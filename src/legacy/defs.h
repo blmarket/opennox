@@ -1293,11 +1293,12 @@ typedef struct zzz {
 	uint32_t field_16; // 4, 16
 	uint32_t field_20; // 5, 20
 	uint64_t field_24; // 6, 24
-	uint32_t field_32; // 8, 32
 } zzz;
+_Static_assert(sizeof(zzz) == 32, "wrong size of zzz structure!");
 
 typedef struct zzz2 {
 	zzz z[3];
 } zzz2;
+_Static_assert(sizeof(zzz2) == 96, "wrong size of zzz2 structure!");
 
 #endif // NOX_DEFS_H
