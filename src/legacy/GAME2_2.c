@@ -4197,7 +4197,7 @@ int sub_4862E0(zzz* a3p, int a4) {
 	int a3 = (int)a3p;
 	*(uint32_t*)a3 = 0;
 	*(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
-	sub_486380((uint32_t*)a3, 0x3E8u, 0, 0x4000);
+	sub_486380(a3p, 0x3E8u, 0, 0x4000);
 	sub_486320((uint32_t*)a3, a4);
 	return sub_4863B0((unsigned int*)a3);
 }
@@ -4230,7 +4230,8 @@ int sub_486350(void* a1p, int a2) {
 }
 
 //----- (00486380) --------------------------------------------------------
-int sub_486380(uint32_t* a1, unsigned int a2, int a3, int a4) {
+int sub_486380(zzz* a1p, unsigned int a2, int a3, int a4) {
+	uint32_t* a1 = a1p;
 	int result; // eax
 
 	a1[4] = a2;
