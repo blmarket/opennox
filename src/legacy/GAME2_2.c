@@ -4193,7 +4193,8 @@ int nox_xxx_tile_486060() {
 }
 
 //----- (004862E0) --------------------------------------------------------
-int sub_4862E0(int a3, int a4) {
+int sub_4862E0(zzz* a3p, int a4) {
+	int a3 = (int)a3p;
 	*(uint32_t*)a3 = 0;
 	*(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
 	sub_486380((uint32_t*)a3, 0x3E8u, 0, 0x4000);
