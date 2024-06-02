@@ -18,7 +18,6 @@ int sub_43F0E0(uint32_t* a1);
 void sub_44D5C0(int a1, int a2);
 char* sub_413890();
 void sub_43D3C0(int a1, int a2);
-int sub_486350(void* a1, int a2);
 int sub_486640(void* a1, int a2);
 int nox_xxx_parseSoundSetBin_424170(char* a1);
 
@@ -381,7 +380,7 @@ func Sub_486320(p unsafe.Pointer, a2 int) {
 }
 
 func Sub_486350(p unsafe.Pointer, a2 int) {
-	C.sub_486350(p, C.int(a2))
+	C.sub_486350((*C.zzz)(p), C.int(a2))
 }
 
 func Sub_43D3C0(s ail.Stream, a2 int) {

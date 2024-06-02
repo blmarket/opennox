@@ -4214,7 +4214,7 @@ uint32_t* sub_486320(zzz* a1p, int a2) {
 }
 
 //----- (00486350) --------------------------------------------------------
-int sub_486350(void* a1p, int a2) {
+int sub_486350(zzz* a1p, int a2) {
 	int a1 = a1p;
 	long long v2; // rax
 	int v3;       // ecx
