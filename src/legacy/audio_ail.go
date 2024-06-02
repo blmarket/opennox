@@ -422,7 +422,7 @@ func Set_dword_587000_81128(v unsafe.Pointer) {
 }
 
 func Sub_4864A0(v unsafe.Pointer) {
-	C.sub_4864A0((*C.uint)(v))
+	C.sub_4864A0((*C.zzz2)(v))
 }
 
 func Sub_451850(a1 unsafe.Pointer, a2 unsafe.Pointer) {
