@@ -16,6 +16,11 @@ src/*.dat
 src/*.dat.gz
 src/opennox*
 src/main/
+src/r1
+src/r2
+.env
+src/.env
+note.md
 cmake-*
 
 # For JetBrains IDEs
