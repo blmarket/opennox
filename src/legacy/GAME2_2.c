@@ -4203,7 +4203,8 @@ int sub_4862E0(zzz* a3p, int a4) {
 }
 
 //----- (00486320) --------------------------------------------------------
-uint32_t* sub_486320(uint32_t* a1, int a2) {
+uint32_t* sub_486320(zzz* a1p, int a2) {
+	uint32_t* a1 = a1p;
 	uint32_t* result; // eax
 
 	result = a1;
