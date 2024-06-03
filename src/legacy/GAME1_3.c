@@ -330,7 +330,7 @@ int sub_43D8E0() {
 	dword_5d4594_816376 = v1;
 	dword_587000_93156 = v1 != 0;
 	sub_4864A0(getMemAt(0x5D4594, 816148));
-	sub_486380(getMemAt(0x5D4594, 816148), 0x3E8u, 0, 0x4000);
+	sub_486380(getMemAt(0x5D4594, 816148), 0x3E8u, 0x4000);
 	dword_5d4594_816348 = 0;
 	dword_5d4594_816092 = 0;
 	*getMemU32Ptr(0x5D4594, 816352) = 0;

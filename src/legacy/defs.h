@@ -1286,13 +1286,12 @@ _Static_assert(sizeof(noxSYSTEMTIME) == 16, "wrong size of SYSTEMTIME structure!
 void noxGetLocalTime(noxSYSTEMTIME* lpSystemTime);
 
 typedef struct zzz {
-	uint32_t field_0; // 0, 0
-	uint32_t field_4; // 1, 4
-	uint32_t field_8; // 2, 8
-	uint32_t field_12; // 3, 12
-	uint32_t field_16; // 4, 16
-	uint32_t field_20; // 5, 20
-	uint64_t field_24; // 6, 24
+	uint32_t field_0; // Seems 2 bits are used to toggle something
+	uint32_t field_4;
+	uint32_t field_8;
+	uint32_t field_12;
+	uint64_t field_16; // Some kind of target elaspsed ticks are stored here?
+	uint64_t field_24; // usually has tick when a function called
 } zzz;
 _Static_assert(sizeof(zzz) == 32, "wrong size of zzz structure!");
 

@@ -4195,9 +4195,11 @@ int nox_xxx_tile_486060() {
 //----- (004862E0) --------------------------------------------------------
 int sub_4862E0(zzz* a3p, int a4) {
 	int a3 = (int)a3p;
-	*(uint32_t*)a3 = 0;
-	*(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
-	sub_486380(a3p, 0x3E8u, 0, 0x4000);
+	// *(uint32_t*)a3 = 0;
+	// *(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
+	a3p->field_0 = 0;
+	a3p->field_24 = nox_platform_get_ticks();
+	sub_486380(a3p, 0x3E8u /*1000*/, 0x4000);
 	sub_486320(a3p, a4);
 	return sub_4863B0((unsigned int*)a3);
 }
@@ -4205,41 +4207,30 @@ int sub_4862E0(zzz* a3p, int a4) {
 //----- (00486320) --------------------------------------------------------
 uint32_t* sub_486320(zzz* a1p, int a2) {
 	uint32_t* a1 = a1p;
-	uint32_t* result; // eax
-
-	result = a1;
-	*a1 |= 1u;
-	a1[2] = a2 << 16;
-	return result;
+	a1p->field_0 |= 1u;
+	a1p->field_8 = a2 << 16;
+	return a1p;
 }
 
 //----- (00486350) --------------------------------------------------------
 int sub_486350(zzz* a1p, int a2) {
 	int a1 = a1p;
-	long long v2; // rax
-	int v3;       // ecx
 
-	LODWORD(v2) = *(uint32_t*)(a1 + 8);
-	v3 = *(uint32_t*)(a1 + 4);
-	*(uint32_t*)a1 &= 0xFFFFFFFE;
-	if ((uint32_t)v2 == v3) {
-		v2 = nox_platform_get_ticks();
-		*(uint64_t*)(a1 + 24) = v2;
+	a1p->field_0 &= 0xFFFFFFFE; // Remove first bit
+	if (a1p->field_4 == a1p->field_8) {
+		a1p->field_24 = nox_platform_get_ticks();
 	}
-	*(uint32_t*)(a1 + 8) = a2 << 16;
-	return v2;
+	a1p->field_8 = a2 << 16;
+	// Is this return value used at all?
+	return a1p->field_24;
 }
 
 //----- (00486380) --------------------------------------------------------
-int sub_486380(zzz* a1p, unsigned int a2, int a3, int a4) {
+int sub_486380(zzz* a1p, unsigned int a2, int a4) {
 	uint32_t* a1 = a1p;
-	int result; // eax
-
-	a1[4] = a2;
-	a1[3] = (a4 << 16) / a2;
-	result = a3;
-	a1[5] = a3;
-	return result;
+	a1p->field_12 = (a4 << 16) / a2;
+	a1p->field_16 = a2;
+	return 0;
 }
 
 //----- (004863B0) --------------------------------------------------------
@@ -4248,83 +4239,49 @@ int sub_4863B0(zzz* a2p) {
 	signed int v1;          // ebx
 	unsigned int v2;        // eax
 	int result;             // eax
-	long long v4;           // rax
-	unsigned int v5;        // edi
-	unsigned int v6;        // ebp
-	unsigned int v7;        // ecx
-	unsigned int v8;        // ecx
-	unsigned int v9;        // edi
-	unsigned long long v10; // kr00_8
-	signed int v11;         // eax
-	unsigned int v12;       // eax
-	unsigned int v13;       // ecx
-	unsigned int v14;       // eax
-	unsigned int v15;       // ecx
 
-	v1 = a2[2] - a2[1];
-	if (!v1) {
+	v1 = a2p->field_8 - a2p->field_4;
+	if (v1 == 0) {
 		return 0;
 	}
-	if (*(uint8_t*)a2 & 1) {
-		a2[1] = a2[2];
-		v2 = *a2;
-		LOBYTE(v2) = *a2 | 2;
-		*a2 = v2;
-		result = 1;
+	if (LOBYTE(a2p->field_0) & 1) {
+		a2p->field_4 = a2p->field_8;
+		a2p->field_0 |= 2;
 	} else {
-		v4 = nox_platform_get_ticks();
-		v5 = a2[6];
-		v6 = a2[7];
-		v7 = v4;
-		a2[6] = v4;
-		LODWORD(v4) = a2[5];
-		a2[7] = HIDWORD(v4);
-		v10 = __PAIR64__(HIDWORD(v4), v7) - __PAIR64__(v6, v5);
-		v9 = (__PAIR64__(HIDWORD(v4), v7) - __PAIR64__(v6, v5)) >> 32;
-		v8 = v10;
-		if (__PAIR64__(v9, v10) > __PAIR64__(v4, a2[4])) {
-			v8 = a2[4];
+		uint64_t ticks = nox_platform_get_ticks();
+		uint64_t v4 = ticks;
+		uint64_t v5v6 = a2p->field_24;
+		uint32_t v7 = v4;
+		a2p->field_24 = v4;
+
+		uint64_t v10 = ticks - v5v6;
+		uint32_t v9 = HIDWORD(v10);
+		uint32_t v8 = LODWORD(v10);
+		if (v10 > a2p->field_16) {
+			v8 = LODWORD(a2p->field_16);
 		}
-		v11 = v8 * a2[3];
+		int32_t v11 = v8 * a2p->field_12;
 		if (v1 >= 0) {
-			if (v11 <= v1) {
-				v15 = v11 + a2[1];
-				v14 = *a2;
-				LOBYTE(v14) = *a2 | 2;
-				a2[1] = v15;
-			} else {
-				a2[1] += v1;
-				v14 = *a2;
-				LOBYTE(v14) = *a2 | 2;
-			}
-			*a2 = v14;
-			result = 1;
-		} else {
-			if (v11 <= -v1) {
-				v13 = a2[1] - v11;
-				v12 = *a2;
-				LOBYTE(v12) = *a2 | 2;
-				a2[1] = v13;
-			} else {
-				a2[1] += v1;
-				v12 = *a2;
-				LOBYTE(v12) = *a2 | 2;
-			}
-			*a2 = v12;
-			result = 1;
+			a2p->field_4 += (v1 < v11) ? v1 : v11; // min(v1, v11)
+			a2p->field_0 |= 2;
+		} else { // v1 < 0
+			a2p->field_4 += (v1 < -v11) ? -v11 : v1; // max(v1, -v11)
+			a2p->field_0 |= 2;
 		}
 	}
-	return result;
+	return 1;
 }
 
 //----- (004864A0) --------------------------------------------------------
 uint32_t* sub_4864A0(zzz2* a3) {
 	sub_4862E0(&a3->z[0], 0x4000);
+	sub_486380(&a3->z[0], 0x3E8u, 0x4000);
+
 	sub_4862E0(&a3->z[1], 100);
+	sub_486380(&a3->z[1], 0x3E8u, 10);
+
 	sub_4862E0(&a3->z[2], 0x2000);
-	sub_486380(&a3->z[0], 0x3E8u, 0, 0x4000);
-	sub_486380(&a3->z[1], 0x3E8u, 0, 10);
-	sub_486380(&a3->z[2], 0x3E8u, 0, 0x4000);
+	sub_486380(&a3->z[2], 0x3E8u, 0x4000);
 	return sub_486320(&a3->z[0], 0x4000);
 }
 
