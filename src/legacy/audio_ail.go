@@ -10,7 +10,6 @@ package legacy
 void sub_43E910(int a1);
 void sub_43E8E0(int a1);
 void sub_43D2D0();
-uint32_t* sub_486620(uint32_t* a1);
 void sub_43EDB0(HSAMPLE a1);
 int sub_43EE00(void* a1);
 int sub_43F060(uint32_t* a1);
@@ -269,7 +268,7 @@ func Sub_43D2D0() {
 }
 
 func Sub_486620(v unsafe.Pointer) {
-	C.sub_486620((*C.uint32_t)(v))
+	C.sub_486620((*C.zzz2)(v))
 }
 
 func Sub_42EBB0(a1 int, a2 unsafe.Pointer, a3 int, a4 string) {

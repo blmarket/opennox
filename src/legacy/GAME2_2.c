@@ -4360,7 +4360,8 @@ int sub_486570(unsigned int* a1, uint32_t* a2) {
 }
 
 //----- (00486620) --------------------------------------------------------
-uint32_t* sub_486620(uint32_t* a1) {
+uint32_t* sub_486620(zzz2* a1p) {
+	uint32_t* a1 = a1p;
 	uint32_t* result; // eax
 
 	result = a1;
