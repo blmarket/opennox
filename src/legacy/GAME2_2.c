@@ -4199,7 +4199,7 @@ int sub_4862E0(zzz* a3p, int a4) {
 	// *(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
 	a3p->field_0 = 0;
 	a3p->field_24 = nox_platform_get_ticks();
-	sub_486380(a3p, 0x3E8u /*1000*/, 0x4000);
+	sub_486380(a3p, 1000, 0x4000);
 	sub_486320(a3p, a4);
 	return sub_4863B0((unsigned int*)a3);
 }
@@ -4224,11 +4224,9 @@ void sub_486350(zzz* a1p, int a2) {
 }
 
 //----- (00486380) --------------------------------------------------------
-int sub_486380(zzz* a1p, unsigned int a2, int a4) {
-	uint32_t* a1 = a1p;
-	a1p->field_12 = (a4 << 16) / a2;
-	a1p->field_16 = a2;
-	return 0;
+void sub_486380(zzz* a1p, unsigned int target_elapsed, int interp_velocity) {
+	a1p->field_12 = (interp_velocity << 16) / target_elapsed;
+	a1p->field_16 = target_elapsed;
 }
 
 //----- (004863B0) --------------------------------------------------------
@@ -4246,27 +4244,23 @@ int sub_4863B0(zzz* a2p) {
 	if (LOBYTE(a2p->field_0) & 1) {
 		a2p->field_4 = a2p->field_8;
 		a2p->field_0 |= 2;
-	} else {
-		uint64_t ticks = nox_platform_get_ticks();
-		uint64_t v4 = ticks;
-		uint64_t v5v6 = a2p->field_24;
-		uint32_t v7 = v4;
-		a2p->field_24 = v4;
+		return 1;
+	} 
 
-		uint64_t v10 = ticks - v5v6;
-		uint32_t v9 = HIDWORD(v10);
-		uint32_t v8 = LODWORD(v10);
-		if (v10 > a2p->field_16) {
-			v8 = LODWORD(a2p->field_16);
-		}
-		int32_t v11 = v8 * a2p->field_12;
-		if (v1 >= 0) {
-			a2p->field_4 += (v1 < v11) ? v1 : v11; // min(v1, v11)
-			a2p->field_0 |= 2;
-		} else { // v1 < 0
-			a2p->field_4 += (v1 < -v11) ? -v11 : v1; // max(v1, -v11)
-			a2p->field_0 |= 2;
-		}
+	uint64_t ticks = nox_platform_get_ticks();
+	uint64_t v4 = ticks;
+	uint64_t v5v6 = a2p->field_24;
+	a2p->field_24 = v4;
+
+	uint64_t elapsed = ticks - v5v6;
+	uint32_t v8 = elapsed > a2p->field_16 ? LODWORD(a2p->field_16) : LODWORD(elapsed); // LODWORD(min(elapsed, a2p->field_16))
+	int32_t v11 = v8 * a2p->field_12;
+	if (v1 >= 0) {
+		a2p->field_4 += (v1 < v11) ? v1 : v11; // min(v1, v11)
+		a2p->field_0 |= 2;
+	} else { // v1 < 0
+		a2p->field_4 += (v1 < -v11) ? -v11 : v1; // max(v1, -v11)
+		a2p->field_0 |= 2;
 	}
 	return 1;
 }
@@ -4274,28 +4268,26 @@ int sub_4863B0(zzz* a2p) {
 //----- (004864A0) --------------------------------------------------------
 uint32_t* sub_4864A0(zzz2* a3) {
 	sub_4862E0(&a3->z[0], 0x4000);
-	sub_486380(&a3->z[0], 0x3E8u, 0x4000);
+	sub_486380(&a3->z[0], 1000, 0x4000);
 
 	sub_4862E0(&a3->z[1], 100);
-	sub_486380(&a3->z[1], 0x3E8u, 10);
+	sub_486380(&a3->z[1], 1000, 10);
 
 	sub_4862E0(&a3->z[2], 0x2000);
-	sub_486380(&a3->z[2], 0x3E8u, 0x4000);
+	sub_486380(&a3->z[2], 1000, 0x4000);
 	return sub_486320(&a3->z[0], 0x4000);
 }
 
 //----- (00486520) --------------------------------------------------------
 int sub_486520(zzz2* a2p) {
-	unsigned int* a2 = a2p;
-	sub_4863B0(a2);
-	sub_4863B0(a2 + 8);
-	return sub_4863B0(a2 + 16);
+	sub_4863B0(&a2p->z[0]);
+	sub_4863B0(&a2p->z[1]);
+	return sub_4863B0(&a2p->z[2]);
 }
 
 //----- (00486550) --------------------------------------------------------
 int sub_486550(zzz2* a1p) { 
-	uint8_t* a1 = a1p;
-	return *a1 & 2 || a1[32] & 2 || a1[64] & 2; 
+	return a1p->z[0].field_0 & 2 || a1p->z[1].field_0 & 2 || a1p->z[2].field_0 & 2; 
 }
 
 //----- (00486570) --------------------------------------------------------
@@ -4304,12 +4296,12 @@ int sub_486570(zzz2* a1p, zzz2* a2p) {
 	uint32_t* a2 = a2p;
 	int v2; // eax
 
-	sub_486320(a1, ((a2[1] >> 16) * (a1[1] >> 16)) >> 14);
-	sub_4863B0(a1);
-	sub_486320(a1 + 8, (int)((a2[9] >> 16) * (a1[9] >> 16)) / 100);
-	sub_4863B0(a1 + 8);
-	if (a2[17] >> 16 != 0x2000) {
-		v2 = (a1[17] >> 16) + (a2[17] >> 16) - 0x2000;
+	sub_486320(&a1p->z[0], ((a2p->z[0].field_4 >> 16) * (a1p->z[0].field_4 >> 16)) / 0x4000);
+	sub_4863B0(&a1p->z[0]);
+	sub_486320(&a1p->z[1], (int)((a2p->z[1].field_4 >> 16) * (a1p->z[1].field_4 >> 16)) / 100);
+	sub_4863B0(&a1p->z[1]);
+	if (a2p->z[2].field_4 >> 16 != 0x2000) {
+		v2 = (a1p->z[2].field_4 >> 16) + (a2p->z[2].field_4 >> 16) - 0x2000;
 		if (v2 >= 0) {
 			if ((unsigned int)v2 > 0x4000) {
 				v2 = 0x4000;
@@ -4317,9 +4309,10 @@ int sub_486570(zzz2* a1p, zzz2* a2p) {
 		} else {
 			v2 = 0;
 		}
-		sub_486320(a1 + 16, v2);
+		sub_486320(&a1p->z[2], v2);
 	}
-	return sub_4863B0(a1 + 16);
+	int ret = sub_4863B0(&a1p->z[2]);
+	return ret;
 }
 
 //----- (00486620) --------------------------------------------------------
