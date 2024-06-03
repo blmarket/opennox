@@ -1287,10 +1287,10 @@ void noxGetLocalTime(noxSYSTEMTIME* lpSystemTime);
 
 typedef struct zzz {
 	uint32_t field_0; // Seems 2 bits are used to toggle something
-	uint32_t field_4;
-	uint32_t field_8;
-	uint32_t field_12;
-	uint64_t field_16; // Some kind of target elaspsed ticks are stored here?
+	uint32_t field_4; // used together with 8. In sub_4863B0, it interpolates to field_8
+	uint32_t field_8; // used together with 4
+	uint32_t field_12; // multiplier for elapsed timer
+	uint64_t field_16; // Some kind of target elaspsed ticks are stored here? Most cases it was 1000, for workerhunt it's 500
 	uint64_t field_24; // usually has tick when a function called
 } zzz;
 _Static_assert(sizeof(zzz) == 32, "wrong size of zzz structure!");
