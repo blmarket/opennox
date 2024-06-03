@@ -4324,14 +4324,9 @@ int sub_486570(zzz2* a1p, zzz2* a2p) {
 
 //----- (00486620) --------------------------------------------------------
 void sub_486620(zzz2* a1p) {
-	uint32_t* a1 = a1p;
-	uint32_t* result; // eax
-
-	result = a1;
-	*a1 &= 0xFFFFFFFD;
-	a1[16] &= 0xFFFFFFFD;
-	a1[8] &= 0xFFFFFFFD;
-	return result;
+	a1p->z[0].field_0 &= 0xFFFFFFFD; // unset bit 2
+	a1p->z[1].field_0 &= 0xFFFFFFFD; // unset bit 2
+	a1p->z[2].field_0 &= 0xFFFFFFFD; // unset bit 2
 }
 
 //----- (00486640) --------------------------------------------------------
