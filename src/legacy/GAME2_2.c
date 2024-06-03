@@ -4198,7 +4198,7 @@ int sub_4862E0(zzz* a3p, int a4) {
 	*(uint32_t*)a3 = 0;
 	*(uint64_t*)(a3 + 24) = nox_platform_get_ticks();
 	sub_486380(a3p, 0x3E8u, 0, 0x4000);
-	sub_486320((uint32_t*)a3, a4);
+	sub_486320(a3p, a4);
 	return sub_4863B0((unsigned int*)a3);
 }
 
