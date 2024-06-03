@@ -102,7 +102,7 @@ int sub_486350(zzz* a1, int a2);
 int sub_486380(zzz* a1, unsigned int a2, int a3, int a4);
 int sub_4863B0(unsigned int* a2);
 uint32_t* sub_4864A0(zzz2* a3);
-int sub_486520(unsigned int* a2);
+int sub_486520(zzz2* a2);
 int sub_486550(zzz2* a1);
 int sub_486570(zzz2* a1, zzz2* a2);
 uint32_t* sub_486620(zzz2* a1);
