@@ -104,7 +104,7 @@ int sub_4863B0(unsigned int* a2);
 uint32_t* sub_4864A0(zzz2* a3);
 int sub_486520(unsigned int* a2);
 int sub_486550(uint8_t* a1);
-int sub_486570(unsigned int* a1, zzz2* a2);
+int sub_486570(zzz2* a1, zzz2* a2);
 uint32_t* sub_486620(zzz2* a1);
 int sub_486640(void* a1, int a2);
 int sub_4866D0(uint32_t* a1, int a2);

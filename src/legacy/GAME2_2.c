@@ -4338,7 +4338,8 @@ int sub_486520(unsigned int* a2) {
 int sub_486550(uint8_t* a1) { return *a1 & 2 || a1[32] & 2 || a1[64] & 2; }
 
 //----- (00486570) --------------------------------------------------------
-int sub_486570(unsigned int* a1, zzz2* a2p) {
+int sub_486570(zzz2* a1p, zzz2* a2p) {
+	uint32_t* a1 = a1p;
 	uint32_t* a2 = a2p;
 	int v2; // eax
 
