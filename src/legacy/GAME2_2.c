@@ -4213,7 +4213,7 @@ uint32_t* sub_486320(zzz* a1p, int a2) {
 }
 
 //----- (00486350) --------------------------------------------------------
-int sub_486350(zzz* a1p, int a2) {
+void sub_486350(zzz* a1p, int a2) {
 	int a1 = a1p;
 
 	a1p->field_0 &= 0xFFFFFFFE; // Remove first bit
@@ -4221,8 +4221,6 @@ int sub_486350(zzz* a1p, int a2) {
 		a1p->field_24 = nox_platform_get_ticks();
 	}
 	a1p->field_8 = a2 << 16;
-	// Is this return value used at all?
-	return a1p->field_24;
 }
 
 //----- (00486380) --------------------------------------------------------
@@ -4240,6 +4238,7 @@ int sub_4863B0(zzz* a2p) {
 	unsigned int v2;        // eax
 	int result;             // eax
 
+	fprintf(stderr, "%x %d %d %08x %08x %d %lld %lld\n", a2p, !!(a2p->field_0&1), !!(a2p->field_0&2), a2p->field_4, a2p->field_8, a2p->field_12, a2p->field_16, a2p->field_24);
 	v1 = a2p->field_8 - a2p->field_4;
 	if (v1 == 0) {
 		return 0;

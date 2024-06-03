@@ -98,7 +98,7 @@ int nox_thing_read_edge_485D40(nox_memfile* f, char* a2);
 int nox_xxx_tile_486060();
 int sub_4862E0(zzz* a3, int a4);
 uint32_t* sub_486320(zzz* a1, int a2);
-int sub_486350(zzz* a1, int a2);
+void sub_486350(zzz* a1, int a2);
 int sub_486380(zzz* a1, unsigned int a2, int a4);
 int sub_4863B0(zzz* a2);
 uint32_t* sub_4864A0(zzz2* a3);
