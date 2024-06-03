@@ -4243,7 +4243,8 @@ int sub_486380(zzz* a1p, unsigned int a2, int a3, int a4) {
 }
 
 //----- (004863B0) --------------------------------------------------------
-int sub_4863B0(unsigned int* a2) {
+int sub_4863B0(zzz* a2p) {
+	unsigned int* a2 = a2p;
 	signed int v1;          // ebx
 	unsigned int v2;        // eax
 	int result;             // eax
@@ -4336,7 +4337,7 @@ int sub_486520(zzz2* a2p) {
 }
 
 //----- (00486550) --------------------------------------------------------
-int sub_486550(zzz2* a1) { 
+int sub_486550(zzz2* a1p) { 
 	uint8_t* a1 = a1p;
 	return *a1 & 2 || a1[32] & 2 || a1[64] & 2; 
 }
