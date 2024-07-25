@@ -49,6 +49,7 @@
 #include "client__system__ctrlevnt.h"
 #include "common__magic__speltree.h"
 #include "input_common.h"
+#include "dynarray.h"
 
 extern uint32_t dword_8531A0_2576;
 extern uint32_t dword_5d4594_1046852;
