@@ -16,7 +16,8 @@ int sub_4BD300(uint32_t* a1, int a2) {
 void sub_4BD2D0(void* lpMem) { free(lpMem); }
 
 //----- (004BD2E0) --------------------------------------------------------
-uint32_t* sub_4BD2E0(uint32_t** a1) {
+uint32_t* sub_4BD2E0(void* a1p) {
+	uint32_t** a1 = a1p;
 	uint32_t* result; // eax
 	uint32_t* v2;     // edx
 
