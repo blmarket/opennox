@@ -3,7 +3,7 @@
 #include "dynarray.h"
 
 //----- (004BD300) --------------------------------------------------------
-void* sub_4BD300(void* a1p, void* a2p) {
+void* sub_4BD300(dynarray* a1p, void* a2p) {
 	uint32_t* a1 = a1p;
 	int a2 = a2p;
 	void* result; // eax
@@ -15,10 +15,10 @@ void* sub_4BD300(void* a1p, void* a2p) {
 }
 
 //----- (004BD2D0) --------------------------------------------------------
-void sub_4BD2D0(void* lpMem) { free(lpMem); }
+void sub_4BD2D0(dynarray* lpMem) { free(lpMem); }
 
 //----- (004BD2E0) --------------------------------------------------------
-uint32_t* sub_4BD2E0(void* a1p) {
+uint32_t* sub_4BD2E0(dynarray* a1p) {
 	uint32_t** a1 = a1p;
 	uint32_t* result; // eax
 	uint32_t* v2;     // edx
@@ -33,7 +33,7 @@ uint32_t* sub_4BD2E0(void* a1p) {
 }
 
 //----- (004BD280) --------------------------------------------------------
-uint32_t* sub_4BD280(int a1, int a2) {
+dynarray* sub_4BD280(int a1, int a2) {
 	int v2;           // esi
 	uint32_t* result; // eax
 	uint32_t* v4;     // ecx

@@ -16,7 +16,7 @@ extern uint32_t dword_5d4594_1045420;
 extern uint32_t dword_5d4594_1045424;
 extern uint32_t dword_5d4594_1045428;
 extern uint32_t dword_5d4594_1045432;
-extern uint32_t dword_5d4594_1045436;
+extern dynarray* dword_5d4594_1045436;
 extern uint32_t dword_587000_126996;
 extern void* dword_587000_127004;
 
@@ -60,7 +60,7 @@ uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
 	if (!*a1) {
 		return 0;
 	}
-	v1 = sub_4BD2E0(*(uint32_t***)&dword_5d4594_1045436);
+	v1 = sub_4BD2E0(dword_5d4594_1045436);
 	if (!v1) {
 		sub_452230();
 		v1 = sub_4BD2E0(*(uint32_t***)&dword_5d4594_1045436);
