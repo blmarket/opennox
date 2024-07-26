@@ -2,6 +2,13 @@
 #include "dynarray.h"
 #include "memmap.h"
 
+typedef struct s576 {
+    nox_list_item_t list_item;
+    uint32_t field_3[43]; // 12~184
+    uint32_t timer_46[3][8]; // 184~280
+    uint32_t field_70[74]; // 280~576
+} s576;
+
 extern uint32_t dword_5d4594_1045420;
 extern uint32_t dword_5d4594_1045424;
 extern uint32_t dword_5d4594_1045428;
@@ -23,6 +30,7 @@ int***** sub_452230();
 
 //----- (00452300) --------------------------------------------------------
 uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
+    s576* v1p;
 	uint32_t* v1; // esi
 
 	if (!dword_5d4594_1045432) {
@@ -44,7 +52,7 @@ uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
 	}
 	memset(v1, 0, 0x240u);
 	v1[9] = a1;
-	sub_425770(v1);
+	sub_425770(v1); // seems multiple structs are sharing the logic
 	v1[7] = 0;
 	v1[75] = 0;
 	v1[142] = 0;
