@@ -840,30 +840,6 @@ int sub_451F30(int a1, int a2) {
 	return result;
 }
 
-//----- (00451F90) --------------------------------------------------------
-int sub_451F90(int a1) {
-	int v1;     // edi
-	int result; // eax
-	int* v3;    // esi
-
-	v1 = 0;
-	result = *(uint32_t*)(a1 + 168);
-	if (result <= 0) {
-		*(uint32_t*)(a1 + 168) = 0;
-	} else {
-		v3 = (int*)(a1 + 40);
-		do {
-			sub_4BD660(*v3);
-			*v3 = 0;
-			result = *(uint32_t*)(a1 + 168);
-			++v1;
-			++v3;
-		} while (v1 < result);
-		*(uint32_t*)(a1 + 168) = 0;
-	}
-	return result;
-}
-
 //----- (00452010) --------------------------------------------------------
 int sub_452010() {
 	unsigned char* v0; // esi
@@ -978,44 +954,6 @@ int sub_4522A0(int a1) {
 		result = *(uint32_t*)(a1 + 64);
 	} else {
 		result = 0;
-	}
-	return result;
-}
-
-//----- (004523D0) --------------------------------------------------------
-int sub_4523D0(void* a1p) {
-	uint32_t* a1 = a1p;
-	int result = 0; // eax
-
-	if (!(a1[6] & 1)) {
-		sub_452410((int)a1);
-		sub_451F90((int)a1);
-		a1[7] = 4;
-		a1[70] = 0;
-		result = a1[6];
-		LOBYTE(result) = result | 1;
-		a1[6] = result;
-	}
-	return result;
-}
-
-//----- (00452410) --------------------------------------------------------
-int sub_452410(int a1) {
-	int result; // eax
-
-	result = *(uint32_t*)(a1 + 176);
-	if (result && a1 == *(uint32_t*)(result + 152)) {
-		if (*(uint8_t*)(a1 + 24) & 2) {
-			sub_4BDA80(*(uint32_t*)(a1 + 176));
-		}
-		sub_4BDB30(*(uint32_t*)(a1 + 176));
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 152) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 148) = 0;
-		result = *(uint32_t*)(a1 + 176);
-		*(uint32_t*)(result + 140) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 144) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 112) = 0;
-		*(uint32_t*)(a1 + 176) = 0;
 	}
 	return result;
 }
@@ -4030,7 +3968,7 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				}
 			}
 		} else if (result) {
-			result = (int*)sub_4523D0(result);
+			sub_4523D0(result);
 		}
 	}
 }

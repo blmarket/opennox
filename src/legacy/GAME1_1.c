@@ -5165,7 +5165,7 @@ uint32_t* sub_425900(uint32_t* a1, uint32_t* a2) {
 }
 
 //----- (00425920) --------------------------------------------------------
-void nox_common_list_remove_425920(void* a1p) {
+void nox_common_list_remove_425920(nox_list_item_t* a1p) {
 	uint32_t** a1 = a1p;
 
 	*a1[1] = *a1;

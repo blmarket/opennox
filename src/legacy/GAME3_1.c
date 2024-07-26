@@ -572,18 +572,6 @@ int sub_4BD650(int a1) {
 	return result;
 }
 
-//----- (004BD660) --------------------------------------------------------
-int sub_4BD660(int a1) {
-	int result; // eax
-
-	result = *(uint32_t*)(a1 + 12) - 1;
-	*(uint32_t*)(a1 + 12) = result;
-	if (result < 0) {
-		*(uint32_t*)(a1 + 12) = 0;
-	}
-	return result;
-}
-
 //----- (004BD680) --------------------------------------------------------
 int sub_4BD680(int a1) { return *(uint32_t*)(a1 + 12); }
 
