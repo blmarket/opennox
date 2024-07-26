@@ -17,3 +17,7 @@ func StackPop(a unsafe.Pointer) unsafe.Pointer {
 func StackPush(a unsafe.Pointer, b unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C.sub_4BD300(a, b))
 }
+
+func StackDestroy(a unsafe.Pointer) {
+	C.sub_4BD2D0(a)
+}

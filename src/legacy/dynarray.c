@@ -3,8 +3,10 @@
 #include "dynarray.h"
 
 //----- (004BD300) --------------------------------------------------------
-int sub_4BD300(uint32_t* a1, int a2) {
-	int result; // eax
+void* sub_4BD300(void* a1p, void* a2p) {
+	uint32_t* a1 = a1p;
+	int a2 = a2p;
+	void* result; // eax
 
 	result = a2 - 4;
 	*(uint32_t*)(a2 - 4) = *a1;
