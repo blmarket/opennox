@@ -131,7 +131,7 @@ nox_screenParticle* dword_5d4594_806052 = 0;
 
 void* dword_5d4594_814624 = 0;
 
-void* dword_5d4594_805984 = 0;
+extern void* dword_5d4594_805984;
 
 //----- (00427F30) --------------------------------------------------------
 int nox_xxx_wallMath_427F30(int2* a1, int* a2) {
