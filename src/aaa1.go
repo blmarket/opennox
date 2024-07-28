@@ -38,7 +38,7 @@ type Struct264 struct {
 type List155144 struct {
 	field_0  ListItem[unsafe.Pointer] // TODO: clarify types
 	field_12 ListItem[Struct264]
-	field_24 uint32
+	field_24 int32
 	field_28 uint32 // unknown
 	field_32 timer.TimerGroup
 }
@@ -73,5 +73,69 @@ func sub_486EF0() {
 			continue
 		}
 		ccall.CallVoidPtr(v1.field_216, unsafe.Pointer(v1))
+	}
+}
+
+func sub_487050(a1 unsafe.Pointer) {
+	nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_0), a1)
+}
+
+func sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
+	result := nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_0))
+	*a1 = result
+	return result
+}
+
+func sub_487310(a1 unsafe.Pointer) {
+	inst().field_24 += 1
+	nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_12), a1)
+	result := inst().field_24 - 1
+	inst().field_24 = result
+	if result < 0 {
+		inst().field_24 = 0
+	}
+}
+
+func sub_4875B0(a1 *unsafe.Pointer) unsafe.Pointer {
+	result := nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_12))
+	*a1 = result
+	return result
+}
+
+func sub_4875D0(a1 *unsafe.Pointer) unsafe.Pointer {
+	if *a1 != nil {
+		*a1 = nox_common_list_getNextSafe_4258A0(*a1)
+	}
+	return *a1
+}
+
+func sub_4875F0() int32 {
+	var v3 unsafe.Pointer
+	inst().field_24 += 1
+	v0 := sub_4875B0(&v3)
+	for v0 != nil {
+		v1 := sub_4875D0(&v3)
+		legacy.Sub_487680(v0)
+		v0 = v1
+	}
+	result := inst().field_24 - 1
+	inst().field_24 = result
+	if result < 0 {
+		inst().field_24 = 0
+	}
+	return result
+}
+
+func nox_common_list_remove_425920(a1 unsafe.Pointer) {
+	(*listItem)(a1).Remove()
+}
+
+func sub_4876A0(a1 unsafe.Pointer) {
+	inst().field_24 += 1
+	nox_common_list_remove_425920(a1)
+	result := inst().field_24 - 1
+	inst().field_24 = result
+	if result < 0 {
+		inst().field_24 = 0
 	}
 }

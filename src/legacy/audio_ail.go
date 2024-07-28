@@ -26,11 +26,11 @@ void sub_43DC00();
 void sub_44D960();
 void sub_453050();
 int sub_451850(int a2, void* a3);
+void sub_487680(void* lpMem);
 extern void* dword_587000_122852;
 extern void* dword_587000_81128;
 extern void* dword_587000_93164;
 extern void* dword_5d4594_805984;
-extern void* dword_587000_155144;
 */
 import "C"
 import (
@@ -55,6 +55,10 @@ var (
 	Sub_43F060 func(a1p unsafe.Pointer) int
 	Sub_43EC30 func(a1 unsafe.Pointer) int
 	Sub_43ECB0 func(a1 unsafe.Pointer) int
+	Sub_487050 func(a1 unsafe.Pointer)
+	Sub_4870E0 func(a1 *unsafe.Pointer) unsafe.Pointer
+	Sub_4876A0 func(a1 unsafe.Pointer)
+	Sub_487310 func(a1 unsafe.Pointer)
 )
 
 type _WIN32_FIND_DATAA = C.struct__WIN32_FIND_DATAA
@@ -381,4 +385,28 @@ func sub_44D8F0() { Dialogs.Sub_44D8F0() }
 //export sub_44D5C0
 func sub_44D5C0(a1 int, a2 int) {
 	Dialogs.Sub_44D5C0(ail.Stream(a1), a2)
+}
+
+func Sub_487680(a1 unsafe.Pointer) {
+	C.sub_487680(a1)
+}
+
+//export sub_487050
+func sub_487050(a1 unsafe.Pointer) {
+	Sub_487050(a1)
+}
+
+//export sub_4870E0
+func sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
+	return Sub_4870E0(a1)
+}
+
+//export sub_4876A0
+func sub_4876A0(a1 unsafe.Pointer) {
+	Sub_4876A0(a1)
+}
+
+//export sub_487310
+func sub_487310(a1 unsafe.Pointer) {
+	Sub_487310(a1)
 }

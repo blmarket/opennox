@@ -111,10 +111,6 @@ func Sub_431270() {
 	C.sub_431270()
 }
 
-func Sub_4875F0() {
-	C.sub_4875F0()
-}
-
 func Sub_4870A0() {
 	C.sub_4870A0()
 }
