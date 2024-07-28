@@ -4667,12 +4667,6 @@ int sub_487590(int a1, const void* a2) {
 	return result;
 }
 
-//----- (00487680) --------------------------------------------------------
-void sub_487680(void* lpMem) {
-	sub_4876A0((uint32_t**)lpMem);
-	sub_4872C0(lpMem);
-}
-
 //----- (00487750) --------------------------------------------------------
 uint32_t* sub_487750(int a1) {
 	uint32_t* v1; // eax
@@ -4704,15 +4698,6 @@ int sub_487790(int a1, int a2) {
 		} while (v3 && sub_487750(a1));
 	}
 	return v2;
-}
-
-//----- (004877D0) --------------------------------------------------------
-int* sub_4877D0(int a1, int* a2) {
-	int* result; // eax
-
-	result = nox_common_list_getFirstSafe_425890((int*)(a1 + 200));
-	*a2 = (int)result;
-	return result;
 }
 
 //----- (004877F0) --------------------------------------------------------
@@ -4795,29 +4780,6 @@ int sub_487910(int a1, int a2) {
 		v2 = v4;
 	} while (v4);
 	return 0;
-}
-
-//----- (00487970) --------------------------------------------------------
-int* sub_487970(int a1, int a2) {
-	int* result; // eax
-	int* v3;     // edi
-	int v4;      // ebx
-	int* v5;     // esi
-
-	result = sub_4877D0(a1, &a1);
-	v3 = result;
-	if (result) {
-		v4 = a2;
-		do {
-			result = sub_4877F0((int**)&a1);
-			v5 = result;
-			if (v4 == -1 || v3[3] == v4) {
-				result = (int*)sub_4BDA80((int)v3);
-			}
-			v3 = v5;
-		} while (v5);
-	}
-	return result;
 }
 
 //----- (00487C30) --------------------------------------------------------

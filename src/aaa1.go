@@ -29,11 +29,26 @@ func (it *ListItem[T]) Clear() {
 // See sub_4871C0 for where it created
 type Struct264 struct {
 	field_0   ListItem[Struct264]
-	field_12  int32
-	field_16  [50]uint32
+	field_12  uint32
+	field_16  uint32
+	field_20  unsafe.Pointer
+	field_24  unsafe.Pointer
+	field_28  uint32
+	field_32  uint32
+	field_36  [6]uint32
+	field_60  [7]uint32
+	field_88  timer.TimerGroup
+	field_184 uint32
+	field_188 uint32
+	field_192 uint32
+	field_196 uint32
+	field_200 ListItem[unsafe.Pointer]
+	field_212 uint32
 	field_216 unsafe.Pointer // function pointer
 	field_220 [11]uint32
 }
+
+var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]
 
 type List155144 struct {
 	field_0  ListItem[unsafe.Pointer] // TODO: clarify types
@@ -42,8 +57,6 @@ type List155144 struct {
 	field_28 uint32 // unknown
 	field_32 timer.TimerGroup
 }
-
-var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]
 
 func inst() *List155144 {
 	return (*List155144)(legacy.Get_dword_587000_155144())
