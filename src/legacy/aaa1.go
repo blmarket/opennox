@@ -122,9 +122,9 @@ func Sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
 	return result
 }
 
-func Sub_487310(a1 unsafe.Pointer) {
+func Sub_487310(a1 *Struct264) {
 	inst().field_24 += 1
-	C.nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_12), a1)
+	C.nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_12), unsafe.Pointer(a1))
 	result := inst().field_24 - 1
 	inst().field_24 = result
 	if result < 0 {

@@ -329,8 +329,8 @@ func Get_dword_5d4594_805984() *Struct264 {
 	return (*Struct264)(C.dword_5d4594_805984)
 }
 
-func Set_dword_5d4594_805984(v unsafe.Pointer) {
-	C.dword_5d4594_805984 = v
+func Set_dword_5d4594_805984(v *Struct264) {
+	C.dword_5d4594_805984 = unsafe.Pointer(v)
 }
 
 // FIXME: type should be *timer.TimerGroup
@@ -363,12 +363,12 @@ func Sub_487D00(a1 unsafe.Pointer) {
 	C.sub_487D00((*C.uint)(a1))
 }
 
-func Sub_487150(a1 int, a2 unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_487150(C.int(a1), a2))
+func Sub_487150(a1 int, a2 unsafe.Pointer) *Struct264 {
+	return (*Struct264)(unsafe.Pointer(C.sub_487150(C.int(a1), a2)))
 }
 
-func Sub_487790(a1 unsafe.Pointer, a2 int) int {
-	return int(C.sub_487790(C.int(uintptr(a1)), C.int(a2)))
+func Sub_487790(a1 *Struct264, a2 int) int {
+	return int(C.sub_487790(unsafe.Pointer(a1), C.int(a2)))
 }
 
 //export sub_44D8F0
@@ -400,5 +400,5 @@ func sub_4876A0(a1 unsafe.Pointer) {
 
 //export sub_487310
 func sub_487310(a1 unsafe.Pointer) {
-	Sub_487310(a1)
+	Sub_487310((*Struct264)(a1))
 }
