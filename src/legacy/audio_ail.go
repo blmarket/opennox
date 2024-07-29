@@ -55,10 +55,6 @@ var (
 	Sub_43F060 func(a1p unsafe.Pointer) int
 	Sub_43EC30 func(a1 unsafe.Pointer) int
 	Sub_43ECB0 func(a1 unsafe.Pointer) int
-	Sub_487050 func(a1 unsafe.Pointer)
-	Sub_4870E0 func(a1 *unsafe.Pointer) unsafe.Pointer
-	Sub_4876A0 func(a1 unsafe.Pointer)
-	Sub_487310 func(a1 unsafe.Pointer)
 )
 
 type _WIN32_FIND_DATAA = C.struct__WIN32_FIND_DATAA

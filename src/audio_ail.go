@@ -78,7 +78,7 @@ func sub_43ECB0(a1 unsafe.Pointer) int {
 func sub_43E940(a1 unsafe.Pointer) int {
 	ail.Startup()
 	audioTimer93944 = ail.RegisterTimer(func(u uint32) {
-		sub_486EF0()
+		legacy.Sub_486EF0()
 		legacy.MusicModule.Sub_43D2D0()
 		(*timer.TimerGroup)(legacy.Get_dword_587000_127004()).ClearUpdated()
 	})
@@ -217,7 +217,7 @@ func nox_audio_initall(a3 int) int {
 		return 1
 	}
 	if a3 != 0 {
-		sub_486F30()
+		legacy.Sub_486F30()
 		if sub_4311F0() != 0 {
 			legacy.Set_dword_587000_81128(unsafe.Add(legacy.Get_dword_5d4594_805984(), 88))
 			dword_5d4594_805980 = sub_4866F0("audio", "audio")

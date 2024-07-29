@@ -1,10 +1,19 @@
-package opennox
+package legacy
+
+/*
+#include "defs.h"
+
+void nox_common_list_append_4258E0(void* list, void* cur);
+void* nox_common_list_getFirstSafe_425890(void* list);
+void* nox_common_list_getNextSafe_4258A0(void* list);
+void nox_common_list_remove_425920(void* a1);
+*/
+import "C"
 
 import (
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
-	"github.com/noxworld-dev/opennox/v1/legacy"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
@@ -15,6 +24,10 @@ type ListItem[T any] struct {
 	ptr1 *T
 	ptr2 *T
 }
+
+var (
+	Dword_5d4594_1193336 uint32
+)
 
 func (it *ListItem[T]) Self() *T {
 	return (*T)(unsafe.Pointer(it))
@@ -59,22 +72,22 @@ type List155144 struct {
 }
 
 func inst() *List155144 {
-	return (*List155144)(legacy.Get_dword_587000_155144())
+	return (*List155144)(Get_dword_587000_155144())
 }
 
-func sub_486F30() int {
+func Sub_486F30() int {
 	inst().field_0.Clear()
 	inst().field_12.Clear()
 	inst().field_24 = 0
 	*memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340) = &(inst().field_32)
 	inst().field_32.Init()
-	dword_5d4594_1193336 = 1
+	Dword_5d4594_1193336 = 1
 	return 0
 }
 
-func sub_486EF0() {
+func Sub_486EF0() {
 	// fmt.Printf("sub_486EF0\n")
-	if dword_5d4594_1193336 == 0 {
+	if Dword_5d4594_1193336 == 0 {
 		return
 	}
 	if inst().field_24 != 0 {
@@ -89,19 +102,19 @@ func sub_486EF0() {
 	}
 }
 
-func sub_487050(a1 unsafe.Pointer) {
-	nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_0), a1)
+func Sub_487050(a1 unsafe.Pointer) {
+	C.nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_0), a1)
 }
 
-func sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
-	result := nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_0))
+func Sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
+	result := C.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_0))
 	*a1 = result
 	return result
 }
 
-func sub_487310(a1 unsafe.Pointer) {
+func Sub_487310(a1 unsafe.Pointer) {
 	inst().field_24 += 1
-	nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_12), a1)
+	C.nox_common_list_append_4258E0(unsafe.Pointer(&inst().field_12), a1)
 	result := inst().field_24 - 1
 	inst().field_24 = result
 	if result < 0 {
@@ -110,25 +123,25 @@ func sub_487310(a1 unsafe.Pointer) {
 }
 
 func sub_4875B0(a1 *unsafe.Pointer) unsafe.Pointer {
-	result := nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_12))
+	result := C.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_12))
 	*a1 = result
 	return result
 }
 
 func sub_4875D0(a1 *unsafe.Pointer) unsafe.Pointer {
 	if *a1 != nil {
-		*a1 = nox_common_list_getNextSafe_4258A0(*a1)
+		*a1 = C.nox_common_list_getNextSafe_4258A0(*a1)
 	}
 	return *a1
 }
 
-func sub_4875F0() int32 {
+func Sub_4875F0() int32 {
 	var v3 unsafe.Pointer
 	inst().field_24 += 1
 	v0 := sub_4875B0(&v3)
 	for v0 != nil {
 		v1 := sub_4875D0(&v3)
-		legacy.Sub_487680(v0)
+		Sub_487680(v0)
 		v0 = v1
 	}
 	result := inst().field_24 - 1
@@ -139,13 +152,9 @@ func sub_4875F0() int32 {
 	return result
 }
 
-func nox_common_list_remove_425920(a1 unsafe.Pointer) {
-	(*listItem)(a1).Remove()
-}
-
-func sub_4876A0(a1 unsafe.Pointer) {
+func Sub_4876A0(a1 unsafe.Pointer) {
 	inst().field_24 += 1
-	nox_common_list_remove_425920(a1)
+	C.nox_common_list_remove_425920(a1)
 	result := inst().field_24 - 1
 	inst().field_24 = result
 	if result < 0 {
