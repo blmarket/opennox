@@ -119,6 +119,8 @@ void sub_431290() {
 	}
 }
 
+#include <stdio.h>
+
 //----- (00487150) --------------------------------------------------------
 s264* sub_487150(int a1, const void* a2) {
 	// a1 is always -1
@@ -132,6 +134,7 @@ s264* sub_487150(int a1, const void* a2) {
 		v2 = 0;
 	}
 	sub_487360(v2, (int**)&a1, &v6);
+	printf("%x\n", a1);
 	if (!a1) {
 		return 0;
 	}
