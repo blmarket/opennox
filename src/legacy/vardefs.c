@@ -486,7 +486,6 @@ uint32_t dword_5d4594_2487628 = 0;
 uint32_t dword_5d4594_1045544 = 0;
 uint32_t dword_5d4594_1548480 = 0;
 uint32_t nox_xxx_lightningSteps_587000_178216 = 0x8;
-void* dword_5d4594_1045428 = 0;
 uint32_t dword_5d4594_2487536 = 0;
 uint32_t dword_5d4594_2523804 = 0;
 uint32_t dword_587000_126996 = 0x1;

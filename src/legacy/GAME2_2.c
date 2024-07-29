@@ -4663,59 +4663,6 @@ int* sub_4877F0(int** a1) {
 	return *a1;
 }
 
-//----- (00487810) --------------------------------------------------------
-int* sub_487810(int a1, int a2) {
-	unsigned int v2; // esi
-	int v3;          // edi
-	int* v4;         // ebp
-	int* result;     // eax
-	int v6;          // ecx
-	unsigned int v7; // edx
-	int v8;          // [esp+10h] [ebp-8h]
-	int* v9;         // [esp+14h] [ebp-4h]
-
-	v2 = -1;
-	if (a2 == -1) {
-		a2 = 1;
-	}
-	v3 = 127;
-	v4 = 0;
-	v8 = 127;
-	v9 = 0;
-	for (result = sub_4877D0(a1, &a1); result; result = sub_4877F0((int**)&a1)) {
-		if (result[3] == a2) {
-			if (!(result[31] & 0x15)) {
-				return result;
-			}
-			v6 = result[30];
-			if (result[31] & 1) {
-				if (v6 >= v3) {
-					if (v6 == v3) {
-						v7 = result[45];
-						if (v7 < v2 && v2 - v7 >= 0x666) {
-							v3 = result[30];
-							v4 = result;
-							v2 = result[45];
-						}
-					}
-				} else {
-					v2 = result[45];
-					v3 = result[30];
-					v4 = result;
-				}
-			} else if (v6 < v8) {
-				v8 = result[30];
-				v9 = result;
-			}
-		}
-	}
-	result = v9;
-	if (!v9 || v8 > v3) {
-		result = v4;
-	}
-	return result;
-}
-
 //----- (00487910) --------------------------------------------------------
 int sub_487910(int a1, int a2) {
 	int* v2; // edi

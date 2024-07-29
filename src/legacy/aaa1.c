@@ -60,9 +60,13 @@ void sub_4BDA60(void* lpMem);
 void sub_487310(s264* a1);
 void sub_4876A0(void* a1);
 int sub_4BDA80(int a1);
+void* sub_486320(void* a1, int a2);
 uint32_t* sub_4871C0(int a1, int a2, const void* a3);
 
+extern void* dword_587000_127004;
+
 s264* dword_5d4594_805984 = 0;
+s264* dword_5d4594_1045428 = 0;
 
 //----- (00487680) --------------------------------------------------------
 void sub_487680(s264* lpMem) {
@@ -168,4 +172,86 @@ void sub_4872C0(s264* a1p) {
 		*(uint32_t*)(*((uint32_t*)lpMem + 5) + 16) = 0;
 	}
 	free(lpMem);
+}
+
+//----- (00487810) --------------------------------------------------------
+int* sub_487810(s264 *a1p, int a2) {
+	// int a1 = a1p;
+	unsigned int v2; // esi
+	int v3;          // edi
+	int* v4;         // ebp
+	int* result;     // eax
+	int v6;          // ecx
+	unsigned int v7; // edx
+	int v8;          // [esp+10h] [ebp-8h]
+	int* v9;         // [esp+14h] [ebp-4h]
+	int* aa1;
+
+	v2 = -1;
+	if (a2 == -1) {
+		a2 = 1;
+	}
+	v3 = 127;
+	v4 = 0;
+	v8 = 127;
+	v9 = 0;
+	for (result = sub_4877D0(a1p, &aa1); result; result = sub_4877F0((int**)&aa1)) {
+		if (result[3] == a2) {
+			if (!(result[31] & 0x15)) {
+				return result;
+			}
+			v6 = result[30];
+			if (result[31] & 1) {
+				if (v6 >= v3) {
+					if (v6 == v3) {
+						v7 = result[45];
+						if (v7 < v2 && v2 - v7 >= 0x666) {
+							v3 = result[30];
+							v4 = result;
+							v2 = result[45];
+						}
+					}
+				} else {
+					v2 = result[45];
+					v3 = result[30];
+					v4 = result;
+				}
+			} else if (v6 < v8) {
+				v8 = result[30];
+				v9 = result;
+			}
+		}
+	}
+	result = v9;
+	if (!v9 || v8 > v3) {
+		result = v4;
+	}
+	return result;
+}
+
+//----- (00452810) --------------------------------------------------------
+int* sub_452810(int a1, char a2) {
+	int* v2; // esi
+	int* v3; // eax
+
+	v2 = 0;
+	if (dword_5d4594_1045428) {
+		v3 = sub_487810(dword_5d4594_1045428, 1);
+		v2 = v3;
+		if (v3) {
+			if (v3[31] & 0x15 && v3[30] > a1) {
+				return 0;
+			}
+			sub_4BDA80((int)v3);
+			v2[29] = dword_587000_127004;
+			v2[30] = a1;
+			if (a2 & 1) {
+				v2[32] = -1;
+			} else {
+				v2[32] = 0;
+			}
+			sub_486320(v2 + 4, 0x4000);
+		}
+	}
+	return v2;
 }

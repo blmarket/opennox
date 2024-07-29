@@ -61,11 +61,11 @@ type Struct264 struct {
 	field_36  [6]uint32
 	field_60  [7]uint32
 	Field_88  timer.TimerGroup
-	field_184 uint32
+	field_184 *timer.TimerGroup
 	field_188 uint32
 	field_192 uint32
 	field_196 uint32
-	field_200 ListItem[unsafe.Pointer]
+	Field_200 ListItem[unsafe.Pointer]
 	field_212 uint32
 	field_216 unsafe.Pointer // function pointer
 	field_220 [11]uint32
@@ -172,6 +172,10 @@ func Sub_4876A0[T unsafe.Pointer | *Struct264](a1 T) {
 	}
 }
 
+func Get_dword_5d4594_1045428() *Struct264 {
+	return (*Struct264)(C.dword_5d4594_1045428)
+}
+
 func Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int {
 	v2 := 0
 	v3off := 840628
@@ -195,7 +199,7 @@ func Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int {
 	timerGroup := memmap.PtrT[timer.TimerGroup](0x5d4594, 1045228)
 	timerGroup.Init()
 	result := 1
-	*(**timer.TimerGroup)(unsafe.Add(C.dword_5d4594_1045428, 184)) = timerGroup
+	Get_dword_5d4594_1045428().field_184 = timerGroup
 	C.dword_5d4594_1045432 = 1
 	return result
 }
