@@ -380,8 +380,8 @@ func sub_44D5C0(a1 int, a2 int) {
 	Dialogs.Sub_44D5C0(ail.Stream(a1), a2)
 }
 
-func Sub_487680(a1 unsafe.Pointer) {
-	C.sub_487680(a1)
+func Sub_487680(a1 *Struct264) {
+	C.sub_487680(unsafe.Pointer(a1))
 }
 
 //export sub_487050

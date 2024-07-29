@@ -65,8 +65,8 @@ uint32_t* sub_4871C0(int a1, int a2, const void* a3);
 s264* dword_5d4594_805984 = 0;
 
 //----- (00487680) --------------------------------------------------------
-void sub_487680(void* lpMem) {
-	sub_4876A0((uint32_t**)lpMem);
+void sub_487680(s264* lpMem) {
+	sub_4876A0(lpMem);
 	sub_4872C0(lpMem);
 }
 
@@ -147,4 +147,22 @@ s264* sub_487150(int a1, const void* a2) {
 	}
 	++v3[4];
 	return v3;
+}
+
+//----- (004872C0) --------------------------------------------------------
+void sub_4872C0(s264* a1p) {
+	void* lpMem = a1p;
+	int v1; // eax
+	int v2; // ecx
+
+	sub_487910((int)lpMem, -1);
+	(*(void (**)(void*))(*(uint32_t*)(*((uint32_t*)lpMem + 5) + 12) + 32))(lpMem);
+	*(uint32_t*)(*((uint32_t*)lpMem + 5) + 4 * *((uint32_t*)lpMem + 6) + 24) = 0;
+	v1 = *((uint32_t*)lpMem + 5);
+	v2 = *(uint32_t*)(v1 + 16) - 1;
+	*(uint32_t*)(v1 + 16) = v2;
+	if (v2 < 0) {
+		*(uint32_t*)(*((uint32_t*)lpMem + 5) + 16) = 0;
+	}
+	free(lpMem);
 }

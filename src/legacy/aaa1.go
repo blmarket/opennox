@@ -132,21 +132,21 @@ func Sub_487310(a1 *Struct264) {
 	}
 }
 
-func sub_4875B0(a1 *unsafe.Pointer) unsafe.Pointer {
-	result := C.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_12))
+func sub_4875B0(a1 **Struct264) *Struct264 {
+	result := (*Struct264)(C.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&inst().field_12)))
 	*a1 = result
 	return result
 }
 
-func sub_4875D0(a1 *unsafe.Pointer) unsafe.Pointer {
+func sub_4875D0(a1 **Struct264) *Struct264 {
 	if *a1 != nil {
-		*a1 = C.nox_common_list_getNextSafe_4258A0(*a1)
+		*a1 = (*Struct264)(C.nox_common_list_getNextSafe_4258A0(unsafe.Pointer(*a1)))
 	}
 	return *a1
 }
 
 func Sub_4875F0() int32 {
-	var v3 unsafe.Pointer
+	var v3 *Struct264
 	inst().field_24 += 1
 	v0 := sub_4875B0(&v3)
 	for v0 != nil {
@@ -162,9 +162,9 @@ func Sub_4875F0() int32 {
 	return result
 }
 
-func Sub_4876A0(a1 unsafe.Pointer) {
+func Sub_4876A0[T unsafe.Pointer | *Struct264](a1 T) {
 	inst().field_24 += 1
-	C.nox_common_list_remove_425920(a1)
+	C.nox_common_list_remove_425920(unsafe.Pointer(a1))
 	result := inst().field_24 - 1
 	inst().field_24 = result
 	if result < 0 {

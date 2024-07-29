@@ -4508,23 +4508,6 @@ uint32_t* sub_4871C0(int a1, int a2, const void* a3) {
 }
 // 487CF0: using guessed type void  nullsub_10(uint32_t);
 
-//----- (004872C0) --------------------------------------------------------
-void sub_4872C0(void* lpMem) {
-	int v1; // eax
-	int v2; // ecx
-
-	sub_487910((int)lpMem, -1);
-	(*(void (**)(void*))(*(uint32_t*)(*((uint32_t*)lpMem + 5) + 12) + 32))(lpMem);
-	*(uint32_t*)(*((uint32_t*)lpMem + 5) + 4 * *((uint32_t*)lpMem + 6) + 24) = 0;
-	v1 = *((uint32_t*)lpMem + 5);
-	v2 = *(uint32_t*)(v1 + 16) - 1;
-	*(uint32_t*)(v1 + 16) = v2;
-	if (v2 < 0) {
-		*(uint32_t*)(*((uint32_t*)lpMem + 5) + 16) = 0;
-	}
-	free(lpMem);
-}
-
 //----- (00487360) --------------------------------------------------------
 int* sub_487360(int a1, int** a2, int* a3) {
 	int* result; // eax
