@@ -16,6 +16,7 @@ int sub_43F0E0(uint32_t* a1);
 char* sub_413890();
 int sub_486640(void* a1, int a2);
 int nox_xxx_parseSoundSetBin_424170(char* a1);
+void* sub_487150(int a1, const void* a2);
 
 extern void* dword_587000_127004;
 extern uint32_t dword_5d4594_816376;
@@ -364,7 +365,7 @@ func Sub_487D00(a1 unsafe.Pointer) {
 }
 
 func Sub_487150(a1 int, a2 unsafe.Pointer) *Struct264 {
-	return (*Struct264)(unsafe.Pointer(C.sub_487150(C.int(a1), a2)))
+	return (*Struct264)(C.sub_487150(C.int(a1), a2))
 }
 
 func Sub_487790(a1 *Struct264, a2 int) int {

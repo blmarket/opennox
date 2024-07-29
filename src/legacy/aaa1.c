@@ -60,6 +60,7 @@ void sub_4BDA60(void* lpMem);
 void sub_487310(s264* a1);
 void sub_4876A0(void* a1);
 int sub_4BDA80(int a1);
+uint32_t* sub_4871C0(int a1, int a2, const void* a3);
 
 s264* dword_5d4594_805984 = 0;
 
@@ -116,4 +117,34 @@ void sub_431290() {
 	if (dword_5d4594_805984) {
 		sub_487970(dword_5d4594_805984, -1);
 	}
+}
+
+//----- (00487150) --------------------------------------------------------
+s264* sub_487150(int a1, const void* a2) {
+	// a1 is always -1
+	int v2;       // edi
+	uint32_t* v3; // esi
+	uint32_t* v4; // eax
+	int v6;       // [esp+8h] [ebp-4h]
+
+	v2 = a1;
+	if (a1 == -1) {
+		v2 = 0;
+	}
+	sub_487360(v2, (int**)&a1, &v6);
+	if (!a1) {
+		return 0;
+	}
+	v3 = *(uint32_t**)(a1 + 4 * v6 + 24);
+	if (!v3) {
+		v4 = sub_4871C0(a1, v6, a2);
+		v3 = v4;
+		if (!v4) {
+			return 0;
+		}
+		v4[47] = v2;
+		sub_487310(v4);
+	}
+	++v3[4];
+	return v3;
 }

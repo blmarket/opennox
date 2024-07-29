@@ -124,7 +124,6 @@ void sub_487090(uint32_t** a1);
 void sub_4870A0();
 void* sub_4870E0(void** a1);
 int* sub_487100(int** a1);
-uint32_t* sub_487150(int a1, const void* a2);
 uint32_t* sub_4871C0(int a1, int a2, const void* a3);
 void sub_4872C0(void* lpMem);
 void sub_487310(void* a1);

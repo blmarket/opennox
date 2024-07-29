@@ -4466,35 +4466,6 @@ int* sub_487100(int** a1) {
 	return *a1;
 }
 
-//----- (00487150) --------------------------------------------------------
-uint32_t* sub_487150(int a1, const void* a2) {
-	int v2;       // edi
-	uint32_t* v3; // esi
-	uint32_t* v4; // eax
-	int v6;       // [esp+8h] [ebp-4h]
-
-	v2 = a1;
-	if (a1 == -1) {
-		v2 = 0;
-	}
-	sub_487360(v2, (int**)&a1, &v6);
-	if (!a1) {
-		return 0;
-	}
-	v3 = *(uint32_t**)(a1 + 4 * v6 + 24);
-	if (!v3) {
-		v4 = sub_4871C0(a1, v6, a2);
-		v3 = v4;
-		if (!v4) {
-			return 0;
-		}
-		v4[47] = v2;
-		sub_487310(v4);
-	}
-	++v3[4];
-	return v3;
-}
-
 //----- (004871C0) --------------------------------------------------------
 uint32_t* sub_4871C0(int a1, int a2, const void* a3) {
 	int v3;       // ebp
