@@ -3,10 +3,20 @@ package legacy
 /*
 #include "defs.h"
 
+extern void* dword_5d4594_1045420;
+extern void* dword_5d4594_1045424;
+extern void* dword_5d4594_1045428; // actually *Struct264
+extern uint32_t dword_5d4594_1045432;
+extern void* dword_5d4594_1045436;
+
+void nox_common_list_clear_425760(void* list);
 void nox_common_list_append_4258E0(void* list, void* cur);
 void* nox_common_list_getFirstSafe_425890(void* list);
 void* nox_common_list_getNextSafe_4258A0(void* list);
 void nox_common_list_remove_425920(void* a1);
+int sub_451920(void* a2);
+void* sub_4BD340(void* a1, int a2, int a3, int a4);
+void* sub_4BD280(int a1, int a2);
 */
 import "C"
 
@@ -50,7 +60,7 @@ type Struct264 struct {
 	field_32  uint32
 	field_36  [6]uint32
 	field_60  [7]uint32
-	field_88  timer.TimerGroup
+	Field_88  timer.TimerGroup
 	field_184 uint32
 	field_188 uint32
 	field_192 uint32
@@ -160,4 +170,32 @@ func Sub_4876A0(a1 unsafe.Pointer) {
 	if result < 0 {
 		inst().field_24 = 0
 	}
+}
+
+func Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int {
+	v2 := 0
+	v3off := 840628
+	for v3off < 1045228 {
+		v3p := memmap.PtrOff(0x5D4594, uintptr(v3off))
+		C.sub_451920(v3p)
+		*(**C.char)(unsafe.Add(v3p, 84)) = nox_xxx_getSndName_40AF80(v2)
+		v3off += 200
+		v2 += 1
+	}
+	C.dword_5d4594_1045420 = a3p
+	C.dword_5d4594_1045428 = unsafe.Pointer(a2p)
+	if a3p != nil {
+		C.dword_5d4594_1045424 = C.sub_4BD340(a3p, 0x100000, 200, 0x2000)
+		C.dword_5d4594_1045436 = C.sub_4BD280(200, 576)
+	}
+	if C.dword_5d4594_1045424 == nil || C.dword_5d4594_1045420 == nil || C.dword_5d4594_1045428 == nil || C.dword_5d4594_1045436 == nil {
+		return 0
+	}
+	C.nox_common_list_clear_425760(memmap.PtrOff(0x5D4594, 840612))
+	timerGroup := memmap.PtrT[timer.TimerGroup](0x5d4594, 1045228)
+	timerGroup.Init()
+	result := 1
+	*(**timer.TimerGroup)(unsafe.Add(C.dword_5d4594_1045428, 184)) = timerGroup
+	C.dword_5d4594_1045432 = 1
+	return result
 }

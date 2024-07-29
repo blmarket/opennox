@@ -58,7 +58,7 @@ extern uint32_t dword_5d4594_1045596;
 extern uint32_t dword_5d4594_1049692;
 extern uint32_t dword_5d4594_1046652;
 extern uint32_t dword_5d4594_1047536;
-extern uint32_t dword_5d4594_1045420;
+extern void* dword_5d4594_1045420;
 extern uint32_t dword_5d4594_1045556;
 extern uint32_t dword_5d4594_831240;
 extern uint32_t dword_5d4594_1045580;
@@ -70,7 +70,7 @@ extern uint32_t dword_5d4594_832480;
 extern uint32_t dword_5d4594_1046360;
 extern uint32_t dword_5d4594_1045540;
 extern uint32_t dword_587000_126996;
-extern uint32_t dword_5d4594_1045428;
+extern void* dword_5d4594_1045428;
 extern uint32_t dword_5d4594_1045544;
 extern uint32_t dword_5d4594_1045520;
 extern uint32_t dword_5d4594_831244;
@@ -720,38 +720,6 @@ void nox_gui_setQuestStage_450B00(int a1) { *getMemU32Ptr(0x5D4594, 832468) = a1
 
 //----- (00450B10) --------------------------------------------------------
 int nox_gui_getQuestStage_450B10() { return *getMemU32Ptr(0x5D4594, 832468); }
-
-//----- (00451850) --------------------------------------------------------
-int sub_451850(int a2, void* a3p) {
-	int a3 = a3p;
-	int v2;            // edi
-	unsigned char* v3; // esi
-	int result;        // eax
-
-	v2 = 0;
-	v3 = getMemAt(0x5D4594, 840712);
-	do {
-		sub_451920((uint32_t*)v3 - 21);
-		*(uint32_t*)v3 = nox_xxx_getSndName_40AF80(v2);
-		v3 += 200;
-		++v2;
-	} while ((int)v3 < (int)getMemAt(0x5D4594, 1045312));
-	dword_5d4594_1045420 = a3;
-	dword_5d4594_1045428 = a2;
-	if (a3) {
-		dword_5d4594_1045424 = sub_4BD340(a3, 0x100000, 200, 0x2000);
-		dword_5d4594_1045436 = sub_4BD280(200, 576);
-	}
-	if (!dword_5d4594_1045424 || !dword_5d4594_1045420 || !dword_5d4594_1045428 || !dword_5d4594_1045436) {
-		return 0;
-	}
-	nox_common_list_clear_425760(getMemAt(0x5D4594, 840612));
-	sub_4864A0(getMemAt(0x5D4594, 1045228));
-	result = 1;
-	*(uint32_t*)(dword_5d4594_1045428 + 184) = getMemAt(0x5D4594, 1045228);
-	dword_5d4594_1045432 = 1;
-	return result;
-}
 
 //----- (00451920) --------------------------------------------------------
 int sub_451920(uint32_t* a2) {

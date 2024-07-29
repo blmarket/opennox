@@ -25,7 +25,6 @@ extern uint32_t dword_5d4594_831092;
 void sub_43DC00();
 void sub_44D960();
 void sub_453050();
-int sub_451850(int a2, void* a3);
 void sub_487680(void* lpMem);
 extern void* dword_587000_122852;
 extern void* dword_587000_81128;
@@ -326,14 +325,15 @@ func Sub_486640(a1 unsafe.Pointer, a2 int) int {
 	return int(C.sub_486640(a1, C.int(a2)))
 }
 
-func Get_dword_5d4594_805984() unsafe.Pointer {
-	return C.dword_5d4594_805984
+func Get_dword_5d4594_805984() *Struct264 {
+	return (*Struct264)(C.dword_5d4594_805984)
 }
 
 func Set_dword_5d4594_805984(v unsafe.Pointer) {
 	C.dword_5d4594_805984 = v
 }
 
+// FIXME: type should be *timer.TimerGroup
 func Set_dword_587000_81128(v unsafe.Pointer) {
 	C.dword_587000_81128 = v
 }
@@ -353,10 +353,6 @@ func sub_486380(a1 unsafe.Pointer, a2 uint32, a3 int32, a4 uint32) int {
 //export sub_4862E0
 func sub_4862E0(a1 unsafe.Pointer, a2 int32) int {
 	return bool2int((*timer.Timer)(a1).Init(a2))
-}
-
-func Sub_451850(a1 unsafe.Pointer, a2 unsafe.Pointer) {
-	C.sub_451850(C.int(uintptr(a1)), a2)
 }
 
 func Sub_486FA0(a1 int) {

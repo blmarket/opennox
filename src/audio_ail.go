@@ -219,7 +219,7 @@ func nox_audio_initall(a3 int) int {
 	if a3 != 0 {
 		legacy.Sub_486F30()
 		if sub_4311F0() != 0 {
-			legacy.Set_dword_587000_81128(unsafe.Add(legacy.Get_dword_5d4594_805984(), 88))
+			legacy.Set_dword_587000_81128(unsafe.Pointer(&legacy.Get_dword_5d4594_805984().Field_88))
 			dword_5d4594_805980 = sub_4866F0("audio", "audio")
 		}
 	}
