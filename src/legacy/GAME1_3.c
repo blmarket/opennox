@@ -1,7 +1,7 @@
+#include "GAME1_3.h"
 #include "GAME1.h"
 #include "GAME1_1.h"
 #include "GAME1_2.h"
-#include "GAME1_3.h"
 #include "GAME2.h"
 #include "GAME2_1.h"
 #include "GAME2_2.h"
@@ -12,8 +12,8 @@
 #include "GAME4.h"
 #include "GAME5.h"
 #include "GAME5_2.h"
-#include "client__system__parsecmd.h"
 #include "client/audio/ail/compat_mss.h"
+#include "client__system__parsecmd.h"
 
 #include "client__gui__guicon.h"
 #include "client__gui__guiquit.h"
@@ -479,7 +479,7 @@ void sub_4417E0(wchar2_t* a1, const char* a2) {
 	unsigned char v2; // dl
 	char* v3;         // edi
 	char v4[64];      // [esp+4h] [ebp-C0h]
-	wchar2_t v5[64];   // [esp+44h] [ebp-80h]
+	wchar2_t v5[64];  // [esp+44h] [ebp-80h]
 
 	if (a2) {
 		strcpy(v4, a2);
@@ -495,11 +495,11 @@ void sub_4417E0(wchar2_t* a1, const char* a2) {
 
 //----- (004438A0) --------------------------------------------------------
 int nox_xxx_doExecrul_4438A0(int a1) {
-	FILE* v1;        // eax
-	FILE* v2;        // esi
-	char* v3;        // eax
-	char v5[256];    // [esp+8h] [ebp-400h]
-	char v6[256];    // [esp+108h] [ebp-300h]
+	FILE* v1;         // eax
+	FILE* v2;         // esi
+	char* v3;         // eax
+	char v5[256];     // [esp+8h] [ebp-400h]
+	char v6[256];     // [esp+108h] [ebp-300h]
 	wchar2_t v7[128]; // [esp+208h] [ebp-200h]
 
 	if (!a1) {
@@ -536,7 +536,7 @@ int nox_xxx_doExecrul_4438A0(int a1) {
 //----- (00445450) --------------------------------------------------------
 wchar2_t* sub_445450() {
 	unsigned char* v0; // esi
-	wchar2_t* result;   // eax
+	wchar2_t* result;  // eax
 
 	v0 = getMemAt(0x5D4594, 824440);
 	do {
@@ -808,7 +808,7 @@ char* sub_4466F0(char* a1, uint8_t* a2) {
 
 //----- (00446730) --------------------------------------------------------
 uint8_t* nox_xxx_motdAddSomeTextMB_446730(uint8_t* a1) {
-	uint8_t* result; // eax
+	uint8_t* result;  // eax
 	wchar2_t v2[256]; // [esp+0h] [ebp-200h]
 
 	result = a1;

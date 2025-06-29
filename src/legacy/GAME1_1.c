@@ -752,10 +752,16 @@ typedef struct table_55816_t {
 } table_55816_t;
 
 table_55816_t table_55816[] = {
-    {"Attrib Data", 0x2, &sub_41A590},     {"Status Data", 0x3, &sub_41AA30},    {"Inventory Data", 0x4, &sub_41AC30},
-    {"FieldGuide Data", 0x8, &nox_xxx_guiFieldbook_41B420}, {"Spellbook Data", 0x5, &nox_xxx_guiSpellbook_41B660}, {"Enchantment Data", 0x6, &nox_xxx_guiEnchantment_41B9C0},
-    {"Journal Data", 0x9, &sub_41BEC0},    {"Game Data", 0xa, &sub_41C080},      {"PAD_DATA", 0xb, &sub_41C200},
-    {0},
+	{"Attrib Data", 0x2, &sub_41A590},
+	{"Status Data", 0x3, &sub_41AA30},
+	{"Inventory Data", 0x4, &sub_41AC30},
+	{"FieldGuide Data", 0x8, &nox_xxx_guiFieldbook_41B420},
+	{"Spellbook Data", 0x5, &nox_xxx_guiSpellbook_41B660},
+	{"Enchantment Data", 0x6, &nox_xxx_guiEnchantment_41B9C0},
+	{"Journal Data", 0x9, &sub_41BEC0},
+	{"Game Data", 0xa, &sub_41C080},
+	{"PAD_DATA", 0xb, &sub_41C200},
+	{0},
 };
 int table_55816_cnt = sizeof(table_55816) / sizeof(table_55816_t) - 1;
 
@@ -1307,7 +1313,8 @@ int sub_41AC30(void* a1p, void* a2p) {
 			if (v29) {
 				while (1) {
 					if (v29[11] == v37) {
-						nox_xxx_netSendSecondaryWeapon_4D9670(*(unsigned char*)(*(uint32_t*)(v40 + 276) + 2064), v29, 0);
+						nox_xxx_netSendSecondaryWeapon_4D9670(*(unsigned char*)(*(uint32_t*)(v40 + 276) + 2064), v29,
+															  0);
 						break;
 					}
 					v29 = (uint32_t*)v29[124];
@@ -2612,8 +2619,7 @@ void nox_xxx_reconStart_41E400() {
 	if (dword_5d4594_528252 != 1 && dword_5d4594_528256 != 1) {
 		if (!dword_5d4594_528260) {
 			if (!dword_5d4594_528264) {
-				nox_xxx_networkLog_printf_413D30("RECON: Starting reconnection process frame (%d)",
-												 gameFrame());
+				nox_xxx_networkLog_printf_413D30("RECON: Starting reconnection process frame (%d)", gameFrame());
 				dword_5d4594_528252 = 1;
 				dword_5d4594_528256 = 0;
 				dword_5d4594_528264 = gameFrame();
@@ -3654,8 +3660,7 @@ LABEL_12:
 				for (i = nox_xxx_getFirstPlayerUnit_4DA7C0(); i; i = nox_xxx_getNextPlayerUnit_4DA7F0(i)) {
 					if (i != a1) {
 						nox_xxx_netInformTextMsg_4DA0F0(
-							*(unsigned char*)(*(uint32_t*)(*(uint32_t*)(i + 748) + 276) + 2064), 20,
-							(int*)(a1 + 36));
+							*(unsigned char*)(*(uint32_t*)(*(uint32_t*)(i + 748) + 276) + 2064), 20, (int*)(a1 + 36));
 					}
 				}
 				v9 = *((uint32_t*)v4 + 33);
@@ -4120,7 +4125,8 @@ LABEL_43:
 				while (1) {
 					if (!(((uint8_t)v33 + v35) & 1)) {
 						if (v33 & 1) {
-							v39 = (uint8_t*)((uint32_t)(ptr_5D4594_2650668[(v36 - 34) / 46]) + 44 * (23 * (v33 + 1) / 46));
+							v39 = (uint8_t*)((uint32_t)(ptr_5D4594_2650668[(v36 - 34) / 46]) +
+											 44 * (23 * (v33 + 1) / 46));
 							if (*v39 & 1) {
 								v38 = v39 + 4;
 								v69.field_0 = v36;
@@ -5047,9 +5053,9 @@ void* sub_425770(void* a1p) {
 
 //----- (00425790) --------------------------------------------------------
 int sub_425790(int* a1, uint32_t* a2) {
-	int v2;     // esi
-	int v3;     // ebx
-	int* v4;    // eax
+	int v2;  // esi
+	int v3;  // ebx
+	int* v4; // eax
 
 	v2 = 0;
 	v3 = a2[2];
@@ -5529,9 +5535,9 @@ void sub_425F10(nox_playerInfo* pl) {
 
 //----- (00426150) --------------------------------------------------------
 void sub_426150() {
-	char* v1;     // esi
-	char* v2;     // ebp
-	short v3;     // ax
+	char* v1; // esi
+	char* v2; // ebp
+	short v3; // ax
 
 	if (!nox_common_gameFlags_check_40A5C0(0x2000)) {
 		return;
