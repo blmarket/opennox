@@ -1,3 +1,8 @@
+src/opennox
+src/opennox-hd
+src/opennox-server
+src/opennox.yml
+src/r2
 build/
 .flatpak-builder/
 CMakeFiles/
