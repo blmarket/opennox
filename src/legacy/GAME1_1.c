@@ -2239,7 +2239,7 @@ int nox_xxx_parseFileInfoData_41C3B0(int a1) {
 //----- (0041C780) --------------------------------------------------------
 int sub_41C780(int a1) {
 	int i;    // edi
-	char* v2; // esi
+	int4* v2; // esi
 	bool v3;  // [esp+3h] [ebp-19h]
 	int v4;   // [esp+4h] [ebp-18h]
 	int v5;   // [esp+8h] [ebp-14h]
@@ -2269,15 +2269,15 @@ int sub_41C780(int a1) {
 		for (i = 0; i < v4; ++i) {
 			v2 = sub_43DB40(i);
 			if (nox_crypt_IsReadOnly() == 1) {
-				*(uint32_t*)v2 = 0;
-				*((uint32_t*)v2 + 1) = 0;
-				*((uint32_t*)v2 + 2) = 0;
-				*((uint32_t*)v2 + 3) = 0;
+				v2->field_0 = 0;
+				v2->field_4 = 0;
+				v2->field_8 = 0;
+				v2->field_C = 0;
 			}
-			nox_xxx_fileReadWrite_426AC0_file3_fread(v2 + 12, 4u);
-			nox_xxx_fileReadWrite_426AC0_file3_fread(v2 + 8, 4u);
-			nox_xxx_fileReadWrite_426AC0_file3_fread(v2, 4u);
-			nox_xxx_fileReadWrite_426AC0_file3_fread(v2 + 4, 4u);
+			nox_xxx_fileReadWrite_426AC0_file3_fread(&v2->field_C, 4u);
+			nox_xxx_fileReadWrite_426AC0_file3_fread(&v2->field_8, 4u);
+			nox_xxx_fileReadWrite_426AC0_file3_fread(&v2->field_0, 4u);
+			nox_xxx_fileReadWrite_426AC0_file3_fread(&v2->field_4, 4u);
 		}
 		if (nox_crypt_IsReadOnly() == 1 && !nox_common_gameFlags_check_40A5C0(0x2000)) {
 			sub_43D9E0(&v6);
