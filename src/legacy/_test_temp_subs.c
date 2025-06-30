@@ -23,10 +23,7 @@ uint32_t hash_memory(const void* data, size_t len) {
 	return hash;
 }
 
-void* mem_getPtrSize(uintptr_t base, uintptr_t off, uintptr_t size) {
-	printf("mem_getPtrSize called with base=%lx, off=%lx, size=%lx\n", base, off, size);
-	return &mock_memory[off];
-}
+void* mem_getPtrSize(uintptr_t base, uintptr_t off, uintptr_t size) { return &mock_memory[off]; }
 void* mem_getPtr(uintptr_t base, uintptr_t off) { return mem_getPtrSize(base, off, 4); }
 int32_t* mem_getI32Ptr(uintptr_t base, uintptr_t off) { return (int32_t*)mem_getPtrSize(base, off, sizeof(int32_t)); }
 
