@@ -22,6 +22,12 @@ type MusicBlock struct {
 
 var _ = [1]struct{}{}[20-unsafe.Sizeof(MusicBlock{})]
 
+type MusicStateArrayEntry struct {
+	Field1, Field2, Field3, Field4 int32
+}
+
+var _ = [1]struct{}{}[16-unsafe.Sizeof(MusicStateArrayEntry{})]
+
 type Module struct {
 	dir string
 
@@ -38,15 +44,16 @@ type Module struct {
 	block_5d4594_816060 MusicState       // 5d4594_816060
 
 	// members which has external usages
-	dword_5d4594_816368      *uint32            // 5d4594_816368
-	dword_5d4594_816372      *uint32            // 5d4594_816372
-	dword_5d4594_816376      *ail.Driver        // 5d4594_816376
-	dword_587000_93156       *uint32            // 587000_93156
-	dword_587000_93160       *uint32            // 587000_93160, used by dialog.go
-	dword_5d4594_816340      *uint32            // 5d4594_816340
-	counter_5d4594_816244    *timer.TimerGroup  // 5d4594_816244, used by dword_587000_93164
-	ptr_counter_587000_81128 **timer.TimerGroup // 587000_81128
-	dword_5d4594_816348      *uint32            // 5d4594_816348
+	dword_5d4594_816368      *uint32                     // 5d4594_816368
+	dword_5d4594_816372      *uint32                     // 5d4594_816372
+	musicStateArray          *[3][6]MusicStateArrayEntry // 5d4594_815772
+	dword_5d4594_816376      *ail.Driver                 // 5d4594_816376
+	dword_587000_93156       *uint32                     // 587000_93156
+	dword_587000_93160       *uint32                     // 587000_93160, used by dialog.go
+	dword_5d4594_816340      *uint32                     // 5d4594_816340
+	counter_5d4594_816244    *timer.TimerGroup           // 5d4594_816244, used by dword_587000_93164
+	ptr_counter_587000_81128 **timer.TimerGroup          // 587000_81128
+	dword_5d4594_816348      *uint32                     // 5d4594_816348
 
 	Sub_43F130    func() ail.Driver
 	checkDialogs  func() bool
@@ -65,6 +72,7 @@ func NewModule(
 	dir string,
 	dword_5d4594_816368 *uint32,
 	dword_5d4594_816372 *uint32,
+	musicStateArray *[3][6]MusicStateArrayEntry,
 	dword_5d4594_816376 *ail.Driver,
 	dword_587000_93156 *uint32,
 	dword_587000_93160 *uint32,
@@ -83,6 +91,7 @@ func NewModule(
 
 		dword_5d4594_816368:      dword_5d4594_816368,
 		dword_5d4594_816372:      dword_5d4594_816372,
+		musicStateArray:          musicStateArray,
 		dword_5d4594_816376:      dword_5d4594_816376,
 		dword_587000_93156:       dword_587000_93156,
 		dword_587000_93160:       dword_587000_93160,
