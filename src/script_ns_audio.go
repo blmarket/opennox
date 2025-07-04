@@ -15,7 +15,7 @@ func (s noxScriptNS) Music(music int, volume int) {
 
 func (s noxScriptNS) MusicPushEvent() {
 	if noxflags.HasGame(noxflags.GameModeCoop) {
-		legacy.Sub_43DA80()
+		legacy.MusicModule.Sub_43DA80()
 	} else {
 		s.s.NetMusicPushEvent()
 	}
@@ -23,7 +23,7 @@ func (s noxScriptNS) MusicPushEvent() {
 
 func (s noxScriptNS) MusicPopEvent() {
 	if noxflags.HasGame(noxflags.GameModeCoop) {
-		legacy.Sub_43DAD0()
+		legacy.MusicModule.Sub_43DAD0()
 	} else {
 		s.s.NetMusicPopEvent()
 	}

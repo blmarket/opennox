@@ -33,7 +33,7 @@ int sub_43DA80();
 void sub_43DAD0();
 int sub_43DB20();
 int sub_43DB30(int a1);
-int4* sub_43DB40(int a1);
+void* sub_43DB40(int a1);
 int sub_43DB60();
 void sub_43DBA0();
 void sub_43DBE0();

@@ -102,3 +102,29 @@ func sub_43D9B0(a1, a2 int) {
 func sub_43DD70(a1, a2 int) {
 	MusicModule.Sub_43DD70(uint32(a1), uint32(a2))
 }
+
+//export sub_43DA80
+func sub_43DA80() int {
+	return MusicModule.Sub_43DA80()
+}
+
+//export sub_43DAD0
+func sub_43DAD0() {
+	MusicModule.Sub_43DAD0()
+}
+
+//export sub_43DB20
+func sub_43DB20() int {
+	return MusicModule.Sub_43DB20()
+}
+
+//export sub_43DB30
+func sub_43DB30(a1 int) int {
+	return MusicModule.Sub_43DB30(a1)
+}
+
+//export sub_43DB40
+func sub_43DB40(a1 int) unsafe.Pointer {
+	entry := MusicModule.Sub_43DB40(a1)
+	return unsafe.Pointer(entry)
+}

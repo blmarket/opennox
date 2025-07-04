@@ -22,12 +22,6 @@ type MusicBlock struct {
 
 var _ = [1]struct{}{}[20-unsafe.Sizeof(MusicBlock{})]
 
-type MusicStateArrayEntry struct {
-	Field1, Field2, Field3, Field4 int32
-}
-
-var _ = [1]struct{}{}[16-unsafe.Sizeof(MusicStateArrayEntry{})]
-
 type Module struct {
 	dir string
 
@@ -44,16 +38,16 @@ type Module struct {
 	block_5d4594_816060 MusicState       // 5d4594_816060
 
 	// members which has external usages
-	dword_5d4594_816368      *uint32                     // 5d4594_816368
-	dword_5d4594_816372      *uint32                     // 5d4594_816372
-	musicStateArray          *[3][6]MusicStateArrayEntry // 5d4594_815772
-	dword_5d4594_816376      *ail.Driver                 // 5d4594_816376
-	dword_587000_93156       *uint32                     // 587000_93156
-	dword_587000_93160       *uint32                     // 587000_93160, used by dialog.go
-	dword_5d4594_816340      *uint32                     // 5d4594_816340
-	counter_5d4594_816244    *timer.TimerGroup           // 5d4594_816244, used by dword_587000_93164
-	ptr_counter_587000_81128 **timer.TimerGroup          // 587000_81128
-	dword_5d4594_816348      *uint32                     // 5d4594_816348
+	dword_5d4594_816368      *uint32            // 5d4594_816368
+	dword_5d4594_816372      *uint32            // 5d4594_816372
+	musicStateArray          *[3][6]MusicState  // 5d4594_815772
+	dword_5d4594_816376      *ail.Driver        // 5d4594_816376
+	dword_587000_93156       *uint32            // 587000_93156
+	dword_587000_93160       *uint32            // 587000_93160, used by dialog.go
+	dword_5d4594_816340      *uint32            // 5d4594_816340
+	counter_5d4594_816244    *timer.TimerGroup  // 5d4594_816244, used by dword_587000_93164
+	ptr_counter_587000_81128 **timer.TimerGroup // 587000_81128
+	dword_5d4594_816348      *uint32            // 5d4594_816348
 
 	Sub_43F130    func() ail.Driver
 	checkDialogs  func() bool
@@ -72,7 +66,7 @@ func NewModule(
 	dir string,
 	dword_5d4594_816368 *uint32,
 	dword_5d4594_816372 *uint32,
-	musicStateArray *[3][6]MusicStateArrayEntry,
+	musicStateArray *[3][6]MusicState,
 	dword_5d4594_816376 *ail.Driver,
 	dword_587000_93156 *uint32,
 	dword_587000_93160 *uint32,
@@ -354,4 +348,51 @@ func (m *Module) Sub_43DD70(a1, a2 uint32) {
 func (m *Module) Sub_43DDA0() {
 	m.dword_5d4594_816344 = 0
 	m.SetNextMusic(m.block_5d4594_816060)
+}
+
+// sub_43DA80 - Push music state to array
+func (m *Module) Sub_43DA80() int {
+	if *m.dword_5d4594_816368 < 6 {
+		m.Sub_43DD10(&m.musicStateArray[*m.dword_5d4594_816372][*m.dword_5d4594_816368])
+		*m.dword_5d4594_816368++
+		return 1
+	} else {
+		*m.dword_5d4594_816368 = 6
+		return 0
+	}
+}
+
+// sub_43DAD0 - Pop music state from array
+func (m *Module) Sub_43DAD0() {
+	if *m.dword_5d4594_816368 > 0 {
+		(*m.dword_5d4594_816368)--
+		m.Sub_43D9E0(&m.musicStateArray[*m.dword_5d4594_816372][*m.dword_5d4594_816368])
+	}
+	*m.dword_5d4594_816368 = 0
+}
+
+// sub_43DB20 - Get current array index
+func (m *Module) Sub_43DB20() int {
+	return int(*m.dword_5d4594_816368)
+}
+
+// sub_43DB30 - Set array index
+func (m *Module) Sub_43DB30(a1 int) int {
+	*m.dword_5d4594_816368 = uint32(a1)
+	return a1
+}
+
+// sub_43DB40 - Get music state array entry pointer
+func (m *Module) Sub_43DB40(a1 int) *MusicState {
+	return &m.musicStateArray[*m.dword_5d4594_816372][a1]
+}
+
+func (m *Module) Sub_43DD10(entry *MusicState) {
+	current := m.GetCurrentBlock()
+	*entry = current
+}
+
+func (m *Module) Sub_43D9E0(entry *MusicState) {
+	// Restore music state from array entry
+	m.SetNextMusic(*entry)
 }
