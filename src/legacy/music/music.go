@@ -37,9 +37,9 @@ type Module struct {
 	playingStream       ail.Stream        // 5d4594_816364
 	dword_5d4594_816344 uint32            // 5d4594_816344
 	block_5d4594_816060 MusicState        // 5d4594_816060
+	musicIndexArray     *[3]uint32        // 5d4594_816076
 
 	// members which has external usages
-	musicIndexArray          *[3]uint32         // 5d4594_816076
 	dword_5d4594_816368      *uint32            // 5d4594_816368
 	dword_5d4594_816372      *uint32            // 5d4594_816372
 	dword_5d4594_816376      *ail.Driver        // 5d4594_816376
@@ -398,4 +398,32 @@ func (m *Module) Sub_43DD10(entry *MusicState) {
 func (m *Module) Sub_43D9E0(entry *MusicState) {
 	// Restore music state from array entry
 	m.SetNextMusic(*entry)
+}
+
+// sub_43DB60 - Push music state and manage musicIndexArray
+func (m *Module) Sub_43DB60() int {
+	if *m.dword_5d4594_816372 < 3 {
+		m.Sub_43DA80()
+		v1 := *m.dword_5d4594_816372
+		v2 := *m.dword_5d4594_816368
+		*m.dword_5d4594_816368 = 0
+		m.musicIndexArray[*m.dword_5d4594_816372] = v2
+		*m.dword_5d4594_816372 = v1 + 1
+		return int(v1 + 1)
+	} else {
+		*m.dword_5d4594_816372 = 3
+		return 3
+	}
+}
+
+// sub_43DBA0 - Pop music state and manage musicIndexArray
+func (m *Module) Sub_43DBA0() {
+	if *m.dword_5d4594_816372 > 0 {
+		v1 := *m.dword_5d4594_816372 - 1
+		*m.dword_5d4594_816372 = v1
+		*m.dword_5d4594_816368 = m.musicIndexArray[v1]
+		m.Sub_43DAD0()
+	} else {
+		*m.dword_5d4594_816372 = 0
+	}
 }

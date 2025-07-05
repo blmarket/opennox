@@ -201,7 +201,7 @@ mainloop:
 }
 
 func mainloopConnectOrHost() (again bool, _ error) {
-	legacy.Sub_43DB60()
+	legacy.MusicModule.Sub_43DB60()
 	legacy.Sub_43D990()
 	g_v20 = true
 	noxAudioServeT(800)
@@ -347,7 +347,7 @@ func cmainLoop() {
 		return
 	}
 	if g_v20 {
-		legacy.Sub_43DBA0()
+		legacy.MusicModule.Sub_43DBA0()
 		g_v20 = false
 	}
 	noxAudioServe()

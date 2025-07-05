@@ -47,6 +47,7 @@ func initMusic() {
 		dword_5d4594_816368,
 		dword_5d4594_816372,
 		musicStateArray,
+		musicIndexArray,
 		dword_5d4594_816376,
 		dword_587000_93156,
 		dword_587000_93160,
@@ -128,4 +129,23 @@ func sub_43DB30(a1 int) int {
 func sub_43DB40(a1 int) unsafe.Pointer {
 	entry := MusicModule.Sub_43DB40(a1)
 	return unsafe.Pointer(entry)
+}
+
+//export sub_43DB60
+func sub_43DB60() int {
+	return MusicModule.Sub_43DB60()
+}
+
+//export sub_43DBA0
+func sub_43DBA0() {
+	MusicModule.Sub_43DBA0()
+}
+
+// Go wrapper functions for the main gameloop
+func Sub_43DB60() int {
+	return MusicModule.Sub_43DB60()
+}
+
+func Sub_43DBA0() {
+	MusicModule.Sub_43DBA0()
 }

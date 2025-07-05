@@ -41,7 +41,6 @@ extern uint32_t dword_5d4594_825736;
 extern void* dword_5d4594_826036;
 extern uint32_t dword_5d4594_826032;
 extern uint32_t dword_5d4594_825744;
-extern uint32_t dword_5d4594_816372;
 extern void* dword_587000_81128;
 extern uint32_t dword_5d4594_816368;
 extern uint32_t dword_5d4594_815044;
@@ -193,40 +192,6 @@ void sub_43CEB0() {
 	*getMemU64Ptr(0x587000, 91880) = v0a;
 }
 // 43CFA0: variable 'v1' is possibly undefined
-
-//----- (0043DB60) --------------------------------------------------------
-int sub_43DB60() {
-	int result; // eax
-	int v1;     // eax
-	int v2;     // ecx
-
-	result = 3;
-	if (*(int*)&dword_5d4594_816372 < 3) {
-		sub_43DA80();
-		v1 = dword_5d4594_816372;
-		v2 = dword_5d4594_816368;
-		dword_5d4594_816368 = 0;
-		*getMemU32Ptr(0x5D4594, 816076 + 4 * dword_5d4594_816372) = v2;
-		result = v1 + 1;
-		dword_5d4594_816372 = result;
-	} else {
-		dword_5d4594_816372 = 3;
-	}
-	return result;
-}
-
-//----- (0043DBA0) --------------------------------------------------------
-void sub_43DBA0() {
-	int v1; // eax
-	if (dword_5d4594_816372 > 0) {
-		v1 = dword_5d4594_816372 - 1;
-		dword_5d4594_816372 = v1;
-		dword_5d4594_816368 = *getMemU32Ptr(0x5D4594, 816076 + 4 * v1);
-		sub_43DAD0();
-	} else {
-		dword_5d4594_816372 = 0;
-	}
-}
 
 //----- (0043DC00) --------------------------------------------------------
 void sub_43DC00() { dword_587000_93156 = 0; }
