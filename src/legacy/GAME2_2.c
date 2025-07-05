@@ -4357,7 +4357,7 @@ FILE* sub_486E00(int a1) {
 }
 
 //----- (00486E30) --------------------------------------------------------
-in sub_486E30(int a1, struct_4BD720* a2) {
+int sub_486E30(int a1, struct_4BD720* a2) {
 	int result; // eax
 
 	a2->field_33 = a1;
@@ -4392,8 +4392,8 @@ int sub_486E90(int a1) {
 
 //----- (00486FA0) --------------------------------------------------------
 uint32_t* sub_486FA0(int a1) {
-	uint32_t* result; // eax
-	uint32_t* v2;     // edi
+	struct_486FE0_0x58* result; // eax
+	struct_486FE0_0x58* v2;     // edi
 	int v3;           // eax
 
 	result = sub_486FE0(a1);
@@ -4402,25 +4402,25 @@ uint32_t* sub_486FA0(int a1) {
 		v3 = *(uint32_t*)(a1 + 12);
 		LOBYTE(v3) = v3 | 1;
 		*(uint32_t*)(a1 + 12) = v3;
-		sub_487050(v2);
+		sub_487050((uint32_t*)v2);
 		if (*(uint8_t*)(a1 + 8) & 2) {
 			*getMemU32Ptr(0x5D4594, 1193332) = 1;
 		}
 		result = v2;
 	}
-	return result;
+	return (uint32_t*)result;
 }
 
 //----- (00486FE0) --------------------------------------------------------
-uint32_t* sub_486FE0(int a1) {
-	uint32_t* v1; // esi
+struct_486FE0_0x58* sub_486FE0(int a1) {
+	struct_486FE0_0x58* v1; // esi
 
-	v1 = calloc(1, 0x58u);
-	memset(v1, 0, 0x58u);
+	v1 = calloc(1, sizeof(struct_486FE0_0x58));
+	memset(v1, 0, sizeof(struct_486FE0_0x58));
 	sub_425770(v1);
-	v1[4] = 0;
-	v1[3] = a1;
-	if (!(*(int (**)(uint32_t*))(a1 + 20))(v1)) {
+	v1->field_0x10 = 0;
+	v1->field_0x0C = a1;
+	if (!(*(int (**)(struct_486FE0_0x58*))(a1 + 20))(v1)) {
 		return v1;
 	}
 	if (v1) {

@@ -3,8 +3,6 @@
 
 #include "defs.h"
 
-typedef struct struct_4BD720 struct_4BD720;
-
 int sub_476080(unsigned char* a1);
 int sub_4761B0(nox_drawable* a1p);
 void nox_video_setCutSize_4766A0(int a1);
@@ -118,7 +116,7 @@ FILE* sub_486E00(int a1);
 int sub_486E30(int a1, struct_4BD720* a2);
 int sub_486E90(int a1);
 uint32_t* sub_486FA0(int a1);
-uint32_t* sub_486FE0(int a1);
+struct_486FE0_0x58* sub_486FE0(int a1);
 void sub_487030(void* lpMem);
 void sub_487050(uint32_t* a1);
 void sub_487070(void* lpMem);
@@ -161,7 +159,8 @@ int sub_488B60();
 int sub_488BA0();
 void nox_xxx_onChar_488BD0(unsigned short a1);
 int nox_xxx_wndStaticDrawNoImage_488D00(nox_window* a1p, nox_window_data* a2p);
-nox_window* nox_gui_newStaticText_489300(nox_window* a1, int a2, int a3, int a4, int a5, int a6, nox_window_data* a7p, nox_staticText_data* a8p);
+nox_window* nox_gui_newStaticText_489300(nox_window* a1, int a2, int a3, int a4, int a5, int a6, nox_window_data* a7p,
+										 nox_staticText_data* a8p);
 int sub_4896E0();
 int sub_489870();
 int nox_xxx_checkSomeFlagsOnJoin_4899C0(nox_gui_server_ent_t* srv);
