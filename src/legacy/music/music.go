@@ -26,21 +26,21 @@ type Module struct {
 	dir string
 
 	// private members
-	currentPlaying      MusicState       // 5d4594_816092
-	dword_5d4594_816356 uint32           // 5d4594_816356
-	counterValue        int32            // 587000_93168
-	lastUpdatedTick     uint64           // 5d4594_816380
-	timer               timer.TimerGroup // 5d4594_816148
-	block_idx           uint32           // 5d4594_816352
-	blocks              [2]MusicBlock    // 5d4594_816108
-	playingStream       ail.Stream       // 5d4594_816364
-	dword_5d4594_816344 uint32           // 5d4594_816344
-	block_5d4594_816060 MusicState       // 5d4594_816060
+	musicStateArray     *[3][6]MusicState // 5d4594_815772
+	currentPlaying      MusicState        // 5d4594_816092
+	dword_5d4594_816356 uint32            // 5d4594_816356
+	counterValue        int32             // 587000_93168
+	lastUpdatedTick     uint64            // 5d4594_816380
+	timer               timer.TimerGroup  // 5d4594_816148
+	block_idx           uint32            // 5d4594_816352
+	blocks              [2]MusicBlock     // 5d4594_816108
+	playingStream       ail.Stream        // 5d4594_816364
+	dword_5d4594_816344 uint32            // 5d4594_816344
+	block_5d4594_816060 MusicState        // 5d4594_816060
 
 	// members which has external usages
 	dword_5d4594_816368      *uint32            // 5d4594_816368
 	dword_5d4594_816372      *uint32            // 5d4594_816372
-	musicStateArray          *[3][6]MusicState  // 5d4594_815772
 	dword_5d4594_816376      *ail.Driver        // 5d4594_816376
 	dword_587000_93156       *uint32            // 587000_93156
 	dword_587000_93160       *uint32            // 587000_93160, used by dialog.go
