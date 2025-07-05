@@ -730,7 +730,7 @@ void sub_4BD840(int a3) {
 	sub_486570(v2, (uint32_t*)(v1 + 88));
 	result = *(uint32_t*)(v1 + 184);
 	if (result) {
-		 sub_486570(v2, *(uint32_t**)(v1 + 184));
+		sub_486570(v2, *(uint32_t**)(v1 + 184));
 	}
 }
 
@@ -1127,21 +1127,21 @@ int sub_4BDFD0() {
 
 //----- (004BE120) --------------------------------------------------------
 int sub_4BE120(int a1) {
-	uint32_t* v1;    // eax
-	int v2;          // ecx
-	unsigned int v3; // ecx
-	uint32_t* v4;    // eax
-	int v5;          // ecx
-	unsigned int v6; // ecx
-	uint32_t* v7;    // esi
-	uint32_t* v8;    // eax
-	uint32_t* v9;    // eax
-	uint32_t* v10;   // eax
-	uint32_t* v11;   // eax
-	uint32_t* v12;   // eax
-	int result;      // eax
-	uint32_t* v14;   // eax
-	int v15;         // [esp-14h] [ebp-40h]
+	uint32_t* v1;     // eax
+	int v2;           // ecx
+	unsigned int v3;  // ecx
+	uint32_t* v4;     // eax
+	int v5;           // ecx
+	unsigned int v6;  // ecx
+	uint32_t* v7;     // esi
+	uint32_t* v8;     // eax
+	uint32_t* v9;     // eax
+	uint32_t* v10;    // eax
+	uint32_t* v11;    // eax
+	uint32_t* v12;    // eax
+	int result;       // eax
+	uint32_t* v14;    // eax
+	int v15;          // [esp-14h] [ebp-40h]
 	wchar2_t v16[16]; // [esp+Ch] [ebp-20h]
 
 	v1 = nox_xxx_wndGetChildByID_46B0C0(*(uint32_t**)&dword_5d4594_1316972, 2102);
@@ -1206,25 +1206,25 @@ int sub_4BE320() { return 1; }
 
 //----- (004BE330) --------------------------------------------------------
 int sub_4BE330(int a1, unsigned int a2, int* a3, int a4) {
-	uint32_t* v4;       // esi
-	char* v5;           // edi
-	int result;         // eax
+	uint32_t* v4;        // esi
+	char* v5;            // edi
+	int result;          // eax
 	const wchar2_t* v7;  // eax
-	int v8;             // eax
-	int v9;             // esi
-	char* v10;          // eax
-	char* v11;          // eax
-	char* v12;          // esi
-	uint32_t* v13;      // eax
-	char* v14;          // esi
-	uint32_t* v15;      // eax
-	char* v16;          // esi
-	uint32_t* v17;      // eax
-	char* v18;          // esi
-	uint32_t* v19;      // eax
-	char* v20;          // edi
+	int v8;              // eax
+	int v9;              // esi
+	char* v10;           // eax
+	char* v11;           // eax
+	char* v12;           // esi
+	uint32_t* v13;       // eax
+	char* v14;           // esi
+	uint32_t* v15;       // eax
+	char* v16;           // esi
+	uint32_t* v17;       // eax
+	char* v18;           // esi
+	uint32_t* v19;       // eax
+	char* v20;           // edi
 	const wchar2_t* v21; // eax
-	int v22;            // esi
+	int v22;             // esi
 
 	if (a2 > 0x4007) {
 		if (a2 == 16393) {
@@ -1935,10 +1935,10 @@ int sub_4BFDD0(uint32_t* a1, int a2, unsigned int a3) {
 //----- (004BFE40) --------------------------------------------------------
 int sub_4BFE40() {
 	const wchar2_t* v0; // eax
-	unsigned int v1;   // esi
-	int v3;            // [esp+0h] [ebp-10h]
-	int v4;            // [esp+4h] [ebp-Ch]
-	int2 v5;           // [esp+8h] [ebp-8h]
+	unsigned int v1;    // esi
+	int v3;             // [esp+0h] [ebp-10h]
+	int v4;             // [esp+4h] [ebp-Ch]
+	int2 v5;            // [esp+8h] [ebp-8h]
 
 	if (dword_5d4594_1319268 != 1) {
 		return 0;
@@ -2035,18 +2035,18 @@ int sub_4C0030(int a1) {
 
 //----- (004C01C0) --------------------------------------------------------
 int sub_4C01C0(int a1, int a2, int* a3, int a4) {
-	int v3;            // esi
-	int result;        // eax
+	int v3;             // esi
+	int result;         // eax
 	const wchar2_t* v5; // eax
-	unsigned int v6;   // esi
+	unsigned int v6;    // esi
 	const wchar2_t* v7; // eax
-	unsigned int v8;   // esi
+	unsigned int v8;    // esi
 	const wchar2_t* v9; // eax
-	int v10;           // eax
-	int v11;           // esi
-	int v12;           // [esp+4h] [ebp-10h]
-	int v13;           // [esp+8h] [ebp-Ch]
-	int2 v14;          // [esp+Ch] [ebp-8h]
+	int v10;            // eax
+	int v11;            // esi
+	int v12;            // [esp+4h] [ebp-10h]
+	int v13;            // [esp+8h] [ebp-Ch]
+	int2 v14;           // [esp+Ch] [ebp-8h]
 
 	if (a2 != 16391 || dword_5d4594_1319268 != 1) {
 		return 0;
@@ -2390,7 +2390,7 @@ int sub_4C0D00() {
 	int v20;            // [esp+1Ch] [ebp-4Ch]
 	int v21;            // [esp+20h] [ebp-48h]
 	int v22;            // [esp+24h] [ebp-44h]
-	wchar2_t v23[32];    // [esp+28h] [ebp-40h]
+	wchar2_t v23[32];   // [esp+28h] [ebp-40h]
 
 	nox_gui_getWindowOffs_46AA20(*(int*)&dword_5d4594_1320940, &v21, &v22);
 	nox_window_get_size(*(int*)&dword_5d4594_1320940, &v20, &v19);
@@ -2480,11 +2480,11 @@ int sub_4C0D00() {
 
 //----- (004C1120) --------------------------------------------------------
 int sub_4C1120(int a1, int a2, wchar2_t** a3) {
-	uint32_t* v3; // eax
+	uint32_t* v3;  // eax
 	wchar2_t** v4; // eax
-	uint32_t* v5; // eax
+	uint32_t* v5;  // eax
 	wchar2_t* v6;  // eax
-	int2 a1a;     // [esp+0h] [ebp-8h]
+	int2 a1a;      // [esp+0h] [ebp-8h]
 
 	a1a.field_0 = (unsigned short)a3;
 	a1a.field_4 = (unsigned int)a3 >> 16;
@@ -2617,7 +2617,7 @@ int sub_4C1410() {
 	uint32_t* v9;      // eax
 	uint32_t* v10;     // eax
 	int result;        // eax
-	wchar2_t v12[64];   // [esp+10h] [ebp-80h]
+	wchar2_t v12[64];  // [esp+10h] [ebp-80h]
 
 	*getMemU16Ptr(0x5D4594, 1320240) = 0;
 	*getMemU16Ptr(0x5D4594, 1320868) = 0;
@@ -3342,7 +3342,7 @@ int* sub_4C2BF0() {
 //----- (004C2C20) --------------------------------------------------------
 int sub_4C2C20(uint32_t* a1, int a2, unsigned int a3) {
 	wchar2_t* v3; // eax
-	int2 a2a;    // [esp+0h] [ebp-8h]
+	int2 a2a;     // [esp+0h] [ebp-8h]
 
 	a2a.field_4 = a3 >> 16;
 	a2a.field_0 = (unsigned short)a3;
@@ -3917,7 +3917,8 @@ int sub_4C3FC0(unsigned int a1) {
 	int v11 = *(uint32_t*)((uint32_t)dword_5d4594_1321248 + 32);
 	if (*(uint16_t*)(v11 + 44) > 0) {
 		do {
-			const wchar2_t* v12 = (const wchar2_t*)nox_window_call_field_94(*(int*)&dword_5d4594_1321248, 16406, v10, 0);
+			const wchar2_t* v12 =
+				(const wchar2_t*)nox_window_call_field_94(*(int*)&dword_5d4594_1321248, 16406, v10, 0);
 			if (!nox_wcscmp(v12, v6)) {
 				nox_window_call_field_94(*(int*)&dword_5d4594_1321248, 16407, (int)getMemAt(0x587000, 185448), v10);
 			}
@@ -3933,12 +3934,12 @@ int sub_4C3FC0(unsigned int a1) {
 
 //----- (004C4100) --------------------------------------------------------
 int sub_4C4100(unsigned int a1) {
-	char* v1;          // edi
-	int v2;            // esi
-	int v3;            // ebx
+	char* v1;           // edi
+	int v2;             // esi
+	int v3;             // ebx
 	const wchar2_t* v4; // eax
-	int v5;            // esi
-	int v6;            // ebx
+	int v5;             // esi
+	int v6;             // ebx
 	const wchar2_t* v7; // eax
 
 	v1 = nox_xxx_keybind_titleByKey_42EA00(a1);
@@ -4147,7 +4148,8 @@ void nox_xxx_drawObject_4C4770_draw(nox_draw_viewport_t* vp, nox_drawable* dr, v
 			}
 		}
 	}
-	if ((*((uint32_t*)a2 + 28) & 0x80000) && (*((uint32_t*)a2 + 30) & 0x1000000) || (*((uint32_t*)a2 + 30) & 0x40000000)) {
+	if ((*((uint32_t*)a2 + 28) & 0x80000) && (*((uint32_t*)a2 + 30) & 0x1000000) ||
+		(*((uint32_t*)a2 + 30) & 0x40000000)) {
 		v28 = getMemAt(0x587000, 185472);
 	} else {
 		v28 = sub_469920((int2*)(a2 + 12));
@@ -4215,8 +4217,8 @@ void nox_xxx_drawObject_4C4770_draw(nox_draw_viewport_t* vp, nox_drawable* dr, v
 		nox_client_drawSetAlpha_434580(0x80u);
 	}
 	if (!(!nox_client_drawable_testBuff_4356C0((int)v3, 0) && !v54 &&
-		(*((uint32_t*)v3 + 27) != dword_5d4594_1321520 || !*getMemU32Ptr(0x852978, 8) ||
-		 !nox_client_drawable_testBuff_4356C0(*getMemIntPtr(0x852978, 8), 21)))) {
+		  (*((uint32_t*)v3 + 27) != dword_5d4594_1321520 || !*getMemU32Ptr(0x852978, 8) ||
+		   !nox_client_drawable_testBuff_4356C0(*getMemIntPtr(0x852978, 8), 21)))) {
 		if (dword_8531A0_2576 && (*(uint8_t*)(dword_8531A0_2576 + 3680) & 1)) {
 			nox_client_drawEnableAlpha_434560(1);
 			nox_client_drawSetAlpha_434580(0x80u);
@@ -4301,7 +4303,8 @@ void nox_xxx_drawObject_4C4770_draw(nox_draw_viewport_t* vp, nox_drawable* dr, v
 		}
 	}
 LABEL_A:
-	if (!(v3[112] & 4) && nox_client_drawable_testBuff_4356C0((int)v3, 23) && !nox_common_gameFlags_check_40A5C0(2048)) {
+	if (!(v3[112] & 4) && nox_client_drawable_testBuff_4356C0((int)v3, 23) &&
+		!nox_common_gameFlags_check_40A5C0(2048)) {
 		nox_xxx_draw_434600(1);
 		if ((unsigned char)gameFrame() & 1) {
 			nox_draw_setColorMultAndIntensity_433E40(nox_color_white_2523948);
@@ -4704,18 +4707,18 @@ int sub_4CAFB0(int a1) {
 
 //----- (004CAFF0) --------------------------------------------------------
 int sub_4CAFF0(uint32_t* a1, uint32_t* a2) {
-	int v2;          // ecx
-	int v3;          // ebp
-	int v4;          // edi
-	int v5;          // edi
-	int v6;          // edi
-	int v7;          // ebp
-	int xLeft;       // [esp+10h] [ebp-98h]
-	int yTop;        // [esp+14h] [ebp-94h]
-	int v11;         // [esp+18h] [ebp-90h]
-	int v12;         // [esp+1Ch] [ebp-8Ch]
-	int v13;         // [esp+20h] [ebp-88h]
-	int v14;         // [esp+24h] [ebp-84h]
+	int v2;           // ecx
+	int v3;           // ebp
+	int v4;           // edi
+	int v5;           // edi
+	int v6;           // edi
+	int v7;           // ebp
+	int xLeft;        // [esp+10h] [ebp-98h]
+	int yTop;         // [esp+14h] [ebp-94h]
+	int v11;          // [esp+18h] [ebp-90h]
+	int v12;          // [esp+1Ch] [ebp-8Ch]
+	int v13;          // [esp+20h] [ebp-88h]
+	int v14;          // [esp+24h] [ebp-84h]
 	wchar2_t v15[64]; // [esp+28h] [ebp-80h]
 
 	v2 = a2[17];
@@ -4965,7 +4968,8 @@ int sub_4CC280(unsigned int a1) {
 	int v11 = *(uint32_t*)((uint32_t)dword_5d4594_1522628 + 32);
 	if (*(uint16_t*)(v11 + 44) > 0) {
 		do {
-			const wchar2_t* v12 = (const wchar2_t*)nox_window_call_field_94(*(int*)&dword_5d4594_1522628, 16406, v10, 0);
+			const wchar2_t* v12 =
+				(const wchar2_t*)nox_window_call_field_94(*(int*)&dword_5d4594_1522628, 16406, v10, 0);
 			if (!nox_wcscmp(v12, v6)) {
 				nox_window_call_field_94(*(int*)&dword_5d4594_1522628, 16407, (int)getMemAt(0x587000, 187828), v10);
 			}
@@ -4981,12 +4985,12 @@ int sub_4CC280(unsigned int a1) {
 
 //----- (004CC3C0) --------------------------------------------------------
 int sub_4CC3C0(unsigned int a1) {
-	char* v1;          // edi
-	int v2;            // esi
-	int v3;            // ebx
+	char* v1;           // edi
+	int v2;             // esi
+	int v3;             // ebx
 	const wchar2_t* v4; // eax
-	int v5;            // esi
-	int v6;            // ebx
+	int v5;             // esi
+	int v6;             // ebx
 	const wchar2_t* v7; // eax
 
 	v1 = nox_xxx_keybind_titleByKey_42EA00(a1);
