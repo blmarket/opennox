@@ -4391,9 +4391,9 @@ int sub_486E90(int a1) {
 }
 
 //----- (00486FA0) --------------------------------------------------------
-uint32_t* sub_486FA0(int a1) {
-	struct_486FE0_0x58* result; // eax
-	struct_486FE0_0x58* v2;     // edi
+void sub_486FA0(int a1) {
+	struct58* result; // eax
+	struct58* v2;     // edi
 	int v3;           // eax
 
 	result = sub_486FE0(a1);
@@ -4402,25 +4402,24 @@ uint32_t* sub_486FA0(int a1) {
 		v3 = *(uint32_t*)(a1 + 12);
 		LOBYTE(v3) = v3 | 1;
 		*(uint32_t*)(a1 + 12) = v3;
-		sub_487050((uint32_t*)v2);
+		sub_487050(v2);
 		if (*(uint8_t*)(a1 + 8) & 2) {
 			*getMemU32Ptr(0x5D4594, 1193332) = 1;
 		}
 		result = v2;
 	}
-	return (uint32_t*)result;
 }
 
 //----- (00486FE0) --------------------------------------------------------
-struct_486FE0_0x58* sub_486FE0(int a1) {
-	struct_486FE0_0x58* v1; // esi
+struct58* sub_486FE0(int a1) {
+	struct58* v1; // esi
 
-	v1 = calloc(1, sizeof(struct_486FE0_0x58));
-	memset(v1, 0, sizeof(struct_486FE0_0x58));
+	v1 = calloc(1, sizeof(struct58));
+	memset(v1, 0, sizeof(struct58));
 	sub_425770(v1);
 	v1->field_0x10 = 0;
 	v1->field_0x0C = a1;
-	if (!(*(int (**)(struct_486FE0_0x58*))(a1 + 20))(v1)) {
+	if (!(*(int (**)(struct58*))(a1 + 20))(v1)) {
 		return v1;
 	}
 	if (v1) {
@@ -4430,32 +4429,32 @@ struct_486FE0_0x58* sub_486FE0(int a1) {
 }
 
 //----- (00487030) --------------------------------------------------------
-void sub_487030(void* lpMem) {
-	(*(void (**)(void*))(*((uint32_t*)lpMem + 3) + 24))(lpMem);
-	*(uint32_t*)(*((uint32_t*)lpMem + 3) + 12) &= 0xFFFFFFFE;
+void sub_487030(struct58* lpMem) {
+	(*(void (**)(void*))(lpMem->field_0x0C + 24))(lpMem);
+	*(uint32_t*)(lpMem->field_0x0C + 12) &= 0xFFFFFFFE;
 	free(lpMem);
 }
 
 //----- (00487050) --------------------------------------------------------
-void sub_487050(uint32_t* a1) { nox_common_list_append_4258E0(*(int*)&dword_587000_155144, a1); }
+void sub_487050(struct58* a1) { nox_common_list_append_4258E0(*(int*)&dword_587000_155144, a1); }
 
 //----- (00487070) --------------------------------------------------------
-void sub_487070(void* lpMem) {
-	sub_487090((uint32_t**)lpMem);
+void sub_487070(struct58* lpMem) {
+	sub_487090(lpMem);
 	sub_487030(lpMem);
 	*getMemU32Ptr(0x5D4594, 1193332) = 0;
 }
 
 //----- (00487090) --------------------------------------------------------
-void sub_487090(uint32_t** a1) { nox_common_list_remove_425920(a1); }
+void sub_487090(struct58* a1) { nox_common_list_remove_425920(a1); }
 
 //----- (004870A0) --------------------------------------------------------
 void sub_4870A0() {
-	int* v1; // edi
-	int* v2; // esi
-	int* v3; // [esp+4h] [ebp-4h]
+	struct58* v1; // edi
+	struct58* v2; // esi
+	struct58* v3; // [esp+4h] [ebp-4h]
 
-	v1 = sub_4870E0((int*)&v3);
+	v1 = sub_4870E0(&v3);
 	if (v1) {
 		do {
 			v2 = sub_487100(&v3);
@@ -4466,16 +4465,16 @@ void sub_4870A0() {
 }
 
 //----- (004870E0) --------------------------------------------------------
-int* sub_4870E0(int* a1) {
-	int* result; // eax
+struct58* sub_4870E0(struct58** a1) {
+	struct58* result; // eax
 
 	result = nox_common_list_getFirstSafe_425890(*(int**)&dword_587000_155144);
-	*a1 = (int)result;
+	*a1 = result;
 	return result;
 }
 
 //----- (00487100) --------------------------------------------------------
-int* sub_487100(int** a1) {
+struct58* sub_487100(struct58** a1) {
 	if (*a1) {
 		*a1 = nox_common_list_getNextSafe_4258A0(*a1);
 	}

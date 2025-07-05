@@ -1315,13 +1315,13 @@ typedef struct {
 	uint32_t field_73[5];  // remaining bytes to 312
 } struct_4BD720;
 
-typedef struct struct_486FE0_0x58 {
+typedef struct struct58 {
 	uint32_t list_next;    // offset 0x00 - linked list next pointer
 	uint32_t list_prev;    // offset 0x04 - linked list prev pointer
 	uint32_t list_count;   // offset 0x08 - linked list count
 	uint32_t field_0x0C;   // offset 0x0C - set to a1 parameter
 	uint32_t field_0x10;   // offset 0x10 - set to 0
 	uint32_t reserved[17]; // offset 0x14 - remaining bytes to reach 0x58 (88 bytes)
-} struct_486FE0_0x58;
+} struct58;
 
 #endif // NOX_DEFS_H
