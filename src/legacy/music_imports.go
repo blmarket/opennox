@@ -40,6 +40,7 @@ func initMusic() {
 		ptr_counter_587000_81128 **timer.TimerGroup = (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_81128))
 		dword_5d4594_816348      *uint32            = (*uint32)(&C.dword_5d4594_816348)
 		musicStateArray                             = memmap.PtrT[[3][6]music.MusicState](0x5d4594, 815772)
+		musicIndexArray                             = memmap.PtrT[[3]uint32](0x5d4594, 816076)
 	)
 	MusicModule = music.NewModule(
 		"music",

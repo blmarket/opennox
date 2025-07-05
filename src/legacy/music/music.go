@@ -39,6 +39,7 @@ type Module struct {
 	block_5d4594_816060 MusicState        // 5d4594_816060
 
 	// members which has external usages
+	musicIndexArray          *[3]uint32         // 5d4594_816076
 	dword_5d4594_816368      *uint32            // 5d4594_816368
 	dword_5d4594_816372      *uint32            // 5d4594_816372
 	dword_5d4594_816376      *ail.Driver        // 5d4594_816376
@@ -67,6 +68,7 @@ func NewModule(
 	dword_5d4594_816368 *uint32,
 	dword_5d4594_816372 *uint32,
 	musicStateArray *[3][6]MusicState,
+	musicIndexArray *[3]uint32,
 	dword_5d4594_816376 *ail.Driver,
 	dword_587000_93156 *uint32,
 	dword_587000_93160 *uint32,
@@ -86,6 +88,7 @@ func NewModule(
 		dword_5d4594_816368:      dword_5d4594_816368,
 		dword_5d4594_816372:      dword_5d4594_816372,
 		musicStateArray:          musicStateArray,
+		musicIndexArray:          musicIndexArray,
 		dword_5d4594_816376:      dword_5d4594_816376,
 		dword_587000_93156:       dword_587000_93156,
 		dword_587000_93160:       dword_587000_93160,
