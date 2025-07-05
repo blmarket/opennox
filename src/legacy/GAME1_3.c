@@ -42,7 +42,6 @@ extern void* dword_5d4594_826036;
 extern uint32_t dword_5d4594_826032;
 extern uint32_t dword_5d4594_825744;
 extern void* dword_587000_81128;
-extern uint32_t dword_5d4594_816368;
 extern uint32_t dword_5d4594_815044;
 extern uint32_t dword_587000_93156;
 extern uint32_t dword_5d4594_826028;

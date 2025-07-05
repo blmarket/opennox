@@ -41,14 +41,16 @@ func newTestMusic(t *testing.T) *Module {
 		counter_5d4594_816244    timer.TimerGroup
 		ptr_counter_587000_81128 *timer.TimerGroup = new(timer.TimerGroup)
 		dword_5d4594_816348      uint32
-		musicStateArray          = [3][6]MusicStateArrayEntry{}
+		musicStateArray          = new([3][6]MusicState)
+		musicIndexArray          = new([3]uint32)
 	)
 
 	return NewModule(
 		"testdata",
 		&dword_5d4594_816368,
 		&dword_5d4594_816372,
-		&musicStateArray,
+		musicStateArray,
+		musicIndexArray,
 		&dword_5d4594_816376,
 		&dword_587000_93156,
 		&dword_587000_93160,
