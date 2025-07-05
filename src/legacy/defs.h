@@ -1324,4 +1324,8 @@ typedef struct struct58 {
 	uint32_t reserved[17]; // offset 0x14 - remaining bytes to reach 0x58 (88 bytes)
 } struct58;
 
+typedef struct struct28 {
+	uint32_t field[7];
+} struct28;
+
 #endif // NOX_DEFS_H
