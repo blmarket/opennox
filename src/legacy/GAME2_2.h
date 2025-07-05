@@ -3,6 +3,8 @@
 
 #include "defs.h"
 
+typedef struct struct_4BD720 struct_4BD720;
+
 int sub_476080(unsigned char* a1);
 int sub_4761B0(nox_drawable* a1p);
 void nox_video_setCutSize_4766A0(int a1);
@@ -136,7 +138,7 @@ int* sub_4875D0(int** a1);
 int sub_4875F0();
 void sub_487680(void* lpMem);
 void* sub_4876A0(uint32_t** a1);
-uint32_t* sub_487750(int a1);
+struct_4BD720* sub_487750(int a1);
 int sub_487790(int a1, int a2);
 int* sub_4877D0(int a1, int* a2);
 int* sub_4877F0(int** a1);

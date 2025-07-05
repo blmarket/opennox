@@ -4757,9 +4757,9 @@ void* sub_4876A0(uint32_t** a1) {
 }
 
 //----- (00487750) --------------------------------------------------------
-uint32_t* sub_487750(int a1) {
-	uint32_t* v1; // eax
-	uint32_t* v2; // esi
+struct_4BD720* sub_487750(int a1) {
+	struct_4BD720* v1; // eax
+	struct_4BD720* v2; // esi
 
 	if (*(int*)(a1 + 192) >= *(int*)(a1 + 196)) {
 		return 0;

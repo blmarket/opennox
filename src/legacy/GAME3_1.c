@@ -660,18 +660,18 @@ int sub_4BD690(int a1) {
 int sub_4BD710(int a1) { return a1 + 24; }
 
 //----- (004BD720) --------------------------------------------------------
-uint32_t* sub_4BD720(int a1) {
-	uint32_t* v1; // esi
+struct_4BD720* sub_4BD720(int a1) {
+	struct_4BD720* v1; // esi
 
-	v1 = calloc(1, 0x138u);
-	memset(v1, 0, 0x138u);
+	v1 = calloc(1, sizeof(struct_4BD720));
+	memset(v1, 0, sizeof(struct_4BD720));
 	sub_425770(v1);
-	sub_4BDC00((int)(v1 + 30));
-	sub_4864A0(v1 + 44);
+	sub_4BDC00((int)&v1->field_30);
+	sub_4864A0(&v1->field_44);
 	sub_4BD7C0(v1);
-	v1[33] = a1;
-	v1[43] = *(uint32_t*)(a1 + 256);
-	if (!(*(int (**)(uint32_t*))(*(uint32_t*)(a1 + 256) + 4))(v1)) {
+	v1->field_33 = a1;
+	v1->field_43 = *(uint32_t*)(a1 + 256);
+	if (!(*(int (**)(struct_4BD720*))(*(uint32_t*)(a1 + 256) + 4))(v1)) {
 		return v1;
 	}
 	if (v1) {
@@ -682,29 +682,28 @@ uint32_t* sub_4BD720(int a1) {
 
 //----- (004BD7A0) --------------------------------------------------------
 void sub_4BD7A0(void* lpMem) {
-	(*(void (**)(void*))(*((uint32_t*)lpMem + 43) + 8))(lpMem);
+	struct_4BD720* mem = (struct_4BD720*)lpMem;
+	(*(void (**)(void*))(mem->field_43 + 8))(lpMem);
 	free(lpMem);
 }
 
 //----- (004BD7C0) --------------------------------------------------------
-uint32_t* sub_4BD7C0(uint32_t* a1) {
-	uint32_t* result; // eax
-
-	a1[69] = sub_4BD8C0;
-	a1[70] = sub_4BD940;
-	a1[71] = sub_4BD9B0;
-	a1[34] = 0;
-	a1[35] = 0;
-	a1[36] = 0;
-	a1[38] = 0;
-	a1[3] = 1;
-	sub_4BDC00((int)(a1 + 30));
-	a1[30] = 0;
-	a1[29] = *getMemU32Ptr(0x5D4594, 1193340);
-	a1[28] = 0;
-	result = sub_4864A0(a1 + 4);
-	a1[72] = 0;
-	return result;
+struct_4BD720* sub_4BD7C0(struct_4BD720* a1) {
+	a1->field_69 = (uint32_t)sub_4BD8C0;
+	a1->field_70 = (uint32_t)sub_4BD940;
+	a1->field_71 = (uint32_t)sub_4BD9B0;
+	a1->field_34 = 0;
+	a1->field_35 = 0;
+	a1->field_36 = 0;
+	a1->field_38 = 0;
+	a1->field_3 = 1;
+	sub_4BDC00((int)&a1->field_30);
+	a1->field_30 = 0;
+	a1->field_29 = *getMemU32Ptr(0x5D4594, 1193340);
+	a1->field_28 = 0;
+	sub_4864A0(&a1->field_4[0]);
+	a1->field_72 = 0;
+	return a1;
 }
 
 //----- (004BD840) --------------------------------------------------------

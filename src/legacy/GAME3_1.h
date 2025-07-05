@@ -3,6 +3,30 @@
 
 #include "defs.h"
 
+typedef struct {
+    uint32_t field_0[3];        // offsets 0-8
+    uint32_t field_3;           // offset 12 (set to 1)
+    uint32_t field_4[24];       // offsets 16-112 (includes sub_4864A0 target at +4)
+    uint32_t field_28;          // offset 112 (set to 0)
+    uint32_t field_29;          // offset 116 (stores memory value)
+    uint32_t field_30;          // offset 120 (set to 0, also sub_4BDC00 target)
+    uint32_t field_31[2];       // offsets 124-128
+    uint32_t field_33;          // offset 132 (stores a1)
+    uint32_t field_34;          // offset 136 (set to 0)
+    uint32_t field_35;          // offset 140 (set to 0)
+    uint32_t field_36;          // offset 144 (set to 0)
+    uint32_t field_37;          // offset 148
+    uint32_t field_38;          // offset 152 (set to 0)
+    uint32_t field_39[4];       // offsets 156-168
+    uint32_t field_43;          // offset 172 (stores *(uint32_t*)(a1 + 256))
+    uint32_t field_44[25];      // offsets 176-272 (includes sub_4864A0 target at +44)
+    uint32_t field_69;          // offset 276 (function pointer sub_4BD8C0)
+    uint32_t field_70;          // offset 280 (function pointer sub_4BD940)
+    uint32_t field_71;          // offset 284 (function pointer sub_4BD9B0)
+    uint32_t field_72;          // offset 288 (set to 0)
+    uint32_t field_73[5];       // remaining bytes to 312
+} struct_4BD720;
+
 int sub_4B9470(const char** a1);
 int sub_4B94E0(nox_drawable* dr);
 uint32_t* sub_4B95D0(nox_drawable* dr);
@@ -26,9 +50,9 @@ int sub_4BD660(int a1);
 int sub_4BD680(int a1);
 int sub_4BD690(int a1);
 int sub_4BD710(int a1);
-uint32_t* sub_4BD720(int a1);
+struct_4BD720* sub_4BD720(int a1);
 void sub_4BD7A0(void* lpMem);
-uint32_t* sub_4BD7C0(uint32_t* a1);
+struct_4BD720* sub_4BD7C0(struct_4BD720* a1);
 void sub_4BD840(int a3);
 int sub_4BD8C0(int a1);
 int sub_4BD940(int a1);
