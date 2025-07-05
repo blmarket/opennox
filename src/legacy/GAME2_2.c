@@ -4354,10 +4354,10 @@ FILE* sub_486E00(int a1) {
 }
 
 //----- (00486E30) --------------------------------------------------------
-int sub_486E30(int a1, uint32_t* a2) {
+int sub_486E30(int a1, struct_4BD720* a2) {
 	int result; // eax
 
-	a2[33] = a1;
+	a2->field_33 = a1;
 	++*(uint32_t*)(a1 + 192);
 	++*(uint32_t*)(a1 + 212);
 	nox_common_list_append_4258E0(a1 + 200, a2);
