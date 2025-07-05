@@ -1325,7 +1325,13 @@ typedef struct struct58 {
 } struct58;
 
 typedef struct struct28 {
-	uint32_t field[7];
+	uint32_t field_0;
+	uint32_t field_1; // it's actually a pointer
+	uint32_t field_2; // it's actually a pointer
+	uint32_t field_3;
+	uint32_t field_4;
+	uint32_t field_5;
+	uint32_t field_6;
 } struct28;
 
 #endif // NOX_DEFS_H

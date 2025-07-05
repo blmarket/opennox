@@ -463,17 +463,17 @@ int sub_4BD300(uint32_t* a1, int a2) {
 }
 
 //----- (004BD340) --------------------------------------------------------
-uint32_t* sub_4BD340(int a1, int a2, int a3, int a4) {
-	uint32_t* v4; // esi
+struct28* sub_4BD340(int a1, int a2, int a3, int a4) {
+	struct28* v4; // esi
 
-	v4 = calloc(1, 0x1Cu);
-	memset(v4, 0, 0x1Cu);
-	*v4 = a1;
-	v4[6] = a4;
-	v4[1] = sub_4BD280(a2 / (a4 + 24), a4 + 24);
-	v4[2] = sub_4BD280(a3, 84);
-	nox_common_list_clear_425760(v4 + 3);
-	if (v4[1] && v4[2]) {
+	v4 = calloc(1, sizeof(struct28));
+	memset(v4, 0, sizeof(struct28));
+	v4->field_0 = a1;
+	v4->field_6 = a4;
+	v4->field_1 = sub_4BD280(a2 / (a4 + 24), a4 + 24);
+	v4->field_2 = sub_4BD280(a3, 84);
+	nox_common_list_clear_425760(&v4->field_3);
+	if (v4->field_1 && v4->field_2) {
 		return v4;
 	}
 	sub_4BD3C0(v4);
@@ -481,17 +481,17 @@ uint32_t* sub_4BD340(int a1, int a2, int a3, int a4) {
 }
 
 //----- (004BD3C0) --------------------------------------------------------
-void sub_4BD3C0(void* lpMem) {
+void sub_4BD3C0(struct28* lpMem) {
 	int i; // eax
 
-	for (i = nox_common_list_getNext_425940((int*)lpMem + 3); i; i = nox_common_list_getNext_425940((int*)lpMem + 3)) {
+	for (i = nox_common_list_getNext_425940(&lpMem->field_3); i; i = nox_common_list_getNext_425940(&lpMem->field_3)) {
 		sub_4BD690(i);
 	}
-	if (*((uint32_t*)lpMem + 1)) {
-		sub_4BD2D0(*((void**)lpMem + 1));
+	if (lpMem->field_1) {
+		sub_4BD2D0((void*)&lpMem->field_1);
 	}
 	if (*((uint32_t*)lpMem + 2)) {
-		sub_4BD2D0(*((void**)lpMem + 2));
+		sub_4BD2D0((void*)&lpMem->field_2);
 	}
 	free(lpMem);
 }

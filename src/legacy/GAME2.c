@@ -37,10 +37,10 @@
 #include "client__gui__servopts__playrlst.h"
 #include "client__gui__window.h"
 #include "client__shell__mainmenu.h"
+#include "common__crypt.h"
 #include "common__gamemech__pausefx.h"
 #include "common__net_list.h"
 #include "common__strman.h"
-#include "common__crypt.h"
 #include "operators.h"
 
 #include "client__audio__audevent.h"
@@ -83,7 +83,7 @@ extern uint32_t dword_5d4594_1046864;
 extern uint32_t dword_5d4594_831256;
 extern uint32_t dword_5d4594_1049536;
 extern uint32_t dword_5d4594_1046944;
-extern uint32_t dword_5d4594_1045424;
+extern struct28* dword_5d4594_1045424;
 extern uint32_t dword_5d4594_1045584;
 extern uint32_t dword_5d4594_1049696;
 extern uint32_t dword_5d4594_1046540;
@@ -571,7 +571,8 @@ int nox_client_lockScreenBriefing_450160(int a1, int a2, char a3) {
 		dword_5d4594_831276 = 1140457472;
 		*getMemU32Ptr(0x5D4594, 831280) = -20 - *getMemU32Ptr(0x5D4594, 831280);
 	} else {
-		*getMemU32Ptr(0x5D4594, 831280) = (480 - nox_xxx_guiFontHeightMB_43F320(v5[59]) - *getMemIntPtr(0x5D4594, 831280)) / 2;
+		*getMemU32Ptr(0x5D4594, 831280) =
+			(480 - nox_xxx_guiFontHeightMB_43F320(v5[59]) - *getMemIntPtr(0x5D4594, 831280)) / 2;
 		*(float*)&dword_5d4594_831276 = (double)*getMemIntPtr(0x5D4594, 831280);
 	}
 	sub_431290();
@@ -777,7 +778,7 @@ void sub_451970() {
 	sub_4521F0();
 	sub_452230();
 	if (dword_5d4594_1045424) {
-		sub_4BD3C0(*(void**)&dword_5d4594_1045424);
+		sub_4BD3C0(dword_5d4594_1045424);
 		dword_5d4594_1045424 = 0;
 	}
 	if (dword_5d4594_1045436) {
@@ -981,7 +982,7 @@ int sub_451F30(int a1, int a2) {
 	int result; // eax
 
 	*(uint32_t*)(a1 + 4 * *(uint32_t*)(a1 + 168) + 40) =
-		sub_4BD470(*(uint32_t***)&dword_5d4594_1045424, *(short*)(*(uint32_t*)(a1 + 36) + 2 * a2 + 128));
+		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field, *(short*)(*(uint32_t*)(a1 + 36) + 2 * a2 + 128));
 	v2 = *(uint32_t*)(a1 + 168);
 	result = *(uint32_t*)(a1 + 4 * v2 + 40);
 	if (result) {
@@ -1937,13 +1938,13 @@ int sub_453350(int a1, int a2) {
 
 //----- (004533D0) --------------------------------------------------------
 int sub_4533D0(int a1, int a2, int a3, int a4) {
-	int v3;       // esi
-	int v5;       // eax
-	int v6;       // eax
-	int v7;       // edx
-	int v8;       // ecx
-	int v9;       // edx
-	int v10;      // ecx
+	int v3;        // esi
+	int v5;        // eax
+	int v6;        // eax
+	int v7;        // edx
+	int v8;        // ecx
+	int v9;        // edx
+	int v10;       // ecx
 	wchar2_t* v11; // [esp-4h] [ebp-Ch]
 
 	if (a2 == 0x4000) {
@@ -2513,54 +2514,54 @@ int sub_454A90(int a1, int a2) {
 
 //----- (00454BA0) --------------------------------------------------------
 int nox_xxx_windowAccessProc_454BA0(int a1, int a2, int* a3, int a4) {
-	int v4;                 // eax
-	int result;             // eax
-	char* v6;               // eax
-	int v7;                 // esi
-	char* v8;               // esi
+	int v4;                  // eax
+	int result;              // eax
+	char* v6;                // eax
+	int v7;                  // esi
+	char* v8;                // esi
 	const wchar2_t* v9;      // eax
-	char* v10;              // esi
+	char* v10;               // esi
 	const wchar2_t* v11;     // eax
-	char* v12;              // esi
+	char* v12;               // esi
 	const wchar2_t* v13;     // eax
-	char* v14;              // esi
+	char* v14;               // esi
 	const wchar2_t* v15;     // eax
-	char* v16;              // eax
-	char v17;               // dl
-	uint32_t* v18;          // esi
-	uint32_t* v19;          // eax
-	uint32_t* v20;          // eax
-	char* v21;              // esi
+	char* v16;               // eax
+	char v17;                // dl
+	uint32_t* v18;           // esi
+	uint32_t* v19;           // eax
+	uint32_t* v20;           // eax
+	char* v21;               // esi
 	wchar2_t* v22;           // esi
-	int v23;                // esi
-	int v24;                // esi
-	char* v25;              // eax
-	int* v26;               // eax
-	int* v27;               // ebp
-	int v28;                // eax
+	int v23;                 // esi
+	int v24;                 // esi
+	char* v25;               // eax
+	int* v26;                // eax
+	int* v27;                // ebp
+	int v28;                 // eax
 	wchar2_t* v29;           // eax
 	wchar2_t* v30;           // edi
-	char* v31;              // eax
-	char* v32;              // esi
-	int* v33;               // eax
-	int* v34;               // edi
-	int v35;                // eax
+	char* v31;               // eax
+	char* v32;               // esi
+	int* v33;                // eax
+	int* v34;                // edi
+	int v35;                 // eax
 	wchar2_t* v36;           // eax
-	char* v37;              // eax
-	char* v38;              // esi
-	char* v39;              // ebp
+	char* v37;               // eax
+	char* v38;               // esi
+	char* v39;               // ebp
 	const wchar2_t* v40;     // eax
 	wchar2_t* v41;           // esi
-	int v42;                // ebx
-	int v43;                // ebp
-	uint32_t* v44;          // esi
+	int v42;                 // ebx
+	int v43;                 // ebp
+	uint32_t* v44;           // esi
 	const wchar2_t* v45;     // eax
 	wchar2_t* v46;           // edi
-	int v47;                // ebx
+	int v47;                 // ebx
 	wchar2_t WideCharStr[8]; // [esp+10h] [ebp-10h]
-	char* v49;              // [esp+28h] [ebp+8h]
-	char* v50;              // [esp+30h] [ebp+10h]
-	char* v51;              // [esp+30h] [ebp+10h]
+	char* v49;               // [esp+28h] [ebp+8h]
+	char* v50;               // [esp+30h] [ebp+10h]
+	char* v51;               // [esp+30h] [ebp+10h]
 
 	switch (a2) {
 	case 16387:
@@ -2892,11 +2893,11 @@ int nox_xxx_windowAccessProc_454BA0(int a1, int a2, int* a3, int a4) {
 
 //----- (00455770) --------------------------------------------------------
 int sub_455770() {
-	int* v0;     // eax
-	int* v1;     // esi
-	int v2;      // eax
+	int* v0;      // eax
+	int* v1;      // esi
+	int v2;       // eax
 	wchar2_t* v3; // eax
-	char* v4;    // eax
+	char* v4;     // eax
 
 	v0 = (int*)nox_window_call_field_94(*(int*)&dword_5d4594_1045536, 16404, 0, 0);
 	v1 = v0;
@@ -2938,10 +2939,10 @@ int sub_4557D0(int a1) {
 
 //----- (00455800) --------------------------------------------------------
 int* sub_455800() {
-	int* result;             // eax
-	int v1;                  // eax
-	int* i;                  // esi
-	int* j;                  // esi
+	int* result;              // eax
+	int v1;                   // eax
+	int* i;                   // esi
+	int* j;                   // esi
 	wchar2_t WideCharStr[10]; // [esp+4h] [ebp-48h]
 	wchar2_t v5[26];          // [esp+18h] [ebp-34h]
 
@@ -3002,8 +3003,8 @@ void sub_455950(wchar2_t* a1) {
 
 //----- (004559B0) --------------------------------------------------------
 int sub_4559B0(wchar2_t* a1) {
-	int v1;            // esi
-	int v2;            // ebx
+	int v1;             // esi
+	int v2;             // ebx
 	const wchar2_t* v3; // eax
 
 	v1 = 0;
@@ -3356,8 +3357,8 @@ void sub_456BB0(int a1) {
 	uint32_t* v4; // esi
 	float2 v6;    // [esp+8h] [ebp-8h]
 
-	if (!dword_8531A0_2576 || !(*(uint8_t*)(dword_8531A0_2576 + 4) & 1) &&
-											  !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 1)) {
+	if (!dword_8531A0_2576 ||
+		!(*(uint8_t*)(dword_8531A0_2576 + 4) & 1) && !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 1)) {
 		v2 = nox_common_gameFlags_check_40A5C0(1);
 		v1 = nox_xxx_objGetTeamByNetCode_418C80(nox_player_netCode_85319C);
 		v3 = (int)v1;
@@ -3395,7 +3396,7 @@ void sub_456BB0(int a1) {
 
 //----- (00456D00) --------------------------------------------------------
 wchar2_t* sub_456D00(int a1, wchar2_t* a2) {
-	uint32_t* v2;      // eax
+	uint32_t* v2;       // eax
 	const wchar2_t* v3; // eax
 	wchar2_t* v4;       // eax
 	wchar2_t v6[56];    // [esp+0h] [ebp-70h]
@@ -3507,8 +3508,8 @@ int sub_456EA0(wchar2_t* a1) {
 
 //----- (00456F10) --------------------------------------------------------
 int sub_456F10(wchar2_t* a1, int a2) {
-	int* v2;        // esi
-	int v3;         // ebx
+	int* v2;         // esi
+	int v3;          // ebx
 	wchar2_t* v4;    // eax
 	wchar2_t v6[56]; // [esp+Ch] [ebp-70h]
 
@@ -3566,7 +3567,7 @@ unsigned char sub_457120(int a1) { return getMemByte(0x587000, 128968 + 8 * (*(u
 //----- (00457140) --------------------------------------------------------
 int sub_457140(int a1, wchar2_t* a2) {
 	int result;   // eax
-	wchar2_t* v3;  // esi
+	wchar2_t* v3; // esi
 	uint32_t* v4; // eax
 
 	result = dword_5d4594_1045684;
@@ -3648,23 +3649,23 @@ int nox_xxx_guiServerOptionsTryHide_4574D0() {
 
 //----- (00457B60) --------------------------------------------------------
 int sub_457B60(int a1) {
-	char* v1;                // eax
-	uint32_t* v2;            // eax
-	char* v3;                // eax
-	unsigned short v4;       // di
-	char* v5;                // esi
-	uint32_t* v6;            // eax
-	unsigned short v7;       // ax
-	unsigned char v8;        // al
-	uint32_t* v9;            // eax
-	uint32_t* v10;           // eax
-	uint32_t* v11;           // edi
-	int v12;                 // eax
-	uint32_t* v13;           // edi
-	int v14;                 // eax
-	uint32_t* v15;           // edi
-	int v16;                 // eax
-	unsigned int v17;        // ecx
+	char* v1;                 // eax
+	uint32_t* v2;             // eax
+	char* v3;                 // eax
+	unsigned short v4;        // di
+	char* v5;                 // esi
+	uint32_t* v6;             // eax
+	unsigned short v7;        // ax
+	unsigned char v8;         // al
+	uint32_t* v9;             // eax
+	uint32_t* v10;            // eax
+	uint32_t* v11;            // edi
+	int v12;                  // eax
+	uint32_t* v13;            // edi
+	int v14;                  // eax
+	uint32_t* v15;            // edi
+	int v16;                  // eax
+	unsigned int v17;         // ecx
 	wchar2_t WideCharStr[16]; // [esp+0h] [ebp-E8h]
 	wchar2_t v20[100];        // [esp+20h] [ebp-C8h]
 
@@ -3818,7 +3819,7 @@ char sub_459150() {
 	int i;             // edi
 	char* v2;          // esi
 	int v3;            // ebx
-	wchar2_t* v4;       // eax
+	wchar2_t* v4;      // eax
 	char* v5;          // eax
 	const char* v6;    // edi
 	char* v7;          // eax
@@ -4026,11 +4027,11 @@ int sub_459560(int a1) {
 
 //----- (00459700) --------------------------------------------------------
 int sub_459700() {
-	char* v0;          // esi
-	int v1;            // eax
-	int v2;            // edi
-	const wchar2_t* v3; // eax
-	wchar2_t v5[256] = {0};   // [esp+8h] [ebp-200h]
+	char* v0;               // esi
+	int v1;                 // eax
+	int v2;                 // edi
+	const wchar2_t* v3;     // eax
+	wchar2_t v5[256] = {0}; // [esp+8h] [ebp-200h]
 
 	sub_416580();
 	v0 = sub_4165B0();
@@ -4086,7 +4087,7 @@ char* sub_459870() { return (char*)getMemAt(0x5D4594, 1045956); }
 
 //----- (00459A40) --------------------------------------------------------
 int sub_459A40(char* a1) {
-	char v2[100];    // [esp+0h] [ebp-12Ch]
+	char v2[100];     // [esp+0h] [ebp-12Ch]
 	wchar2_t v3[100]; // [esp+64h] [ebp-C8h]
 
 	strncpy(v2, a1, 0xFu);
@@ -4098,13 +4099,13 @@ int sub_459A40(char* a1) {
 //----- (00459AA0) --------------------------------------------------------
 char* sub_459AA0(void* a1p) {
 	int a1 = a1p;
-	int v1;            // eax
+	int v1;             // eax
 	const wchar2_t* v2; // eax
 	const wchar2_t* v3; // eax
-	char* result;      // eax
-	int v5;            // eax
-	const char* v6;    // edi
-	char v7[100];      // [esp+Ch] [ebp-64h]
+	char* result;       // eax
+	int v5;             // eax
+	const char* v6;     // edi
+	char v7[100];       // [esp+Ch] [ebp-64h]
 
 	v1 = nox_window_call_field_94(dword_5d4594_1046512, 16413, 0, 0);
 	nox_sprintf(v7, "%S", v1);
@@ -4318,11 +4319,11 @@ int nox_xxx_spriteSetFrameMB_45AB80(int a1, int a2) {
 
 //----- (0045ABC0) --------------------------------------------------------
 int nox_xxx_guiSpellSortFn_45ABC0(const void* a1, const void* a2) {
-	int v2;            // edi
+	int v2;             // edi
 	const wchar2_t* v3; // esi
 	const wchar2_t* v4; // eax
-	int result;        // eax
-	int v6;            // [esp-4h] [ebp-Ch]
+	int result;         // eax
+	int v6;             // [esp-4h] [ebp-Ch]
 
 	v2 = *(uint32_t*)a2;
 	if (dword_5d4594_1046868 == 1) {
@@ -5808,7 +5809,7 @@ int sub_45DFC0(int a1) {
 	int v3;     // eax
 
 	if (a1) {
-		v2 = *getMemU32Ptr(0x5D4594, 1047764 + 24*a1 + 4);
+		v2 = *getMemU32Ptr(0x5D4594, 1047764 + 24 * a1 + 4);
 		if (v2) {
 			dword_5d4594_1047932 = 0;
 			dword_5d4594_1047936 = 0;
@@ -5816,7 +5817,7 @@ int sub_45DFC0(int a1) {
 			nox_xxx_clientPlaySoundSpecial_452D80(766, 100);
 			result = v2;
 		} else {
-			v3 = *getMemU32Ptr(0x5D4594, 1047764 + 24*a1);
+			v3 = *getMemU32Ptr(0x5D4594, 1047764 + 24 * a1);
 			dword_5d4594_1047932 = 1;
 			dword_5d4594_1047936 = v3;
 			nox_xxx_clientPlaySoundSpecial_452D80(766, 100);
@@ -5898,8 +5899,7 @@ int nox_xxx_quickBarWnd_45EF50(int a1, int a2, unsigned int a3) {
 		switch (a2) {
 		case 5:
 			if (!*v9 || *getMemU32Ptr(0x5D4594, 1047928) || dword_5d4594_1047932 || nox_xxx_get_57AF20() ||
-				*(uint8_t*)(dword_8531A0_2576 + 2251) &&
-					!nox_xxx_spellIsEnabled_424B70(*(uint32_t*)v14.field_0)) {
+				*(uint8_t*)(dword_8531A0_2576 + 2251) && !nox_xxx_spellIsEnabled_424B70(*(uint32_t*)v14.field_0)) {
 				return 1;
 			}
 			nox_xxx_wndSetCaptureMain_46ADC0(a1);
@@ -5937,7 +5937,8 @@ int nox_xxx_quickBarWnd_45EF50(int a1, int a2, unsigned int a3) {
 				return 1;
 			}
 			if (v10 < 0) {
-				v12 = nox_xxx_bookSpellDrop_45DCA0(*(uint32_t*)(v8 + v3[51]), *(uint8_t*)(v8 + v3[51] + 4), v7, v15, v3);
+				v12 =
+					nox_xxx_bookSpellDrop_45DCA0(*(uint32_t*)(v8 + v3[51]), *(uint8_t*)(v8 + v3[51] + 4), v7, v15, v3);
 				if (v12 >> 16 == 137) {
 					v14.field_0 = v7;
 					v14.field_4 = v15;
@@ -6023,8 +6024,8 @@ void nox_xxx_clientSwapQuickbarKeys_45F300(int a1, int a2, int a3) {
 	int v4;       // ecx
 	int v5;       // edx
 	uint32_t* v6; // eax
-	wchar2_t* v7;  // eax
-	wchar2_t* v8;  // eax
+	wchar2_t* v7; // eax
+	wchar2_t* v8; // eax
 
 	v3 = *(uint32_t*)(a1 + 204);
 	v4 = *(uint32_t*)(v3 + 8 * a2);
@@ -6042,8 +6043,8 @@ void nox_xxx_clientSwapQuickbarKeys_45F300(int a1, int a2, int a3) {
 
 //----- (0045F390) --------------------------------------------------------
 void sub_45F390(int a1, int a2, int a3, int a4) {
-	int v4;      // edi
-	int v5;      // ebx
+	int v4;       // edi
+	int v5;       // ebx
 	wchar2_t* v6; // eax
 
 	v4 = *(uint32_t*)(a2 + 8 * a4);
@@ -6437,7 +6438,7 @@ void* sub_4602F0() {
 void* sub_460380() {
 	unsigned char* v0; // eax
 
-	v0 = getMemAt(0x5D4594, 1047764 + 24*1 + 16);
+	v0 = getMemAt(0x5D4594, 1047764 + 24 * 1 + 16);
 	do {
 		*(uint32_t*)v0 = 0;
 		v0 += 24;
