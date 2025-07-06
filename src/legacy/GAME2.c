@@ -4254,15 +4254,15 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 	v2 = a1;
 	v3 = 0;
 	v16 = 0;
-	v4 = nox_xxx_draw_452270(*(uint32_t*)(a1 + 492));
+	v4 = nox_xxx_draw_452270(a1p->field_123);
 	v5 = v4;
 	v17 = v4;
 	result = (int*)nox_draw_getViewport_437250();
 	v18 = result;
 	if (v5 && result) {
-		if (*(uint32_t*)(a1 + 120) & 0x1000000 && !(*(uint8_t*)(a1 + 280) & 0xC)) {
-			v7 = *(uint32_t*)(a2 + 12) - *(uint32_t*)(a1 + 12);
-			v8 = *(uint32_t*)(a2 + 16) - *(uint32_t*)(a1 + 16);
+		if (a1p->flags30 & 0x1000000 && !(a1p->flags70 & 0xC)) {
+			v7 = a2p->pos.x - a1p->pos.x;
+			v8 = a2p->pos.y - a1p->pos.y;
 			v9 = sub_4522A0((int)v17);
 			v10 = v9;
 			if (v7 < v9 && v8 < v9 && v9 > 0) {
@@ -4277,12 +4277,12 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 					} else {
 						v3 = 100;
 					}
-					v16 = 50 * (*(int*)(a1 + 12) - v18[6] - *v18) / (nox_win_width / 2);
+					v16 = 50 * (a1p->pos.x - v18[6] - *v18) / (nox_win_width / 2);
 				}
 			}
 			v2 = a1;
 		}
-		v13 = (int*)(v2 + 496);
+		v13 = (int*)&a1p->field_124;
 		result = (int*)sub_452EB0(v13);
 		v14 = result;
 		if (v3) {
