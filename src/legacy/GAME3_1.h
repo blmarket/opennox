@@ -14,7 +14,7 @@ int sub_4BC720(int a1);
 int nox_xxx_updDrawMonsterGen_4BC920();
 uint32_t* sub_4BD280(int a1, int a2);
 void sub_4BD2D0(void* lpMem);
-uint32_t* sub_4BD2E0(uint32_t** a1);
+struct576* sub_4BD2E0(uint32_t** a1);
 int sub_4BD300(uint32_t* a1, int a2);
 struct28* sub_4BD340(int a1, int a2, int a3, int a4);
 void sub_4BD3C0(struct28* lpMem);

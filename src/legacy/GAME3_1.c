@@ -439,7 +439,7 @@ uint32_t* sub_4BD280(int a1, int a2) {
 void sub_4BD2D0(void* lpMem) { free(lpMem); }
 
 //----- (004BD2E0) --------------------------------------------------------
-uint32_t* sub_4BD2E0(uint32_t** a1) {
+struct576* sub_4BD2E0(uint32_t** a1) {
 	uint32_t* result; // eax
 	uint32_t* v2;     // edx
 

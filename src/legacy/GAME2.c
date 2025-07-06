@@ -984,7 +984,7 @@ int sub_451F30(int a1, int a2) {
 	int result; // eax
 
 	*(uint32_t*)(a1 + 4 * *(uint32_t*)(a1 + 168) + 40) =
-		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field, *(short*)(*(uint32_t*)(a1 + 36) + 2 * a2 + 128));
+		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)(*(uint32_t*)(a1 + 36) + 2 * a2 + 128));
 	v2 = *(uint32_t*)(a1 + 168);
 	result = *(uint32_t*)(a1 + 4 * v2 + 40);
 	if (result) {
@@ -1319,9 +1319,9 @@ int sub_452490(uint32_t* a1) {
 }
 
 //----- (00452510) --------------------------------------------------------
-void sub_452510(int a3) {
-	int v1; // eax
-	int v2; // eax
+void sub_452510(int a3) { // a3 should be struct576*
+	int v1;               // eax
+	int v2;               // eax
 
 	if (!dword_587000_126996) {
 		*(uint32_t*)(a3 + 28) = 4;
@@ -1735,7 +1735,7 @@ int sub_452BD0(int a1, char* a2) {
 //----- (00452D80) --------------------------------------------------------
 void nox_xxx_clientPlaySoundSpecial_452D80(int a1, int a2) {
 	uint32_t* result; // eax
-	struct576* v3;     // esi
+	struct576* v3;    // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
@@ -1752,7 +1752,7 @@ void nox_xxx_clientPlaySoundSpecial_452D80(int a1, int a2) {
 //----- (00452DC0) --------------------------------------------------------
 void sub_452DC0(int a1, int a2, int a3) {
 	uint32_t* result; // eax
-	struct576* v4;     // esi
+	struct576* v4;    // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
@@ -1770,7 +1770,7 @@ void sub_452DC0(int a1, int a2, int a3) {
 //----- (00452E10) --------------------------------------------------------
 void sub_452E10(int a1, int a2, int a3) {
 	uint32_t* result; // eax
-	struct576* v4;     // esi
+	struct576* v4;    // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
