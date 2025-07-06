@@ -1763,7 +1763,7 @@ void sub_452DC0(int a1, int a2, int a3) {
 		return;
 	}
 	sub_452EE0(v4, a2);
-	sub_452F80((int)v4, a3);
+	sub_452F80(v4, a3);
 	sub_452510(v4);
 }
 
@@ -1781,7 +1781,7 @@ void sub_452E10(int a1, int a2, int a3) {
 		return;
 	}
 	sub_452EE0(v4, a2);
-	sub_452F80((int)v4, a3);
+	sub_452F80(v4, a3);
 	v4->field_75 = 2;
 	sub_452510(v4);
 }
@@ -1845,11 +1845,11 @@ int sub_452F50(int a1, int a2) {
 }
 
 //----- (00452F80) --------------------------------------------------------
-uint32_t* sub_452F80(int a1, int a2) {
+uint32_t* sub_452F80(struct576* a1, int a2) {
 	int v2; // eax
 
 	v2 = sub_452FA0(a2);
-	return sub_486320((uint32_t*)(a1 + 248), v2);
+	return sub_486320((uint32_t*)((int)a1 + 248), v2);
 }
 
 //----- (00452FA0) --------------------------------------------------------
@@ -4294,7 +4294,7 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				v15 = (int*)v15_struct;
 				if (v15_struct) {
 					sub_452EE0(v15_struct, v3);
-					sub_452F80((int)v15_struct, v16);
+					sub_452F80(v15_struct, v16);
 					result = (int*)sub_452E90(v13, (int)v15_struct);
 				} else {
 					result = 0;

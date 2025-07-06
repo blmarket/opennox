@@ -1335,30 +1335,30 @@ typedef struct struct28 {
 } struct28;
 
 typedef struct struct576 {
-	struct576* next;       // 0
-	struct576* prev;       // 1
-	nox_list_item_t* head; // 2
-	uint32_t field_3;      // 3
-	uint32_t field_4;      // 4
-	uint32_t field_5;      // 5
-	uint32_t field_6;      // 6
-	uint32_t field_7;      // 7
-	uint32_t field_8;      // 8
-	uint32_t* field_9;     // 9 - stores a1 parameter
-	uint32_t field_10[32]; // 10-41
-	uint32_t field_42;     // 42
-	uint32_t field_43;     // 43
-	uint32_t field_44;     // 44
-	uint32_t field_45;     // 45
-	uint32_t field_46[24]; // 46-69 - target for sub_4864A0
-	uint32_t field_70;     // 70 - stores incrementing counter
-	uint32_t field_71[4];  // 71-74
-	uint32_t field_75;     // 75
-	uint32_t field_76[32]; // 76-107
-	uint32_t field_108;    // 108
+	struct struct576* next; // 0
+	struct struct576* prev; // 1
+	nox_list_item_t* head;  // 2
+	uint32_t field_3;       // 3
+	uint32_t field_4;       // 4
+	uint32_t field_5;       // 5
+	uint32_t field_6;       // 6
+	uint32_t field_7;       // 7
+	uint32_t field_8;       // 8
+	uint32_t* field_9;      // 9 - stores a1 parameter
+	uint32_t field_10[32];  // 10-41
+	uint32_t field_42;      // 42
+	uint32_t field_43;      // 43
+	uint32_t field_44;      // 44
+	uint32_t field_45;      // 45
+	uint32_t field_46[24];  // 46-69 - target for sub_4864A0
+	uint32_t field_70;      // 70 - stores incrementing counter
+	uint32_t field_71[4];   // 71-74
+	uint32_t field_75;      // 75
+	uint32_t field_76[32];  // 76-107
+	uint32_t field_108;     // 108
 	uint32_t field_109[33]; // 109-141
-	uint32_t field_142;    // 142
-	uint32_t field_143;    // 143
+	uint32_t field_142;     // 142
+	uint32_t field_143;     // 143
 } struct576;
 _Static_assert(sizeof(struct576) == 576, "wrong size of struct576 structure!");
 

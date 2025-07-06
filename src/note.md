@@ -1,4 +1,3 @@
-## TODO
+In sub_452F80 function, a1 should be better `struct576*` type.
 
-- sub_452EE0 parameter a1 should be changed to struct576*
 
