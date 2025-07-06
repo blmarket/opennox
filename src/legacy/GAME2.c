@@ -1787,14 +1787,14 @@ void sub_452E10(int a1, int a2, int a3) {
 }
 
 //----- (00452E90) --------------------------------------------------------
-int sub_452E90(uint32_t* a1, int a2) {
+int sub_452E90(uint32_t* a1, struct576* a2) {
 	int result; // eax
 
-	result = a2;
-	*a1 = a2;
+	result = (int)a2;
+	*a1 = (uint32_t)a2;
 	if (a2) {
-		a1[1] = *(uint32_t*)(a2 + 280);
-		result = *(uint32_t*)(a2 + 36);
+		a1[1] = a2->field_70;
+		result = a2->field_9;
 		a1[2] = result;
 	}
 	return result;
