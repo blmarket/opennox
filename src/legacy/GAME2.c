@@ -1220,8 +1220,8 @@ int sub_4522A0(int a1) {
 }
 
 //----- (00452300) --------------------------------------------------------
-uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
-	uint32_t* v1; // esi
+struct576* nox_xxx_draw_452300(uint32_t* a1) {
+	struct576* v1; // esi
 
 	if (!dword_5d4594_1045432) {
 		return 0;
@@ -1240,17 +1240,17 @@ uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
 			return 0;
 		}
 	}
-	memset(v1, 0, 0x240u);
-	v1[9] = a1;
+	memset(v1, 0, sizeof(struct576));
+	v1->field_9 = a1;
 	sub_425770(v1);
-	v1[7] = 0;
-	v1[75] = 0;
-	v1[142] = 0;
-	v1[108] = 0;
-	v1[42] = 0;
-	sub_4864A0(v1 + 46);
+	v1->field_7 = 0;
+	v1->field_75 = 0;
+	v1->field_142 = 0;
+	v1->field_108 = 0;
+	v1->field_42 = 0;
+	sub_4864A0(v1->field_46);
 	nox_common_list_append_4258E0(get_list_at_840612(), v1);
-	v1[70] = (*getMemU32Ptr(0x587000, 127000))++;
+	v1->field_70 = (*getMemU32Ptr(0x587000, 127000))++;
 	return v1;
 }
 
@@ -1735,36 +1735,34 @@ int sub_452BD0(int a1, char* a2) {
 //----- (00452D80) --------------------------------------------------------
 void nox_xxx_clientPlaySoundSpecial_452D80(int a1, int a2) {
 	uint32_t* result; // eax
-	uint32_t* v3;     // esi
+	struct576* v3;     // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
 		return;
 	}
-	result = nox_xxx_draw_452300(result);
-	v3 = result;
-	if (!result) {
+	v3 = nox_xxx_draw_452300(result);
+	if (!v3) {
 		return;
 	}
-	sub_452EE0((int)result, a2);
+	sub_452EE0((int)v3, a2);
 	sub_452510((int)v3);
 }
 
 //----- (00452DC0) --------------------------------------------------------
 void sub_452DC0(int a1, int a2, int a3) {
 	uint32_t* result; // eax
-	uint32_t* v4;     // esi
+	struct576* v4;     // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
 		return;
 	}
-	result = nox_xxx_draw_452300(result);
-	v4 = result;
-	if (!result) {
+	v4 = nox_xxx_draw_452300(result);
+	if (!v4) {
 		return;
 	}
-	sub_452EE0((int)result, a2);
+	sub_452EE0((int)v4, a2);
 	sub_452F80((int)v4, a3);
 	sub_452510((int)v4);
 }
@@ -1772,20 +1770,19 @@ void sub_452DC0(int a1, int a2, int a3) {
 //----- (00452E10) --------------------------------------------------------
 void sub_452E10(int a1, int a2, int a3) {
 	uint32_t* result; // eax
-	uint32_t* v4;     // esi
+	struct576* v4;     // esi
 
 	result = nox_xxx_draw_452270(a1);
 	if (!result) {
 		return;
 	}
-	result = nox_xxx_draw_452300(result);
-	v4 = result;
-	if (!result) {
+	v4 = nox_xxx_draw_452300(result);
+	if (!v4) {
 		return;
 	}
-	sub_452EE0((int)result, a2);
+	sub_452EE0((int)v4, a2);
 	sub_452F80((int)v4, a3);
-	v4[75] = 2;
+	v4->field_75 = 2;
 	sub_452510((int)v4);
 }
 
@@ -4293,12 +4290,14 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				sub_452FE0((int)result, v16);
 				result = (int*)sub_452F50((int)v14, v3);
 			} else {
-				result = nox_xxx_draw_452300(v17);
-				v15 = result;
-				if (result) {
-					sub_452EE0((int)result, v3);
-					sub_452F80((int)v15, v16);
-					result = (int*)sub_452E90(v13, (int)v15);
+				struct576* v15_struct = nox_xxx_draw_452300(v17);
+				v15 = (int*)v15_struct;
+				if (v15_struct) {
+					sub_452EE0((int)v15_struct, v3);
+					sub_452F80((int)v15_struct, v16);
+					result = (int*)sub_452E90(v13, (int)v15_struct);
+				} else {
+					result = 0;
 				}
 			}
 		} else if (result) {
