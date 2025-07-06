@@ -1,3 +1,4 @@
-## List of refactors
+## TODO
 
-- There is an usage of `getMemU32Ptr(0x5D4594, 1193332)` which can be replaced with a variable.
+- sub_452EE0 parameter a1 should be changed to struct576*
+

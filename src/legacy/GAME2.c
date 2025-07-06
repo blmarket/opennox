@@ -1319,15 +1319,15 @@ int sub_452490(uint32_t* a1) {
 }
 
 //----- (00452510) --------------------------------------------------------
-void sub_452510(int a3) { // a3 should be struct576*
-	int v1;               // eax
-	int v2;               // eax
+void sub_452510(struct576* a3) {
+	int v1; // eax
+	int v2; // eax
 
 	if (!dword_587000_126996) {
-		*(uint32_t*)(a3 + 28) = 4;
+		a3->field_7 = 4;
 	}
 	while (1) {
-		v1 = *(uint32_t*)(a3 + 28);
+		v1 = a3->field_7;
 		if (!v1) {
 			break;
 		}
@@ -1339,10 +1339,10 @@ void sub_452510(int a3) { // a3 should be struct576*
 			}
 			return;
 		}
-		if (nox_platform_get_ticks() <= *(uint64_t*)(a3 + 288)) {
+		if (nox_platform_get_ticks() <= *(uint64_t*)&a3->field_71[1]) {
 			return;
 		}
-		*(uint32_t*)(a3 + 28) = *(uint32_t*)(a3 + 32);
+		a3->field_7 = a3->field_8;
 	}
 	if (!sub_452580((uint32_t*)a3)) {
 		sub_4523D0((uint32_t*)a3);
@@ -1745,8 +1745,8 @@ void nox_xxx_clientPlaySoundSpecial_452D80(int a1, int a2) {
 	if (!v3) {
 		return;
 	}
-	sub_452EE0((int)v3, a2);
-	sub_452510((int)v3);
+	sub_452EE0(v3, a2);
+	sub_452510(v3);
 }
 
 //----- (00452DC0) --------------------------------------------------------
@@ -1762,9 +1762,9 @@ void sub_452DC0(int a1, int a2, int a3) {
 	if (!v4) {
 		return;
 	}
-	sub_452EE0((int)v4, a2);
+	sub_452EE0(v4, a2);
 	sub_452F80((int)v4, a3);
-	sub_452510((int)v4);
+	sub_452510(v4);
 }
 
 //----- (00452E10) --------------------------------------------------------
@@ -1780,10 +1780,10 @@ void sub_452E10(int a1, int a2, int a3) {
 	if (!v4) {
 		return;
 	}
-	sub_452EE0((int)v4, a2);
+	sub_452EE0(v4, a2);
 	sub_452F80((int)v4, a3);
 	v4->field_75 = 2;
-	sub_452510((int)v4);
+	sub_452510(v4);
 }
 
 //----- (00452E90) --------------------------------------------------------
@@ -1813,12 +1813,12 @@ int sub_452EB0(int* a1) {
 }
 
 //----- (00452EE0) --------------------------------------------------------
-int sub_452EE0(int a1, int a2) {
+int sub_452EE0(struct576* a1, int a2) {
 	int v2; // eax
 
-	v2 = sub_452F10(a1, a2);
-	sub_486320((uint32_t*)(a1 + 184), v2);
-	return sub_4863B0((unsigned int*)(a1 + 184));
+	v2 = sub_452F10((int)a1, a2);
+	sub_486320((uint32_t*)&a1->field_46, v2);
+	return sub_4863B0((unsigned int*)&a1->field_46);
 }
 
 //----- (00452F10) --------------------------------------------------------
@@ -4293,7 +4293,7 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				struct576* v15_struct = nox_xxx_draw_452300(v17);
 				v15 = (int*)v15_struct;
 				if (v15_struct) {
-					sub_452EE0((int)v15_struct, v3);
+					sub_452EE0(v15_struct, v3);
 					sub_452F80((int)v15_struct, v16);
 					result = (int*)sub_452E90(v13, (int)v15_struct);
 				} else {
