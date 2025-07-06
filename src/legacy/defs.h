@@ -943,9 +943,9 @@ _Static_assert(sizeof(nox_gui_animation) == 68, "wrong size of nox_gui_animation
 
 typedef struct nox_list_item_t nox_list_item_t;
 typedef struct nox_list_item_t {
-	nox_list_item_t* field_0; // 0, 0
-	nox_list_item_t* field_1; // 1, 4
-	nox_list_item_t* field_2; // 2, 8
+	nox_list_item_t* field_0; // 0, 0. next
+	nox_list_item_t* field_1; // 1, 4. prev
+	nox_list_item_t* field_2; // 2, 8. head
 } nox_list_item_t;
 _Static_assert(sizeof(nox_list_item_t) == 12, "wrong size of nox_list_item_t structure!");
 

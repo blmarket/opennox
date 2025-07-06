@@ -722,6 +722,8 @@ void nox_gui_setQuestStage_450B00(int a1) { *getMemU32Ptr(0x5D4594, 832468) = a1
 //----- (00450B10) --------------------------------------------------------
 int nox_gui_getQuestStage_450B10() { return *getMemU32Ptr(0x5D4594, 832468); }
 
+nox_list_item_t* get_list_at_840612() { return (nox_list_item_t*)getMemAt(0x5D4594, 840612); }
+
 //----- (00451850) --------------------------------------------------------
 int sub_451850(int a2, void* a3p) {
 	int a3 = a3p;
@@ -746,7 +748,7 @@ int sub_451850(int a2, void* a3p) {
 	if (!dword_5d4594_1045424 || !dword_5d4594_1045420 || !dword_5d4594_1045428 || !dword_5d4594_1045436) {
 		return 0;
 	}
-	nox_common_list_clear_425760(getMemAt(0x5D4594, 840612));
+	nox_common_list_clear_425760(get_list_at_840612());
 	sub_4864A0(getMemAt(0x5D4594, 1045228));
 	result = 1;
 	*(uint32_t*)(dword_5d4594_1045428 + 184) = getMemAt(0x5D4594, 1045228);
@@ -812,9 +814,9 @@ void sub_4519C0() {
 	}
 	*getMemU32Ptr(0x5D4594, 1045448) = 1;
 	sub_486520(*(unsigned int**)&dword_587000_127004);
-	v1 = *getMemU32Ptr(0x5D4594, 840612);
+	v1 = get_list_at_840612()->field_0;
 	++*getMemU32Ptr(0x5D4594, 1045440);
-	if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
 			v2 = *(uint32_t*)(v1 + 36);
 			if (*(uint32_t*)(v2 + 100) != *getMemU32Ptr(0x5D4594, 1045440)) {
@@ -827,19 +829,19 @@ void sub_4519C0() {
 				sub_451BE0(v1);
 			}
 			v1 = *(uint32_t*)v1;
-		} while ((unsigned char*)v1 != getMemAt(0x5D4594, 840612));
-		v1 = *getMemU32Ptr(0x5D4594, 840612);
-		if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+		} while ((unsigned char*)v1 != get_list_at_840612());
+		v1 = get_list_at_840612()->field_0;
+		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
 				sub_452510(v1);
-				v1 = *(uint32_t*)v1;
-			} while ((unsigned char*)v1 != getMemAt(0x5D4594, 840612));
-			v1 = *getMemU32Ptr(0x5D4594, 840612);
+				v1 = *(uint32_t*)v1; // beginning of v1 is nox_list_item_t, so it's next item
+			} while ((unsigned char*)v1 != get_list_at_840612());
+			v1 = get_list_at_840612()->field_0;
 		}
 	}
 	v3 = 0;
 	sub_452010();
-	if ((unsigned char*)v1 != getMemAt(0x5D4594, 840612)) {
+	if ((unsigned char*)v1 != get_list_at_840612()) {
 		do {
 			v4 = *(uint32_t*)(v1 + 176);
 			v5 = *(unsigned char**)v1;
@@ -853,7 +855,7 @@ void sub_4519C0() {
 				sub_452050((uint32_t*)v1);
 			}
 			v1 = (int)v5;
-		} while (v5 != getMemAt(0x5D4594, 840612));
+		} while (v5 != get_list_at_840612());
 	}
 	if (v3 <= 100) {
 		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x4000);
@@ -861,8 +863,8 @@ void sub_4519C0() {
 		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x190000u / v3);
 	}
 	result = sub_486520(getMemUintPtr(0x5D4594, 1045228));
-	v6 = *(unsigned char**)getMemAt(0x5D4594, 840612);
-	if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+	v6 = get_list_at_840612()->field_0;
+	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
 			v7 = *(unsigned char**)v6;
 			result = *((uint32_t*)v6 + 7);
@@ -889,7 +891,7 @@ void sub_4519C0() {
 				}
 			}
 			v6 = v7;
-		} while (v7 != getMemAt(0x5D4594, 840612));
+		} while (v7 != get_list_at_840612());
 	}
 	*getMemU32Ptr(0x5D4594, 1045448) = 0;
 }
@@ -1098,8 +1100,8 @@ int* sub_452120(int a1) {
 	v3 = result;
 	if (result) {
 		sub_452190((int)result);
-		v4 = *(unsigned char**)getMemAt(0x5D4594, 840612);
-		if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+		v4 = get_list_at_840612()->field_0;
+		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
 				v5 = *(unsigned char**)v4;
 				if (*((int**)v4 + 9) == v3) {
@@ -1108,7 +1110,7 @@ int* sub_452120(int a1) {
 					v1 = 1;
 				}
 				v4 = v5;
-			} while (v5 != getMemAt(0x5D4594, 840612));
+			} while (v5 != get_list_at_840612());
 		}
 		result = (int*)v1;
 	}
@@ -1159,14 +1161,14 @@ int sub_4521F0() {
 
 	result = dword_5d4594_1045432;
 	if (dword_5d4594_1045432) {
-		v1 = *(unsigned char**)getMemAt(0x5D4594, 840612);
-		if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+		v1 = get_list_at_840612()->field_0;
+		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
 				v2 = *(unsigned char**)v1;
 				sub_4523D0(v1);
 				result = sub_451FE0((int)v1);
 				v1 = v2;
-			} while (v2 != getMemAt(0x5D4594, 840612));
+			} while (v2 != get_list_at_840612());
 		}
 	}
 	return result;
@@ -1179,15 +1181,15 @@ int***** sub_452230() {
 
 	result = *(int******)&dword_5d4594_1045432;
 	if (dword_5d4594_1045432) {
-		result = *(int******)getMemAt(0x5D4594, 840612);
-		if (*(unsigned char**)getMemAt(0x5D4594, 840612) != getMemAt(0x5D4594, 840612)) {
+		result = get_list_at_840612()->field_0;
+		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
 				v1 = *result;
 				if ((uint8_t)result[6] & 1) {
 					sub_451FE0((int)result);
 				}
 				result = (int*****)v1;
-			} while (v1 != (int****)getMemAt(0x5D4594, 840612));
+			} while (v1 != get_list_at_840612());
 		}
 	}
 	return result;
@@ -1247,7 +1249,7 @@ uint32_t* nox_xxx_draw_452300(uint32_t* a1) {
 	v1[108] = 0;
 	v1[42] = 0;
 	sub_4864A0(v1 + 46);
-	nox_common_list_append_4258E0((int)getMemAt(0x5D4594, 840612), v1);
+	nox_common_list_append_4258E0(get_list_at_840612(), v1);
 	v1[70] = (*getMemU32Ptr(0x587000, 127000))++;
 	return v1;
 }
