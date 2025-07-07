@@ -1354,7 +1354,8 @@ void sub_452510(struct576* a3) {
 }
 
 //----- (00452690) --------------------------------------------------------
-long long sub_452690(int a3, long long a4, int a5) {
+long long sub_452690(struct576* a3p, long long a4, int a5) {
+	int a3 = a3p;
 	long long result; // rax
 
 	*(uint32_t*)(a3 + 32) = a5;
@@ -1800,12 +1801,13 @@ void sub_452E90(nox_drawable_inner3* a1, struct576* a2) {
 }
 
 //----- (00452EB0) --------------------------------------------------------
-int sub_452EB0(nox_drawable_inner3* a1) {
+struct576* sub_452EB0(nox_drawable_inner3* a1) {
+	struct576* res;
 	int result; // eax
 
-	result = a1->field_0;
+	result = res = a1->field_0;
 	if (a1->field_0 && (a1->field_2 != *(uint32_t*)(result + 36) || a1->field_1 != *(uint32_t*)(result + 280))) {
-		result = 0;
+		result = res = 0;
 		a1->field_0 = 0;
 	}
 	return result;
