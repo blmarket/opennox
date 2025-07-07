@@ -1800,15 +1800,15 @@ void sub_452E90(nox_drawable_inner3* a1, struct576* a2) {
 }
 
 //----- (00452EB0) --------------------------------------------------------
-struct576* sub_452EB0(nox_drawable_inner3* a1) {
-	struct576* res;
+int sub_452EB0(nox_drawable_inner3* a1) {
+	int result; // eax
 
-	res = a1->field_0;
-	if (a1->field_0 && (a1->field_2 != res->field_9 || a1->field_1 != res->field_70)) {
-		res = 0;
+	result = a1->field_0;
+	if (a1->field_0 && (a1->field_2 != *(uint32_t*)(result + 36) || a1->field_1 != *(uint32_t*)(result + 280))) {
+		result = 0;
 		a1->field_0 = 0;
 	}
-	return res;
+	return result;
 }
 
 //----- (00452EE0) --------------------------------------------------------
@@ -1822,6 +1822,7 @@ int sub_452EE0(struct576* a1, int a2) {
 
 //----- (00452F10) --------------------------------------------------------
 unsigned int sub_452F10(struct576* a1p, int a2) {
+	int a1 = a1p;
 	int v2; // ecx
 
 	v2 = a2;
@@ -1832,7 +1833,7 @@ unsigned int sub_452F10(struct576* a1p, int a2) {
 	} else {
 		v2 = 100;
 	}
-	return (unsigned int)(163 * v2 * (*(uint32_t*)(*(uint32_t*)a1p->field_9 + 20) >> 16)) >> 14;
+	return (unsigned int)(163 * v2 * (*(uint32_t*)(*(uint32_t*)(a1 + 36) + 20) >> 16)) >> 14;
 }
 
 //----- (00452F50) --------------------------------------------------------
@@ -4244,7 +4245,8 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 	long long v11;            // rax
 	int v12;                  // eax
 	nox_drawable_inner3* v13; // esi
-	struct576* v14;           // edi
+	int* v14;                 // edi
+	int* v15;                 // edi
 	int v16;                  // [esp+Ch] [ebp-Ch]
 	char* v17;                // [esp+10h] [ebp-8h]
 	int* v18;                 // [esp+14h] [ebp-4h]
@@ -4286,7 +4288,7 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 		if (v3) {
 			if (result) {
 				sub_452FE0((int)result, v16);
-				result = (int*)sub_452F50(v14, v3);
+				result = (int*)sub_452F50((int)v14, v3);
 			} else {
 				struct576* v15_struct = nox_xxx_draw_452300(v17);
 				if (v15_struct) {
