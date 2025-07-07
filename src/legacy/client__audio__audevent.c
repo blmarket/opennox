@@ -52,7 +52,6 @@ int sub_451CF0(uint32_t* a1) {
 
 //----- (00451DC0) --------------------------------------------------------
 int sub_451DC0(struct576* a1p) {
-	int a1 = a1p;
 	uint32_t* v1; // esi
 	int result;   // eax
 	int v3;       // ebx
@@ -60,31 +59,31 @@ int sub_451DC0(struct576* a1p) {
 	int v5;       // eax
 	int v6;       // eax
 
-	v1 = *(uint32_t**)(a1 + 36);
-	result = *(uint32_t*)(a1 + 168);
+	v1 = a1p->field_9;
+	result = a1p->field_42;
 	v3 = v1[1];
 	if (result) {
 		if (v1[17] < 0x21u) {
 			return result;
 		}
-		sub_451F90(a1);
+		sub_451F90(a1p);
 	}
 	if (v3 & 4) {
 		if (v1[17] >= 0x21u) {
-			v5 = sub_451E80(a1);
-			result = sub_451F30(a1, v5);
+			v5 = sub_451E80(a1p);
+			result = sub_451F30(a1p, v5);
 		} else {
 			result = v1[48];
 			for (i = 0; i < result; ++i) {
-				sub_451F30(a1, i);
+				sub_451F30(a1p, i);
 				result = v1[48];
 			}
 		}
 	} else if (v3 & 2) {
 		v6 = nox_common_randomIntMinMax_415FF0(0, v1[48] - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 536);
-		result = sub_451F30(a1, v6);
+		result = sub_451F30(a1p, v6);
 	} else {
-		result = sub_451F30(a1, 0);
+		result = sub_451F30(a1p, 0);
 	}
 	return result;
 }
