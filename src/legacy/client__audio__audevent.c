@@ -51,7 +51,8 @@ int sub_451CF0(uint32_t* a1) {
 }
 
 //----- (00451DC0) --------------------------------------------------------
-int sub_451DC0(int a1) {
+int sub_451DC0(struct576* a1p) {
+	int a1 = a1p;
 	uint32_t* v1; // esi
 	int result;   // eax
 	int v3;       // ebx
@@ -138,7 +139,8 @@ int sub_451E80(int a1) {
 }
 
 //----- (00452580) --------------------------------------------------------
-int sub_452580(uint32_t* a1) {
+int sub_452580(struct576* a1p) {
+	uint32_t* a1 = a1p;
 	int v1;     // edi
 	int result; // eax
 	int v3;     // eax

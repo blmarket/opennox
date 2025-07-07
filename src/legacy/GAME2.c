@@ -722,6 +722,7 @@ void nox_gui_setQuestStage_450B00(int a1) { *getMemU32Ptr(0x5D4594, 832468) = a1
 //----- (00450B10) --------------------------------------------------------
 int nox_gui_getQuestStage_450B10() { return *getMemU32Ptr(0x5D4594, 832468); }
 
+// List contains struct576
 nox_list_item_t* get_list_at_840612() { return (nox_list_item_t*)getMemAt(0x5D4594, 840612); }
 
 //----- (00451850) --------------------------------------------------------
@@ -798,11 +799,11 @@ void sub_4519C0() {
 	int v3;            // ebp
 	int v4;            // eax
 	unsigned char* v5; // edi
-	unsigned char* v6; // esi
-	unsigned char* v7; // edi
-	int v8;            // eax
-	int v9;            // eax
-	int v10;           // eax
+	struct576* v6p;    // esi
+	struct576* v7p;
+	int v8;  // eax
+	int v9;  // eax
+	int v10; // eax
 
 	result = dword_5d4594_1045432;
 	if (!dword_5d4594_1045432) {
@@ -863,35 +864,35 @@ void sub_4519C0() {
 		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x190000u / v3);
 	}
 	result = sub_486520(getMemUintPtr(0x5D4594, 1045228));
-	v6 = get_list_at_840612()->field_0;
+	v6p = get_list_at_840612()->field_0;
 	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
-			v7 = *(unsigned char**)v6;
-			result = *((uint32_t*)v6 + 7);
+			v7p = v6p->next;
+			result = v6p->field_7;
 			if (result == 1) {
-				sub_451DC0((int)v6);
-				v8 = sub_451CA0(v6);
-				*((uint32_t*)v6 + 74) = v8;
+				sub_451DC0(v6p);
+				v8 = sub_451CA0(v6p);
+				v6p->field_71[3] = v8;
 				if (!v8) {
 					do {
-						if (!sub_452120((int)v6)) {
+						if (!sub_452120(v6p)) {
 							break;
 						}
-						v7 = *(unsigned char**)v6;
-						sub_451DC0((int)v6);
-						v9 = sub_451CA0(v6);
-						*((uint32_t*)v6 + 74) = v9;
+						v7p = v6p->next;
+						sub_451DC0(v6p);
+						v9 = sub_451CA0(v6p);
+						v6p->field_71[3] = v9;
 					} while (!v9);
 				}
-				v10 = sub_451CA0(v6);
-				*((uint32_t*)v6 + 74) = v10;
-				if (!v10 || (result = sub_452490(v6)) == 0) {
-					sub_4523D0(v6);
-					result = sub_451FE0((int)v6);
+				v10 = sub_451CA0(v6p);
+				v6p->field_71[3] = v10;
+				if (!v10 || (result = sub_452490(v6p)) == 0) {
+					sub_4523D0(v6p);
+					result = sub_451FE0(v6p);
 				}
 			}
-			v6 = v7;
-		} while (v7 != get_list_at_840612());
+			v6p = v7p;
+		} while (v7p != get_list_at_840612());
 	}
 	*getMemU32Ptr(0x5D4594, 1045448) = 0;
 }
@@ -956,7 +957,8 @@ int sub_451BE0(int a1) {
 }
 
 //----- (00451CA0) --------------------------------------------------------
-int sub_451CA0(uint32_t* a1) {
+int sub_451CA0(struct576* a1p) {
+	uint32_t* a1 = a1p;
 	int v1;       // ecx
 	int v3;       // eax
 	uint32_t* v4; // ecx
@@ -996,31 +998,32 @@ int sub_451F30(int a1, int a2) {
 }
 
 //----- (00451F90) --------------------------------------------------------
-int sub_451F90(int a1) {
+int sub_451F90(struct576* a1p) {
 	int v1;     // edi
 	int result; // eax
 	int* v3;    // esi
 
 	v1 = 0;
-	result = *(uint32_t*)(a1 + 168);
+	result = a1p->field_42;
 	if (result <= 0) {
-		*(uint32_t*)(a1 + 168) = 0;
+		a1p->field_42 = 0;
 	} else {
-		v3 = (int*)(a1 + 40);
+		v3 = a1p->field_10;
 		do {
-			sub_4BD660(*v3);
-			*v3 = 0;
-			result = *(uint32_t*)(a1 + 168);
+			sub_4BD660(v3[0]);
+			v3[0] = 0;
+			result = a1p->field_42;
 			++v1;
 			++v3;
 		} while (v1 < result);
-		*(uint32_t*)(a1 + 168) = 0;
+		a1p->field_42 = 0;
 	}
 	return result;
 }
 
 //----- (00451FE0) --------------------------------------------------------
-int sub_451FE0(int a1) {
+int sub_451FE0(struct576* a1p) {
+	int a1 = a1p;
 	nox_common_list_remove_425920((uint32_t**)a1);
 	*(uint32_t*)(a1 + 280) = 0;
 	return sub_4BD300(*(uint32_t**)&dword_5d4594_1045436, a1);
@@ -1088,7 +1091,8 @@ void sub_452050(uint32_t* a1) {
 }
 
 //----- (00452120) --------------------------------------------------------
-int* sub_452120(int a1) {
+int* sub_452120(struct576* a1p) {
+	int a1 = a1p;
 	int v1;            // ebp
 	int* result;       // eax
 	int* v3;           // ebx
@@ -1255,45 +1259,44 @@ struct576* nox_xxx_draw_452300(uint32_t* a1) {
 }
 
 //----- (004523D0) --------------------------------------------------------
-int sub_4523D0(void* a1p) {
+int sub_4523D0(struct576* a1p) {
 	uint32_t* a1 = a1p;
 	int result = 0; // eax
 
 	if (!(a1[6] & 1)) {
-		sub_452410((int)a1);
-		sub_451F90((int)a1);
-		a1[7] = 4;
-		a1[70] = 0;
-		result = a1[6];
-		LOBYTE(result) = result | 1;
-		a1[6] = result;
+		sub_452410(a1p);
+		sub_451F90(a1p);
+		a1p->field_7 = 4;
+		a1p->field_70 = 0;
+		a1p->field_6 |= 1;
 	}
 	return result;
 }
 
 //----- (00452410) --------------------------------------------------------
-int sub_452410(int a1) {
+int sub_452410(struct576* a1p) {
 	int result; // eax
 
-	result = *(uint32_t*)(a1 + 176);
-	if (result && a1 == *(uint32_t*)(result + 152)) {
-		if (*(uint8_t*)(a1 + 24) & 2) {
-			sub_4BDA80(*(uint32_t*)(a1 + 176));
+	result = a1p->field_44;
+	if (result && a1p == *(uint32_t*)(result + 152)) {
+		if (a1p->field_6 & 2) {
+			sub_4BDA80(a1p->field_44);
 		}
-		sub_4BDB30(*(uint32_t*)(a1 + 176));
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 152) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 148) = 0;
-		result = *(uint32_t*)(a1 + 176);
+		sub_4BDB30(a1p->field_44);
+		*(uint32_t*)(a1p->field_44 + 152) = 0;
+		*(uint32_t*)(a1p->field_44 + 148) = 0;
+		result = a1p->field_44;
 		*(uint32_t*)(result + 140) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 144) = 0;
-		*(uint32_t*)(*(uint32_t*)(a1 + 176) + 112) = 0;
-		*(uint32_t*)(a1 + 176) = 0;
+		*(uint32_t*)(a1p->field_44 + 144) = 0;
+		*(uint32_t*)(a1p->field_44 + 112) = 0;
+		a1p->field_44 = 0;
 	}
 	return result;
 }
 
 //----- (00452490) --------------------------------------------------------
-int sub_452490(uint32_t* a1) {
+int sub_452490(struct576* a1p) {
+	uint32_t* a1 = a1p;
 	int v1; // eax
 	int v3; // edi
 	int v4; // eax
@@ -1344,8 +1347,8 @@ void sub_452510(struct576* a3) {
 		}
 		a3->field_7 = a3->field_8;
 	}
-	if (!sub_452580((uint32_t*)a3)) {
-		sub_4523D0((uint32_t*)a3);
+	if (!sub_452580(a3)) {
+		sub_4523D0(a3);
 	}
 }
 
@@ -4241,7 +4244,6 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 	int v12;                  // eax
 	nox_drawable_inner3* v13; // esi
 	struct576* v14;           // edi
-	int* v15;                 // edi
 	int v16;                  // [esp+Ch] [ebp-Ch]
 	char* v17;                // [esp+10h] [ebp-8h]
 	int* v18;                 // [esp+14h] [ebp-4h]
@@ -4286,7 +4288,6 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				result = (int*)sub_452F50(v14, v3);
 			} else {
 				struct576* v15_struct = nox_xxx_draw_452300(v17);
-				v15 = (int*)v15_struct;
 				if (v15_struct) {
 					sub_452EE0(v15_struct, v3);
 					sub_452F80(v15_struct, v16);

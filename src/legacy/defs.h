@@ -1356,14 +1356,17 @@ typedef struct struct576 {
 	uint32_t field_3;       // 3
 	uint32_t field_4;       // 4
 	uint32_t field_5;       // 5
-	uint32_t field_6;       // 6
+	uint8_t field_6;        // 6
+	uint8_t field_6_1;      // 6 - stores a1 parameter
+	uint8_t field_6_2;      // 6 - stores a2 parameter
+	uint8_t field_6_3;      // 6 - stores a3 parameter
 	uint32_t field_7;       // 7
 	uint32_t field_8;       // 8
 	uint32_t* field_9;      // 9 - stores a1 parameter
 	uint32_t field_10[32];  // 10-41
-	uint32_t field_42;      // 42
+	uint32_t field_42;      // 42 - contains length of field_10 array
 	uint32_t field_43;      // 43
-	uint32_t field_44;      // 44
+	uint32_t field_44;      // 44 - looks like a pointer to some struct
 	uint32_t field_45;      // 45
 	timer field_46;
 	uint32_t field_54[8];

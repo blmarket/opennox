@@ -6,7 +6,7 @@ extern int nox_drawable_count;
 extern void* dword_5d4594_1096640;
 extern void* nox_client_spriteUnderCursorXxx_1096644;
 void sub_495B50(void* a1);
-int sub_4523D0(void* a1);
+int sub_4523D0(struct576* a1);
 void sub_495FC0(void* a1, nox_drawable* a2);
 int sub_49C520(nox_drawable* a1);
 void sub_45A9B0(nox_drawable* a1, nox_drawable* a2);
