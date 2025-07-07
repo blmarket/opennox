@@ -58,6 +58,8 @@
 
 #pragma warning(disable : 4028 4024 4700 4026 4070 4142 4022 4098 4113 4146 4090 4172 4101)
 
+typedef struct struct576 struct576;
+
 // For now bools are kept 1-byte long
 //_Static_assert(sizeof(bool) == 4, "boolean values must be aligned to 32-bit int");
 
@@ -494,6 +496,12 @@ typedef struct nox_window_yyy {
 } nox_window_yyy;
 _Static_assert(sizeof(nox_window_yyy) == 20, "wrong size of nox_window_yyy structure!");
 
+typedef struct nox_drawable_inner3 {
+	struct576* field_0;
+	uint32_t field_1;
+	uint32_t field_2;
+} nox_drawable_inner3;
+
 typedef struct nox_drawable {
 	uint32_t field_0;             // 0, 0
 	uint32_t field_1;             // 1, 4
@@ -593,13 +601,11 @@ typedef struct nox_drawable {
 	uint32_t field_117;
 	uint32_t field_118;
 	uint32_t field_119;
-	uint32_t field_120; // 120, 480
-	uint32_t field_121; // 121, 484
-	uint32_t field_122; // 122, 488
-	uint32_t field_123; // 123, 492
-	uint32_t field_124;
-	uint32_t field_125;
-	uint32_t field_126;
+	uint32_t field_120;            // 120, 480
+	uint32_t field_121;            // 121, 484
+	uint32_t field_122;            // 122, 488
+	uint32_t field_123;            // 123, 492
+	nox_drawable_inner3 field_124; // 124, 496
 	uint32_t field_127;
 } nox_drawable;
 _Static_assert(sizeof(nox_drawable) == 512, "wrong size of nox_drawable structure!");
