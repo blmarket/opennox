@@ -98,7 +98,7 @@ int nox_thing_read_edge_485D40(nox_memfile* f, char* a2);
 int nox_xxx_tile_486060();
 int sub_4862E0(void* a3, int a4);
 void* sub_486320(/* timer* */ void* a1, int a2);
-int sub_486350(void* a1, int a2);
+int sub_486350(/* timer* */ void* a1, int a2);
 int sub_486380(void* a1, uint32_t a2, int32_t a3, uint32_t a4);
 int sub_4863B0(void* a2);
 void* sub_4864A0(void* a3);
