@@ -1787,17 +1787,12 @@ void sub_452E10(int a1, int a2, int a3) {
 }
 
 //----- (00452E90) --------------------------------------------------------
-int sub_452E90(nox_drawable_inner3* a1, struct576* a2) {
-	int result; // eax
-
-	result = (int)a2;
-	a1->field_0 = (uint32_t)a2;
+void sub_452E90(nox_drawable_inner3* a1, struct576* a2) {
+	a1->field_0 = a2;
 	if (a2) {
 		a1->field_1 = a2->field_70;
-		result = a2->field_9;
-		a1->field_2 = result;
+		a1->field_2 = a2->field_9;
 	}
-	return result;
 }
 
 //----- (00452EB0) --------------------------------------------------------
@@ -4295,7 +4290,7 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 				if (v15_struct) {
 					sub_452EE0(v15_struct, v3);
 					sub_452F80(v15_struct, v16);
-					result = (int*)sub_452E90(v13, (int)v15_struct);
+					sub_452E90(v13, v15_struct);
 				} else {
 					result = 0;
 				}
