@@ -981,7 +981,8 @@ int sub_451CA0(struct576* a1p) {
 }
 
 //----- (00451F30) --------------------------------------------------------
-int sub_451F30(int a1, int a2) {
+int sub_451F30(struct576* a1p, int a2) {
+	int a1 = a1p;
 	int v2;     // edx
 	int result; // eax
 

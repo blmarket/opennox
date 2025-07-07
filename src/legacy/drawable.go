@@ -223,7 +223,7 @@ func Sub_495B50(fx *client.DrawableFX) {
 	C.sub_495B50(fx.C())
 }
 func Sub_4523D0(p unsafe.Pointer) {
-	C.sub_4523D0(p)
+	C.sub_4523D0((*C.struct576)(p))
 }
 func Sub_495FC0(p *client.DrawableFX, dr *client.Drawable) {
 	C.sub_495FC0(p.C(), (*nox_drawable)(dr.C()))
