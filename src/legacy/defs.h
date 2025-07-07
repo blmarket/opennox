@@ -1286,9 +1286,6 @@ _Static_assert(sizeof(noxSYSTEMTIME) == 16, "wrong size of SYSTEMTIME structure!
 void noxGetLocalTime(noxSYSTEMTIME* lpSystemTime);
 
 // See timer.go for definition
-typedef struct timer timer;
-
-// See timer.go for definition
 typedef struct timerGroup timerGroup;
 
 typedef struct {
@@ -1334,6 +1331,18 @@ typedef struct struct28 {
 	uint32_t field_6;
 } struct28;
 
+// See timer.go for definition
+typedef struct timer {
+	uint32_t field_0; // 0
+	uint32_t field_1; // 4
+	uint32_t field_2; // 8
+	uint32_t field_3; // 12
+	uint64_t field_4; // 16
+	uint64_t field_5; // 24
+} timer;
+
+_Static_assert(sizeof(timer) == 32, "wrong size of nox_timer_t structure!");
+
 typedef struct struct576 {
 	struct struct576* next; // 0
 	struct struct576* prev; // 1
@@ -1350,7 +1359,9 @@ typedef struct struct576 {
 	uint32_t field_43;      // 43
 	uint32_t field_44;      // 44
 	uint32_t field_45;      // 45
-	uint32_t field_46[24];  // 46-69 - target for sub_4864A0
+	timer field_46;
+	uint32_t field_54[8];
+	timer field_62;
 	uint32_t field_70;      // 70 - stores incrementing counter
 	uint32_t field_71[4];   // 71-74
 	uint32_t field_75;      // 75

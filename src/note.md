@@ -1,3 +1,7 @@
-In sub_452E90 function, a2 should be better `struct576*` type. Update the parameters, and replace the field access via pointer arithmetic with field access.
+```
+v2 = sub_452F10((int)a1, a2);
+```
+
+Because a1 is struct576*, Update sub_452F10 function parameter type to match as well.
 
 

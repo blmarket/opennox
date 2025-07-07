@@ -1248,7 +1248,7 @@ struct576* nox_xxx_draw_452300(uint32_t* a1) {
 	v1->field_142 = 0;
 	v1->field_108 = 0;
 	v1->field_42 = 0;
-	sub_4864A0(v1->field_46);
+	sub_4864A0(&v1->field_46);
 	nox_common_list_append_4258E0(get_list_at_840612(), v1);
 	v1->field_70 = (*getMemU32Ptr(0x587000, 127000))++;
 	return v1;
@@ -1817,7 +1817,7 @@ int sub_452EE0(struct576* a1, int a2) {
 	int v2; // eax
 
 	v2 = sub_452F10((int)a1, a2);
-	sub_486320((uint32_t*)&a1->field_46, v2);
+	sub_486320(&a1->field_46, v2);
 	return sub_4863B0((unsigned int*)&a1->field_46);
 }
 
@@ -1849,7 +1849,7 @@ uint32_t* sub_452F80(struct576* a1, int a2) {
 	int v2; // eax
 
 	v2 = sub_452FA0(a2);
-	return sub_486320((uint32_t*)((int)a1 + 248), v2);
+	return sub_486320(&a1->field_62, v2);
 }
 
 //----- (00452FA0) --------------------------------------------------------
