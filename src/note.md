@@ -1,7 +1,1 @@
-```
-v2 = sub_452F10((int)a1, a2);
-```
-
-Because a1 is struct576*, Update sub_452F10 function parameter type to match as well.
-
-
+Check the return type of sub_487D30 can be simplified. Make the change if possible.
