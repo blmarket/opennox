@@ -981,18 +981,17 @@ int sub_451CA0(struct576* a1p) {
 
 //----- (00451F30) --------------------------------------------------------
 int sub_451F30(struct576* a1p, int a2) {
-	int a1 = a1p;
 	int v2;     // edx
 	int result; // eax
 
-	*(uint32_t*)(a1 + 4 * *(uint32_t*)(a1 + 168) + 40) =
-		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)(*(uint32_t*)(a1 + 36) + 2 * a2 + 128));
-	v2 = *(uint32_t*)(a1 + 168);
-	result = *(uint32_t*)(a1 + 4 * v2 + 40);
+	a1p->field_10[a1p->field_42] =
+		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
+	v2 = a1p->field_42;
+	result = a1p->field_10[v2];
 	if (result) {
-		sub_4BD650(*(uint32_t*)(a1 + 4 * v2 + 40));
-		result = *(uint32_t*)(a1 + 168) + 1;
-		*(uint32_t*)(a1 + 168) = result;
+		sub_4BD650(a1p->field_10[v2]);
+		result = a1p->field_42 + 1;
+		a1p->field_42 = result;
 	}
 	return result;
 }
