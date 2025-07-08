@@ -7,7 +7,6 @@
 
 //----- (00451CF0) --------------------------------------------------------
 int sub_451CF0(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	int v1;       // ecx
 	int result;   // eax
 	int v3;       // edx
@@ -18,34 +17,34 @@ int sub_451CF0(struct576* a1p) {
 	uint32_t* v8; // eax
 	int v9;       // eax
 
-	v1 = a1[9];
-	result = a1[108];
+	v1 = (int)a1p->field_9;
+	result = a1p->field_108;
 	v3 = *(uint32_t*)(v1 + 4);
 	if (result) {
 		if (v3 & 2) {
 			v5 = nox_common_randomIntMinMax_415FF0(0, result - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 376);
-			v6 = a1[108] - 1;
-			a1[43] = a1[v5 + 76];
+			v6 = a1p->field_108 - 1;
+			a1p->field_43 = a1p->field_76[v5];
 			v7 = v5;
 			if (v5 < v6) {
-				v8 = &a1[v5 + 76];
+				v8 = &a1p->field_76[v5];
 				do {
 					++v7;
 					*v8 = v8[1];
 					++v8;
-				} while (v7 < a1[108] - 1);
+				} while (v7 < a1p->field_108 - 1);
 			}
 		} else {
-			++a1[43];
+			++a1p->field_43;
 		}
-		v9 = a1[43];
-		--a1[108];
-		result = sub_4BD710(a1[v9 + 10]);
+		v9 = a1p->field_43;
+		--a1p->field_108;
+		result = sub_4BD710(a1p->field_10[v9]);
 	} else if (v3 & 1) {
-		if (*(uint32_t*)(v1 + 60) && (v4 = a1[109] + 1, a1[109] = v4, v4 >= *(int*)(v1 + 60))) {
+		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109[0] + 1, a1p->field_109[0] = v4, v4 >= *(int*)(v1 + 60))) {
 			result = 0;
 		} else {
-			result = sub_451CA0(a1);
+			result = sub_451CA0(a1p);
 		}
 	}
 	return result;
