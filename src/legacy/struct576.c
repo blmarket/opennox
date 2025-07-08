@@ -2,6 +2,8 @@
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
+// It holds memory allocation holding 200 elements of struct576. There is 4 byte overhead for each element, to keep
+// track of the next element. i.e. pointer to 200 * (576 + 4) byte array, where first 4 byte points to next element.
 extern uint32_t* dword_5d4594_1045436;
 extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045432;
@@ -100,10 +102,9 @@ int sub_451F90(struct576* a1p) {
 
 //----- (00451FE0) --------------------------------------------------------
 int sub_451FE0(struct576* a1p) {
-	int a1 = a1p;
-	nox_common_list_remove_425920((uint32_t**)a1);
-	*(uint32_t*)(a1 + 280) = 0;
-	return sub_4BD300(*(uint32_t**)&dword_5d4594_1045436, a1);
+	nox_common_list_remove_425920(a1p);
+	a1p->field_70 = 0;
+	return sub_4BD300(*(uint32_t**)&dword_5d4594_1045436, a1p);
 }
 
 //----- (00452120) --------------------------------------------------------

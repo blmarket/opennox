@@ -793,13 +793,11 @@ void sub_451970() {
 
 //----- (004519C0) --------------------------------------------------------
 void sub_4519C0() {
-	int result;        // eax
-	int v1;            // esi
-	int v2;            // eax
-	int v3;            // ebp
-	int v4;            // eax
-	unsigned char* v5; // edi
-	struct576* v6p;    // esi
+	int result;     // eax
+	int v2;         // eax
+	int v3;         // ebp
+	int v4;         // eax
+	struct576* v6p; // esi
 	struct576* v7p;
 	int v8;  // eax
 	int v9;  // eax
@@ -816,48 +814,49 @@ void sub_4519C0() {
 	*getMemU32Ptr(0x5D4594, 1045448) = 1;
 	sub_486520(*(unsigned int**)&dword_587000_127004);
 	struct576* v1p;
-	v1 = v1p = get_list_at_840612()->field_0;
+	v1p = get_list_at_840612()->field_0;
 	++*getMemU32Ptr(0x5D4594, 1045440);
 	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
-			v2 = *(uint32_t*)(v1 + 36);
+			v2 = v1p->field_9;
 			if (*(uint32_t*)(v2 + 100) != *getMemU32Ptr(0x5D4594, 1045440)) {
 				nox_common_list_clear_425760((uint32_t*)(v2 + 88));
-				*(uint32_t*)(*(uint32_t*)(v1 + 36) + 52) = 0;
-				*(uint32_t*)(*(uint32_t*)(v1 + 36) + 100) = *getMemU32Ptr(0x5D4594, 1045440);
+				*(uint32_t*)((uint32_t)v1p->field_9 + 52) = 0;
+				*(uint32_t*)((uint32_t)v1p->field_9 + 100) = *getMemU32Ptr(0x5D4594, 1045440);
 			}
-			sub_486520((unsigned int*)(v1 + 184));
-			if (*(uint32_t*)(v1 + 28) != 4) {
-				sub_451BE0(v1);
+			sub_486520(&v1p->timerGroup_46);
+			if (v1p->field_7 != 4) {
+				sub_451BE0(v1p);
 			}
-			v1 = *(uint32_t*)v1;
-		} while ((unsigned char*)v1 != get_list_at_840612());
-		v1 = get_list_at_840612()->field_0;
+			v1p = v1p->next;
+		} while (v1p != get_list_at_840612());
+		v1p = get_list_at_840612()->field_0;
 		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
-				sub_452510(v1);
-				v1 = *(uint32_t*)v1; // beginning of v1 is nox_list_item_t, so it's next item
-			} while ((unsigned char*)v1 != get_list_at_840612());
-			v1 = get_list_at_840612()->field_0;
+				sub_452510(v1p);
+				v1p = v1p->next;
+			} while (v1p != get_list_at_840612());
+			v1p = get_list_at_840612()->field_0;
 		}
 	}
 	v3 = 0;
 	sub_452010();
-	if ((unsigned char*)v1 != get_list_at_840612()) {
+	if (v1p != get_list_at_840612()) {
+		struct576* v5p;
 		do {
-			v4 = *(uint32_t*)(v1 + 176);
-			v5 = *(unsigned char**)v1;
-			if (!v4 || v1 != *(uint32_t*)(v4 + 152)) {
-				sub_4523D0((uint32_t*)v1);
+			v4 = v1p->field_44;
+			v5p = v1p->next;
+			if (!v4 || v1p != *(uint32_t*)(v4 + 152)) {
+				sub_4523D0(v1p);
 			}
-			if (*(uint8_t*)(v1 + 24) & 1) {
-				sub_451FE0(v1);
+			if (v1p->field_6 & 1) {
+				sub_451FE0(v1p);
 			} else {
-				v3 += (unsigned int)(33 * (*(uint32_t*)(*(uint32_t*)(v1 + 36) + 20) >> 16)) >> 14;
-				sub_452050((uint32_t*)v1);
+				v3 += (unsigned int)(33 * (*(uint32_t*)((uint32_t)v1p->field_9 + 20) >> 16)) >> 14;
+				sub_452050(v1p);
 			}
-			v1 = (int)v5;
-		} while (v5 != get_list_at_840612());
+			v1p = v5p;
+		} while (v5p != get_list_at_840612());
 	}
 	if (v3 <= 100) {
 		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x4000);
@@ -899,7 +898,8 @@ void sub_4519C0() {
 }
 
 //----- (00451BE0) --------------------------------------------------------
-int sub_451BE0(int a1) {
+int sub_451BE0(struct576* a1p) {
+	int a1 = a1p;
 	int v1;          // eax
 	int v2;          // edi
 	unsigned int v3; // ebx
@@ -978,7 +978,8 @@ int sub_452010() {
 }
 
 //----- (00452050) --------------------------------------------------------
-void sub_452050(uint32_t* a1) {
+void sub_452050(struct576* a1p) {
+	uint32_t* a1 = a1p;
 	uint32_t* v1;      // esi
 	int v2;            // edi
 	unsigned int v3;   // ebx
@@ -1055,7 +1056,7 @@ int* sub_4521A0(int a1) {
 }
 
 //----- (004521F0) --------------------------------------------------------
-int sub_4521F0() {
+void sub_4521F0() {
 	int result;        // eax
 	unsigned char* v1; // esi
 	unsigned char* v2; // edi
@@ -1072,7 +1073,6 @@ int sub_4521F0() {
 			} while (v2 != get_list_at_840612());
 		}
 	}
-	return result;
 }
 
 //----- (00452230) --------------------------------------------------------
