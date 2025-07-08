@@ -438,20 +438,6 @@ uint32_t* sub_4BD280(int a1, int a2) {
 //----- (004BD2D0) --------------------------------------------------------
 void sub_4BD2D0(void* lpMem) { free(lpMem); }
 
-//----- (004BD2E0) --------------------------------------------------------
-struct576* sub_4BD2E0(uint32_t** a1) {
-	uint32_t* result; // eax
-	uint32_t* v2;     // edx
-
-	result = *a1;
-	if (*a1) {
-		v2 = (uint32_t*)*result;
-		++result;
-		*a1 = v2;
-	}
-	return result;
-}
-
 //----- (004BD300) --------------------------------------------------------
 int sub_4BD300(uint32_t* a1, int a2) {
 	int result; // eax

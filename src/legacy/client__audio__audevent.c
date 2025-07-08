@@ -5,89 +5,6 @@
 #include "GAME2_2.h"
 #include "GAME3_1.h"
 
-//----- (00451CF0) --------------------------------------------------------
-int sub_451CF0(struct576* a1p) {
-	int v1;       // ecx
-	int result;   // eax
-	int v3;       // edx
-	int v4;       // edi
-	int v5;       // eax
-	int v6;       // edi
-	int v7;       // ecx
-	uint32_t* v8; // eax
-	int v9;       // eax
-
-	v1 = (int)a1p->field_9;
-	result = a1p->field_108;
-	v3 = *(uint32_t*)(v1 + 4);
-	if (result) {
-		if (v3 & 2) {
-			v5 = nox_common_randomIntMinMax_415FF0(0, result - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 376);
-			v6 = a1p->field_108 - 1;
-			a1p->field_43 = a1p->field_76[v5];
-			v7 = v5;
-			if (v5 < v6) {
-				v8 = &a1p->field_76[v5];
-				do {
-					++v7;
-					*v8 = v8[1];
-					++v8;
-				} while (v7 < a1p->field_108 - 1);
-			}
-		} else {
-			++a1p->field_43;
-		}
-		v9 = a1p->field_43;
-		--a1p->field_108;
-		result = sub_4BD710(a1p->field_10[v9]);
-	} else if (v3 & 1) {
-		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109 + 1, a1p->field_109 = v4, v4 >= *(int*)(v1 + 60))) {
-			result = 0;
-		} else {
-			result = sub_451CA0(a1p);
-		}
-	}
-	return result;
-}
-
-//----- (00451DC0) --------------------------------------------------------
-int sub_451DC0(struct576* a1p) {
-	uint32_t* v1; // esi
-	int result;   // eax
-	int v3;       // ebx
-	int i;        // edi
-	int v5;       // eax
-	int v6;       // eax
-
-	v1 = a1p->field_9;
-	result = a1p->field_42;
-	v3 = v1[1];
-	if (result) {
-		if (v1[17] < 0x21u) {
-			return result;
-		}
-		sub_451F90(a1p);
-	}
-	if (v3 & 4) {
-		if (v1[17] >= 0x21u) {
-			v5 = sub_451E80(a1p);
-			result = sub_451F30(a1p, v5);
-		} else {
-			result = v1[48];
-			for (i = 0; i < result; ++i) {
-				sub_451F30(a1p, i);
-				result = v1[48];
-			}
-		}
-	} else if (v3 & 2) {
-		v6 = nox_common_randomIntMinMax_415FF0(0, v1[48] - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 536);
-		result = sub_451F30(a1p, v6);
-	} else {
-		result = sub_451F30(a1p, 0);
-	}
-	return result;
-}
-
 //----- (00451E80) --------------------------------------------------------
 int sub_451E80(int a1) {
 	int v1;        // eax
@@ -135,45 +52,6 @@ int sub_451E80(int a1) {
 		} while (v10 < *(int*)(a1 + 568));
 	}
 	return v9;
-}
-
-//----- (00452580) --------------------------------------------------------
-int sub_452580(struct576* a1p) {
-	int v1;     // edi
-	int result; // eax
-	int v3;     // eax
-	int v4;     // eax
-	int v5;     // eax
-
-	v1 = (int)a1p->field_9;
-	if (!*(uint32_t*)(v1 + 192)) {
-		return 0;
-	}
-	v3 = a1p->field_75;
-	a1p->field_109 = 0;
-	result = sub_452810(*(uint32_t*)(v1 + 48) + v3, 0);
-	a1p->field_44 = result;
-	if (result) {
-		v4 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 76), *(uint32_t*)(v1 + 80),
-											   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1482);
-		sub_486320((uint32_t*)(a1p->field_44 + 48), v4 + 100);
-		sub_4BDB20(a1p->field_44);
-		*(uint32_t*)(a1p->field_44 + 152) = (uint32_t)a1p;
-		*(uint32_t*)(a1p->field_44 + 140) = (uint32_t)sub_452770;
-		*(uint32_t*)(a1p->field_44 + 144) = (uint32_t)sub_4526F0;
-		*(uint32_t*)(a1p->field_44 + 148) = (uint32_t)sub_4526D0;
-		a1p->field_7 = 1;
-		*(uint32_t*)(a1p->field_44 + 112) = (uint32_t)&a1p->field_46;
-		if (*(uint8_t*)(v1 + 4) & 8) {
-			v5 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 68), *(uint32_t*)(v1 + 72),
-												   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1497);
-			if (v5 > 33) {
-				sub_452690((int)a1p, v5, 1);
-			}
-		}
-		result = 1;
-	}
-	return result;
 }
 
 //----- (00452770) --------------------------------------------------------
