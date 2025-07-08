@@ -1296,28 +1296,27 @@ int sub_452410(struct576* a1p) {
 
 //----- (00452490) --------------------------------------------------------
 int sub_452490(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	int v1; // eax
 	int v3; // edi
 	int v4; // eax
 
-	v1 = a1[44];
-	if (a1 != *(uint32_t**)(v1 + 152)) {
+	v1 = a1p->field_44;
+	if (a1p != *(uint32_t**)(v1 + 152)) {
 		return 0;
 	}
-	v3 = a1[74];
-	sub_4BDB90((uint32_t*)v1, (uint32_t*)a1[74]);
-	a1[7] = 3;
-	v4 = a1[6];
+	v3 = a1p->field_74;
+	sub_4BDB90((uint32_t*)v1, (uint32_t*)a1p->field_74);
+	a1p->field_7 = 3;
+	v4 = a1p->field_6;
 	LOBYTE(v4) = v4 | 2;
-	a1[6] = v4;
-	a1[74] = 0;
-	if (!sub_4BDB40(a1[44])) {
+	a1p->field_6 = v4;
+	a1p->field_74 = 0;
+	if (!sub_4BDB40(a1p->field_44)) {
 		return 1;
 	}
-	a1[7] = 1;
-	a1[74] = v3;
-	a1[6] &= 0xFFFFFFFD;
+	a1p->field_7 = 1;
+	a1p->field_74 = v3;
+	a1p->field_6 &= 0xFFFFFFFD;
 	return 0;
 }
 
