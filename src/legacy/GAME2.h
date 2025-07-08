@@ -60,7 +60,7 @@ bool sub_452120(struct576* a1);
 void sub_452190(int a1);
 int* sub_4521A0(int a1);
 int sub_4521F0();
-int***** sub_452230();
+void sub_452230();
 char* nox_xxx_draw_452270(int a1);
 int sub_4522A0(int a1);
 struct576* nox_xxx_draw_452300(uint32_t* a1);

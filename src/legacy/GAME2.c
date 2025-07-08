@@ -733,7 +733,7 @@ int sub_451850(int a2, void* a3p) {
 	int result; // eax
 
 	v2 = 0;
-	void* v33 = getMemAt(0x5D4594, 840628);
+	uint32_t v33 = getMemAt(0x5D4594, 840628);
 	do {
 		sub_451920(v33);
 		*((uint32_t*)v33 + 21) = nox_xxx_getSndName_40AF80(v2);
@@ -815,7 +815,8 @@ void sub_4519C0() {
 	}
 	*getMemU32Ptr(0x5D4594, 1045448) = 1;
 	sub_486520(*(unsigned int**)&dword_587000_127004);
-	v1 = get_list_at_840612()->field_0;
+	struct576* v1p;
+	v1 = v1p = get_list_at_840612()->field_0;
 	++*getMemU32Ptr(0x5D4594, 1045440);
 	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
