@@ -1372,7 +1372,9 @@ typedef struct struct576 {
 	uint32_t field_54[8];
 	timer field_62;
 	uint32_t field_70;      // 70 - stores incrementing counter
-	uint32_t field_71[4];   // 71-74
+	uint32_t field_71;      // 71
+	uint64_t field_72;      // 72 - 64 bit
+	uint32_t field_74;      // 74
 	uint32_t field_75;      // 75
 	uint32_t field_76[32];  // 76-107
 	uint32_t field_108;     // 108

@@ -872,7 +872,7 @@ void sub_4519C0() {
 			if (result == 1) {
 				sub_451DC0(v6p);
 				v8 = sub_451CA0(v6p);
-				v6p->field_71[3] = v8;
+				v6p->field_74 = v8;
 				if (!v8) {
 					do {
 						if (!sub_452120(v6p)) {
@@ -881,11 +881,11 @@ void sub_4519C0() {
 						v7p = v6p->next;
 						sub_451DC0(v6p);
 						v9 = sub_451CA0(v6p);
-						v6p->field_71[3] = v9;
+						v6p->field_74 = v9;
 					} while (!v9);
 				}
 				v10 = sub_451CA0(v6p);
-				v6p->field_71[3] = v10;
+				v6p->field_74 = v10;
 				if (!v10 || (result = sub_452490(v6p)) == 0) {
 					sub_4523D0(v6p);
 					result = sub_451FE0(v6p);
@@ -1342,7 +1342,7 @@ void sub_452510(struct576* a3) {
 			}
 			return;
 		}
-		if (nox_platform_get_ticks() <= *(uint64_t*)&a3->field_71[1]) {
+		if (nox_platform_get_ticks() <= a3->field_72) {
 			return;
 		}
 		a3->field_7 = a3->field_8;
