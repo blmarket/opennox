@@ -1092,29 +1092,28 @@ void sub_452050(uint32_t* a1) {
 
 //----- (00452120) --------------------------------------------------------
 int* sub_452120(struct576* a1p) {
-	int a1 = a1p;
-	int v1;            // ebp
-	int* result;       // eax
-	int* v3;           // ebx
-	unsigned char* v4; // esi
-	unsigned char* v5; // edi
+	int v1;      // ebp
+	int* result; // eax
+	int* v3;     // ebx
 
 	v1 = 0;
-	result = sub_4521A0(*(uint32_t*)(a1 + 300) + *(uint32_t*)(*(uint32_t*)(a1 + 36) + 48));
+	result = sub_4521A0(a1p->field_75 + *(uint32_t*)((uint32_t)a1p->field_9 + 48));
 	v3 = result;
 	if (result) {
 		sub_452190((int)result);
-		v4 = get_list_at_840612()->field_0;
+		struct576* v4p;
+		struct576* v5p;
+		v4p = get_list_at_840612()->field_0;
 		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
-				v5 = *(unsigned char**)v4;
-				if (*((int**)v4 + 9) == v3) {
-					sub_4523D0(v4);
-					sub_451FE0((int)v4);
+				v5p = v4p->next;
+				if (v4p->field_9 == v3) {
+					sub_4523D0(v4p);
+					sub_451FE0(v4p);
 					v1 = 1;
 				}
-				v4 = v5;
-			} while (v5 != get_list_at_840612());
+				v4p = v5p;
+			} while (v5p != get_list_at_840612());
 		}
 		result = (int*)v1;
 	}
