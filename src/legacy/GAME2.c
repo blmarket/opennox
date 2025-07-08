@@ -958,26 +958,25 @@ int sub_451BE0(int a1) {
 
 //----- (00451CA0) --------------------------------------------------------
 int sub_451CA0(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	int v1;       // ecx
 	int v3;       // eax
 	uint32_t* v4; // ecx
 
-	v1 = a1[42];
-	a1[108] = v1;
+	v1 = a1p->field_42;
+	a1p->field_108 = v1;
 	if (!v1) {
 		return 0;
 	}
 	v3 = 0;
 	if (v1 > 0) {
-		v4 = a1 + 76;
+		v4 = a1p->field_76;
 		do {
 			*v4 = v3++;
 			++v4;
-		} while (v3 < a1[108]);
+		} while (v3 < a1p->field_108);
 	}
-	a1[43] = -1;
-	return sub_451CF0(a1);
+	a1p->field_43 = -1;
+	return sub_451CF0(a1p);
 }
 
 //----- (00451F30) --------------------------------------------------------

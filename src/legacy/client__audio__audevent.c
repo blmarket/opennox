@@ -6,7 +6,8 @@
 #include "GAME3_1.h"
 
 //----- (00451CF0) --------------------------------------------------------
-int sub_451CF0(uint32_t* a1) {
+int sub_451CF0(struct576* a1p) {
+	uint32_t* a1 = a1p;
 	int v1;       // ecx
 	int result;   // eax
 	int v3;       // edx
