@@ -11,6 +11,7 @@ nox_list_item_t* get_list_at_840612();
 int sub_451CA0(struct576* a1);
 int sub_451DC0(struct576* a1);
 int sub_451FE0(struct576* a1);
+void sub_452050(struct576* a1);
 bool sub_452120(struct576* a1);
 int sub_4523D0(struct576* a1);
 int sub_452490(struct576* a1);

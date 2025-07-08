@@ -55,7 +55,6 @@ int sub_451F30(struct576* a1, int a2);
 int sub_451F90(struct576* a1);
 int sub_451FE0(struct576* a1);
 int sub_452010();
-void sub_452050(struct576* a1);
 bool sub_452120(struct576* a1);
 void sub_452190(int a1);
 int* sub_4521A0(int a1);

@@ -1,4 +1,5 @@
 #include "struct576.h"
+#include "memmap.h"
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
@@ -548,4 +549,46 @@ int sub_452770(uint32_t* a1) {
 		v1p->field_74 = v2;
 	}
 	return 0;
+}
+
+//----- (00452050) --------------------------------------------------------
+void sub_452050(struct576* a1p) {
+	uint32_t* a1 = a1p;
+	uint32_t* v1;      // esi
+	int v2;            // edi
+	unsigned int v3;   // ebx
+	unsigned char* v4; // ebp
+	uint32_t* result;  // eax
+	uint32_t** v6;     // esi
+	uint32_t** v7;     // esi
+	uint32_t* v8;      // esi
+
+	v1 = (uint32_t*)a1[9];
+	v2 = v1[12] + a1[75];
+	v3 = (a1[47] >> 16) / 0x666u;
+	v4 = getMemAt(0x5D4594, 839892 + 120 * v2);
+	if (v1[26] == *getMemU32Ptr(0x5D4594, 1045444)) {
+		result = (uint32_t*)v1[27];
+		if (v2 <= (int)result) {
+			if ((uint32_t*)v2 == result && v3 > v1[31]) {
+				v1[31] = v3;
+				v7 = (uint32_t**)(v1 + 28);
+				nox_common_list_remove_425920(v7);
+				nox_common_list_append_4258E0((int)&v4[12 * v3], v7);
+			}
+		} else {
+			v1[27] = v2;
+			v1[31] = v3;
+			v6 = (uint32_t**)(v1 + 28);
+			nox_common_list_remove_425920(v6);
+			nox_common_list_append_4258E0((int)&v4[12 * v3], v6);
+		}
+	} else {
+		v1[26] = *getMemU32Ptr(0x5D4594, 1045444);
+		v1[27] = v2;
+		v1[31] = v3;
+		v8 = v1 + 28;
+		sub_425770(v8);
+		nox_common_list_append_4258E0((int)&v4[12 * v3], v8);
+	}
 }
