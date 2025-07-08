@@ -1823,7 +1823,6 @@ int sub_452EE0(struct576* a1, int a2) {
 
 //----- (00452F10) --------------------------------------------------------
 unsigned int sub_452F10(struct576* a1p, int a2) {
-	int a1 = a1p;
 	int v2; // ecx
 
 	v2 = a2;
@@ -1834,7 +1833,7 @@ unsigned int sub_452F10(struct576* a1p, int a2) {
 	} else {
 		v2 = 100;
 	}
-	return (unsigned int)(163 * v2 * (*(uint32_t*)(*(uint32_t*)(a1 + 36) + 20) >> 16)) >> 14;
+	return (unsigned int)(163 * v2 * (*(uint32_t*)((uint32_t)a1p->field_9 + 20) >> 16)) >> 14;
 }
 
 //----- (00452F50) --------------------------------------------------------
