@@ -1344,10 +1344,18 @@ typedef struct timer {
 	uint32_t field_2; // 8
 	uint32_t field_3; // 12
 	uint64_t field_4; // 16
-	uint64_t field_5; // 24
+	uint64_t field_6; // 24
 } timer;
 
 _Static_assert(sizeof(timer) == 32, "wrong size of nox_timer_t structure!");
+
+typedef struct timerGroup {
+	timer field_0;
+	timer field_8;
+	timer field_16;
+} timerGroup;
+
+_Static_assert(sizeof(timerGroup) == 96, "wrong size of timerGroup structure!");
 
 typedef struct struct576 {
 	struct struct576* next; // 0
@@ -1368,9 +1376,7 @@ typedef struct struct576 {
 	uint32_t field_43;      // 43
 	uint32_t field_44;      // 44 - looks like a pointer to some struct
 	uint32_t field_45;      // 45
-	timer field_46;
-	uint32_t field_54[8];
-	timer field_62;
+	timerGroup timerGroup_46;
 	uint32_t field_70;      // 70 - stores incrementing counter
 	uint32_t field_71;      // 71
 	uint64_t field_72;      // 72 - 64 bit

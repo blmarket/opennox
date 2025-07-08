@@ -32,4 +32,6 @@ struct576* nox_xxx_draw_452300(uint32_t* a1);
 struct576* sub_452EB0(nox_drawable_inner3* a1);
 struct576* sub_4BD2E0(uint32_t** a1);
 
+int sub_452770(uint32_t* a1);
+
 #endif // NOX_STRUCT576_H
