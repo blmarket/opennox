@@ -1258,10 +1258,9 @@ struct576* nox_xxx_draw_452300(uint32_t* a1) {
 
 //----- (004523D0) --------------------------------------------------------
 int sub_4523D0(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	int result = 0; // eax
 
-	if (!(a1[6] & 1)) {
+	if (!(a1p->field_6 & 1)) {
 		sub_452410(a1p);
 		sub_451F90(a1p);
 		a1p->field_7 = 4;
