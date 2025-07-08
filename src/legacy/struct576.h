@@ -25,6 +25,7 @@ int sub_452EE0(struct576* a1, int a2);
 unsigned int sub_452F10(struct576* a1p, int a2);
 int sub_452F50(struct576* a1p, int a2);
 uint32_t* sub_452F80(struct576* a1, int a2);
+int sub_451E80(struct576* a1p);
 
 // Functions that return struct576*
 struct576* nox_xxx_draw_452300(uint32_t* a1);

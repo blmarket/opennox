@@ -1,10 +1,4 @@
 #include "struct576.h"
-#include "GAME2.h"
-#include "GAME2_2.h"
-#include "GAME3_1.h"
-#include "client__audio__audevent.h"
-#include "common__random.h"
-#include "operators.h"
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
@@ -15,6 +9,29 @@ extern uint32_t dword_5d4594_1045432;
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nox_common_list_remove_425920(void* a1);
 void* sub_425770(void* a1);
+int sub_452770(uint32_t* a1);
+int* sub_452810(int a1, char a2);
+int sub_4526D0(int a1);
+int sub_4526F0(int a1);
+int sub_4BDB20(int a1);
+int sub_4BD710(int a1);
+int sub_452FA0(int a1);
+int sub_486350(/* timer* */ void* a1, int a2);
+int sub_4863B0(/* timer* */ void* a2);
+void* sub_486320(/* timer* */ void* a1, int a2);
+void* sub_4864A0(/* timerGroup* */ void* a3);
+int nox_common_randomIntMinMax_415FF0(int min, int max, const char* file, int line);
+int***** sub_452230();
+int sub_4BDB40(int a2);
+void sub_4BDB90(uint32_t* a1, uint32_t* a2);
+int sub_4BDA80(int a1);
+int sub_4BDB30(int a1);
+void sub_452190(int a1);
+int* sub_4521A0(int a1);
+int sub_4BD300(uint32_t* a1, int a2);
+int sub_4BD660(int a1);
+int sub_4BD650(int a1);
+uint32_t* sub_4BD470(uint32_t** a1, int a2);
 
 //----- (00451CA0) --------------------------------------------------------
 int sub_451CA0(struct576* a1p) {
@@ -157,7 +174,6 @@ int sub_452410(struct576* a1p) {
 int sub_452490(struct576* a1p) {
 	int v1; // eax
 	int v3; // edi
-	int v4; // eax
 
 	v1 = a1p->field_44;
 	if (a1p != *(uint32_t**)(v1 + 152)) {
@@ -166,9 +182,7 @@ int sub_452490(struct576* a1p) {
 	v3 = a1p->field_74;
 	sub_4BDB90((uint32_t*)v1, (uint32_t*)a1p->field_74);
 	a1p->field_7 = 3;
-	v4 = a1p->field_6;
-	LOBYTE(v4) = v4 | 2;
-	a1p->field_6 = v4;
+	a1p->field_6 |= 2;
 	a1p->field_74 = 0;
 	if (!sub_4BDB40(a1p->field_44)) {
 		return 1;
@@ -452,4 +466,54 @@ struct576* sub_4BD2E0(uint32_t** a1) {
 		*a1 = v2;
 	}
 	return result;
+}
+
+//----- (00451E80) --------------------------------------------------------
+int sub_451E80(struct576* a1p) {
+	int a1 = a1p;
+	int v1;        // eax
+	int v2;        // ebx
+	int v3;        // eax
+	int v4;        // ecx
+	int v5;        // edx
+	int v6;        // eax
+	int v7;        // edx
+	int v8;        // eax
+	int v9;        // edi
+	int v10;       // ecx
+	uint32_t* v11; // eax
+
+	v1 = *(uint32_t*)(a1 + 36);
+	v2 = *(uint32_t*)(v1 + 4);
+	if (*(int*)(a1 + 568) <= 0) {
+		v3 = *(uint32_t*)(v1 + 192);
+		v4 = 0;
+		*(uint32_t*)(a1 + 568) = v3;
+		if (v3 > 0) {
+			v5 = a1 + 440;
+			do {
+				v5 += 4;
+				v6 = v3 - v4++ - 1;
+				*(uint32_t*)(v5 - 4) = v6;
+				v3 = *(uint32_t*)(a1 + 568);
+			} while (v4 < v3);
+		}
+	}
+	v7 = *(uint32_t*)(a1 + 568) - 1;
+	*(uint32_t*)(a1 + 568) = v7;
+	if (!(v2 & 2)) {
+		return *(uint32_t*)(a1 + 4 * v7 + 440);
+	}
+	v8 = nox_common_randomIntMinMax_415FF0(0, v7, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 431);
+	v9 = *(uint32_t*)(a1 + 4 * v8 + 440);
+	v10 = v8;
+	if (v8 < *(int*)(a1 + 568)) {
+		v11 = (uint32_t*)(a1 + 4 * v8 + 440);
+		do {
+			++v10;
+			*v11 = v11[1];
+			++v11;
+		} while (v10 < *(int*)(a1 + 568));
+	}
+	return v9;
 }

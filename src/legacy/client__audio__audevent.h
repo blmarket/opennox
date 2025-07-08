@@ -5,7 +5,6 @@
 
 int sub_451CF0(struct576* a1);
 int sub_451DC0(struct576* a1);
-int sub_451E80(int a1);
 int sub_452580(struct576* a1);
 int sub_452770(uint32_t* a1);
 
