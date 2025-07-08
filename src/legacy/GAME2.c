@@ -1128,24 +1128,25 @@ int sub_4526D0(int a1) {
 
 //----- (004526F0) --------------------------------------------------------
 int sub_4526F0(int a1) {
-	uint32_t* v1; // esi
-	int v2;       // eax
+	struct576* v1p;
+	// uint32_t* v1; // esi
+	int v2; // eax
 
-	v1 = *(uint32_t**)(a1 + 152);
-	v1[6] &= 0xFFFFFFFD;
+	v1p = *(uint32_t**)(a1 + 152);
+	v1p->field_6 &= 0xFFFFFFFD;
 	v2 = 4;
-	if (v1[7] != 4) {
-		if (v1[74] || v1[142]) {
+	if (v1p->field_7 != 4) {
+		if (v1p->field_74 || v1p->field_142) {
 			v2 = 1;
 		} else {
-			v1[71] = 0;
+			v1p->field_71 = 0;
 		}
-		if (v1[71]) {
-			sub_452690((int)v1, (unsigned int)v1[71], v2);
-			v1[71] = 0;
+		if (v1p->field_71) {
+			sub_452690(v1p, v1p->field_71, v2);
+			v1p->field_71 = 0;
 			return 0;
 		}
-		v1[7] = v2;
+		v1p->field_7 = v2;
 	}
 	return 0;
 }
@@ -1562,7 +1563,8 @@ int sub_452FA0(int a1) {
 }
 
 //----- (00452FE0) --------------------------------------------------------
-int sub_452FE0(int a1, int a2) {
+int sub_452FE0(struct576* a1p, int a2) {
+	int a1 = a1p;
 	int v2; // eax
 
 	v2 = sub_452FA0(a2);
@@ -3953,49 +3955,51 @@ void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
 	v17 = v4;
 	result = (int*)nox_draw_getViewport_437250();
 	v18 = result;
-	if (v5 && result) {
-		if (a1p->flags30 & 0x1000000 && !(a1p->flags70 & 0xC)) {
-			v7 = a2p->pos.x - a1p->pos.x;
-			v8 = a2p->pos.y - a1p->pos.y;
-			v9 = sub_4522A0((int)v17);
-			v10 = v9;
-			if (v7 < v9 && v8 < v9 && v9 > 0) {
-				v11 = (long long)sqrt((double)(v8 * v8 + v7 * v7 + 1));
-				if ((int)v11 < v10) {
-					v12 = 100 * (v10 - (int)v11) / v10;
-					v3 = v12;
-					if (v12 <= 100) {
-						if (v12 < 0) {
-							v3 = 0;
-						}
-					} else {
-						v3 = 100;
+
+	if (!v5 || !result) {
+		return;
+	}
+	if (a1p->flags30 & 0x1000000 && !(a1p->flags70 & 0xC)) {
+		v7 = a2p->pos.x - a1p->pos.x;
+		v8 = a2p->pos.y - a1p->pos.y;
+		v9 = sub_4522A0((int)v17);
+		v10 = v9;
+		if (v7 < v9 && v8 < v9 && v9 > 0) {
+			v11 = (long long)sqrt((double)(v8 * v8 + v7 * v7 + 1));
+			if ((int)v11 < v10) {
+				v12 = 100 * (v10 - (int)v11) / v10;
+				v3 = v12;
+				if (v12 <= 100) {
+					if (v12 < 0) {
+						v3 = 0;
 					}
-					v16 = 50 * (a1p->pos.x - v18[6] - *v18) / (nox_win_width / 2);
-				}
-			}
-			v2 = a1;
-		}
-		v13 = (nox_drawable_inner3*)&a1p->field_124;
-		result = (int*)sub_452EB0(v13);
-		v14 = result;
-		if (v3) {
-			if (result) {
-				sub_452FE0((int)result, v16);
-				result = (int*)sub_452F50((int)v14, v3);
-			} else {
-				struct576* v15_struct = nox_xxx_draw_452300(v17);
-				if (v15_struct) {
-					sub_452EE0(v15_struct, v3);
-					sub_452F80(v15_struct, v16);
-					sub_452E90(v13, v15_struct);
 				} else {
-					result = 0;
+					v3 = 100;
 				}
+				v16 = 50 * (a1p->pos.x - v18[6] - *v18) / (nox_win_width / 2);
 			}
-		} else if (result) {
-			result = (int*)sub_4523D0(result);
 		}
+		v2 = a1;
+	}
+	v13 = (nox_drawable_inner3*)&a1p->field_124;
+	struct576* res = sub_452EB0(v13);
+	struct576* v14p = res;
+	if (v3) {
+		if (res) {
+			sub_452FE0(res, v16);
+			sub_452F50(v14p, v3);
+		} else {
+			struct576* v15_struct = nox_xxx_draw_452300(v17);
+			if (v15_struct) {
+				sub_452EE0(v15_struct, v3);
+				sub_452F80(v15_struct, v16);
+				sub_452E90(v13, v15_struct);
+			} else {
+				res = 0;
+			}
+		}
+	} else if (res) {
+		sub_4523D0(res);
 	}
 }
 
