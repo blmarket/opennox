@@ -1354,13 +1354,12 @@ void sub_452510(struct576* a3) {
 
 //----- (00452690) --------------------------------------------------------
 long long sub_452690(struct576* a3p, long long a4, int a5) {
-	int a3 = a3p;
 	long long result; // rax
 
-	*(uint32_t*)(a3 + 32) = a5;
+	a3p->field_8 = a5;
 	result = a4 + nox_platform_get_ticks();
-	*(uint64_t*)(a3 + 288) = result;
-	*(uint32_t*)(a3 + 28) = 2;
+	a3p->field_72 = result;
+	a3p->field_7 = 2;
 	return result;
 }
 
