@@ -729,18 +729,17 @@ nox_list_item_t* get_list_at_840612() { return (nox_list_item_t*)getMemAt(0x5D45
 //----- (00451850) --------------------------------------------------------
 int sub_451850(int a2, void* a3p) {
 	int a3 = a3p;
-	int v2;            // edi
-	unsigned char* v3; // esi
-	int result;        // eax
+	int v2;     // edi
+	int result; // eax
 
 	v2 = 0;
-	v3 = getMemAt(0x5D4594, 840712);
+	void* v33 = getMemAt(0x5D4594, 840628);
 	do {
-		sub_451920((uint32_t*)v3 - 21);
-		*(uint32_t*)v3 = nox_xxx_getSndName_40AF80(v2);
-		v3 += 200;
+		sub_451920(v33);
+		*((uint32_t*)v33 + 21) = nox_xxx_getSndName_40AF80(v2);
+		v33 += 200;
 		++v2;
-	} while ((int)v3 < (int)getMemAt(0x5D4594, 1045312));
+	} while ((int)v33 < (int)getMemAt(0x5D4594, 1045228));
 	dword_5d4594_1045420 = a3;
 	dword_5d4594_1045428 = a2;
 	if (a3) {
@@ -1076,24 +1075,20 @@ int sub_4521F0() {
 }
 
 //----- (00452230) --------------------------------------------------------
-int***** sub_452230() {
-	int***** result; // eax
-	int**** v1;      // esi
-
-	result = *(int******)&dword_5d4594_1045432;
+void sub_452230() {
 	if (dword_5d4594_1045432) {
-		result = get_list_at_840612()->field_0;
+		struct576* res = get_list_at_840612()->field_0;
+		struct576* v1p;
 		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 			do {
-				v1 = *result;
-				if ((uint8_t)result[6] & 1) {
-					sub_451FE0((int)result);
+				v1p = res->next;
+				if (res->field_6 & 1) {
+					sub_451FE0(res);
 				}
-				result = (int*****)v1;
-			} while (v1 != get_list_at_840612());
+				res = v1p;
+			} while (v1p != get_list_at_840612());
 		}
 	}
-	return result;
 }
 
 //----- (00452270) --------------------------------------------------------
@@ -1564,11 +1559,10 @@ int sub_452FA0(int a1) {
 
 //----- (00452FE0) --------------------------------------------------------
 int sub_452FE0(struct576* a1p, int a2) {
-	int a1 = a1p;
 	int v2; // eax
 
 	v2 = sub_452FA0(a2);
-	return sub_486350(a1 + 248, v2);
+	return sub_486350(&a1p->timerGroup_46.field_16, v2);
 }
 
 //----- (00453050) --------------------------------------------------------

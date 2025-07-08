@@ -476,7 +476,7 @@ void sub_4BD3C0(struct28* lpMem) {
 	if (lpMem->field_1) {
 		sub_4BD2D0((void*)&lpMem->field_1);
 	}
-	if (*((uint32_t*)lpMem + 2)) {
+	if (lpMem->field_2) {
 		sub_4BD2D0((void*)&lpMem->field_2);
 	}
 	free(lpMem);

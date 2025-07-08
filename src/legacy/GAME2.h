@@ -86,7 +86,7 @@ unsigned int sub_452F10(struct576* a1p, int a2);
 int sub_452F50(struct576* a1p, int a2);
 uint32_t* sub_452F80(struct576* a1, int a2);
 int sub_452FA0(int a1);
-int sub_452FE0(int a1, int a2);
+int sub_452FE0(struct576* a1, int a2);
 void sub_453050();
 void nox_xxx____setargv_9_453060();
 int sub_453070();
