@@ -41,7 +41,7 @@ int sub_451CF0(struct576* a1p) {
 		--a1p->field_108;
 		result = sub_4BD710(a1p->field_10[v9]);
 	} else if (v3 & 1) {
-		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109[0] + 1, a1p->field_109[0] = v4, v4 >= *(int*)(v1 + 60))) {
+		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109 + 1, a1p->field_109 = v4, v4 >= *(int*)(v1 + 60))) {
 			result = 0;
 		} else {
 			result = sub_451CA0(a1p);
@@ -139,37 +139,36 @@ int sub_451E80(int a1) {
 
 //----- (00452580) --------------------------------------------------------
 int sub_452580(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	int v1;     // edi
 	int result; // eax
 	int v3;     // eax
 	int v4;     // eax
 	int v5;     // eax
 
-	v1 = a1[9];
+	v1 = (int)a1p->field_9;
 	if (!*(uint32_t*)(v1 + 192)) {
 		return 0;
 	}
-	v3 = a1[75];
-	a1[109] = 0;
+	v3 = a1p->field_75;
+	a1p->field_109 = 0;
 	result = sub_452810(*(uint32_t*)(v1 + 48) + v3, 0);
-	a1[44] = result;
+	a1p->field_44 = result;
 	if (result) {
 		v4 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 76), *(uint32_t*)(v1 + 80),
 											   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1482);
-		sub_486320((uint32_t*)(a1[44] + 48), v4 + 100);
-		sub_4BDB20(a1[44]);
-		*(uint32_t*)(a1[44] + 152) = a1;
-		*(uint32_t*)(a1[44] + 140) = sub_452770;
-		*(uint32_t*)(a1[44] + 144) = sub_4526F0;
-		*(uint32_t*)(a1[44] + 148) = sub_4526D0;
-		a1[7] = 1;
-		*(uint32_t*)(a1[44] + 112) = a1 + 46;
+		sub_486320((uint32_t*)(a1p->field_44 + 48), v4 + 100);
+		sub_4BDB20(a1p->field_44);
+		*(uint32_t*)(a1p->field_44 + 152) = (uint32_t)a1p;
+		*(uint32_t*)(a1p->field_44 + 140) = (uint32_t)sub_452770;
+		*(uint32_t*)(a1p->field_44 + 144) = (uint32_t)sub_4526F0;
+		*(uint32_t*)(a1p->field_44 + 148) = (uint32_t)sub_4526D0;
+		a1p->field_7 = 1;
+		*(uint32_t*)(a1p->field_44 + 112) = (uint32_t)&a1p->field_46;
 		if (*(uint8_t*)(v1 + 4) & 8) {
 			v5 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 68), *(uint32_t*)(v1 + 72),
 												   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1497);
 			if (v5 > 33) {
-				sub_452690((int)a1, v5, 1);
+				sub_452690((int)a1p, v5, 1);
 			}
 		}
 		result = 1;

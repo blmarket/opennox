@@ -1376,7 +1376,8 @@ typedef struct struct576 {
 	uint32_t field_75;      // 75
 	uint32_t field_76[32];  // 76-107
 	uint32_t field_108;     // 108
-	uint32_t field_109[33]; // 109-141
+	uint32_t field_109;     // 109
+	uint32_t field_110[32]; // 110-141
 	uint32_t field_142;     // 142
 	uint32_t field_143;     // 143
 } struct576;
