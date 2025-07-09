@@ -592,3 +592,63 @@ void sub_452050(struct576* a1p) {
 		nox_common_list_append_4258E0((int)&v4[12 * v3], v8);
 	}
 }
+
+//----- (00451BE0) --------------------------------------------------------
+int sub_451BE0(struct576* a1p) {
+	int a1 = a1p;
+	int v1;          // eax
+	int v2;          // edi
+	unsigned int v3; // ebx
+	uint32_t* v4;    // esi
+	int v5;          // eax
+	int v6;          // eax
+	uint32_t* v7;    // ebx
+	int result;      // eax
+	int v9;          // esi
+	uint32_t* v10;   // esi
+
+	v1 = a1;
+	v2 = *(uint32_t*)(a1 + 36);
+	v3 = *(uint32_t*)(a1 + 188) >> 16;
+	v4 = *(uint32_t**)(v2 + 88);
+	if (v4 != (uint32_t*)(v2 + 88)) {
+		do {
+			v5 = (v4[44] >> 16) - v3;
+			if (v5 < 0) {
+				v5 = v3 - (v4[44] >> 16);
+			}
+			if (v5 >= (*(uint32_t*)(v2 + 20) >> 16) / 10) {
+				if (v4[44] >> 16 < v3) {
+					break;
+				}
+			} else {
+				v6 = v4[4];
+				if (*(uint8_t*)(v2 + 4) & 0x10) {
+					if (v6) {
+						break;
+					}
+				} else if (!v6) {
+					break;
+				}
+			}
+			v4 = (uint32_t*)*v4;
+		} while (v4 != (uint32_t*)(v2 + 88));
+		v1 = a1;
+	}
+	v7 = (uint32_t*)(v1 + 12);
+	sub_425770((uint32_t*)(v1 + 12));
+	nox_common_list_append_4258E0((int)v4, v7);
+	result = *(uint32_t*)(v2 + 56);
+	v9 = *(uint32_t*)(v2 + 52) + 1;
+	*(uint32_t*)(v2 + 52) = v9;
+	if (result) {
+		if (v9 > result) {
+			v10 = (uint32_t*)(*(uint32_t*)(v2 + 92) - 12);
+			nox_common_list_remove_425920(*(uint32_t***)(v2 + 92));
+			sub_4523D0(v10);
+			result = *(uint32_t*)(v2 + 52) - 1;
+			*(uint32_t*)(v2 + 52) = result;
+		}
+	}
+	return result;
+}
