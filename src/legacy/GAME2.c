@@ -44,7 +44,6 @@
 #include "common__strman.h"
 #include "operators.h"
 
-#include "client__audio__audevent.h"
 #include "client__video__draw_common.h"
 
 #include "client__system__ctrlevnt.h"
@@ -897,7 +896,6 @@ void sub_4519C0() {
 	*getMemU32Ptr(0x5D4594, 1045448) = 0;
 }
 
-
 //----- (00452010) --------------------------------------------------------
 int sub_452010() {
 	unsigned char* v0; // esi
@@ -917,7 +915,6 @@ int sub_452010() {
 	} while (v1);
 	return ++*getMemU32Ptr(0x5D4594, 1045444);
 }
-
 
 //----- (00452190) --------------------------------------------------------
 void sub_452190(int a1) { nox_common_list_remove_425920((uint32_t**)(a1 + 112)); }

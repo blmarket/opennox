@@ -24,7 +24,7 @@ int sub_452F50(struct576* a1p, int a2);
 uint32_t* sub_452F80(struct576* a1, int a2);
 struct576* nox_xxx_draw_452300(uint32_t* a1);
 struct576* sub_452EB0(nox_drawable_inner3* a1);
-struct576* sub_4BD2E0(uint32_t** a1);
+uint32_t* sub_4BD2E0(uint32_t** a1);
 // private - no access outside of struct576.c
 int sub_451CF0(struct576* a1);
 int sub_451F30(struct576* a1, int a2);

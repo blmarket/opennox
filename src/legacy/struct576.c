@@ -3,8 +3,9 @@
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
-// It holds memory allocation holding 200 elements of struct576. There is 4 byte overhead for each element, to keep
-// track of the next element. i.e. pointer to 200 * (576 + 4) byte array, where first 4 byte points to next element.
+// It holds memory allocation holding 200 elements of struct576. The first 4 bytes points to next free element (or 0 if
+// no remaining free space), and for each elements, first 4 bytes contain pointer to the next free element (or 0 if it's
+// the last element).
 extern uint32_t* dword_5d4594_1045436;
 extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045432;
@@ -460,7 +461,7 @@ int sub_452580(struct576* a1p) {
 }
 
 //----- (004BD2E0) --------------------------------------------------------
-struct576* sub_4BD2E0(uint32_t** a1) {
+uint32_t* sub_4BD2E0(uint32_t** a1) {
 	uint32_t* result; // eax
 	uint32_t* v2;     // edx
 
@@ -553,7 +554,6 @@ int sub_452770(uint32_t* a1) {
 
 //----- (00452050) --------------------------------------------------------
 void sub_452050(struct576* a1p) {
-	uint32_t* a1 = a1p;
 	uint32_t* v1;      // esi
 	int v2;            // edi
 	unsigned int v3;   // ebx
@@ -563,9 +563,9 @@ void sub_452050(struct576* a1p) {
 	uint32_t** v7;     // esi
 	uint32_t* v8;      // esi
 
-	v1 = (uint32_t*)a1[9];
-	v2 = v1[12] + a1[75];
-	v3 = (a1[47] >> 16) / 0x666u;
+	v1 = (uint32_t*)a1p->field_9;
+	v2 = v1[12] + a1p->field_75;
+	v3 = (a1p->timerGroup_46.field_0.field_1 >> 16) / 0x666u;
 	v4 = getMemAt(0x5D4594, 839892 + 120 * v2);
 	if (v1[26] == *getMemU32Ptr(0x5D4594, 1045444)) {
 		result = (uint32_t*)v1[27];
@@ -595,8 +595,6 @@ void sub_452050(struct576* a1p) {
 
 //----- (00451BE0) --------------------------------------------------------
 int sub_451BE0(struct576* a1p) {
-	int a1 = a1p;
-	int v1;          // eax
 	int v2;          // edi
 	unsigned int v3; // ebx
 	uint32_t* v4;    // esi
@@ -607,9 +605,8 @@ int sub_451BE0(struct576* a1p) {
 	int v9;          // esi
 	uint32_t* v10;   // esi
 
-	v1 = a1;
-	v2 = *(uint32_t*)(a1 + 36);
-	v3 = *(uint32_t*)(a1 + 188) >> 16;
+	v2 = a1p->field_9;
+	v3 = (uint32_t)(a1p->timerGroup_46.field_0.field_1) >> 16;
 	v4 = *(uint32_t**)(v2 + 88);
 	if (v4 != (uint32_t*)(v2 + 88)) {
 		do {
@@ -633,10 +630,9 @@ int sub_451BE0(struct576* a1p) {
 			}
 			v4 = (uint32_t*)*v4;
 		} while (v4 != (uint32_t*)(v2 + 88));
-		v1 = a1;
 	}
-	v7 = (uint32_t*)(v1 + 12);
-	sub_425770((uint32_t*)(v1 + 12));
+	v7 = (uint32_t*)&a1p->field_3;
+	sub_425770((uint32_t*)&a1p->field_3);
 	nox_common_list_append_4258E0((int)v4, v7);
 	result = *(uint32_t*)(v2 + 56);
 	v9 = *(uint32_t*)(v2 + 52) + 1;
