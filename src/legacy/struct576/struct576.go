@@ -1,0 +1,76 @@
+package struct576
+
+import (
+	"unsafe"
+
+	"github.com/noxworld-dev/opennox/v1/legacy/timer"
+)
+
+type ListItem struct {
+	next *ListItem
+	prev *ListItem
+	head *ListItem
+}
+
+var _ = [1]struct{}{}[12-unsafe.Sizeof(ListItem{})] // Ensure listItem is 12 bytes
+
+type Struct576 struct {
+	Next         *Struct576 // 0
+	Prev         *Struct576 // 1
+	Head         unsafe.Pointer
+	Field3       uint32
+	Field4       uint32           // 4
+	Field5       uint32           // 5
+	Field6       uint8            // 6
+	Field6_1     uint8            // 6 - stores a1 parameter
+	Field6_2     uint8            // 6 - stores a2 parameter
+	Field6_3     uint8            // 6 - stores a3 parameter
+	Field7       uint32           // 7
+	Field8       uint32           // 8
+	Field9       *uint32          // 9 - stores a1 parameter
+	Field10      [32]uint32       // 10-41
+	Field42      uint32           // 42 - contains length of field_10 array
+	Field43      uint32           // 43
+	Field44      uint32           // 44 - looks like a pointer to some struct
+	Field45      uint32           // 45
+	TimerGroup46 timer.TimerGroup // 46
+	Field70      uint32           // 70 - stores incrementing counter
+	Field71      uint32           // 71
+	Field72      uint64           // 72 - 64 bit
+	Field74      uint32           // 74 - looks like a pointer to some struct
+	Field75      uint32           // 75
+	Field76      [32]uint32       // 76-107
+	Field108     uint32           // 108
+	Field109     uint32           // 109
+	Field110     [32]uint32       // 110-141
+	Field142     uint32           // 142
+	Field143     uint32           // 143
+}
+
+var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})] // Ensure Struct576 is 576 bytes
+
+// Module represents the struct576 module state and operations
+type Module struct {
+	dword_5d4594_1045424 unsafe.Pointer
+	dword_5d4594_1045436 *uint32
+	dword_587000_126996  *uint32
+	dword_5d4594_1045432 *uint32
+	get_list_at_840612   func() *ListItem
+}
+
+// NewModule creates a new struct576 module instance
+func NewModule(
+	dword_5d4594_1045424 unsafe.Pointer,
+	dword_5d4594_1045436 *uint32,
+	dword_587000_126996 *uint32,
+	dword_5d4594_1045432 *uint32,
+	get_list_at_840612 func() *ListItem,
+) *Module {
+	return &Module{
+		dword_5d4594_1045424: dword_5d4594_1045424,
+		dword_5d4594_1045436: dword_5d4594_1045436,
+		dword_587000_126996:  dword_587000_126996,
+		dword_5d4594_1045432: dword_5d4594_1045432,
+		get_list_at_840612:   get_list_at_840612,
+	}
+}
