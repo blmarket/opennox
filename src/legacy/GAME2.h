@@ -80,7 +80,7 @@ void sub_452DC0(int a1, int a2, int a3);
 void sub_452E10(int a1, int a2, int a3);
 void sub_452E90(nox_drawable_inner3* a1, struct576* a2);
 struct576* sub_452EB0(nox_drawable_inner3* a1);
-int sub_452EE0(struct576* a1, int a2);
+void sub_452EE0(struct576* a1, int a2);
 unsigned int sub_452F10(struct576* a1p, int a2);
 int sub_452F50(struct576* a1p, int a2);
 uint32_t* sub_452F80(struct576* a1, int a2);

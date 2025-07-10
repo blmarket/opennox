@@ -92,3 +92,9 @@ func (m *Module) Sub_452F10(a1p *Struct576, a2 int32) uint32 {
 
 	return uint32((163 * v2 * int32(valueAtOffset>>16)) >> 14)
 }
+
+func (m *Module) Sub_452EE0(a1 *Struct576, a2 int32) {
+	v2 := m.Sub_452F10(a1, a2)
+	a1.TimerGroup46.Timers[0].SetRaw(v2)
+	a1.TimerGroup46.Timers[0].Update()
+}

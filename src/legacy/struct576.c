@@ -296,14 +296,14 @@ struct576* sub_452EB0(nox_drawable_inner3* a1) {
 	return result;
 }
 
-//----- (00452EE0) --------------------------------------------------------
-int sub_452EE0(struct576* a1, int a2) {
-	int v2; // eax
+// //----- (00452EE0) --------------------------------------------------------
+// int sub_452EE0(struct576* a1, int a2) {
+// 	int v2; // eax
 
-	v2 = sub_452F10(a1, a2);
-	sub_486320(&a1->timerGroup_46.field_0, v2);
-	return sub_4863B0(&a1->timerGroup_46.field_0);
-}
+// 	v2 = sub_452F10(a1, a2);
+// 	sub_486320(&a1->timerGroup_46.field_0, v2);
+// 	return sub_4863B0(&a1->timerGroup_46.field_0);
+// }
 
 // //----- (00452F10) --------------------------------------------------------
 // unsigned int sub_452F10(struct576* a1p, int a2) {

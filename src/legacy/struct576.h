@@ -19,7 +19,7 @@ int sub_452490(struct576* a1);
 void sub_452510(struct576* a3);
 long long sub_452690(struct576* a3, long long a4, int a5);
 void sub_452E90(nox_drawable_inner3* a1, struct576* a2);
-int sub_452EE0(struct576* a1, int a2);
+void sub_452EE0(struct576* a1, int a2);
 int sub_452F50(struct576* a1p, int a2);
 uint32_t* sub_452F80(struct576* a1, int a2);
 struct576* nox_xxx_draw_452300(uint32_t* a1);
