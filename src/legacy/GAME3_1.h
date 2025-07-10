@@ -21,7 +21,7 @@ void sub_4BD3C0(struct28* lpMem);
 uint32_t* sub_4BD420(int a1, int a2);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int sub_4BD600(int a1);
-int sub_4BD650(int a1);
+void sub_4BD650(int a1);
 int sub_4BD660(int a1);
 int sub_4BD680(int a1);
 int sub_4BD690(int a1);

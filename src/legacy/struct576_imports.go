@@ -8,6 +8,9 @@ extern struct28* dword_5d4594_1045424;
 extern uint32_t* dword_5d4594_1045436;
 extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045432;
+
+uint32_t* sub_4BD470(uint32_t** a1, int a2);
+void sub_4BD650(int a1);
 */
 import "C"
 import (
@@ -35,6 +38,18 @@ func initStruct576() {
 		dword_5d4594_1045432,
 		func() *struct576.ListItem {
 			return memmap.PtrT[struct576.ListItem](0x5D4594, 840612)
+		},
+		func(min, max int, file unsafe.Pointer, line int) int {
+			return nox_common_randomIntMinMax_415FF0(
+				min, max,
+				(*C.char)(file), line,
+			)
+		},
+		func(a1 unsafe.Pointer, a2 int32) unsafe.Pointer {
+			return unsafe.Pointer(C.sub_4BD470((**C.uint32_t)(a1), C.int(a2)))
+		},
+		func(a1 unsafe.Pointer) {
+			C.sub_4BD650((C.int)(uintptr(a1)))
 		},
 	)
 }

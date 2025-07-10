@@ -28,9 +28,9 @@ type Struct576 struct {
 	Field7       uint32           // 7
 	Field8       uint32           // 8
 	Field9       *uint32          // 9 - stores a1 parameter
-	Field10      [32]uint32       // 10-41
-	Field42      uint32           // 42 - contains length of field_10 array
-	Field43      uint32           // 43
+	Field10      [32]uintptr      // 10-41
+	Field42      int32            // 42 - contains length of field_10 array
+	Field43      int32            // 43
 	Field44      uint32           // 44 - looks like a pointer to some struct
 	Field45      uint32           // 45
 	TimerGroup46 timer.TimerGroup // 46
@@ -39,9 +39,9 @@ type Struct576 struct {
 	Field72      uint64           // 72 - 64 bit
 	Field74      uint32           // 74 - looks like a pointer to some struct
 	Field75      uint32           // 75
-	Field76      [32]uint32       // 76-107
-	Field108     uint32           // 108
-	Field109     uint32           // 109
+	Field76      [32]int32        // 76-107
+	Field108     int32            // 108
+	Field109     int32            // 109
 	Field110     [32]uint32       // 110-141
 	Field142     uint32           // 142
 	Field143     uint32           // 143
@@ -51,11 +51,14 @@ var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})] // Ensure Struct576 is 576
 
 // Module represents the struct576 module state and operations
 type Module struct {
-	dword_5d4594_1045424 unsafe.Pointer
-	dword_5d4594_1045436 *uint32
-	dword_587000_126996  *uint32
-	dword_5d4594_1045432 *uint32
-	get_list_at_840612   func() *ListItem
+	dword_5d4594_1045424              unsafe.Pointer
+	dword_5d4594_1045436              *uint32
+	dword_587000_126996               *uint32
+	dword_5d4594_1045432              *uint32
+	get_list_at_840612                func() *ListItem
+	nox_common_randomIntMinMax_415FF0 func(min, max int, file unsafe.Pointer, line int) int
+	sub_4BD470                        func(a1 unsafe.Pointer, a2 int32) unsafe.Pointer
+	sub_4BD650                        func(a1 unsafe.Pointer)
 }
 
 // NewModule creates a new struct576 module instance
@@ -65,13 +68,19 @@ func NewModule(
 	dword_587000_126996 *uint32,
 	dword_5d4594_1045432 *uint32,
 	get_list_at_840612 func() *ListItem,
+	nox_common_randomIntMinMax_415FF0 func(min, max int, file unsafe.Pointer, line int) int,
+	sub_4BD470 func(a1 unsafe.Pointer, a2 int32) unsafe.Pointer,
+	sub_4BD650 func(a1 unsafe.Pointer),
 ) *Module {
 	return &Module{
-		dword_5d4594_1045424: dword_5d4594_1045424,
-		dword_5d4594_1045436: dword_5d4594_1045436,
-		dword_587000_126996:  dword_587000_126996,
-		dword_5d4594_1045432: dword_5d4594_1045432,
-		get_list_at_840612:   get_list_at_840612,
+		dword_5d4594_1045424:              dword_5d4594_1045424,
+		dword_5d4594_1045436:              dword_5d4594_1045436,
+		dword_587000_126996:               dword_587000_126996,
+		dword_5d4594_1045432:              dword_5d4594_1045432,
+		get_list_at_840612:                get_list_at_840612,
+		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
+		sub_4BD470:                        sub_4BD470,
+		sub_4BD650:                        sub_4BD650,
 	}
 }
 
