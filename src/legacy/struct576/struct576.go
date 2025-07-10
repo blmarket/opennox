@@ -98,3 +98,68 @@ func (m *Module) Sub_452EE0(a1 *Struct576, a2 int32) {
 	a1.TimerGroup46.Timers[0].SetRaw(v2)
 	a1.TimerGroup46.Timers[0].Update()
 }
+
+func (m *Module) Sub_452F50(a1p *Struct576, a2 int32) {
+	v2 := m.Sub_452F10(a1p, a2)
+	a1p.TimerGroup46.Timers[0].SetInterp(v2)
+}
+
+// //----- (00452F50) --------------------------------------------------------
+// int sub_452F50(struct576* a1p, int a2) {
+// 	int v2; // eax
+// 	v2 = sub_452F10(a1p, a2);
+// 	return sub_486350(&a1p->timerGroup_46.field_0, v2);
+// }
+
+func (m *Module) Sub_452F80(a1 *Struct576, a2 int32) {
+	v2 := m.sub_452FA0(a2)
+	a1.TimerGroup46.Timers[2].SetRaw(uint32(v2))
+}
+
+// //----- (00452F80) --------------------------------------------------------
+// uint32_t* sub_452F80(struct576* a1, int a2) {
+// 	int v2; // eax
+
+// 	v2 = sub_452FA0(a2);
+// 	return sub_486320(&a1->timerGroup_46.field_16, v2);
+// }
+
+func (m *Module) sub_452FA0(a1 int32) int32 {
+	v1 := a1
+	if a1 <= 50 {
+		if a1 < -50 {
+			v1 = -50
+		}
+	} else {
+		v1 = 50
+	}
+	return (v1*8192)/50 + 8192
+}
+
+// //----- (00452FA0) --------------------------------------------------------
+// int sub_452FA0(int a1) {
+// 	int v1; // eax
+
+// 	v1 = a1;
+// 	if (a1 <= 50) {
+// 		if (a1 < -50) {
+// 			v1 = -50;
+// 		}
+// 	} else {
+// 		v1 = 50;
+// 	}
+// 	return (v1 * 8192) / 50 + 8192;
+// }
+
+func (m *Module) Sub_452FE0(a1p *Struct576, a2 int32) {
+	v2 := m.sub_452FA0(a2)
+	a1p.TimerGroup46.Timers[2].SetInterp(uint32(v2))
+}
+
+// //----- (00452FE0) --------------------------------------------------------
+// int sub_452FE0(struct576* a1p, int a2) {
+// 	int v2; // eax
+
+// 	v2 = sub_452FA0(a2);
+// 	return sub_486350(&a1p->timerGroup_46.field_16, v2);
+// }

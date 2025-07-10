@@ -20,7 +20,6 @@ int sub_4526D0(int a1);
 int sub_4526F0(int a1);
 int sub_4BDB20(int a1);
 int sub_4BD710(int a1);
-int sub_452FA0(int a1);
 int sub_486350(/* timer* */ void* a1, int a2);
 int sub_4863B0(/* timer* */ void* a2);
 void* sub_486320(/* timer* */ void* a1, int a2);
@@ -320,21 +319,21 @@ struct576* sub_452EB0(nox_drawable_inner3* a1) {
 // 	return (unsigned int)(163 * v2 * (*(uint32_t*)((uint32_t)a1p->field_9 + 20) >> 16)) >> 14;
 // }
 
-//----- (00452F50) --------------------------------------------------------
-int sub_452F50(struct576* a1p, int a2) {
-	int v2; // eax
+// //----- (00452F50) --------------------------------------------------------
+// int sub_452F50(struct576* a1p, int a2) {
+// 	int v2; // eax
 
-	v2 = sub_452F10(a1p, a2);
-	return sub_486350(&a1p->timerGroup_46.field_0, v2);
-}
+// 	v2 = sub_452F10(a1p, a2);
+// 	return sub_486350(&a1p->timerGroup_46.field_0, v2);
+// }
 
-//----- (00452F80) --------------------------------------------------------
-uint32_t* sub_452F80(struct576* a1, int a2) {
-	int v2; // eax
+// //----- (00452F80) --------------------------------------------------------
+// uint32_t* sub_452F80(struct576* a1, int a2) {
+// 	int v2; // eax
 
-	v2 = sub_452FA0(a2);
-	return sub_486320(&a1->timerGroup_46.field_16, v2);
-}
+// 	v2 = sub_452FA0(a2);
+// 	return sub_486320(&a1->timerGroup_46.field_16, v2);
+// }
 
 //----- (00451CF0) --------------------------------------------------------
 int sub_451CF0(struct576* a1p) {

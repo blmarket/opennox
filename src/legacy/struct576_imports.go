@@ -48,3 +48,18 @@ func sub_452F10(a1p *C.struct576, a2 int32) uint32 {
 func sub_452EE0(a1p *C.struct576, a2 int32) {
 	Struct576Module.Sub_452EE0((*struct576.Struct576)(unsafe.Pointer(a1p)), a2)
 }
+
+//export sub_452F50
+func sub_452F50(a1p *C.struct576, a2 int32) {
+	Struct576Module.Sub_452F50((*struct576.Struct576)(unsafe.Pointer(a1p)), a2)
+}
+
+//export sub_452F80
+func sub_452F80(a1 *C.struct576, a2 int32) {
+	Struct576Module.Sub_452F80((*struct576.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export sub_452FE0
+func sub_452FE0(a1 *C.struct576, a2 int32) {
+	Struct576Module.Sub_452FE0((*struct576.Struct576)(unsafe.Pointer(a1)), a2)
+}
