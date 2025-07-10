@@ -460,20 +460,6 @@ int sub_452580(struct576* a1p) {
 	return result;
 }
 
-//----- (004BD2E0) --------------------------------------------------------
-uint32_t* sub_4BD2E0(uint32_t** a1) {
-	uint32_t* result; // eax
-	uint32_t* v2;     // edx
-
-	result = *a1;
-	if (*a1) {
-		v2 = (uint32_t*)*result;
-		++result;
-		*a1 = v2;
-	}
-	return result;
-}
-
 //----- (00451E80) --------------------------------------------------------
 int sub_451E80(struct576* a1p) {
 	int a1 = a1p;

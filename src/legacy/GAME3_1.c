@@ -438,7 +438,34 @@ uint32_t* sub_4BD280(int a1, int a2) {
 //----- (004BD2D0) --------------------------------------------------------
 void sub_4BD2D0(void* lpMem) { free(lpMem); }
 
+// Preallocated items
+// pseudo code:
+// struct FreeList<class T, int N> {
+//   struct Element<T> {
+//	   Element<T>* next; // nullptr if it's the last element
+//     T data;
+//   }
+//   Element<T>* head; // points to the first free element.
+//   Element<T> elements[N];
+// }
+
+//----- (004BD2E0) --------------------------------------------------------
+// Get one element from the struct.
+uint32_t* sub_4BD2E0(uint32_t** a1) {
+	uint32_t* result; // eax
+	uint32_t* v2;     // edx
+
+	result = *a1;
+	if (*a1) {
+		v2 = (uint32_t*)*result;
+		++result;
+		*a1 = v2;
+	}
+	return result;
+}
+
 //----- (004BD300) --------------------------------------------------------
+// Free one element back to the list.
 int sub_4BD300(uint32_t* a1, int a2) {
 	int result; // eax
 
