@@ -38,3 +38,8 @@ func initStruct576() {
 		},
 	)
 }
+
+//export sub_452F10
+func sub_452F10(a1p *C.struct576, a2 int32) uint32 {
+	return Struct576Module.Sub_452F10((*struct576.Struct576)(unsafe.Pointer(a1p)), a2)
+}

@@ -74,3 +74,21 @@ func NewModule(
 		get_list_at_840612:   get_list_at_840612,
 	}
 }
+
+func (m *Module) Sub_452F10(a1p *Struct576, a2 int32) uint32 {
+	v2 := a2
+	if a2 <= 100 {
+		if a2 < 0 {
+			v2 = 0
+		}
+	} else {
+		v2 = 100
+	}
+
+	// Access field_9 + 20 bytes offset
+	// field_9 is a pointer to uint32, so we need to get the value at offset 20/4 = 5 uint32s
+	field9Ptr := uintptr(unsafe.Pointer(a1p.Field9))
+	valueAtOffset := *(*uint32)(unsafe.Pointer(field9Ptr + 20))
+
+	return uint32((163 * v2 * int32(valueAtOffset>>16)) >> 14)
+}

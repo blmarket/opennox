@@ -305,20 +305,20 @@ int sub_452EE0(struct576* a1, int a2) {
 	return sub_4863B0(&a1->timerGroup_46.field_0);
 }
 
-//----- (00452F10) --------------------------------------------------------
-unsigned int sub_452F10(struct576* a1p, int a2) {
-	int v2; // ecx
+// //----- (00452F10) --------------------------------------------------------
+// unsigned int sub_452F10(struct576* a1p, int a2) {
+// 	int v2; // ecx
 
-	v2 = a2;
-	if (a2 <= 100) {
-		if (a2 < 0) {
-			v2 = 0;
-		}
-	} else {
-		v2 = 100;
-	}
-	return (unsigned int)(163 * v2 * (*(uint32_t*)((uint32_t)a1p->field_9 + 20) >> 16)) >> 14;
-}
+// 	v2 = a2;
+// 	if (a2 <= 100) {
+// 		if (a2 < 0) {
+// 			v2 = 0;
+// 		}
+// 	} else {
+// 		v2 = 100;
+// 	}
+// 	return (unsigned int)(163 * v2 * (*(uint32_t*)((uint32_t)a1p->field_9 + 20) >> 16)) >> 14;
+// }
 
 //----- (00452F50) --------------------------------------------------------
 int sub_452F50(struct576* a1p, int a2) {
