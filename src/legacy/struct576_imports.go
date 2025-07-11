@@ -106,3 +106,13 @@ func sub_451CA0(a1p *C.struct576) int32 {
 func sub_451CF0(a1p *C.struct576) int32 {
 	return Struct576Module.Sub_451CF0((*struct576.Struct576)(unsafe.Pointer(a1p)))
 }
+
+//export sub_451E80
+func sub_451E80(a1p *C.struct576) int32 {
+	return Struct576Module.Sub_451E80((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}
+
+//export sub_451DC0
+func sub_451DC0(a1p *C.struct576) {
+	Struct576Module.Sub_451DC0((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}

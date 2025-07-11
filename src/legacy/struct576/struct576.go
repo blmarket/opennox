@@ -379,3 +379,192 @@ func (m *Module) Sub_451CF0(a1p *Struct576) int32 {
 // 	}
 // 	return result;
 // }
+
+func (m *Module) Sub_451DC0(a1p *Struct576) {
+	v1 := a1p.Field9
+	result := a1p.Field42
+
+	// Access v1[1] - field_9 is *uint32, so v1[1] is at offset 4 bytes
+	field9Ptr := uintptr(unsafe.Pointer(v1))
+	v3 := *(*uint32)(unsafe.Pointer(field9Ptr + 4))
+
+	if result != 0 {
+		// Access v1[17] - at offset 17*4 = 68 bytes
+		v1_17 := *(*uint32)(unsafe.Pointer(field9Ptr + 68))
+		if v1_17 < 0x21 {
+			return
+		}
+		m.Sub_451F90(a1p)
+	}
+
+	if v3&4 != 0 {
+		// Access v1[17] again
+		v1_17 := *(*uint32)(unsafe.Pointer(field9Ptr + 68))
+		if v1_17 >= 0x21 {
+			v5 := m.Sub_451E80(a1p)
+			result = m.Sub_451F30(a1p, v5)
+		} else {
+			// Access v1[48] - at offset 48*4 = 192 bytes
+			v1_48 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
+			result = int32(v1_48)
+			for i := int32(0); i < result; i++ {
+				m.Sub_451F30(a1p, i)
+				// Re-read v1[48] in case it changed
+				result = int32(*(*uint32)(unsafe.Pointer(field9Ptr + 192)))
+			}
+		}
+	} else if v3&2 != 0 {
+		// Access v1[48] for random range
+		v1_48 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
+		v6 := m.nox_common_randomIntMinMax_415FF0(0, int(v1_48-1), nil, 536)
+		result = m.Sub_451F30(a1p, int32(v6))
+	} else {
+		result = m.Sub_451F30(a1p, 0)
+	}
+}
+
+// //----- (00451DC0) --------------------------------------------------------
+// int sub_451DC0(struct576* a1p) {
+// 	uint32_t* v1; // esi
+// 	int result;   // eax
+// 	int v3;       // ebx
+// 	int i;        // edi
+// 	int v5;       // eax
+// 	int v6;       // eax
+
+// 	v1 = a1p->field_9;
+// 	result = a1p->field_42;
+// 	v3 = v1[1];
+// 	if (result) {
+// 		if (v1[17] < 0x21u) {
+// 			return result;
+// 		}
+// 		sub_451F90(a1p);
+// 	}
+// 	if (v3 & 4) {
+// 		if (v1[17] >= 0x21u) {
+// 			v5 = sub_451E80(a1p);
+// 			result = sub_451F30(a1p, v5);
+// 		} else {
+// 			result = v1[48];
+// 			for (i = 0; i < result; ++i) {
+// 				sub_451F30(a1p, i);
+// 				result = v1[48];
+// 			}
+// 		}
+// 	} else if (v3 & 2) {
+// 		v6 = nox_common_randomIntMinMax_415FF0(0, v1[48] - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 536);
+// 		result = sub_451F30(a1p, v6);
+// 	} else {
+// 		result = sub_451F30(a1p, 0);
+// 	}
+// 	return result;
+// }
+
+func (m *Module) Sub_451E80(a1p *Struct576) int32 {
+	// v1 = *(uint32_t*)(a1 + 36) - offset 36 corresponds to Field9
+	v1 := a1p.Field9
+	field9Ptr := uintptr(unsafe.Pointer(v1))
+
+	// v2 = *(uint32_t*)(v1 + 4) - access v1[1]
+	v2 := *(*uint32)(unsafe.Pointer(field9Ptr + 4))
+
+	// if (*(int*)(a1 + 568) <= 0) - offset 568 corresponds to Field142 (568/4 = 142)
+	if a1p.Field142 <= 0 {
+		// v3 = *(uint32_t*)(v1 + 192) - access v1[48] (192/4 = 48)
+		v3 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
+		v4 := uint32(0)
+
+		// *(uint32_t*)(a1 + 568) = v3
+		a1p.Field142 = v3
+
+		if v3 > 0 {
+			// v5 = a1 + 440 - offset 440 corresponds to Field110 (440/4 = 110)
+			for v4 < v3 {
+				// v6 = v3 - v4++ - 1
+				v6 := v3 - v4 - 1
+				// *(uint32_t*)(v5 - 4) = v6 - store in Field110[v4]
+				a1p.Field110[v4] = v6
+				v4++
+				// v3 = *(uint32_t*)(a1 + 568) - reload Field142
+				v3 = a1p.Field142
+			}
+		}
+	}
+
+	// v7 = *(uint32_t*)(a1 + 568) - 1
+	v7 := a1p.Field142 - 1
+	// *(uint32_t*)(a1 + 568) = v7
+	a1p.Field142 = v7
+
+	if (v2 & 2) == 0 {
+		// return *(uint32_t*)(a1 + 4 * v7 + 440) - return Field110[v7]
+		return int32(a1p.Field110[v7])
+	}
+
+	// Random selection mode
+	v8 := m.nox_common_randomIntMinMax_415FF0(0, int(v7), nil, 431)
+	// v9 = *(uint32_t*)(a1 + 4 * v8 + 440) - get Field110[v8]
+	v9 := a1p.Field110[v8]
+	v10 := int32(v8)
+
+	// Shift remaining elements in Field110 array
+	if v8 < int(a1p.Field142) {
+		for v10 < int32(a1p.Field142) {
+			a1p.Field110[v10] = a1p.Field110[v10+1]
+			v10++
+		}
+	}
+
+	return int32(v9)
+}
+
+// //----- (00451E80) --------------------------------------------------------
+// int sub_451E80(struct576* a1p) {
+// 	int a1 = a1p;
+// 	int v1;        // eax
+// 	int v2;        // ebx
+// 	int v3;        // eax
+// 	int v4;        // ecx
+// 	int v5;        // edx
+// 	int v6;        // eax
+// 	int v7;        // edx
+// 	int v8;        // eax
+// 	int v9;        // edi
+// 	int v10;       // ecx
+// 	uint32_t* v11; // eax
+
+// 	v1 = *(uint32_t*)(a1 + 36);
+// 	v2 = *(uint32_t*)(v1 + 4);
+// 	if (*(int*)(a1 + 568) <= 0) {
+// 		v3 = *(uint32_t*)(v1 + 192);
+// 		v4 = 0;
+// 		*(uint32_t*)(a1 + 568) = v3;
+// 		if (v3 > 0) {
+// 			v5 = a1 + 440;
+// 			do {
+// 				v5 += 4;
+// 				v6 = v3 - v4++ - 1;
+// 				*(uint32_t*)(v5 - 4) = v6;
+// 				v3 = *(uint32_t*)(a1 + 568);
+// 			} while (v4 < v3);
+// 		}
+// 	}
+// 	v7 = *(uint32_t*)(a1 + 568) - 1;
+// 	*(uint32_t*)(a1 + 568) = v7;
+// 	if (!(v2 & 2)) {
+// 		return *(uint32_t*)(a1 + 4 * v7 + 440);
+// 	}
+// 	v8 = nox_common_randomIntMinMax_415FF0(0, v7, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 431);
+// 	v9 = *(uint32_t*)(a1 + 4 * v8 + 440);
+// 	v10 = v8;
+// 	if (v8 < *(int*)(a1 + 568)) {
+// 		v11 = (uint32_t*)(a1 + 4 * v8 + 440);
+// 		do {
+// 			++v10;
+// 			*v11 = v11[1];
+// 			++v11;
+// 		} while (v10 < *(int*)(a1 + 568));
+// 	}
+// 	return v9;
+// }
