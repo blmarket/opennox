@@ -51,7 +51,7 @@ int sub_451920(uint32_t* a2);
 void sub_451970();
 int sub_451BE0(struct576* a1);
 int sub_451CA0(struct576* a1);
-int sub_451F90(struct576* a1);
+void sub_451F90(struct576* a1);
 int sub_451FE0(struct576* a1);
 int sub_452010();
 bool sub_452120(struct576* a1);

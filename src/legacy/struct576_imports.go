@@ -11,6 +11,8 @@ extern uint32_t dword_5d4594_1045432;
 
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 void sub_4BD650(int a1);
+int sub_4BD660(int a1);
+int sub_4BD710(int a1);
 */
 import "C"
 import (
@@ -51,6 +53,12 @@ func initStruct576() {
 		func(a1 unsafe.Pointer) {
 			C.sub_4BD650((C.int)(uintptr(a1)))
 		},
+		func(a1 unsafe.Pointer) {
+			C.sub_4BD660((C.int)(uintptr(a1)))
+		},
+		func(a1 unsafe.Pointer) int32 {
+			return int32(C.sub_4BD710((C.int)(uintptr(a1))))
+		},
 	)
 }
 
@@ -82,4 +90,19 @@ func sub_452FE0(a1 *C.struct576, a2 int32) {
 //export sub_451F30
 func sub_451F30(a1p *C.struct576, a2 int32) {
 	Struct576Module.Sub_451F30((*struct576.Struct576)(unsafe.Pointer(a1p)), a2)
+}
+
+//export sub_451F90
+func sub_451F90(a1p *C.struct576) {
+	Struct576Module.Sub_451F90((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}
+
+//export sub_451CA0
+func sub_451CA0(a1p *C.struct576) int32 {
+	return Struct576Module.Sub_451CA0((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}
+
+//export sub_451CF0
+func sub_451CF0(a1p *C.struct576) int32 {
+	return Struct576Module.Sub_451CF0((*struct576.Struct576)(unsafe.Pointer(a1p)))
 }

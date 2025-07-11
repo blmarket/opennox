@@ -38,28 +38,28 @@ int sub_4BD660(int a1);
 int sub_4BD650(int a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 
-//----- (00451CA0) --------------------------------------------------------
-int sub_451CA0(struct576* a1p) {
-	int v1;       // ecx
-	int v3;       // eax
-	uint32_t* v4; // ecx
+// //----- (00451CA0) --------------------------------------------------------
+// int sub_451CA0(struct576* a1p) {
+// 	int v1;       // ecx
+// 	int v3;       // eax
+// 	uint32_t* v4; // ecx
 
-	v1 = a1p->field_42;
-	a1p->field_108 = v1;
-	if (!v1) {
-		return 0;
-	}
-	v3 = 0;
-	if (v1 > 0) {
-		v4 = a1p->field_76;
-		do {
-			*v4 = v3++;
-			++v4;
-		} while (v3 < a1p->field_108);
-	}
-	a1p->field_43 = -1;
-	return sub_451CF0(a1p);
-}
+// 	v1 = a1p->field_42;
+// 	a1p->field_108 = v1;
+// 	if (!v1) {
+// 		return 0;
+// 	}
+// 	v3 = 0;
+// 	if (v1 > 0) {
+// 		v4 = a1p->field_76;
+// 		do {
+// 			*v4 = v3++;
+// 			++v4;
+// 		} while (v3 < a1p->field_108);
+// 	}
+// 	a1p->field_43 = -1;
+// 	return sub_451CF0(a1p);
+// }
 
 // //----- (00451F30) --------------------------------------------------------
 // int sub_451F30(struct576* a1p, int a2) {
@@ -80,29 +80,29 @@ int sub_451CA0(struct576* a1p) {
 // 	return result;
 // }
 
-//----- (00451F90) --------------------------------------------------------
-int sub_451F90(struct576* a1p) {
-	int v1;     // edi
-	int result; // eax
-	int* v3;    // esi
+// //----- (00451F90) --------------------------------------------------------
+// int sub_451F90(struct576* a1p) {
+// 	int v1;     // edi
+// 	int result; // eax
+// 	int* v3;    // esi
 
-	v1 = 0;
-	result = a1p->field_42;
-	if (result <= 0) {
-		a1p->field_42 = 0;
-	} else {
-		v3 = a1p->field_10;
-		do {
-			sub_4BD660(v3[0]);
-			v3[0] = 0;
-			result = a1p->field_42;
-			++v1;
-			++v3;
-		} while (v1 < result);
-		a1p->field_42 = 0;
-	}
-	return result;
-}
+// 	v1 = 0;
+// 	result = a1p->field_42;
+// 	if (result <= 0) {
+// 		a1p->field_42 = 0;
+// 	} else {
+// 		v3 = a1p->field_10;
+// 		do {
+// 			sub_4BD660(v3[0]);
+// 			v3[0] = 0;
+// 			result = a1p->field_42;
+// 			++v1;
+// 			++v3;
+// 		} while (v1 < result);
+// 		a1p->field_42 = 0;
+// 	}
+// 	return result;
+// }
 
 //----- (00451FE0) --------------------------------------------------------
 int sub_451FE0(struct576* a1p) {
@@ -338,50 +338,50 @@ struct576* sub_452EB0(nox_drawable_inner3* a1) {
 // 	return sub_486320(&a1->timerGroup_46.field_16, v2);
 // }
 
-//----- (00451CF0) --------------------------------------------------------
-int sub_451CF0(struct576* a1p) {
-	int v1;       // ecx
-	int result;   // eax
-	int v3;       // edx
-	int v4;       // edi
-	int v5;       // eax
-	int v6;       // edi
-	int v7;       // ecx
-	uint32_t* v8; // eax
-	int v9;       // eax
+// //----- (00451CF0) --------------------------------------------------------
+// int sub_451CF0(struct576* a1p) {
+// 	int v1;       // ecx
+// 	int result;   // eax
+// 	int v3;       // edx
+// 	int v4;       // edi
+// 	int v5;       // eax
+// 	int v6;       // edi
+// 	int v7;       // ecx
+// 	uint32_t* v8; // eax
+// 	int v9;       // eax
 
-	v1 = (int)a1p->field_9;
-	result = a1p->field_108;
-	v3 = *(uint32_t*)(v1 + 4);
-	if (result) {
-		if (v3 & 2) {
-			v5 = nox_common_randomIntMinMax_415FF0(0, result - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 376);
-			v6 = a1p->field_108 - 1;
-			a1p->field_43 = a1p->field_76[v5];
-			v7 = v5;
-			if (v5 < v6) {
-				v8 = &a1p->field_76[v5];
-				do {
-					++v7;
-					*v8 = v8[1];
-					++v8;
-				} while (v7 < a1p->field_108 - 1);
-			}
-		} else {
-			++a1p->field_43;
-		}
-		v9 = a1p->field_43;
-		--a1p->field_108;
-		result = sub_4BD710(a1p->field_10[v9]);
-	} else if (v3 & 1) {
-		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109 + 1, a1p->field_109 = v4, v4 >= *(int*)(v1 + 60))) {
-			result = 0;
-		} else {
-			result = sub_451CA0(a1p);
-		}
-	}
-	return result;
-}
+// 	v1 = (int)a1p->field_9;
+// 	result = a1p->field_108;
+// 	v3 = *(uint32_t*)(v1 + 4);
+// 	if (result) {
+// 		if (v3 & 2) {
+// 			v5 = nox_common_randomIntMinMax_415FF0(0, result - 1, "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 376);
+// 			v6 = a1p->field_108 - 1;
+// 			a1p->field_43 = a1p->field_76[v5];
+// 			v7 = v5;
+// 			if (v5 < v6) {
+// 				v8 = &a1p->field_76[v5];
+// 				do {
+// 					++v7;
+// 					*v8 = v8[1];
+// 					++v8;
+// 				} while (v7 < a1p->field_108 - 1);
+// 			}
+// 		} else {
+// 			++a1p->field_43;
+// 		}
+// 		v9 = a1p->field_43;
+// 		--a1p->field_108;
+// 		result = sub_4BD710(a1p->field_10[v9]);
+// 	} else if (v3 & 1) {
+// 		if (*(uint32_t*)(v1 + 60) && (v4 = a1p->field_109 + 1, a1p->field_109 = v4, v4 >= *(int*)(v1 + 60))) {
+// 			result = 0;
+// 		} else {
+// 			result = sub_451CA0(a1p);
+// 		}
+// 	}
+// 	return result;
+// }
 
 //----- (00451DC0) --------------------------------------------------------
 int sub_451DC0(struct576* a1p) {
