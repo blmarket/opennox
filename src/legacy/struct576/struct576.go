@@ -51,8 +51,8 @@ var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})] // Ensure Struct576 is 576
 
 // Module represents the struct576 module state and operations
 type Module struct {
-	dword_5d4594_1045424              unsafe.Pointer
-	dword_5d4594_1045436              *uint32
+	dword_5d4594_1045424              *unsafe.Pointer
+	dword_5d4594_1045436              *unsafe.Pointer
 	dword_587000_126996               *uint32
 	dword_5d4594_1045432              *uint32
 	get_list_at_840612                func() *ListItem
@@ -63,8 +63,8 @@ type Module struct {
 
 // NewModule creates a new struct576 module instance
 func NewModule(
-	dword_5d4594_1045424 unsafe.Pointer,
-	dword_5d4594_1045436 *uint32,
+	dword_5d4594_1045424 *unsafe.Pointer,
+	dword_5d4594_1045436 *unsafe.Pointer,
 	dword_587000_126996 *uint32,
 	dword_5d4594_1045432 *uint32,
 	get_list_at_840612 func() *ListItem,
@@ -171,4 +171,42 @@ func (m *Module) Sub_452FE0(a1p *Struct576, a2 int32) {
 
 // 	v2 = sub_452FA0(a2);
 // 	return sub_486350(&a1p->timerGroup_46.field_16, v2);
+// }
+
+func (m *Module) Sub_451F30(a1p *Struct576, a2 int32) int32 {
+	// Calculate offset into field_9: field_9 + 2 * a2 + 128
+	// field_9 is *uint32, so we work with 16-bit values (int16)
+	field9Ptr := uintptr(unsafe.Pointer(a1p.Field9))
+	offsetPtr := unsafe.Pointer(field9Ptr + uintptr(2*a2+128))
+	value := *(*int16)(offsetPtr)
+
+	// Call sub_4BD470 and store result in field_10[field_42]
+	a1p.Field10[a1p.Field42] = uintptr(m.sub_4BD470(*m.dword_5d4594_1045424, int32(value)))
+
+	v2 := a1p.Field42
+	result := a1p.Field10[v2]
+
+	if result != 0 {
+		m.sub_4BD650(unsafe.Pointer(result))
+		result = uintptr(a1p.Field42 + 1)
+		a1p.Field42 = a1p.Field42 + 1
+	}
+
+	return int32(result)
+}
+
+// //----- (00451F30) --------------------------------------------------------
+// int sub_451F30(struct576* a1p, int a2) {
+//     int v2;     // edx
+//     int result; // eax
+
+//     a1p->field_10[a1p->field_42] = sub_4BD470(dword_5d4594_1045424, *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
+//     v2 = a1p->field_42;
+//     result = a1p->field_10[v2];
+//     if (result) {
+//         sub_4BD650(a1p->field_10[v2]);
+//         result = a1p->field_42 + 1;
+//         a1p->field_42 = result;
+//     }
+//     return result;
 // }

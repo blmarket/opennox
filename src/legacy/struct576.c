@@ -1,5 +1,6 @@
 #include "struct576.h"
 #include "memmap.h"
+#include <stdio.h>
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
@@ -60,22 +61,24 @@ int sub_451CA0(struct576* a1p) {
 	return sub_451CF0(a1p);
 }
 
-//----- (00451F30) --------------------------------------------------------
-int sub_451F30(struct576* a1p, int a2) {
-	int v2;     // edx
-	int result; // eax
+// //----- (00451F30) --------------------------------------------------------
+// int sub_451F30(struct576* a1p, int a2) {
+// 	int v2;     // edx
+// 	int result; // eax
 
-	a1p->field_10[a1p->field_42] =
-		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
-	v2 = a1p->field_42;
-	result = a1p->field_10[v2];
-	if (result) {
-		sub_4BD650(a1p->field_10[v2]);
-		result = a1p->field_42 + 1;
-		a1p->field_42 = result;
-	}
-	return result;
-}
+// 	// printf("Sub_4BD470 %p %p %d\n", dword_5d4594_1045424, &dword_5d4594_1045424->field_0,
+// 	// 	   *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
+// 	a1p->field_10[a1p->field_42] =
+// 		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
+// 	v2 = a1p->field_42;
+// 	result = a1p->field_10[v2];
+// 	if (result) {
+// 		sub_4BD650(a1p->field_10[v2]);
+// 		result = a1p->field_42 + 1;
+// 		a1p->field_42 = result;
+// 	}
+// 	return result;
+// }
 
 //----- (00451F90) --------------------------------------------------------
 int sub_451F90(struct576* a1p) {

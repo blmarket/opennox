@@ -26,10 +26,10 @@ var (
 
 func initStruct576() {
 	var (
-		dword_5d4594_1045424 unsafe.Pointer = unsafe.Pointer(&C.dword_5d4594_1045424)
-		dword_5d4594_1045436 *uint32        = (*uint32)(unsafe.Pointer(&C.dword_5d4594_1045436))
-		dword_587000_126996  *uint32        = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045432 *uint32        = (*uint32)(&C.dword_5d4594_1045432)
+		dword_5d4594_1045424 *unsafe.Pointer = (*unsafe.Pointer)(unsafe.Pointer(&C.dword_5d4594_1045424))
+		dword_5d4594_1045436 *unsafe.Pointer = (*unsafe.Pointer)(unsafe.Pointer(&C.dword_5d4594_1045436))
+		dword_587000_126996  *uint32         = (*uint32)(&C.dword_587000_126996)
+		dword_5d4594_1045432 *uint32         = (*uint32)(&C.dword_5d4594_1045432)
 	)
 	Struct576Module = struct576.NewModule(
 		dword_5d4594_1045424,
@@ -77,4 +77,9 @@ func sub_452F80(a1 *C.struct576, a2 int32) {
 //export sub_452FE0
 func sub_452FE0(a1 *C.struct576, a2 int32) {
 	Struct576Module.Sub_452FE0((*struct576.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export sub_451F30
+func sub_451F30(a1p *C.struct576, a2 int32) {
+	Struct576Module.Sub_451F30((*struct576.Struct576)(unsafe.Pointer(a1p)), a2)
 }
