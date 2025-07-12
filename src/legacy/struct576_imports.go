@@ -13,6 +13,8 @@ uint32_t* sub_4BD470(uint32_t** a1, int a2);
 void sub_4BD650(int a1);
 int sub_4BD660(int a1);
 int sub_4BD710(int a1);
+int sub_4BDA80(int a1);
+int sub_4BDB30(int a1);
 */
 import "C"
 import (
@@ -58,6 +60,12 @@ func initStruct576() {
 		},
 		func(a1 unsafe.Pointer) int32 {
 			return int32(C.sub_4BD710((C.int)(uintptr(a1))))
+		},
+		func(a1 unsafe.Pointer) int32 {
+			return int32(C.sub_4BDA80((C.int)(uintptr(a1))))
+		},
+		func(a1 unsafe.Pointer) int32 {
+			return int32(C.sub_4BDB30((C.int)(uintptr(a1))))
 		},
 	)
 }
@@ -115,4 +123,9 @@ func sub_451E80(a1p *C.struct576) int32 {
 //export sub_451DC0
 func sub_451DC0(a1p *C.struct576) {
 	Struct576Module.Sub_451DC0((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}
+
+//export sub_4523D0
+func sub_4523D0(a1p *C.struct576) int32 {
+	return Struct576Module.Sub_4523D0((*struct576.Struct576)(unsafe.Pointer(a1p)))
 }

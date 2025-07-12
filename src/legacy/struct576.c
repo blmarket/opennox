@@ -141,40 +141,7 @@ bool sub_452120(struct576* a1p) {
 	return (result != 0);
 }
 
-//----- (004523D0) --------------------------------------------------------
-int sub_4523D0(struct576* a1p) {
-	int result = 0; // eax
 
-	if (!(a1p->field_6 & 1)) {
-		sub_452410(a1p);
-		sub_451F90(a1p);
-		a1p->field_7 = 4;
-		a1p->field_70 = 0;
-		a1p->field_6 |= 1;
-	}
-	return result;
-}
-
-//----- (00452410) --------------------------------------------------------
-int sub_452410(struct576* a1p) {
-	int result; // eax
-
-	result = a1p->field_44;
-	if (result && a1p == *(uint32_t*)(result + 152)) {
-		if (a1p->field_6 & 2) {
-			sub_4BDA80(a1p->field_44);
-		}
-		sub_4BDB30(a1p->field_44);
-		*(uint32_t*)(a1p->field_44 + 152) = 0;
-		*(uint32_t*)(a1p->field_44 + 148) = 0;
-		result = a1p->field_44;
-		*(uint32_t*)(result + 140) = 0;
-		*(uint32_t*)(a1p->field_44 + 144) = 0;
-		*(uint32_t*)(a1p->field_44 + 112) = 0;
-		a1p->field_44 = 0;
-	}
-	return result;
-}
 
 //----- (00452490) --------------------------------------------------------
 int sub_452490(struct576* a1p) {

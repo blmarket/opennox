@@ -61,6 +61,8 @@ type Module struct {
 	sub_4BD650                        func(a1 unsafe.Pointer)
 	sub_4BD660                        func(a1 unsafe.Pointer)
 	sub_4BD710                        func(a1 unsafe.Pointer) int32
+	sub_4BDA80                        func(a1 unsafe.Pointer) int32
+	sub_4BDB30                        func(a1 unsafe.Pointer) int32
 }
 
 // NewModule creates a new struct576 module instance
@@ -75,6 +77,8 @@ func NewModule(
 	sub_4BD650 func(a1 unsafe.Pointer),
 	sub_4BD660 func(a1 unsafe.Pointer),
 	sub_4BD710 func(a1 unsafe.Pointer) int32,
+	sub_4BDA80 func(a1 unsafe.Pointer) int32,
+	sub_4BDB30 func(a1 unsafe.Pointer) int32,
 ) *Module {
 	return &Module{
 		dword_5d4594_1045424:              dword_5d4594_1045424,
@@ -87,6 +91,8 @@ func NewModule(
 		sub_4BD650:                        sub_4BD650,
 		sub_4BD660:                        sub_4BD660,
 		sub_4BD710:                        sub_4BD710,
+		sub_4BDA80:                        sub_4BDA80,
+		sub_4BDB30:                        sub_4BDB30,
 	}
 }
 
@@ -568,3 +574,32 @@ func (m *Module) Sub_451E80(a1p *Struct576) int32 {
 // 	}
 // 	return v9;
 // }
+
+func (m *Module) Sub_4523D0(a1p *Struct576) int32 {
+	if (a1p.Field6 & 1) == 0 {
+		m.sub_452410(a1p)
+		m.Sub_451F90(a1p)
+		a1p.Field7 = 4
+		a1p.Field70 = 0
+		a1p.Field6 |= 1
+	}
+	return 0
+}
+
+func (m *Module) sub_452410(a1p *Struct576) int32 {
+	result := a1p.Field44
+	if result != 0 && a1p == (*Struct576)(unsafe.Pointer(uintptr(result)+152)) {
+		if (a1p.Field6 & 2) != 0 {
+			m.sub_4BDA80(unsafe.Pointer(uintptr(a1p.Field44)))
+		}
+		m.sub_4BDB30(unsafe.Pointer(uintptr(a1p.Field44)))
+
+		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 152)) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 148)) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 140)) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 144)) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 112)) = 0
+		a1p.Field44 = 0
+	}
+	return int32(result)
+}
