@@ -63,6 +63,8 @@ type Module struct {
 	sub_4BD710                        func(a1 unsafe.Pointer) int32
 	sub_4BDA80                        func(a1 unsafe.Pointer) int32
 	sub_4BDB30                        func(a1 unsafe.Pointer) int32
+	nox_common_list_remove_425920     func(a1 unsafe.Pointer)
+	sub_4BD300                        func(a1 unsafe.Pointer, a2 unsafe.Pointer) int32
 }
 
 // NewModule creates a new struct576 module instance
@@ -79,6 +81,8 @@ func NewModule(
 	sub_4BD710 func(a1 unsafe.Pointer) int32,
 	sub_4BDA80 func(a1 unsafe.Pointer) int32,
 	sub_4BDB30 func(a1 unsafe.Pointer) int32,
+	nox_common_list_remove_425920 func(a1 unsafe.Pointer),
+	sub_4BD300 func(a1 unsafe.Pointer, a2 unsafe.Pointer) int32,
 ) *Module {
 	return &Module{
 		dword_5d4594_1045424:              dword_5d4594_1045424,
@@ -93,6 +97,8 @@ func NewModule(
 		sub_4BD710:                        sub_4BD710,
 		sub_4BDA80:                        sub_4BDA80,
 		sub_4BDB30:                        sub_4BDB30,
+		nox_common_list_remove_425920:     nox_common_list_remove_425920,
+		sub_4BD300:                        sub_4BD300,
 	}
 }
 
@@ -602,4 +608,10 @@ func (m *Module) sub_452410(a1p *Struct576) int32 {
 		a1p.Field44 = 0
 	}
 	return int32(result)
+}
+
+func (m *Module) Sub_451FE0(a1p *Struct576) int32 {
+	m.nox_common_list_remove_425920(unsafe.Pointer(a1p))
+	a1p.Field70 = 0
+	return m.sub_4BD300(*m.dword_5d4594_1045436, unsafe.Pointer(a1p))
 }

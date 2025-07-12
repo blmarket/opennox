@@ -15,6 +15,8 @@ int sub_4BD660(int a1);
 int sub_4BD710(int a1);
 int sub_4BDA80(int a1);
 int sub_4BDB30(int a1);
+void nox_common_list_remove_425920(void* a1);
+int sub_4BD300(uint32_t* a1, int a2);
 */
 import "C"
 import (
@@ -66,6 +68,12 @@ func initStruct576() {
 		},
 		func(a1 unsafe.Pointer) int32 {
 			return int32(C.sub_4BDB30((C.int)(uintptr(a1))))
+		},
+		func(a1 unsafe.Pointer) {
+			C.nox_common_list_remove_425920(a1)
+		},
+		func(a1 unsafe.Pointer, a2 unsafe.Pointer) int32 {
+			return int32(C.sub_4BD300((*C.uint32_t)(a1), (C.int)(uintptr(a2))))
 		},
 	)
 }
@@ -128,4 +136,9 @@ func sub_451DC0(a1p *C.struct576) {
 //export sub_4523D0
 func sub_4523D0(a1p *C.struct576) int32 {
 	return Struct576Module.Sub_4523D0((*struct576.Struct576)(unsafe.Pointer(a1p)))
+}
+
+//export sub_451FE0
+func sub_451FE0(a1p *C.struct576) int32 {
+	return Struct576Module.Sub_451FE0((*struct576.Struct576)(unsafe.Pointer(a1p)))
 }
