@@ -29,7 +29,6 @@ uint32_t* sub_4BD2E0(uint32_t** a1);
 int sub_451CF0(struct576* a1);
 int sub_451F30(struct576* a1, int a2);
 void sub_451F90(struct576* a1);
-int sub_452410(struct576* a1);
 int sub_452580(struct576* a1);
 unsigned int sub_452F10(struct576* a1p, int a2);
 int sub_451E80(struct576* a1p);

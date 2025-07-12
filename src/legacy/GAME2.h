@@ -63,7 +63,6 @@ char* nox_xxx_draw_452270(int a1);
 int sub_4522A0(int a1);
 struct576* nox_xxx_draw_452300(uint32_t* a1);
 int sub_4523D0(struct576* a1);
-int sub_452410(struct576* a1);
 int sub_452490(struct576* a1);
 void sub_452510(struct576* a3);
 long long sub_452690(struct576* a3, long long a4, int a5);

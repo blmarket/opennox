@@ -60,7 +60,7 @@ type Struct576 struct {
 	Field10      [32]unsafe.Pointer // 10-41
 	Field42      int32              // 42 - contains length of field_10 array
 	Field43      int32              // 43
-	Field44      *StructAt44        // 44 - looks like a pointer to some struct
+	Field44      unsafe.Pointer     // 44 - looks like a pointer to some struct
 	Field45      uint32             // 45
 	TimerGroup46 timer.TimerGroup   // 46
 	Field70      uint32             // 70 - stores incrementing counter
@@ -609,9 +609,9 @@ func (m *Module) Sub_4523D0(a1p *Struct576) int32 {
 	return 0
 }
 
-func (m *Module) sub_452410(a1p *Struct576) int32 {
+func (m *Module) sub_452410(a1p *Struct576) {
 	result := a1p.Field44
-	if result != 0 && a1p == *(**Struct576)(unsafe.Pointer(uintptr(result) + 152)) {
+	if result != nil && a1p == *(**Struct576)(unsafe.Pointer(uintptr(result) + 152)) {
 		if (a1p.Field6 & 2) != 0 {
 			m.sub_4BDA80(unsafe.Pointer(uintptr(a1p.Field44)))
 		}
@@ -622,9 +622,8 @@ func (m *Module) sub_452410(a1p *Struct576) int32 {
 		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 140)) = 0
 		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 144)) = 0
 		*(*uint32)(unsafe.Pointer(uintptr(a1p.Field44) + 112)) = 0
-		a1p.Field44 = 0
+		a1p.Field44 = nil
 	}
-	return int32(result)
 }
 
 func (m *Module) Sub_451FE0(a1p *Struct576) int32 {
