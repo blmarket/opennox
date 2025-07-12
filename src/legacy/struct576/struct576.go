@@ -14,6 +14,35 @@ type ListItem struct {
 
 var _ = [1]struct{}{}[12-unsafe.Sizeof(ListItem{})] // Ensure listItem is 12 bytes
 
+type StructAt9 struct {
+	Field0  uint32     // unknown
+	Field1  uint32     // Flags
+	Field2  uint32     // unknown
+	Field3  uint32     // unknown
+	Field4  uint32     // unknown
+	Field5  uint32     // unknown
+	Field6  uint32     // unknown
+	Field7  uint32     // unknown
+	Field8  uint32     // unknown
+	Field9  uint32     // unknown
+	Field10 uint32     // unknown
+	Field11 uint32     // unknown
+	Field12 uint32     // unknown
+	Field13 uint32     // unknown
+	Field14 uint32     // unknown
+	Field15 uint32     // unknown
+	Field16 uint32     // unknown
+	Field17 uint32     // unknown
+	Field18 [14]uint32 // unknown
+	Field32 [32]uint16
+	Field48 int32 // Seems to be signed int32. Should be up to 32 or -1?
+}
+
+var _ = [1]struct{}{}[196-unsafe.Sizeof(StructAt9{})] // Ensure listItem is 12 bytes
+
+type StructAt44 struct {
+}
+
 type Struct576 struct {
 	Next         *Struct576 // 0
 	Prev         *Struct576 // 1
@@ -27,11 +56,11 @@ type Struct576 struct {
 	Field6_3     uint8              // 6 - stores a3 parameter
 	Field7       uint32             // 7
 	Field8       uint32             // 8
-	Field9       *uint32            // 9 - stores a1 parameter
+	Struct9      *StructAt9         // 9 - stores a1 parameter
 	Field10      [32]unsafe.Pointer // 10-41
 	Field42      int32              // 42 - contains length of field_10 array
 	Field43      int32              // 43
-	Field44      uint32             // 44 - looks like a pointer to some struct
+	Field44      *StructAt44        // 44 - looks like a pointer to some struct
 	Field45      uint32             // 45
 	TimerGroup46 timer.TimerGroup   // 46
 	Field70      uint32             // 70 - stores incrementing counter
@@ -42,8 +71,8 @@ type Struct576 struct {
 	Field76      [32]int32          // 76-107
 	Field108     int32              // 108
 	Field109     int32              // 109
-	Field110     [32]uint32         // 110-141
-	Field142     uint32             // 142
+	Field110     [32]int32          // 110-141
+	Field142     int32              // 142
 	Field143     uint32             // 143
 }
 
@@ -112,10 +141,7 @@ func (m *Module) Sub_452F10(a1p *Struct576, a2 int32) uint32 {
 		v2 = 100
 	}
 
-	// Access field_9 + 20 bytes offset
-	// field_9 is a pointer to uint32, so we need to get the value at offset 20/4 = 5 uint32s
-	field9Ptr := uintptr(unsafe.Pointer(a1p.Field9))
-	valueAtOffset := *(*uint32)(unsafe.Pointer(field9Ptr + 20))
+	valueAtOffset := a1p.Struct9.Field5
 
 	return uint32((163 * v2 * int32(valueAtOffset>>16)) >> 14)
 }
@@ -192,11 +218,7 @@ func (m *Module) Sub_452FE0(a1p *Struct576, a2 int32) {
 // }
 
 func (m *Module) Sub_451F30(a1p *Struct576, a2 int32) int32 {
-	// Calculate offset into field_9: field_9 + 2 * a2 + 128
-	// field_9 is *uint32, so we work with 16-bit values (int16)
-	field9Ptr := uintptr(unsafe.Pointer(a1p.Field9))
-	offsetPtr := unsafe.Pointer(field9Ptr + uintptr(2*a2+128))
-	value := *(*int16)(offsetPtr)
+	value := a1p.Struct9.Field32[a2]
 
 	// Call sub_4BD470 and store result in field_10[field_42]
 	a1p.Field10[a1p.Field42] = m.sub_4BD470(*m.dword_5d4594_1045424, int32(value))
@@ -302,9 +324,11 @@ func (m *Module) Sub_451CA0(a1p *Struct576) int32 {
 // }
 
 func (m *Module) Sub_451CF0(a1p *Struct576) int32 {
-	v1 := uintptr(unsafe.Pointer(a1p.Field9))
+	// v1 := uintptr(unsafe.Pointer(a1p.Struct9))
+	f1 := a1p.Struct9
 	result := a1p.Field108
-	v3 := *(*uint32)(unsafe.Pointer(v1 + 4))
+	// v3 := *(*uint32)(unsafe.Pointer(v1 + 4))
+	v3 := f1.Field1
 
 	if a1p.Field108 != 0 {
 		if v3&2 != 0 {
@@ -330,7 +354,7 @@ func (m *Module) Sub_451CF0(a1p *Struct576) int32 {
 		result = m.sub_4BD710(a1p.Field10[v9])
 	} else if v3&1 != 0 {
 		// Loop mode
-		v1_60 := *(*uint32)(unsafe.Pointer(v1 + 60))
+		v1_60 := f1.Field10
 		if v1_60 != 0 {
 			v4 := a1p.Field109 + 1
 			a1p.Field109 = v4
@@ -393,16 +417,15 @@ func (m *Module) Sub_451CF0(a1p *Struct576) int32 {
 // }
 
 func (m *Module) Sub_451DC0(a1p *Struct576) {
-	v1 := a1p.Field9
+	f1 := a1p.Struct9
 	result := a1p.Field42
 
 	// Access v1[1] - field_9 is *uint32, so v1[1] is at offset 4 bytes
-	field9Ptr := uintptr(unsafe.Pointer(v1))
-	v3 := *(*uint32)(unsafe.Pointer(field9Ptr + 4))
+	// field9Ptr := uintptr(unsafe.Pointer(v1))
+	v3 := f1.Field1
 
 	if result != 0 {
-		// Access v1[17] - at offset 17*4 = 68 bytes
-		v1_17 := *(*uint32)(unsafe.Pointer(field9Ptr + 68))
+		v1_17 := f1.Field17
 		if v1_17 < 0x21 {
 			return
 		}
@@ -410,24 +433,23 @@ func (m *Module) Sub_451DC0(a1p *Struct576) {
 	}
 
 	if v3&4 != 0 {
-		// Access v1[17] again
-		v1_17 := *(*uint32)(unsafe.Pointer(field9Ptr + 68))
+		v1_17 := f1.Field17
 		if v1_17 >= 0x21 {
 			v5 := m.Sub_451E80(a1p)
 			result = m.Sub_451F30(a1p, v5)
 		} else {
 			// Access v1[48] - at offset 48*4 = 192 bytes
-			v1_48 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
+			v1_48 := f1.Field48
 			result = int32(v1_48)
 			for i := int32(0); i < result; i++ {
 				m.Sub_451F30(a1p, i)
 				// Re-read v1[48] in case it changed
-				result = int32(*(*uint32)(unsafe.Pointer(field9Ptr + 192)))
+				result = int32(f1.Field48)
 			}
 		}
 	} else if v3&2 != 0 {
 		// Access v1[48] for random range
-		v1_48 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
+		v1_48 := f1.Field48
 		v6 := m.nox_common_randomIntMinMax_415FF0(0, int(v1_48-1), nil, 536)
 		result = m.Sub_451F30(a1p, int32(v6))
 	} else {
@@ -475,30 +497,25 @@ func (m *Module) Sub_451DC0(a1p *Struct576) {
 
 func (m *Module) Sub_451E80(a1p *Struct576) int32 {
 	// v1 = *(uint32_t*)(a1 + 36) - offset 36 corresponds to Field9
-	v1 := a1p.Field9
-	field9Ptr := uintptr(unsafe.Pointer(v1))
+	// v1 := unsafe.Pointer(a1p.Struct9)
+	f9 := a1p.Struct9
 
 	// v2 = *(uint32_t*)(v1 + 4) - access v1[1]
-	v2 := *(*uint32)(unsafe.Pointer(field9Ptr + 4))
+	v2 := f9.Field1
 
 	// if (*(int*)(a1 + 568) <= 0) - offset 568 corresponds to Field142 (568/4 = 142)
 	if a1p.Field142 <= 0 {
 		// v3 = *(uint32_t*)(v1 + 192) - access v1[48] (192/4 = 48)
-		v3 := *(*uint32)(unsafe.Pointer(field9Ptr + 192))
-		v4 := uint32(0)
+		v3 := f9.Field48
+		v4 := int32(0)
 
 		// *(uint32_t*)(a1 + 568) = v3
 		a1p.Field142 = v3
 
 		if v3 > 0 {
-			// v5 = a1 + 440 - offset 440 corresponds to Field110 (440/4 = 110)
 			for v4 < v3 {
-				// v6 = v3 - v4++ - 1
-				v6 := v3 - v4 - 1
-				// *(uint32_t*)(v5 - 4) = v6 - store in Field110[v4]
-				a1p.Field110[v4] = v6
+				a1p.Field110[v4] = (v3 - v4 - 1)
 				v4++
-				// v3 = *(uint32_t*)(a1 + 568) - reload Field142
 				v3 = a1p.Field142
 			}
 		}
