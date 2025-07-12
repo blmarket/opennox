@@ -339,9 +339,8 @@ func Set_dword_587000_81128(v unsafe.Pointer) {
 }
 
 //export sub_4864A0
-func sub_4864A0(a3 unsafe.Pointer) unsafe.Pointer {
-	(*timer.TimerGroup)(a3).Init()
-	return nil
+func sub_4864A0(a3 *C.timerGroup) {
+	(*timer.TimerGroup)(unsafe.Pointer(a3)).Init()
 }
 
 //export sub_486380

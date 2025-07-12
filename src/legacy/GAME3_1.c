@@ -646,18 +646,18 @@ int sub_4BD690(int a1) {
 int sub_4BD710(int a1) { return a1 + 24; }
 
 //----- (004BD720) --------------------------------------------------------
-struct_4BD720* sub_4BD720(int a1) {
-	struct_4BD720* v1; // esi
+struct312* sub_4BD720(int a1) {
+	struct312* v1; // esi
 
-	v1 = calloc(1, sizeof(struct_4BD720));
-	memset(v1, 0, sizeof(struct_4BD720));
+	v1 = calloc(1, sizeof(struct312));
+	memset(v1, 0, sizeof(struct312));
 	sub_425770(v1);
 	sub_4BDC00((int)&v1->field_30);
 	sub_4864A0(&v1->field_44);
 	sub_4BD7C0(v1);
 	v1->field_33 = a1;
 	v1->field_43 = *(uint32_t*)(a1 + 256);
-	if (!(*(int (**)(struct_4BD720*))(*(uint32_t*)(a1 + 256) + 4))(v1)) {
+	if (!(*(int (**)(struct312*))(*(uint32_t*)(a1 + 256) + 4))(v1)) {
 		return v1;
 	}
 	if (v1) {
@@ -668,13 +668,13 @@ struct_4BD720* sub_4BD720(int a1) {
 
 //----- (004BD7A0) --------------------------------------------------------
 void sub_4BD7A0(void* lpMem) {
-	struct_4BD720* mem = (struct_4BD720*)lpMem;
+	struct312* mem = (struct312*)lpMem;
 	(*(void (**)(void*))(mem->field_43 + 8))(lpMem);
 	free(lpMem);
 }
 
 //----- (004BD7C0) --------------------------------------------------------
-struct_4BD720* sub_4BD7C0(struct_4BD720* a1) {
+struct312* sub_4BD7C0(struct312* a1) {
 	a1->field_69 = (uint32_t)sub_4BD8C0;
 	a1->field_70 = (uint32_t)sub_4BD940;
 	a1->field_71 = (uint32_t)sub_4BD9B0;

@@ -1292,7 +1292,24 @@ _Static_assert(sizeof(noxSYSTEMTIME) == 16, "wrong size of SYSTEMTIME structure!
 void noxGetLocalTime(noxSYSTEMTIME* lpSystemTime);
 
 // See timer.go for definition
-typedef struct timerGroup timerGroup;
+typedef struct timer {
+	uint32_t field_0; // 0
+	uint32_t field_1; // 4
+	uint32_t field_2; // 8
+	uint32_t field_3; // 12
+	uint64_t field_4; // 16
+	uint64_t field_6; // 24
+} timer;
+
+_Static_assert(sizeof(timer) == 32, "wrong size of nox_timer_t structure!");
+
+typedef struct timerGroup {
+	timer field_0;
+	timer field_8;
+	timer field_16;
+} timerGroup;
+
+_Static_assert(sizeof(timerGroup) == 96, "wrong size of timerGroup structure!");
 
 typedef struct {
 	uint32_t field_0[3];   // offsets 0-8
@@ -1316,16 +1333,52 @@ typedef struct {
 	uint32_t field_71;     // offset 284 (function pointer sub_4BD9B0)
 	uint32_t field_72;     // offset 288 (set to 0)
 	uint32_t field_73[5];  // remaining bytes to 312
-} struct_4BD720;
+} struct312;
 
-typedef struct struct58 {
-	uint32_t list_next;    // offset 0x00 - linked list next pointer
-	uint32_t list_prev;    // offset 0x04 - linked list prev pointer
-	uint32_t list_count;   // offset 0x08 - linked list count
-	uint32_t field_0x0C;   // offset 0x0C - set to a1 parameter
-	uint32_t field_0x10;   // offset 0x10 - set to 0
-	uint32_t reserved[17]; // offset 0x14 - remaining bytes to reach 0x58 (88 bytes)
-} struct58;
+typedef struct struct264 struct264;
+
+typedef struct struct88 {
+	uint32_t list_next;  // offset 0x00 - linked list next pointer
+	uint32_t list_prev;  // offset 0x04 - linked list prev pointer
+	uint32_t list_count; // offset 0x08 - linked list count
+	uint32_t* field_3;   // offset 0x0C - set to a1 parameter
+	uint32_t field_4;    // offset 0x10 - set to 0
+	int32_t field_5;
+	struct264* field_6[16];
+} struct88;
+
+_Static_assert(sizeof(struct88) == 88, "wrong size of struct88 structure!");
+
+typedef struct struct264 {
+	uint32_t field_0[4];  // v4[0-3] - keep as is
+	uint32_t field_4;     // v4[4] - index/counter field
+	struct88* field_5;    // v4[5] - parent pointer (a1)
+	uint32_t field_6;     // v4[6] - type/id field (a2)
+	uint32_t field_7;     // v4[7] - padding/reserved
+	uint32_t field_8[7];  // v4[8-14] - includes nullsub_10 target at v4[8]
+	uint32_t field_15[7]; // v4[15-21] - includes nullsub_10 target at v4[15]
+	timerGroup timerGroup_22;
+	uint32_t field_46;
+	uint32_t field_47;
+	uint32_t field_48;
+	uint32_t field_49;
+	nox_list_item_t field_50; // v4[50-52] - list structure for nox_common_list_clear_425760
+	uint32_t field_53;        // v4[53] - status/state field
+	int (*field_54)(int);     // v4[54] - function pointer (sub_4873C0)
+	uint32_t field_55;
+	uint32_t field_56;
+	uint32_t field_57; // v4[57] - counter/flag
+	uint32_t field_58; // v4[58] - counter/flag
+	uint32_t field_59; // v4[59] - counter/flag
+	uint32_t field_60; // v4[60] - counter/flag
+	uint32_t field_61; // v4[61] - counter/flag
+	uint32_t field_62; // v4[62] - counter/flag
+	uint32_t field_63; // v4[63] - counter/flag
+	uint32_t field_64; // v4[64] - value from *(uint32_t*)(v3 + 36)
+	uint32_t field_65;
+} struct264;
+
+_Static_assert(sizeof(struct264) == 264, "wrong size of struct264 structure!");
 
 typedef struct struct28 {
 	uint32_t field_0;
@@ -1334,26 +1387,6 @@ typedef struct struct28 {
 	nox_list_item_t field_3;
 	uint32_t field_6;
 } struct28;
-
-// See timer.go for definition
-typedef struct timer {
-	uint32_t field_0; // 0
-	uint32_t field_1; // 4
-	uint32_t field_2; // 8
-	uint32_t field_3; // 12
-	uint64_t field_4; // 16
-	uint64_t field_6; // 24
-} timer;
-
-_Static_assert(sizeof(timer) == 32, "wrong size of nox_timer_t structure!");
-
-typedef struct timerGroup {
-	timer field_0;
-	timer field_8;
-	timer field_16;
-} timerGroup;
-
-_Static_assert(sizeof(timerGroup) == 96, "wrong size of timerGroup structure!");
 
 typedef struct struct576 {
 	struct struct576* next; // 0

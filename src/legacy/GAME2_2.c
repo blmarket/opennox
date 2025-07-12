@@ -4357,7 +4357,7 @@ FILE* sub_486E00(int a1) {
 }
 
 //----- (00486E30) --------------------------------------------------------
-int sub_486E30(int a1, struct_4BD720* a2) {
+int sub_486E30(int a1, struct312* a2) {
 	int result; // eax
 
 	a2->field_33 = a1;
@@ -4392,8 +4392,8 @@ int sub_486E90(int a1) {
 
 //----- (00486FA0) --------------------------------------------------------
 void sub_486FA0(int a1) {
-	struct58* result; // eax
-	struct58* v2;     // edi
+	struct88* result; // eax
+	struct88* v2;     // edi
 	int v3;           // eax
 
 	result = sub_486FE0(a1);
@@ -4411,15 +4411,15 @@ void sub_486FA0(int a1) {
 }
 
 //----- (00486FE0) --------------------------------------------------------
-struct58* sub_486FE0(int a1) {
-	struct58* v1; // esi
+struct88* sub_486FE0(int a1) {
+	struct88* v1; // esi
 
-	v1 = calloc(1, sizeof(struct58));
-	memset(v1, 0, sizeof(struct58));
+	v1 = calloc(1, sizeof(struct88));
+	memset(v1, 0, sizeof(struct88));
 	sub_425770(v1);
-	v1->field_0x10 = 0;
-	v1->field_0x0C = a1;
-	if (!(*(int (**)(struct58*))(a1 + 20))(v1)) {
+	v1->field_4 = 0;
+	v1->field_3 = a1;
+	if (!(*(int (**)(struct88*))(a1 + 20))(v1)) {
 		return v1;
 	}
 	if (v1) {
@@ -4429,30 +4429,30 @@ struct58* sub_486FE0(int a1) {
 }
 
 //----- (00487030) --------------------------------------------------------
-void sub_487030(struct58* lpMem) {
-	(*(void (**)(void*))(lpMem->field_0x0C + 24))(lpMem);
-	*(uint32_t*)(lpMem->field_0x0C + 12) &= 0xFFFFFFFE;
+void sub_487030(struct88* lpMem) {
+	(*(void (**)(void*))(lpMem->field_3 + 24))(lpMem);
+	*(uint32_t*)(lpMem->field_3 + 12) &= 0xFFFFFFFE;
 	free(lpMem);
 }
 
 //----- (00487050) --------------------------------------------------------
-void sub_487050(struct58* a1) { nox_common_list_append_4258E0(*(int*)&dword_587000_155144, a1); }
+void sub_487050(struct88* a1) { nox_common_list_append_4258E0(*(int*)&dword_587000_155144, a1); }
 
 //----- (00487070) --------------------------------------------------------
-void sub_487070(struct58* lpMem) {
+void sub_487070(struct88* lpMem) {
 	sub_487090(lpMem);
 	sub_487030(lpMem);
 	*getMemU32Ptr(0x5D4594, 1193332) = 0;
 }
 
 //----- (00487090) --------------------------------------------------------
-void sub_487090(struct58* a1) { nox_common_list_remove_425920(a1); }
+void sub_487090(struct88* a1) { nox_common_list_remove_425920(a1); }
 
 //----- (004870A0) --------------------------------------------------------
 void sub_4870A0() {
-	struct58* v1; // edi
-	struct58* v2; // esi
-	struct58* v3; // [esp+4h] [ebp-4h]
+	struct88* v1; // edi
+	struct88* v2; // esi
+	struct88* v3; // [esp+4h] [ebp-4h]
 
 	v1 = sub_4870E0(&v3);
 	if (v1) {
@@ -4465,8 +4465,8 @@ void sub_4870A0() {
 }
 
 //----- (004870E0) --------------------------------------------------------
-struct58* sub_4870E0(struct58** a1) {
-	struct58* result; // eax
+struct88* sub_4870E0(struct88** a1) {
+	struct88* result; // eax
 
 	result = nox_common_list_getFirstSafe_425890(*(int**)&dword_587000_155144);
 	*a1 = result;
@@ -4474,7 +4474,7 @@ struct58* sub_4870E0(struct58** a1) {
 }
 
 //----- (00487100) --------------------------------------------------------
-struct58* sub_487100(struct58** a1) {
+struct88* sub_487100(struct88** a1) {
 	if (*a1) {
 		*a1 = nox_common_list_getNextSafe_4258A0(*a1);
 	}
@@ -4482,80 +4482,88 @@ struct58* sub_487100(struct58** a1) {
 }
 
 //----- (00487150) --------------------------------------------------------
-uint32_t* sub_487150(int a1, const void* a2) {
-	int v2;       // edi
-	uint32_t* v3; // esi
-	uint32_t* v4; // eax
-	int v6;       // [esp+8h] [ebp-4h]
+struct264* sub_487150(int a1, const void* a2) {
+	int v2; // edi
+	// uint32_t* v3; // esi
+	// uint32_t* v4; // eax
+	int v6; // [esp+8h] [ebp-4h]
 
 	v2 = a1;
 	if (a1 == -1) {
 		v2 = 0;
 	}
-	sub_487360(v2, (int**)&a1, &v6);
-	if (!a1) {
+	struct88* a1p;
+	sub_487360(v2, &a1p, &v6);
+	if (!a1p) {
 		return 0;
 	}
-	v3 = *(uint32_t**)(a1 + 4 * v6 + 24);
-	if (!v3) {
-		v4 = sub_4871C0(a1, v6, a2);
-		v3 = v4;
-		if (!v4) {
+	struct264* v3p;
+	v3p = a1p->field_6[v6];
+	if (!v3p) {
+		struct264* v4p;
+		v4p = sub_4871C0(a1p, v6, a2);
+		v3p = v4p;
+		if (!v4p) {
 			return 0;
 		}
-		v4[47] = v2;
-		sub_487310(v4);
+		v4p->field_47 = v2;
+		sub_487310(v4p);
 	}
-	++v3[4];
-	return v3;
+	v3p->field_4++;
+	return v3p;
 }
 
 //----- (004871C0) --------------------------------------------------------
-uint32_t* sub_4871C0(int a1, int a2, const void* a3) {
-	int v3;       // ebp
-	uint32_t* v4; // esi
+struct264* sub_4871C0(struct88* a1p, int a2, const void* a3) {
+	// int a1 = a1p;
+	int v3; // ebp
+	// uint32_t* v4; // esi
+	struct264* v4p;
 
-	v3 = *(uint32_t*)(a1 + 12);
-	v4 = calloc(1, 0x108u);
-	memset(v4, 0, 0x108u);
-	sub_425770(v4);
-	v4[6] = a2;
-	v4[5] = a1;
-	v4[4] = 0;
-	++*(uint32_t*)(a1 + 16);
-	*(uint32_t*)(a1 + 4 * a2 + 24) = v4;
-	v4[64] = *(uint32_t*)(v3 + 36);
-	nox_common_list_clear_425760(v4 + 50);
-	sub_4864A0(v4 + 22);
-	v4[53] = 0;
-	v4[56] = 33;
-	v4[60] = 0;
-	v4[58] = 0;
-	v4[62] = 0;
-	v4[54] = sub_4873C0;
-	v4[57] = 0;
-	v4[61] = 0;
-	v4[59] = 0;
-	v4[63] = 0;
-	nullsub_10(v4 + 15);
-	nullsub_10(v4 + 8);
+	// v3 = *(uint32_t*)(a1 + 12);
+	v3 = a1p->field_3;
+	v4p = calloc(1, sizeof(struct264));
+	memset(v4p, 0, sizeof(struct264));
+	sub_425770(v4p);
+	v4p->field_6 = a2;
+	v4p->field_5 = a1p;
+	v4p->field_4 = 0;
+	++a1p->field_4;
+	a1p->field_6[a2] = v4p;
+	// v4[64] = *(uint32_t*)(v3 + 36);
+	v4p->field_64 = *(uint32_t*)(v3 + 36);
+	nox_common_list_clear_425760(&v4p->field_50);
+	sub_4864A0(&v4p->timerGroup_22);
+	v4p->field_53 = 0;
+	v4p->field_56 = 33;
+	v4p->field_60 = 0;
+	v4p->field_58 = 0;
+	v4p->field_62 = 0;
+	v4p->field_54 = sub_4873C0;
+	v4p->field_57 = 0;
+	v4p->field_61 = 0;
+	v4p->field_59 = 0;
+	v4p->field_63 = 0;
+	nullsub_10(v4p->field_15);
+	nullsub_10(v4p->field_8);
 	if (a3) {
-		sub_487590((int)v4, a3);
+		sub_487590(v4p, a3);
 	}
-	if (!(*(int (**)(uint32_t*))(v3 + 28))(v4)) {
-		return v4;
+	if (!(*(int (**)(uint32_t*))(v3 + 28))(v4p)) {
+		return v4p;
 	}
-	if (v4) {
-		sub_4872C0(v4);
+	if (v4p) {
+		sub_4872C0(v4p);
 	}
 	return 0;
 }
 // 487CF0: using guessed type void  nullsub_10(uint32_t);
 
 //----- (004872C0) --------------------------------------------------------
-void sub_4872C0(void* lpMem) {
-	int v1; // eax
-	int v2; // ecx
+void sub_4872C0(struct264* lpMemp) {
+	void* lpMem = lpMemp; // TODO: remove alias
+	int v1;               // eax
+	int v2;               // ecx
 
 	sub_487910((int)lpMem, -1);
 	(*(void (**)(void*))(*(uint32_t*)(*((uint32_t*)lpMem + 5) + 12) + 32))(lpMem);
@@ -4584,28 +4592,28 @@ int sub_487310(uint32_t* a1) {
 }
 
 //----- (00487360) --------------------------------------------------------
-int* sub_487360(int a1, int** a2, int* a3) {
-	int* result; // eax
-	int i;       // esi
-	int v5;      // ecx
-	int* v6;     // [esp+4h] [ebp-4h]
+void sub_487360(int a1, struct88** a2, int* a3) {
+	// int* result; // eax
+	int i;  // esi
+	int v5; // ecx
+	// int* v6;     // [esp+4h] [ebp-4h]
+	struct88* v6p;
+	struct88* res;
 
-	result = sub_4870E0((int*)&v6);
-	for (i = a1; result; result = sub_487100(&v6)) {
-		v5 = result[5];
+	res = sub_4870E0(&v6p);
+	for (i = a1; res; res = sub_487100(&v6p)) {
+		v5 = res->field_5;
 		if (i < v5) {
 			break;
 		}
 		i -= v5;
 	}
-	*a2 = result;
-	if (result) {
-		result = a3;
+	*a2 = res;
+	if (res) {
 		*a3 = i;
 	} else {
 		*a3 = -1;
 	}
-	return result;
 }
 
 //----- (004873C0) --------------------------------------------------------
@@ -4688,7 +4696,8 @@ int sub_4873C0(int a3) {
 }
 
 //----- (00487590) --------------------------------------------------------
-int sub_487590(int a1, const void* a2) {
+int sub_487590(struct264* a1p, const void* a2) {
+	int a1 = a1p;
 	int result; // eax
 
 	result = a1;
@@ -4738,13 +4747,14 @@ int sub_4875F0() {
 }
 
 //----- (00487680) --------------------------------------------------------
-void sub_487680(void* lpMem) {
-	sub_4876A0((uint32_t**)lpMem);
+void sub_487680(struct264* lpMem) {
+	sub_4876A0(lpMem);
 	sub_4872C0(lpMem);
 }
 
 //----- (004876A0) --------------------------------------------------------
-void* sub_4876A0(uint32_t** a1) {
+void sub_4876A0(struct264* a1p) {
+	uint32_t** a1 = a1p;
 	void* result; // eax
 
 	++*(uint32_t*)((uint32_t)dword_587000_155144 + 24);
@@ -4755,13 +4765,12 @@ void* sub_4876A0(uint32_t** a1) {
 		result = *(void**)&dword_587000_155144;
 		*(uint32_t*)((uint32_t)dword_587000_155144 + 24) = 0;
 	}
-	return result;
 }
 
 //----- (00487750) --------------------------------------------------------
-struct_4BD720* sub_487750(int a1) {
-	struct_4BD720* v1; // eax
-	struct_4BD720* v2; // esi
+struct312* sub_487750(int a1) {
+	struct312* v1; // eax
+	struct312* v2; // esi
 
 	if (*(int*)(a1 + 192) >= *(int*)(a1 + 196)) {
 		return 0;

@@ -24,7 +24,7 @@ int sub_452FA0(int a1);
 int sub_486350(/* timer* */ void* a1, int a2);
 int sub_4863B0(/* timer* */ void* a2);
 void* sub_486320(/* timer* */ void* a1, int a2);
-void* sub_4864A0(/* timerGroup* */ void* a3);
+void sub_4864A0(timerGroup* a3);
 int nox_common_randomIntMinMax_415FF0(int min, int max, const char* file, int line);
 int***** sub_452230();
 int sub_4BDB40(int a2);
