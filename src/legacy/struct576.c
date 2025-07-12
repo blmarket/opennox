@@ -14,7 +14,7 @@ extern uint32_t dword_5d4594_1045432;
 // Common library using list access
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nox_common_list_remove_425920(void* a1);
-void* sub_425770(void* a1);
+void sub_425770(void* a1);
 
 int* sub_452810(int a1, char a2);
 int sub_4526D0(int a1);
@@ -140,8 +140,6 @@ bool sub_452120(struct576* a1p) {
 	}
 	return (result != 0);
 }
-
-
 
 //----- (00452490) --------------------------------------------------------
 int sub_452490(struct576* a1p) {

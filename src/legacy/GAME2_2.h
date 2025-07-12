@@ -147,7 +147,7 @@ void sub_487C30(uint32_t* a1);
 int sub_487C50(int a1, uint32_t* a2);
 int sub_487C80(int a1);
 int sub_487D00(uint32_t* a1);
-uint32_t* sub_487D30(uint32_t* a1, int a2, int a3);
+void sub_487D30(uint32_t* a1, int a2, int a3);
 int sub_487D60(int a1);
 int nox_xxx_wndEditProc_487D70(nox_window* a1, int a2, int a3, int a4);
 int nox_xxx_wndEditDrawNoImage_488160(int a1, int a2);

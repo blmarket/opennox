@@ -5040,15 +5040,11 @@ void nox_common_list_clear_425760(nox_list_item_t* list) {
 }
 
 //----- (00425770) --------------------------------------------------------
-void* sub_425770(void* a1p) {
+void sub_425770(void* a1p) {
 	uint32_t* a1 = a1p;
-	uint32_t* result; // eax
-
-	result = a1;
 	*a1 = a1;
 	a1[1] = a1;
 	a1[2] = 0;
-	return result;
 }
 
 //----- (00425790) --------------------------------------------------------
