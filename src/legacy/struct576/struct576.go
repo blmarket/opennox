@@ -594,7 +594,7 @@ func (m *Module) Sub_4523D0(a1p *Struct576) int32 {
 
 func (m *Module) sub_452410(a1p *Struct576) int32 {
 	result := a1p.Field44
-	if result != 0 && a1p == (*Struct576)(unsafe.Pointer(uintptr(result)+152)) {
+	if result != 0 && a1p == *(**Struct576)(unsafe.Pointer(uintptr(result) + 152)) {
 		if (a1p.Field6 & 2) != 0 {
 			m.sub_4BDA80(unsafe.Pointer(uintptr(a1p.Field44)))
 		}
