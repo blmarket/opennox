@@ -732,13 +732,14 @@ int sub_451850(int a2, void* a3p) {
 	int result; // eax
 
 	v2 = 0;
-	uint32_t v33 = getMemAt(0x5D4594, 840628);
+	struct200* v33p;
+	v33p = getMemAt(0x5D4594, 840628);
 	do {
-		sub_451920(v33);
-		*((uint32_t*)v33 + 21) = nox_xxx_getSndName_40AF80(v2);
-		v33 += 200;
+		sub_451920(v33p);
+		v33p->snd_name = nox_xxx_getSndName_40AF80(v2);
+		v33p++;
 		++v2;
-	} while ((int)v33 < (int)getMemAt(0x5D4594, 1045228));
+	} while ((int)v33p < (int)getMemAt(0x5D4594, 1045228));
 	dword_5d4594_1045420 = a3;
 	dword_5d4594_1045428 = a2;
 	if (a3) {
@@ -757,22 +758,22 @@ int sub_451850(int a2, void* a3p) {
 }
 
 //----- (00451920) --------------------------------------------------------
-int sub_451920(uint32_t* a2) {
-	*a2 = 0;
-	a2[1] = 0;
-	a2[2] = 0;
-	a2[14] = 0;
-	a2[15] = 0;
-	a2[19] = 0;
-	a2[20] = 0;
-	a2[12] = 1;
-	a2[48] = 0;
-	a2[18] = 0;
-	a2[17] = 0;
-	a2[25] = 0;
-	a2[26] = 0;
-	a2[16] = 600;
-	return sub_4862E0((int)(a2 + 4), 0x4000);
+int sub_451920(struct200* a2p) {
+	a2p->field_0 = 0;
+	a2p->field_1 = 0;
+	a2p->field_2 = 0;
+	a2p->field_14 = 0;
+	a2p->field_15 = 0;
+	a2p->field_19 = 0;
+	a2p->field_20 = 0;
+	a2p->field_12 = 1;
+	a2p->field_48 = 0;
+	a2p->field_18 = 0;
+	a2p->field_17 = 0;
+	a2p->field_25 = 0;
+	a2p->field_26 = 0;
+	a2p->field_16 = 600;
+	return sub_4862E0(&a2p->field_4, 0x4000);
 }
 
 //----- (00451970) --------------------------------------------------------
@@ -990,8 +991,8 @@ void sub_452230() {
 }
 
 //----- (00452270) --------------------------------------------------------
-char* nox_xxx_draw_452270(int a1) {
-	char* result; // eax
+struct200* nox_xxx_draw_452270(int a1) {
+	struct200* result; // eax
 
 	if (dword_5d4594_1045432 && a1 >= 0 && a1 < 1023) {
 		result = (char*)getMemAt(0x5D4594, 840628 + 200 * a1);

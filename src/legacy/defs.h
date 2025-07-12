@@ -1388,6 +1388,32 @@ typedef struct struct28 {
 	uint32_t field_6;
 } struct28;
 
+typedef struct struct200 {
+	uint32_t field_0; // 0
+	uint32_t field_1; // 1
+	uint32_t field_2; // 2
+	uint32_t field_3; // 3
+	timer field_4;
+	uint32_t field_12;     // 12
+	uint32_t field_13;     // 13
+	uint32_t field_14;     // 14
+	uint32_t field_15;     // 15
+	uint32_t field_16;     // 16
+	uint32_t field_17;     // 17
+	uint32_t field_18;     // 18
+	uint32_t field_19;     // 19
+	uint32_t field_20;     // 20
+	uint32_t snd_name;     // 21 - sound name field accessed in sub_451850
+	uint32_t field_22[3];  // 22-24
+	uint32_t field_25;     // 25
+	uint32_t field_26;     // 26
+	uint32_t field_27[21]; // 27-47
+	uint32_t field_48;     // 48
+	uint32_t field_49;     // 49
+} struct200;
+
+_Static_assert(sizeof(struct200) == 200, "wrong size of struct200 structure!");
+
 typedef struct struct576 {
 	struct struct576* next; // 0
 	struct struct576* prev; // 1
