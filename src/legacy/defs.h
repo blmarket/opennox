@@ -1432,7 +1432,7 @@ typedef struct struct576 {
 	uint32_t field_7;       // 7
 	uint32_t field_8;       // 8
 	struct200* field_9;     // 9 - stores a1 parameter
-	uint32_t field_10[32];  // 10-41
+	void* field_10[32];     // 10-41
 	uint32_t field_42;      // 42 - contains length of field_10 array
 	uint32_t field_43;      // 43
 	uint32_t field_44;      // 44 - looks like a pointer to some struct

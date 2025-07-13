@@ -13,36 +13,39 @@ extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045432;
 extern void* dword_587000_127004;
 
-// Common library using list access
+// Surely external dependency
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nox_common_list_remove_425920(void* a1);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
 void nox_common_list_clear_425760(nox_list_item_t* list);
-void* sub_425770(void* a1);
 int sub_486520(/* timerGroup */ void* a2);
 int sub_4862E0(/* timer */ void* a3, int a4);
-
-int* sub_452810(int a1, char a2);
-int sub_4526D0(int a1);
-int sub_4526F0(int a1);
-int sub_4BDB20(int a1);
-int sub_4BD710(int a1);
-int sub_452FA0(int a1);
 int sub_486350(/* timer* */ void* a1, int a2);
 int sub_4863B0(/* timer* */ void* a2);
 void* sub_486320(/* timer* */ void* a1, int a2);
 void sub_4864A0(timerGroup* a3);
 int nox_common_randomIntMinMax_415FF0(int min, int max, const char* file, int line);
+int sub_4BD300(uint32_t* a1, int a2);
+
+// maybe?
+int* sub_452810(int a1, char a2);
 int sub_4BDB40(int a2);
 void sub_4BDB90(uint32_t* a1, uint32_t* a2);
 int sub_4BDA80(int a1);
 int sub_4BDB30(int a1);
-struct200* sub_4521A0(int a1);
-int sub_4BD300(uint32_t* a1, int a2);
+uint32_t* sub_4BD470(uint32_t** a1, int a2);
+
+// private within audio.c
 int sub_4BD660(int a1);
 int sub_4BD650(int a1);
-uint32_t* sub_4BD470(uint32_t** a1, int a2);
+int sub_4526D0(int a1);
+void* sub_425770(void* a1);
+int sub_4526F0(int a1);
+int sub_4BDB20(int a1);
+int sub_4BD710(int a1);
+int sub_452FA0(int a1);
+struct200* sub_4521A0(int a1);
 
 //----- (00451920) --------------------------------------------------------
 void sub_451920(struct200* a2p) {
@@ -903,4 +906,66 @@ void sub_4519C0() {
 		} while (v7p != get_list_at_840612());
 	}
 	*getMemU32Ptr(0x5D4594, 1045448) = 0;
+}
+
+//----- (004BDB20) --------------------------------------------------------
+int sub_4BDB20(int a1) {
+	int result; // eax
+
+	result = a1;
+	*(uint32_t*)(a1 + 124) |= 0x10u;
+	return result;
+}
+
+//----- (004BD710) --------------------------------------------------------
+int sub_4BD710(int a1) { return a1 + 24; }
+
+//----- (004526D0) --------------------------------------------------------
+int sub_4526D0(int a1) {
+	*(uint32_t*)(*(uint32_t*)(a1 + 152) + 28) = 4;
+	return 0;
+}
+
+//----- (00452FE0) --------------------------------------------------------
+int sub_452FE0(struct576* a1p, int a2) {
+	int v2; // eax
+
+	v2 = sub_452FA0(a2);
+	return sub_486350(&a1p->timerGroup_46.field_16, v2);
+}
+
+//----- (00452FA0) --------------------------------------------------------
+int sub_452FA0(int a1) {
+	int v1; // eax
+
+	v1 = a1;
+	if (a1 <= 50) {
+		if (a1 < -50) {
+			v1 = -50;
+		}
+	} else {
+		v1 = 50;
+	}
+	return (v1 * 8192) / 50 + 8192;
+}
+
+//----- (004BD650) --------------------------------------------------------
+int sub_4BD650(int a1) {
+	int result; // eax
+
+	result = a1;
+	++*(uint32_t*)(a1 + 12);
+	return result;
+}
+
+//----- (004BD660) --------------------------------------------------------
+int sub_4BD660(int a1) {
+	int result; // eax
+
+	result = *(uint32_t*)(a1 + 12) - 1;
+	*(uint32_t*)(a1 + 12) = result;
+	if (result < 0) {
+		*(uint32_t*)(a1 + 12) = 0;
+	}
+	return result;
 }

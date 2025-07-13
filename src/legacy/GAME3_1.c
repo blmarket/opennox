@@ -616,27 +616,6 @@ int sub_4BD600(int a1) {
 	return 1;
 }
 
-//----- (004BD650) --------------------------------------------------------
-int sub_4BD650(int a1) {
-	int result; // eax
-
-	result = a1;
-	++*(uint32_t*)(a1 + 12);
-	return result;
-}
-
-//----- (004BD660) --------------------------------------------------------
-int sub_4BD660(int a1) {
-	int result; // eax
-
-	result = *(uint32_t*)(a1 + 12) - 1;
-	*(uint32_t*)(a1 + 12) = result;
-	if (result < 0) {
-		*(uint32_t*)(a1 + 12) = 0;
-	}
-	return result;
-}
-
 //----- (004BD680) --------------------------------------------------------
 int sub_4BD680(int a1) { return *(uint32_t*)(a1 + 12); }
 
@@ -657,9 +636,6 @@ int sub_4BD690(int a1) {
 	return sub_4BD300(*(uint32_t**)(*(uint32_t*)(a1 + 52) + 8), a1);
 }
 // 487CA0: using guessed type void  nullsub_9(uint32_t);
-
-//----- (004BD710) --------------------------------------------------------
-int sub_4BD710(int a1) { return a1 + 24; }
 
 //----- (004BD720) --------------------------------------------------------
 struct312* sub_4BD720(int a1) {
@@ -831,15 +807,6 @@ int sub_4BDA80(int a1) {
 		result = (int)result2(a1);
 	}
 	*(uint32_t*)(a1 + 288) = 0;
-	return result;
-}
-
-//----- (004BDB20) --------------------------------------------------------
-int sub_4BDB20(int a1) {
-	int result; // eax
-
-	result = a1;
-	*(uint32_t*)(a1 + 124) |= 0x10u;
 	return result;
 }
 
