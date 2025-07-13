@@ -155,7 +155,7 @@ uint8_t* sub_425500(int a1, uint8_t* a2, char a3);
 char sub_425520(int a1, char a2);
 int sub_425550(uint8_t* a1, uint8_t* a2, int a3);
 void nox_common_list_clear_425760(nox_list_item_t* list);
-void* sub_425770(struct264* a1);
+void* sub_425770(nox_list_item_t* a1);
 int sub_425790(int* a1, uint32_t* a2);
 void sub_4257F0(int* a1, uint32_t* a2);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);

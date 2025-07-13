@@ -1406,12 +1406,10 @@ typedef struct struct200 {
 	uint32_t field_20; // 20
 	uint32_t snd_name; // 21 - sound name field accessed in sub_451850
 	nox_list_item_t field_22;
-	uint32_t field_25;     // 25
-	uint32_t field_26;     // 26
-	uint32_t field_27;     // 26
-	uint32_t field_28;     // 26
-	uint32_t field_29;     // 26
-	uint32_t field_30;     // 26
+	uint32_t field_25; // 25
+	uint32_t field_26; // 26
+	uint32_t field_27; // 26
+	nox_list_item_t field_28;
 	uint32_t field_31;     // 26
 	uint16_t field_32[32]; // 32-48
 	uint32_t field_48;     // 48

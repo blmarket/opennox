@@ -5040,7 +5040,7 @@ void nox_common_list_clear_425760(nox_list_item_t* list) {
 }
 
 //----- (00425770) --------------------------------------------------------
-void* sub_425770(struct264* a1p) {
+void* sub_425770(nox_list_item_t* a1p) {
 	uint32_t* a1 = a1p;
 	uint32_t* result; // eax
 

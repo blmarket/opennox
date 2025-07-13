@@ -32,7 +32,7 @@ void sub_4BDB90(uint32_t* a1, uint32_t* a2);
 int sub_4BDA80(int a1);
 int sub_4BDB30(int a1);
 void sub_452190(int a1);
-int* sub_4521A0(int a1);
+struct200* sub_4521A0(int a1);
 int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BD660(int a1);
 int sub_4BD650(int a1);
@@ -110,32 +110,33 @@ int sub_451FE0(struct576* a1p) {
 
 //----- (00452120) --------------------------------------------------------
 bool sub_452120(struct576* a1p) {
-	int v1;      // ebp
-	int* result; // eax
-	int* v3;     // ebx
+	// int* result; // eax
+	// int* v3; // ebx
 
-	v1 = 0;
-	result = sub_4521A0(a1p->field_75 + a1p->field_9->field_12);
-	v3 = result;
-	if (result) {
-		sub_452190((int)result);
-		struct576* v4p;
-		struct576* v5p;
-		v4p = get_list_at_840612()->field_0;
-		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
-			do {
-				v5p = v4p->next;
-				if (v4p->field_9 == v3) {
-					sub_4523D0(v4p);
-					sub_451FE0(v4p);
-					v1 = 1;
-				}
-				v4p = v5p;
-			} while (v5p != get_list_at_840612());
-		}
-		result = (int*)v1;
+	bool v1 = false;
+	struct200* res;
+	struct200* v3p;
+	res = sub_4521A0(a1p->field_75 + a1p->field_9->field_12);
+	v3p = res;
+	if (res == 0) {
+		return false;
 	}
-	return (result != 0);
+	sub_452190(res);
+	struct576* v4p;
+	struct576* v5p;
+	v4p = get_list_at_840612()->field_0;
+	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
+		do {
+			v5p = v4p->next;
+			if (v4p->field_9 == v3p) {
+				sub_4523D0(v4p);
+				sub_451FE0(v4p);
+				v1 = true;
+			}
+			v4p = v5p;
+		} while (v5p != get_list_at_840612());
+	}
+	return v1;
 }
 
 //----- (004523D0) --------------------------------------------------------
@@ -557,7 +558,7 @@ int sub_452770(uint32_t* a1) {
 
 //----- (00452050) --------------------------------------------------------
 void sub_452050(struct576* a1p) {
-	uint32_t* v1;      // esi
+	// uint32_t* v1;      // esi
 	int v2;            // edi
 	unsigned int v3;   // ebx
 	unsigned char* v4; // ebp
@@ -567,31 +568,31 @@ void sub_452050(struct576* a1p) {
 	uint32_t* v8;      // esi
 
 	struct200* v1p;
-	v1 = v1p = a1p->field_9;
-	v2 = v1[12] + a1p->field_75;
+	v1p = a1p->field_9;
+	v2 = v1p->field_12 + a1p->field_75;
 	v3 = (a1p->timerGroup_46.field_0.field_1 >> 16) / 0x666u;
 	v4 = getMemAt(0x5D4594, 839892 + 120 * v2);
-	if (v1[26] == *getMemU32Ptr(0x5D4594, 1045444)) {
-		result = (uint32_t*)v1[27];
+	if (v1p->field_26 == *getMemU32Ptr(0x5D4594, 1045444)) {
+		result = v1p->field_27;
 		if (v2 <= (int)result) {
-			if ((uint32_t*)v2 == result && v3 > v1[31]) {
-				v1[31] = v3;
-				v7 = (uint32_t**)(v1 + 28);
+			if ((uint32_t*)v2 == result && v3 > v1p->field_31) {
+				v1p->field_31 = v3;
+				v7 = &v1p->field_28;
 				nox_common_list_remove_425920(v7);
 				nox_common_list_append_4258E0((int)&v4[12 * v3], v7);
 			}
 		} else {
-			v1[27] = v2;
-			v1[31] = v3;
-			v6 = (uint32_t**)(v1 + 28);
+			v1p->field_27 = v2;
+			v1p->field_31 = v3;
+			v6 = &v1p->field_28;
 			nox_common_list_remove_425920(v6);
 			nox_common_list_append_4258E0((int)&v4[12 * v3], v6);
 		}
 	} else {
-		v1[26] = *getMemU32Ptr(0x5D4594, 1045444);
-		v1[27] = v2;
-		v1[31] = v3;
-		v8 = v1 + 28;
+		v1p->field_26 = *getMemU32Ptr(0x5D4594, 1045444);
+		v1p->field_27 = v2;
+		v1p->field_31 = v3;
+		v8 = &v1p->field_28;
 		sub_425770(v8);
 		nox_common_list_append_4258E0((int)&v4[12 * v3], v8);
 	}
@@ -599,7 +600,7 @@ void sub_452050(struct576* a1p) {
 
 //----- (00451BE0) --------------------------------------------------------
 int sub_451BE0(struct576* a1p) {
-	int v2;          // edi
+	// int v2;          // edi
 	unsigned int v3; // ebx
 	uint32_t* v4;    // esi
 	int v5;          // eax
@@ -610,22 +611,22 @@ int sub_451BE0(struct576* a1p) {
 	uint32_t* v10;   // esi
 
 	struct200* v2p;
-	v2 = v2p = a1p->field_9;
+	v2p = a1p->field_9;
 	v3 = (uint32_t)(a1p->timerGroup_46.field_0.field_1) >> 16;
-	v4 = *(uint32_t**)(v2 + 88);
-	if (v4 != (uint32_t*)(v2 + 88)) {
+	v4 = v2p->field_22.field_0;
+	if (v4 != v2p->field_22.field_0) {
 		do {
 			v5 = (v4[44] >> 16) - v3;
 			if (v5 < 0) {
 				v5 = v3 - (v4[44] >> 16);
 			}
-			if (v5 >= (*(uint32_t*)(v2 + 20) >> 16) / 10) {
+			if (v5 >= (v2p->field_4.field_1 >> 16) / 10) {
 				if (v4[44] >> 16 < v3) {
 					break;
 				}
 			} else {
 				v6 = v4[4];
-				if (*(uint8_t*)(v2 + 4) & 0x10) {
+				if (v2p->field_1 & 0x10) {
 					if (v6) {
 						break;
 					}
@@ -634,21 +635,21 @@ int sub_451BE0(struct576* a1p) {
 				}
 			}
 			v4 = (uint32_t*)*v4;
-		} while (v4 != (uint32_t*)(v2 + 88));
+		} while (v4 != &v2p->field_22);
 	}
 	v7 = (uint32_t*)&a1p->field_3;
 	sub_425770((uint32_t*)&a1p->field_3);
 	nox_common_list_append_4258E0((int)v4, v7);
-	result = *(uint32_t*)(v2 + 56);
-	v9 = *(uint32_t*)(v2 + 52) + 1;
-	*(uint32_t*)(v2 + 52) = v9;
+	result = v2p->field_14;
+	v9 = v2p->field_13 + 1;
+	v2p->field_13 = v9;
 	if (result) {
 		if (v9 > result) {
-			v10 = (uint32_t*)(*(uint32_t*)(v2 + 92) - 12);
-			nox_common_list_remove_425920(*(uint32_t***)(v2 + 92));
+			v10 = (uint32_t*)((uint32_t)v2p->field_22.field_1 - 12);
+			nox_common_list_remove_425920(v2p->field_22.field_1);
 			sub_4523D0(v10);
-			result = *(uint32_t*)(v2 + 52) - 1;
-			*(uint32_t*)(v2 + 52) = result;
+			result = v2p->field_13 - 1;
+			v2p->field_13 = result;
 		}
 	}
 	return result;
