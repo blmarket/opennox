@@ -115,6 +115,22 @@ nox_gui_animation* nox_wnd_xxx_1522608 = 0;
 void* nox_gui_itemAmount_item_1319256 = 0;
 void* nox_gui_itemAmount_dialog_1319228 = 0;
 
+//----- (004BD2E0) --------------------------------------------------------
+// Get an unoccupied element from preallocated list
+// Param: head of the preallocated list
+uint32_t* sub_4BD2E0(uint32_t** a1) {
+	uint32_t* result; // eax
+	uint32_t* v2;     // edx
+
+	result = *a1; // Get free element from head
+	if (*a1) {
+		v2 = (uint32_t*)*result; // Get the next free element
+		++result;                // Body is 4 byte offset from element
+		*a1 = v2;                // Update head with the next free element
+	}
+	return result;
+}
+
 //----- (004B9470) --------------------------------------------------------
 int sub_4B9470(const char** a1) {
 	const char* v1;    // esi
