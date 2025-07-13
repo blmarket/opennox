@@ -1008,31 +1008,6 @@ int sub_4526D0(int a1) {
 	return 0;
 }
 
-//----- (004526F0) --------------------------------------------------------
-int sub_4526F0(int a1) {
-	struct576* v1p;
-	// uint32_t* v1; // esi
-	int v2; // eax
-
-	v1p = *(uint32_t**)(a1 + 152);
-	v1p->field_6 &= 0xFFFFFFFD;
-	v2 = 4;
-	if (v1p->field_7 != 4) {
-		if (v1p->field_74 || v1p->field_142) {
-			v2 = 1;
-		} else {
-			v1p->field_71 = 0;
-		}
-		if (v1p->field_71) {
-			sub_452690(v1p, v1p->field_71, v2);
-			v1p->field_71 = 0;
-			return 0;
-		}
-		v1p->field_7 = v2;
-	}
-	return 0;
-}
-
 //----- (00452810) --------------------------------------------------------
 int* sub_452810(int a1, char a2) {
 	int* v2; // esi

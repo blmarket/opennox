@@ -38,6 +38,31 @@ int sub_4BD660(int a1);
 int sub_4BD650(int a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 
+//----- (004526F0) --------------------------------------------------------
+int sub_4526F0(int a1) {
+	struct576* v1p;
+	// uint32_t* v1; // esi
+	int v2; // eax
+
+	v1p = *(uint32_t**)(a1 + 152);
+	v1p->field_6 &= 0xFFFFFFFD;
+	v2 = 4;
+	if (v1p->field_7 != 4) {
+		if (v1p->field_74 || v1p->field_142) {
+			v2 = 1;
+		} else {
+			v1p->field_71 = 0;
+		}
+		if (v1p->field_71) {
+			sub_452690(v1p, v1p->field_71, v2);
+			v1p->field_71 = 0;
+			return 0;
+		}
+		v1p->field_7 = v2;
+	}
+	return 0;
+}
+
 //----- (00451CA0) --------------------------------------------------------
 int sub_451CA0(struct576* a1p) {
 	int v1;       // ecx
