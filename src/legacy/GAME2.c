@@ -900,21 +900,15 @@ void sub_4519C0() {
 
 //----- (00452010) --------------------------------------------------------
 int sub_452010() {
-	unsigned char* v0; // esi
-	int v1;            // ebx
-	int v2;            // edi
+	int v1; // ebx
+	int v2; // edi
 
-	v0 = getMemAt(0x5D4594, 839892);
-	v1 = 6;
-	do {
-		v2 = 10;
-		do {
-			nox_common_list_clear_425760(v0);
-			v0 += 12;
-			--v2;
-		} while (v2);
-		--v1;
-	} while (v1);
+	nox_list_item_t(*v0)[10] = getMemAt(0x5D4594, 839892);
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 10; j++) {
+			nox_common_list_clear_425760(&v0[i][j]);
+		}
+	}
 	return ++*getMemU32Ptr(0x5D4594, 1045444);
 }
 
@@ -923,28 +917,21 @@ void sub_452190(struct200* a1) { nox_common_list_remove_425920(&a1->field_28); }
 
 //----- (004521A0) --------------------------------------------------------
 struct200* sub_4521A0(int a1) {
-	int v1;            // ebp
-	unsigned char* v2; // ebx
-	int v3;            // edi
-	int* v4;           // esi
-	int* v5;           // eax
+	int v1; // ebp
+	nox_list_item_t* v4p;
+	int* v5; // eax
 
+	nox_list_item_t(*v2p)[10] = getMemAt(0x5D4594, 839892);
 	v1 = 0;
-	v2 = getMemAt(0x5D4594, 839892);
 	if (a1 > 0) {
 		while (1) {
-			v3 = 0;
-			v4 = (int*)v2;
-			do {
-				v5 = nox_common_list_getFirstSafe_425890(v4);
+			for (int v3 = 0; v3 < 10; v3++) {
+				v5 = nox_common_list_getFirstSafe_425890(&v2p[v1][v3]);
 				if (v5) {
 					return v5 - 28;
 				}
-				++v3;
-				v4 += 3;
-			} while (v3 < 10);
+			}
 			++v1;
-			v2 += 120;
 			if (v1 < a1) {
 				continue;
 			}
