@@ -8,6 +8,7 @@ package legacy
 #include "GAME2_2.h"
 #include "GAME3_2.h"
 #include "GAME5.h"
+#include "audio.h"
 #include "common__net_list.h"
 #include "client__system__parsecmd.h"
 #include "common__object__armrlook.h"

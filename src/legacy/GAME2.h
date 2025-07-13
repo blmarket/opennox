@@ -48,7 +48,6 @@ int sub_450AF0(int a1);
 void nox_gui_setQuestStage_450B00(int a1);
 int nox_gui_getQuestStage_450B10();
 void sub_451920(struct200* a2);
-void sub_451970();
 int sub_451BE0(struct576* a1);
 int sub_451CA0(struct576* a1);
 int sub_451F30(struct576* a1, int a2);

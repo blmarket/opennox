@@ -8,6 +8,7 @@ nox_list_item_t* get_list_at_840612();
 
 // Functions that take struct576 as parameter
 // public
+void sub_451970();
 int sub_451BE0(struct576* a1p);
 int sub_451CA0(struct576* a1);
 int sub_451DC0(struct576* a1);

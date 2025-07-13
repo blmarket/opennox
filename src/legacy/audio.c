@@ -1,6 +1,8 @@
 #include "audio.h"
 #include "memmap.h"
 
+#include "GAME3_1.h"
+
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
 // It holds memory allocation holding 200 elements of struct576. The first 4 bytes points to next free element (or 0 if
@@ -9,13 +11,17 @@ extern struct28* dword_5d4594_1045424;
 extern uint32_t* dword_5d4594_1045436;
 extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045432;
+extern void* dword_587000_127004;
 
 // Common library using list access
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nox_common_list_remove_425920(void* a1);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
+void nox_common_list_clear_425760(nox_list_item_t* list);
 void* sub_425770(void* a1);
+int sub_486520(/* timerGroup */ void* a2);
+int sub_4862E0(/* timer */ void* a3, int a4);
 
 int* sub_452810(int a1, char a2);
 int sub_4526D0(int a1);
@@ -55,128 +61,6 @@ void sub_451920(struct200* a2p) {
 	a2p->field_26 = 0;
 	a2p->field_16 = 600;
 	sub_4862E0(&a2p->field_4, 0x4000);
-}
-
-//----- (00451970) --------------------------------------------------------
-void sub_451970() {
-	sub_4521F0();
-	sub_452230();
-	if (dword_5d4594_1045424) {
-		sub_4BD3C0(dword_5d4594_1045424);
-		dword_5d4594_1045424 = 0;
-	}
-	if (dword_5d4594_1045436) {
-		sub_4BD2D0(*(void**)&dword_5d4594_1045436);
-		dword_5d4594_1045436 = 0;
-	}
-	dword_5d4594_1045432 = 0;
-}
-
-//----- (004519C0) --------------------------------------------------------
-void sub_4519C0() {
-	int result; // eax
-	// int v2;         // eax
-	int v3;         // ebp
-	int v4;         // eax
-	struct576* v6p; // esi
-	struct576* v7p;
-	int v8;  // eax
-	int v9;  // eax
-	int v10; // eax
-	struct200* v2p;
-
-	result = dword_5d4594_1045432;
-	if (!dword_5d4594_1045432) {
-		return;
-	}
-	result = *getMemU32Ptr(0x5D4594, 1045448);
-	if (*getMemU32Ptr(0x5D4594, 1045448)) {
-		return;
-	}
-	*getMemU32Ptr(0x5D4594, 1045448) = 1;
-	sub_486520(*(unsigned int**)&dword_587000_127004);
-	struct576* v1p;
-	v1p = get_list_at_840612()->field_0;
-	++*getMemU32Ptr(0x5D4594, 1045440);
-	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
-		do {
-			v2p = v1p->field_9;
-			if (v2p->field_25 != *getMemU32Ptr(0x5D4594, 1045440)) {
-				nox_common_list_clear_425760(&v2p->field_22);
-				v1p->field_9->field_13 = 0;
-				v1p->field_9->field_25 = *getMemU32Ptr(0x5D4594, 1045440);
-			}
-			sub_486520(&v1p->timerGroup_46);
-			if (v1p->field_7 != 4) {
-				sub_451BE0(v1p);
-			}
-			v1p = v1p->next;
-		} while (v1p != get_list_at_840612());
-		v1p = get_list_at_840612()->field_0;
-		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
-			do {
-				sub_452510(v1p);
-				v1p = v1p->next;
-			} while (v1p != get_list_at_840612());
-			v1p = get_list_at_840612()->field_0;
-		}
-	}
-	v3 = 0;
-	sub_452010();
-	if (v1p != get_list_at_840612()) {
-		struct576* v5p;
-		do {
-			v4 = v1p->field_44;
-			v5p = v1p->next;
-			if (!v4 || v1p != *(uint32_t*)(v4 + 152)) {
-				sub_4523D0(v1p);
-			}
-			if (v1p->field_6 & 1) {
-				sub_451FE0(v1p);
-			} else {
-				v3 += (unsigned int)(33 * (v1p->field_9->field_4.field_1 >> 16)) >> 14;
-				sub_452050(v1p);
-			}
-			v1p = v5p;
-		} while (v5p != get_list_at_840612());
-	}
-	if (v3 <= 100) {
-		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x4000);
-	} else {
-		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x190000u / v3);
-	}
-	result = sub_486520(getMemUintPtr(0x5D4594, 1045228));
-	v6p = get_list_at_840612()->field_0;
-	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
-		do {
-			v7p = v6p->next;
-			result = v6p->field_7;
-			if (result == 1) {
-				sub_451DC0(v6p);
-				v8 = sub_451CA0(v6p);
-				v6p->field_74 = v8;
-				if (!v8) {
-					do {
-						if (!sub_452120(v6p)) {
-							break;
-						}
-						v7p = v6p->next;
-						sub_451DC0(v6p);
-						v9 = sub_451CA0(v6p);
-						v6p->field_74 = v9;
-					} while (!v9);
-				}
-				v10 = sub_451CA0(v6p);
-				v6p->field_74 = v10;
-				if (!v10 || (result = sub_452490(v6p)) == 0) {
-					sub_4523D0(v6p);
-					result = sub_451FE0(v6p);
-				}
-			}
-			v6p = v7p;
-		} while (v7p != get_list_at_840612());
-	}
-	*getMemU32Ptr(0x5D4594, 1045448) = 0;
 }
 
 //----- (00452010) --------------------------------------------------------
@@ -912,4 +796,126 @@ int sub_451BE0(struct576* a1p) {
 		}
 	}
 	return result;
+}
+
+//----- (00451970) --------------------------------------------------------
+void sub_451970() {
+	sub_4521F0();
+	sub_452230();
+	if (dword_5d4594_1045424) {
+		sub_4BD3C0(dword_5d4594_1045424);
+		dword_5d4594_1045424 = 0;
+	}
+	if (dword_5d4594_1045436) {
+		sub_4BD2D0(*(void**)&dword_5d4594_1045436);
+		dword_5d4594_1045436 = 0;
+	}
+	dword_5d4594_1045432 = 0;
+}
+
+//----- (004519C0) --------------------------------------------------------
+void sub_4519C0() {
+	int result; // eax
+	// int v2;         // eax
+	int v3;         // ebp
+	int v4;         // eax
+	struct576* v6p; // esi
+	struct576* v7p;
+	int v8;  // eax
+	int v9;  // eax
+	int v10; // eax
+	struct200* v2p;
+
+	result = dword_5d4594_1045432;
+	if (!dword_5d4594_1045432) {
+		return;
+	}
+	result = *getMemU32Ptr(0x5D4594, 1045448);
+	if (*getMemU32Ptr(0x5D4594, 1045448)) {
+		return;
+	}
+	*getMemU32Ptr(0x5D4594, 1045448) = 1;
+	sub_486520(*(unsigned int**)&dword_587000_127004);
+	struct576* v1p;
+	v1p = get_list_at_840612()->field_0;
+	++*getMemU32Ptr(0x5D4594, 1045440);
+	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
+		do {
+			v2p = v1p->field_9;
+			if (v2p->field_25 != *getMemU32Ptr(0x5D4594, 1045440)) {
+				nox_common_list_clear_425760(&v2p->field_22);
+				v1p->field_9->field_13 = 0;
+				v1p->field_9->field_25 = *getMemU32Ptr(0x5D4594, 1045440);
+			}
+			sub_486520(&v1p->timerGroup_46);
+			if (v1p->field_7 != 4) {
+				sub_451BE0(v1p);
+			}
+			v1p = v1p->next;
+		} while (v1p != get_list_at_840612());
+		v1p = get_list_at_840612()->field_0;
+		if (get_list_at_840612()->field_0 != get_list_at_840612()) {
+			do {
+				sub_452510(v1p);
+				v1p = v1p->next;
+			} while (v1p != get_list_at_840612());
+			v1p = get_list_at_840612()->field_0;
+		}
+	}
+	v3 = 0;
+	sub_452010();
+	if (v1p != get_list_at_840612()) {
+		struct576* v5p;
+		do {
+			v4 = v1p->field_44;
+			v5p = v1p->next;
+			if (!v4 || v1p != *(uint32_t*)(v4 + 152)) {
+				sub_4523D0(v1p);
+			}
+			if (v1p->field_6 & 1) {
+				sub_451FE0(v1p);
+			} else {
+				v3 += (unsigned int)(33 * (v1p->field_9->field_4.field_1 >> 16)) >> 14;
+				sub_452050(v1p);
+			}
+			v1p = v5p;
+		} while (v5p != get_list_at_840612());
+	}
+	if (v3 <= 100) {
+		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x4000);
+	} else {
+		sub_486350((int)getMemAt(0x5D4594, 1045228), 0x190000u / v3);
+	}
+	result = sub_486520(getMemUintPtr(0x5D4594, 1045228));
+	v6p = get_list_at_840612()->field_0;
+	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
+		do {
+			v7p = v6p->next;
+			result = v6p->field_7;
+			if (result == 1) {
+				sub_451DC0(v6p);
+				v8 = sub_451CA0(v6p);
+				v6p->field_74 = v8;
+				if (!v8) {
+					do {
+						if (!sub_452120(v6p)) {
+							break;
+						}
+						v7p = v6p->next;
+						sub_451DC0(v6p);
+						v9 = sub_451CA0(v6p);
+						v6p->field_74 = v9;
+					} while (!v9);
+				}
+				v10 = sub_451CA0(v6p);
+				v6p->field_74 = v10;
+				if (!v10 || (result = sub_452490(v6p)) == 0) {
+					sub_4523D0(v6p);
+					result = sub_451FE0(v6p);
+				}
+			}
+			v6p = v7p;
+		} while (v7p != get_list_at_840612());
+	}
+	*getMemU32Ptr(0x5D4594, 1045448) = 0;
 }
