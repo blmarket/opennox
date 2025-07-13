@@ -793,8 +793,8 @@ void sub_451970() {
 
 //----- (004519C0) --------------------------------------------------------
 void sub_4519C0() {
-	int result;     // eax
-	int v2;         // eax
+	int result; // eax
+	// int v2;         // eax
 	int v3;         // ebp
 	int v4;         // eax
 	struct576* v6p; // esi
@@ -802,6 +802,7 @@ void sub_4519C0() {
 	int v8;  // eax
 	int v9;  // eax
 	int v10; // eax
+	struct200* v2p;
 
 	result = dword_5d4594_1045432;
 	if (!dword_5d4594_1045432) {
@@ -818,11 +819,11 @@ void sub_4519C0() {
 	++*getMemU32Ptr(0x5D4594, 1045440);
 	if (get_list_at_840612()->field_0 != get_list_at_840612()) {
 		do {
-			v2 = v1p->field_9;
-			if (*(uint32_t*)(v2 + 100) != *getMemU32Ptr(0x5D4594, 1045440)) {
-				nox_common_list_clear_425760((uint32_t*)(v2 + 88));
-				*(uint32_t*)((uint32_t)v1p->field_9 + 52) = 0;
-				*(uint32_t*)((uint32_t)v1p->field_9 + 100) = *getMemU32Ptr(0x5D4594, 1045440);
+			v2p = v1p->field_9;
+			if (v2p->field_25 != *getMemU32Ptr(0x5D4594, 1045440)) {
+				nox_common_list_clear_425760(&v2p->field_22);
+				v1p->field_9->field_13 = 0;
+				v1p->field_9->field_25 = *getMemU32Ptr(0x5D4594, 1045440);
 			}
 			sub_486520(&v1p->timerGroup_46);
 			if (v1p->field_7 != 4) {
@@ -852,7 +853,7 @@ void sub_4519C0() {
 			if (v1p->field_6 & 1) {
 				sub_451FE0(v1p);
 			} else {
-				v3 += (unsigned int)(33 * (*(uint32_t*)((uint32_t)v1p->field_9 + 20) >> 16)) >> 14;
+				v3 += (unsigned int)(33 * (v1p->field_9->field_4.field_1 >> 16)) >> 14;
 				sub_452050(v1p);
 			}
 			v1p = v5p;
@@ -921,7 +922,7 @@ int sub_452010() {
 void sub_452190(int a1) { nox_common_list_remove_425920((uint32_t**)(a1 + 112)); }
 
 //----- (004521A0) --------------------------------------------------------
-int* sub_4521A0(int a1) {
+struct200* sub_4521A0(int a1) {
 	int v1;            // ebp
 	unsigned char* v2; // ebx
 	int v3;            // edi
@@ -1078,7 +1079,6 @@ int nox_thing_read_AVNT_452890(nox_memfile* a1p, void* a2) {
 	int v2;             // esi
 	unsigned char* v3;  // eax
 	int v4;             // eax
-	char* v5;           // ebx
 	char* v6;           // eax
 	char v7;            // dl
 	char* v8;           // eax
@@ -1112,7 +1112,9 @@ int nox_thing_read_AVNT_452890(nox_memfile* a1p, void* a2) {
 	nox_memfile_read(a2, 1u, v28, v21);
 	*((uint8_t*)a2 + v28) = 0;
 	v4 = nox_xxx_utilFindSound_40AF50(a2);
-	if (v4 && (v5 = nox_xxx_draw_452270(v4)) != 0) {
+	// char* v5; // ebx
+	struct200* v5p;
+	if (v4 && (v5p = nox_xxx_draw_452270(v4)) != 0) {
 		while (1) {
 			v6 = *(char**)(v2 + 8);
 			v7 = *v6;
@@ -1120,46 +1122,46 @@ int nox_thing_read_AVNT_452890(nox_memfile* a1p, void* a2) {
 			*(uint32_t*)(v2 + 8) = v8;
 			switch (v7) {
 			case 0:
-				*(uint32_t*)v5 = 1;
+				v5p->field_0 = 1;
 				result = v7 == 0;
 				break;
 			case 1:
 				v23 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				*((uint32_t*)v5 + 12) = v23;
+				v5p->field_12 = v23;
 				continue;
 			case 2:
 				v26 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				*((uint32_t*)v5 + 1) = v26;
+				v5p->field_1 = v26;
 				continue;
 			case 3:
 				v27 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				sub_4862E0((int)(v5 + 16), 163 * v27);
+				sub_4862E0(&v5p->field_4, 163 * v27);
 				continue;
 			case 4:
 				v24 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				*((uint32_t*)v5 + 14) = v24;
+				v5p->field_14 = v24;
 				continue;
 			case 5:
 				v25 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				*((uint32_t*)v5 + 15) = v25;
+				v5p->field_15 = v25;
 				continue;
 			case 6:
 				v17 = *v8;
 				*(uint32_t*)(v2 + 8) = v8 + 1;
-				*((uint32_t*)v5 + 19) = v17;
+				v5p->field_19 = v17;
 				v18 = *(char**)(v2 + 8);
 				v19 = *v18;
 				*(uint32_t*)(v2 + 8) = v18 + 1;
-				*((uint32_t*)v5 + 20) = v19;
+				v5p->field_20 = v19;
 				continue;
 			case 7:
 				v9 = 0;
-				v22 = v5 + 128;
+				v22 = &v5p->field_32[0];
 				while (1) {
 					v10 = *(unsigned char**)(v2 + 8);
 					v29 = *v10;
@@ -1178,28 +1180,28 @@ int nox_thing_read_AVNT_452890(nox_memfile* a1p, void* a2) {
 						}
 					}
 				}
-				*((uint32_t*)v5 + 48) = v9;
+				v5p->field_48 = v9;
 				continue;
 			case 8:
 				v12 = *(uint32_t*)v8;
 				*(uint32_t*)(v2 + 8) = v8 + 4;
-				*((uint32_t*)v5 + 17) = v12;
+				v5p->field_17 = v12;
 				v13 = *(int**)(v2 + 8);
 				v14 = *v13;
 				*(uint32_t*)(v2 + 8) = v13 + 1;
-				*((uint32_t*)v5 + 18) = v14;
+				v5p->field_18 = v14;
 				continue;
 			case 9:
 				v15 = *(uint16_t*)v8;
 				*(uint32_t*)(v2 + 8) = v8 + 2;
 				if (v15 > 0) {
-					*((uint32_t*)v5 + 16) = 15 * v15;
+					v5p->field_16 = 15 * v15;
 				}
 				continue;
 			case 0xA:
 				v16 = *(uint16_t*)v8;
 				*(uint32_t*)(v2 + 8) = v8 + 2;
-				*((uint32_t*)v5 + 2) = v16;
+				v5p->field_2 = v16;
 				continue;
 			default:
 				result = 0;
@@ -1275,7 +1277,6 @@ int sub_452BD0(int a1, char* a2) {
 	char* v4;           // eax
 	int v5;             // edi
 	int v6;             // eax
-	char* v7;           // edi
 	short* v8;          // eax
 	short v9;           // cx
 	unsigned char* v10; // eax
@@ -1310,41 +1311,43 @@ int sub_452BD0(int a1, char* a2) {
 	nox_memfile_read(a2, 1u, v5, a1);
 	a2[v5] = 0;
 	v6 = nox_xxx_utilFindSound_40AF50(a2);
-	if (v6 && (v7 = nox_xxx_draw_452270(v6)) != 0) {
+	// char* v7; // edi
+	struct200* v7p;
+	if (v6 && (v7p = nox_xxx_draw_452270(v6)) != 0) {
 		v8 = *(short**)(a1 + 8);
 		v9 = *v8;
 		*(uint32_t*)(a1 + 8) = v8 + 1;
-		*((uint32_t*)v7 + 1) = 2;
-		*((uint32_t*)v7 + 2) = v9;
+		v7p->field_1 = 2;
+		v7p->field_2 = v9;
 		v10 = *(unsigned char**)(a1 + 8);
 		v30 = *v10;
 		*(uint32_t*)(v2 + 8) = v10 + 1;
-		sub_4862E0((int)(v7 + 16), 163 * v30);
+		sub_4862E0(&v7p->field_4, 163 * v30);
 		v11 = *(short**)(v2 + 8);
 		v12 = *v11;
 		*(uint32_t*)(v2 + 8) = v11 + 1;
 		if (v12 > 0) {
-			*((uint32_t*)v7 + 16) = 15 * v12;
+			v7p->field_16 = 15 * v12;
 		}
 		v13 = *(char**)(v2 + 8);
 		v14 = *v13;
 		*(uint32_t*)(v2 + 8) = v13 + 1;
-		*((uint32_t*)v7 + 14) = v14;
+		v7p->field_14 = v14;
 		v15 = *(char**)(v2 + 8);
 		v16 = *v15;
 		*(uint32_t*)(v2 + 8) = v15 + 1;
-		*((uint32_t*)v7 + 19) = v16;
+		v7p->field_19 = v16;
 		v17 = *(char**)(v2 + 8);
 		v18 = *v17;
 		*(uint32_t*)(v2 + 8) = v17 + 1;
-		*((uint32_t*)v7 + 20) = v18;
+		v7p->field_20 = v18;
 		v19 = *(char**)(v2 + 8);
 		v20 = *v19;
 		*(uint32_t*)(v2 + 8) = v19 + 1;
-		*((uint32_t*)v7 + 12) = v20;
+		v7p->field_12 = v20;
 		if (v20 < 3) {
 			v32 = 0;
-			v31 = v7 + 128;
+			v31 = &v7p->field_32[0];
 			while (1) {
 				v22 = *(char**)(v2 + 8);
 				v23 = *v22;
@@ -1366,8 +1369,8 @@ int sub_452BD0(int a1, char* a2) {
 					++v31;
 				}
 			}
-			*(uint32_t*)v7 = 1;
-			*((uint32_t*)v7 + 48) = v32;
+			v7p->field_0 = 1;
+			v7p->field_48 = v32;
 			result = 1;
 		} else {
 			result = 0;
@@ -1389,14 +1392,14 @@ int sub_452BD0(int a1, char* a2) {
 
 //----- (00452D80) --------------------------------------------------------
 void nox_xxx_clientPlaySoundSpecial_452D80(int a1, int a2) {
-	uint32_t* result; // eax
-	struct576* v3;    // esi
+	struct200* res;
+	struct576* v3; // esi
 
-	result = nox_xxx_draw_452270(a1);
-	if (!result) {
+	res = nox_xxx_draw_452270(a1);
+	if (!res) {
 		return;
 	}
-	v3 = nox_xxx_draw_452300(result);
+	v3 = nox_xxx_draw_452300(res);
 	if (!v3) {
 		return;
 	}

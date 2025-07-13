@@ -66,8 +66,7 @@ int sub_451F30(struct576* a1p, int a2) {
 	int v2;     // edx
 	int result; // eax
 
-	a1p->field_10[a1p->field_42] =
-		sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, *(short*)((uint32_t)a1p->field_9 + 2 * a2 + 128));
+	a1p->field_10[a1p->field_42] = sub_4BD470((uint32_t**)&dword_5d4594_1045424->field_0, a1p->field_9->field_32[a2]);
 	v2 = a1p->field_42;
 	result = a1p->field_10[v2];
 	if (result) {
@@ -116,7 +115,7 @@ bool sub_452120(struct576* a1p) {
 	int* v3;     // ebx
 
 	v1 = 0;
-	result = sub_4521A0(a1p->field_75 + *(uint32_t*)((uint32_t)a1p->field_9 + 48));
+	result = sub_4521A0(a1p->field_75 + a1p->field_9->field_12);
 	v3 = result;
 	if (result) {
 		sub_452190((int)result);
@@ -240,7 +239,8 @@ long long sub_452690(struct576* a3p, long long a4, int a5) {
 }
 
 //----- (00452300) --------------------------------------------------------
-struct576* nox_xxx_draw_452300(uint32_t* a1) {
+struct576* nox_xxx_draw_452300(struct200* a1p) {
+	// uint32_t* a1 = a1p;
 	struct576* v1; // esi
 
 	if (!dword_5d4594_1045432) {
@@ -249,7 +249,7 @@ struct576* nox_xxx_draw_452300(uint32_t* a1) {
 	if (!dword_587000_126996) {
 		return 0;
 	}
-	if (!*a1) {
+	if (!a1p->field_0) {
 		return 0;
 	}
 	v1 = sub_4BD2E0(*(uint32_t***)&dword_5d4594_1045436);
@@ -261,7 +261,7 @@ struct576* nox_xxx_draw_452300(uint32_t* a1) {
 		}
 	}
 	memset(v1, 0, sizeof(struct576));
-	v1->field_9 = a1;
+	v1->field_9 = a1p;
 	sub_425770(v1);
 	v1->field_7 = 0;
 	v1->field_75 = 0;
@@ -286,14 +286,13 @@ void sub_452E90(nox_drawable_inner3* a1, struct576* a2) {
 //----- (00452EB0) --------------------------------------------------------
 struct576* sub_452EB0(nox_drawable_inner3* a1) {
 	struct576* res;
-	int result; // eax
 
-	result = res = a1->field_0;
-	if (a1->field_0 && (a1->field_2 != *(uint32_t*)(result + 36) || a1->field_1 != *(uint32_t*)(result + 280))) {
-		result = res = 0;
+	res = a1->field_0;
+	if (a1->field_0 && (a1->field_2 != res->field_9 || a1->field_1 != res->field_70)) {
+		res = 0;
 		a1->field_0 = 0;
 	}
-	return result;
+	return res;
 }
 
 //----- (00452EE0) --------------------------------------------------------
@@ -317,7 +316,7 @@ unsigned int sub_452F10(struct576* a1p, int a2) {
 	} else {
 		v2 = 100;
 	}
-	return (unsigned int)(163 * v2 * (*(uint32_t*)((uint32_t)a1p->field_9 + 20) >> 16)) >> 14;
+	return (unsigned int)(163 * v2 * (a1p->field_9->field_4.field_1 >> 16)) >> 14;
 }
 
 //----- (00452F50) --------------------------------------------------------
@@ -348,7 +347,8 @@ int sub_451CF0(struct576* a1p) {
 	uint32_t* v8; // eax
 	int v9;       // eax
 
-	v1 = (int)a1p->field_9;
+	struct200* v1p;
+	v1 = v1p = a1p->field_9;
 	result = a1p->field_108;
 	v3 = *(uint32_t*)(v1 + 4);
 	if (result) {
@@ -390,7 +390,8 @@ int sub_451DC0(struct576* a1p) {
 	int v5;       // eax
 	int v6;       // eax
 
-	v1 = a1p->field_9;
+	struct200* v1p;
+	v1 = v1p = a1p->field_9;
 	result = a1p->field_42;
 	v3 = v1[1];
 	if (result) {
@@ -427,7 +428,8 @@ int sub_452580(struct576* a1p) {
 	int v4;     // eax
 	int v5;     // eax
 
-	v1 = (int)a1p->field_9;
+	struct200* v1p;
+	v1 = v1p = a1p->field_9;
 	if (!*(uint32_t*)(v1 + 192)) {
 		return 0;
 	}
@@ -533,12 +535,13 @@ int sub_452770(uint32_t* a1) {
 
 	v1p = (uint32_t*)a1[38];
 	v2 = (uint32_t*)sub_451CF0((uint32_t*)a1[38]);
-	if (*(uint32_t*)((uint32_t)v1p->field_9 + 72) < 0x21u) {
+	if (v1p->field_9->field_18 < 0x21u) {
 		sub_4BDB90(a1, v2);
 		return 0;
 	}
 	sub_4BDB90(a1, 0);
-	v4 = v1p->field_9;
+	struct200* v4p;
+	v4 = v4p = v1p->field_9;
 	if (!(*(uint8_t*)(v4 + 4) & 8) || v2 || v1p->field_142) {
 		v5 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v4 + 68), *(uint32_t*)(v4 + 72),
 											   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 706);
@@ -563,7 +566,8 @@ void sub_452050(struct576* a1p) {
 	uint32_t** v7;     // esi
 	uint32_t* v8;      // esi
 
-	v1 = (uint32_t*)a1p->field_9;
+	struct200* v1p;
+	v1 = v1p = a1p->field_9;
 	v2 = v1[12] + a1p->field_75;
 	v3 = (a1p->timerGroup_46.field_0.field_1 >> 16) / 0x666u;
 	v4 = getMemAt(0x5D4594, 839892 + 120 * v2);
@@ -605,7 +609,8 @@ int sub_451BE0(struct576* a1p) {
 	int v9;          // esi
 	uint32_t* v10;   // esi
 
-	v2 = a1p->field_9;
+	struct200* v2p;
+	v2 = v2p = a1p->field_9;
 	v3 = (uint32_t)(a1p->timerGroup_46.field_0.field_1) >> 16;
 	v4 = *(uint32_t**)(v2 + 88);
 	if (v4 != (uint32_t*)(v2 + 88)) {

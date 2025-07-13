@@ -59,6 +59,7 @@
 #pragma warning(disable : 4028 4024 4700 4026 4070 4142 4022 4098 4113 4146 4090 4172 4101)
 
 typedef struct struct576 struct576;
+typedef struct struct200 struct200;
 
 // For now bools are kept 1-byte long
 //_Static_assert(sizeof(bool) == 4, "boolean values must be aligned to 32-bit int");
@@ -499,7 +500,7 @@ _Static_assert(sizeof(nox_window_yyy) == 20, "wrong size of nox_window_yyy struc
 typedef struct nox_drawable_inner3 {
 	struct576* field_0;
 	uint32_t field_1;
-	uint32_t field_2;
+	struct200* field_2;
 } nox_drawable_inner3;
 
 typedef struct nox_drawable {
@@ -1394,20 +1395,25 @@ typedef struct struct200 {
 	uint32_t field_2; // 2
 	uint32_t field_3; // 3
 	timer field_4;
-	uint32_t field_12;     // 12
-	uint32_t field_13;     // 13
-	uint32_t field_14;     // 14
-	uint32_t field_15;     // 15
-	uint32_t field_16;     // 16
-	uint32_t field_17;     // 17
-	uint32_t field_18;     // 18
-	uint32_t field_19;     // 19
-	uint32_t field_20;     // 20
-	uint32_t snd_name;     // 21 - sound name field accessed in sub_451850
-	uint32_t field_22[3];  // 22-24
+	uint32_t field_12; // 12
+	uint32_t field_13; // 13
+	uint32_t field_14; // 14
+	uint32_t field_15; // 15
+	uint32_t field_16; // 16
+	uint32_t field_17; // 17
+	uint32_t field_18; // 18
+	uint32_t field_19; // 19
+	uint32_t field_20; // 20
+	uint32_t snd_name; // 21 - sound name field accessed in sub_451850
+	nox_list_item_t field_22;
 	uint32_t field_25;     // 25
 	uint32_t field_26;     // 26
-	uint32_t field_27[21]; // 27-47
+	uint32_t field_27;     // 26
+	uint32_t field_28;     // 26
+	uint32_t field_29;     // 26
+	uint32_t field_30;     // 26
+	uint32_t field_31;     // 26
+	uint16_t field_32[32]; // 32-48
 	uint32_t field_48;     // 48
 	uint32_t field_49;     // 49
 } struct200;
@@ -1427,7 +1433,7 @@ typedef struct struct576 {
 	uint8_t field_6_3;      // 6 - stores a3 parameter
 	uint32_t field_7;       // 7
 	uint32_t field_8;       // 8
-	uint32_t* field_9;      // 9 - stores a1 parameter
+	struct200* field_9;     // 9 - stores a1 parameter
 	uint32_t field_10[32];  // 10-41
 	uint32_t field_42;      // 42 - contains length of field_10 array
 	uint32_t field_43;      // 43
