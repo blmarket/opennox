@@ -565,23 +565,22 @@ int sub_451DC0(struct576* a1p) {
 
 //----- (00452580) --------------------------------------------------------
 int sub_452580(struct576* a1p) {
-	int v1;     // edi
 	int result; // eax
 	int v3;     // eax
 	int v4;     // eax
 	int v5;     // eax
 
 	struct200* v1p;
-	v1 = v1p = a1p->field_9;
-	if (!*(uint32_t*)(v1 + 192)) {
+	v1p = a1p->field_9;
+	if (!v1p->field_48) {
 		return 0;
 	}
 	v3 = a1p->field_75;
 	a1p->field_109 = 0;
-	result = sub_452810(*(uint32_t*)(v1 + 48) + v3, 0);
+	result = sub_452810(v1p->field_12 + v3, 0);
 	a1p->field_44 = result;
 	if (result) {
-		v4 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 76), *(uint32_t*)(v1 + 80),
+		v4 = nox_common_randomIntMinMax_415FF0(v1p->field_19, v1p->field_20,
 											   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1482);
 		sub_486320((uint32_t*)(a1p->field_44 + 48), v4 + 100);
 		sub_4BDB20(a1p->field_44);
@@ -593,11 +592,11 @@ int sub_452580(struct576* a1p) {
 		*(uint32_t*)(a1p->field_44 + 112) =
 			(uint32_t)&a1p->timerGroup_46; // Not sure it's timerGroup_46 or timerGroup_46.field_0. Their pointer
 										   // addresses are the same.
-		if (*(uint8_t*)(v1 + 4) & 8) {
-			v5 = nox_common_randomIntMinMax_415FF0(*(uint32_t*)(v1 + 68), *(uint32_t*)(v1 + 72),
+		if (v1p->field_1 & 8) {
+			v5 = nox_common_randomIntMinMax_415FF0(v1p->field_17, v1p->field_18,
 												   "C:\\NoxPost\\src\\client\\Audio\\AudEvent.c", 1497);
 			if (v5 > 33) {
-				sub_452690((int)a1p, v5, 1);
+				sub_452690(a1p, v5, 1);
 			}
 		}
 		result = 1;
