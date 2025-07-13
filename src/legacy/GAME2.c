@@ -995,7 +995,7 @@ struct200* nox_xxx_draw_452270(int a1) {
 	struct200* result; // eax
 
 	if (dword_5d4594_1045432 && a1 >= 0 && a1 < 1023) {
-		result = (char*)getMemAt(0x5D4594, 840628 + 200 * a1);
+		result = &((struct200*)getMemAt(0x5D4594, 840628))[a1];
 	} else {
 		result = 0;
 	}
