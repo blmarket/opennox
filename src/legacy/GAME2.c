@@ -19,10 +19,10 @@
 #include "GAME4.h"
 #include "GAME4_1.h"
 #include "GAME5_2.h"
+#include "audio.h"
 #include "client__drawable__drawable.h"
 #include "common__system__settings.h"
 #include "common__system__team.h"
-#include "struct576.h"
 
 #include "client__gui__gadgets__listbox.h"
 #include "client__gui__gamewin__gamewin.h"

@@ -1,5 +1,5 @@
-#ifndef NOX_STRUCT576_H
-#define NOX_STRUCT576_H
+#ifndef NOX_AUDIO_H
+#define NOX_AUDIO_H
 
 #include "defs.h"
 
@@ -35,4 +35,4 @@ unsigned int sub_452F10(struct576* a1p, int a2);
 int sub_451E80(struct576* a1p);
 int sub_452770(uint32_t* a1);
 
-#endif // NOX_STRUCT576_H
+#endif // NOX_AUDIO_H

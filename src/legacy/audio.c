@@ -1,4 +1,4 @@
-#include "struct576.h"
+#include "audio.h"
 #include "memmap.h"
 
 // External variable declarations
