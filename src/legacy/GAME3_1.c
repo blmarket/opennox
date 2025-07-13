@@ -427,6 +427,10 @@ int nox_xxx_updDrawMonsterGen_4BC920() { return 1; }
 // 4BCABD: variable 'v4' is possibly undefined
 
 //----- (004BD280) --------------------------------------------------------
+// Creates a preallocated list
+// First 4 bytes pointer to the first free element, followed by each unallocated
+// elements: first 4 bytes: pointer to next free element (single linked list),
+// rest bytes: actual element.
 uint32_t* sub_4BD280(int a1, int a2) {
 	int v2;           // esi
 	uint32_t* result; // eax

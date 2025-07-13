@@ -1,8 +1,6 @@
 #include "audio.h"
 #include "memmap.h"
 
-#include "GAME3_1.h"
-
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
 // It holds memory allocation holding 200 elements of struct576. The first 4 bytes points to next free element (or 0 if
@@ -35,6 +33,8 @@ void sub_4BDB90(uint32_t* a1, uint32_t* a2);
 int sub_4BDA80(int a1);
 int sub_4BDB30(int a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
+void sub_4BD3C0(struct28* lpMem);
+void sub_4BD2D0(void* lpMem);
 
 // private within audio.c
 int sub_4BD660(int a1);
