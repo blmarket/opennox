@@ -23,6 +23,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/internal/netstr"
 	"github.com/noxworld-dev/opennox/v1/legacy"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
+	"github.com/noxworld-dev/opennox/v1/legacy/music"
 	"github.com/noxworld-dev/opennox/v1/server"
 )
 
@@ -158,9 +159,9 @@ mainloop:
 		if !noxServer.Update() {
 			goto MAINLOOP_EXIT
 		}
-		// if !noxClient.Update() {
-		// 	goto MAINLOOP_EXIT
-		// }
+		if !noxClient.Update() {
+			goto MAINLOOP_EXIT
+		}
 
 		mainloopFrameLimit()
 		if mainloopContinue && !mainloopStopError {
@@ -351,6 +352,9 @@ func cmainLoop() {
 		g_v20 = false
 	}
 	noxAudioServe()
+	legacy.MusicModule.SetNextMusic(music.MusicState{MusicIdx: 1, Volume: 100, Position: 0, D: 0})
+	// legacy.MusicModule.Update()
+
 	mainloop_43E290(false)
 }
 

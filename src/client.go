@@ -8,7 +8,6 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/noxworld-dev/opennox/v1/client"
-	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy"
 	"github.com/noxworld-dev/opennox/v1/legacy/client/audio/ail"
@@ -158,13 +157,13 @@ func (c *Client) Update() bool {
 	}
 	legacy.Sub_4519C0()
 	c.sub4312C0()
-	if !isDedicatedServer {
-		legacy.Sub_495430()
-	}
-	if noxflags.HasGame(noxflags.GameHost) && continueMenuOrHost && !mainloopStopError {
-		mainloopMaybeSwitchMapXXX()
-	}
-	c.drawAndPresent()
+	// if !isDedicatedServer {
+	// 	legacy.Sub_495430()
+	// }
+	// if noxflags.HasGame(noxflags.GameHost) && continueMenuOrHost && !mainloopStopError {
+	// 	mainloopMaybeSwitchMapXXX()
+	// }
+	// c.drawAndPresent()
 	return true
 }
 

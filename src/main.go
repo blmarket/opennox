@@ -153,11 +153,11 @@ func RunArgs(args []string) (gerr error) {
 	// 	}()
 	// }
 	noxServer = NewServer(noxConsole, strMan)
-	// var err error
-	// noxClient, err = NewClient(noxConsole, noxServer)
-	// if err != nil {
-	// 	return err
-	// }
+	var err error
+	noxClient, err = NewClient(noxConsole, noxServer)
+	if err != nil {
+		return err
+	}
 	// if err := readConfig(*fConfig); err != nil {
 	// 	return fmt.Errorf("cannot read config: %w", err)
 	// }
