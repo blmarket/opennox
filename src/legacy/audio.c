@@ -1,5 +1,6 @@
 #include "audio.h"
 #include "memmap.h"
+#include <stdio.h>
 
 // External variable declarations
 extern struct28* dword_5d4594_1045424;
@@ -788,12 +789,16 @@ int sub_451BE0(struct576* a1p) {
 
 //----- (00451970) --------------------------------------------------------
 void sub_451970() {
+	printf("1\n");
 	sub_4521F0();
+	printf("2\n");
 	sub_452230();
+	printf("3\n");
 	if (dword_5d4594_1045424) {
 		sub_4BD3C0(dword_5d4594_1045424);
 		dword_5d4594_1045424 = 0;
 	}
+	printf("4\n");
 	if (dword_5d4594_1045436) {
 		sub_4BD2D0(*(void**)&dword_5d4594_1045436);
 		dword_5d4594_1045436 = 0;

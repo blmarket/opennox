@@ -112,7 +112,7 @@ func mainloop_43E290(exitPath bool) {
 	*memmap.PtrUint32(0x5D4594, 816400) = noxServer.SecToFrames(60)
 
 	// XXX
-	noxClient.mapsend.setDownloading(false)
+	// noxClient.mapsend.setDownloading(false)
 
 mainloop:
 	for mainloopContinue && !mainloopStopError {
@@ -121,46 +121,46 @@ mainloop:
 			mainloopHook()
 		}
 		noxServer.RunLoopHooks()
-		if noxClient.mapsend.Downloading() {
-			if done, err := noxClient.mapDownloadLoop(false); !done {
-				continue mainloop
-			} else if err != nil {
-				log.Println(err)
-				// map error
-				mainloopContinue = false
-				continueMenuOrHost = false
-				if debugMainloop {
-					log.Println("mapDownloadLoop exit")
-				}
-				goto MAINLOOP_EXIT
-			}
-		} else {
-			if err := nox_xxx_gameChangeMap_43DEB0(); err != nil {
-				if err != nil && err != ErrMapDownload {
-					gameLog.Println("change game map:", err)
-				}
-				// XXX
-				if noxClient.mapsend.Downloading() {
-					continue mainloop
-				}
-				mainloopContinue = false
-				continueMenuOrHost = false
-				if debugMainloop {
-					log.Println("nox_xxx_gameChangeMap_43DEB0 exit")
-				}
-				goto MAINLOOP_EXIT
-			}
-		}
+		// if noxClient.mapsend.Downloading() {
+		// 	if done, err := noxClient.mapDownloadLoop(false); !done {
+		// 		continue mainloop
+		// 	} else if err != nil {
+		// 		log.Println(err)
+		// 		// map error
+		// 		mainloopContinue = false
+		// 		continueMenuOrHost = false
+		// 		if debugMainloop {
+		// 			log.Println("mapDownloadLoop exit")
+		// 		}
+		// 		goto MAINLOOP_EXIT
+		// 	}
+		// } else {
+		// 	if err := nox_xxx_gameChangeMap_43DEB0(); err != nil {
+		// 		if err != nil && err != ErrMapDownload {
+		// 			gameLog.Println("change game map:", err)
+		// 		}
+		// 		// XXX
+		// 		if noxClient.mapsend.Downloading() {
+		// 			continue mainloop
+		// 		}
+		// 		mainloopContinue = false
+		// 		continueMenuOrHost = false
+		// 		if debugMainloop {
+		// 			log.Println("nox_xxx_gameChangeMap_43DEB0 exit")
+		// 		}
+		// 		goto MAINLOOP_EXIT
+		// 	}
+		// }
 		noxServer.SetRateLimit(30)
-		noxClient.processInput()
-		noxClient.nox_game_cdMaybeSwitchState_413800()
+		// noxClient.processInput()
+		// noxClient.nox_game_cdMaybeSwitchState_413800()
 
 		if !noxServer.Update() {
 			goto MAINLOOP_EXIT
 		}
-		if !noxClient.Update() {
-			goto MAINLOOP_EXIT
-		}
+		// if !noxClient.Update() {
+		// 	goto MAINLOOP_EXIT
+		// }
 
 		mainloopFrameLimit()
 		if mainloopContinue && !mainloopStopError {
@@ -338,14 +338,14 @@ func cmainLoop() {
 		}()
 	}
 	noxAudioServeT(300)
-	if !isDedicatedServer {
-		if !noxClient.sub_43C060() {
-			return
-		}
-	}
-	if !nox_xxx_cliWaitForJoinData_43BFE0() {
-		return
-	}
+	// if !isDedicatedServer {
+	// 	if !noxClient.sub_43C060() {
+	// 		return
+	// 	}
+	// }
+	// if !nox_xxx_cliWaitForJoinData_43BFE0() {
+	// 	return
+	// }
 	if g_v20 {
 		legacy.MusicModule.Sub_43DBA0()
 		g_v20 = false

@@ -490,15 +490,20 @@ struct28* sub_4BD340(int a1, int a2, int a3, int a4) {
 void sub_4BD3C0(struct28* lpMem) {
 	int i; // eax
 
+	printf("a\n");
+
 	for (i = nox_common_list_getNext_425940(&lpMem->field_3); i; i = nox_common_list_getNext_425940(&lpMem->field_3)) {
 		sub_4BD690(i);
 	}
+	printf("b\n");
 	if (lpMem->field_1) {
 		sub_4BD2D0((void*)&lpMem->field_1);
 	}
+	printf("c\n");
 	if (lpMem->field_2) {
 		sub_4BD2D0((void*)&lpMem->field_2);
 	}
+	printf("d\n");
 	free(lpMem);
 }
 
