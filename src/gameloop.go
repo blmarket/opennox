@@ -23,7 +23,6 @@ import (
 	"github.com/noxworld-dev/opennox/v1/internal/netstr"
 	"github.com/noxworld-dev/opennox/v1/legacy"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
-	"github.com/noxworld-dev/opennox/v1/legacy/music"
 	"github.com/noxworld-dev/opennox/v1/server"
 )
 
@@ -352,8 +351,11 @@ func cmainLoop() {
 		g_v20 = false
 	}
 	noxAudioServe()
-	legacy.MusicModule.SetNextMusic(music.MusicState{MusicIdx: 1, Volume: 100, Position: 0, D: 0})
-	// legacy.MusicModule.Update()
+	// Run this to play a music
+	// legacy.MusicModule.SetNextMusic(music.MusicState{MusicIdx: 1, Volume: 100, Position: 0, D: 0})
+
+	// Run this to play a dialog
+	legacy.Dialogs.PlayFile("C5OGK01K.WAV", 100)
 
 	mainloop_43E290(false)
 }
