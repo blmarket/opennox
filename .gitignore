@@ -1,3 +1,5 @@
+src/dialog/
+src/music/
 build/
 .flatpak-builder/
 CMakeFiles/

@@ -157,7 +157,7 @@ func (c *Client) Update() bool {
 		return false
 	}
 	legacy.Sub_4519C0()
-	c.sub4312C0()
+	c.Sub4312C0()
 	if !isDedicatedServer {
 		legacy.Sub_495430()
 	}
@@ -168,7 +168,7 @@ func (c *Client) Update() bool {
 	return true
 }
 
-func (c *Client) sub4312C0() {
+func (c *Client) Sub4312C0() {
 	ail.Serve()
 	if c.inSub4312C0 {
 		return

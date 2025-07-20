@@ -36,6 +36,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy"
 	"github.com/noxworld-dev/opennox/v1/legacy/client/audio/ail"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc/handles"
+	"github.com/noxworld-dev/opennox/v1/legacy/music"
 )
 
 func init() {
@@ -571,6 +572,66 @@ func sub_43DCC0() {
 			legacy.MusicModule.Sub_43D650()
 			legacy.Set_dword_5d4594_816348(0)
 		}
-		noxClient.sub4312C0()
+		noxClient.Sub4312C0()
 	}
+}
+
+func RunAudioTest() (gerr error) {
+	mainloopFrameLimit := func() {
+		noxServer.RateWait()
+	}
+
+	mainloop_43E290 := func(exitPath bool) {
+		mainloopStopError := false
+		mainloopContinue := true
+		*memmap.PtrUint32(0x5D4594, 816400) = noxServer.SecToFrames(60)
+
+	mainloop:
+		for mainloopContinue && !mainloopStopError {
+			if mainloopHook != nil {
+				mainloopHook()
+			}
+			noxServer.RunLoopHooks()
+			noxServer.SetRateLimit(30)
+
+			if !noxServer.Update() {
+				goto MAINLOOP_EXIT
+			}
+			legacy.Sub_4519C0()
+			noxClient.Sub4312C0()
+
+			mainloopFrameLimit()
+			if mainloopContinue && !mainloopStopError {
+				// unwind the stack and continue the mainloop
+				continue mainloop
+			}
+		MAINLOOP_EXIT:
+			panic(0)
+		}
+	}
+
+	cmainLoop := func() {
+		noxAudioServe()
+		// Run this to play a music
+		legacy.MusicModule.SetNextMusic(music.MusicState{MusicIdx: 2, Volume: 100, Position: 0, D: 0})
+
+		// Run this to play a dialog
+		legacy.Dialogs.PlayFile("C5OGK01K.WAV", 100)
+
+		mainloop_43E290(false)
+	}
+
+	handles.Init()
+	noxServer = NewServer(noxConsole, strMan)
+	var err error
+	noxClient, err = NewClient(noxConsole, noxServer)
+	if err != nil {
+		return err
+	}
+	legacy.InitBlobData()
+	if nox_audio_initall(1) == 0 {
+		return fmt.Errorf("failed to init audio")
+	}
+	cmainLoop()
+	return nil
 }
