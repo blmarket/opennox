@@ -1,0 +1,2 @@
+#!/bin/bash
+CGO_ENABLED=1 GOARCH=386 CGO_CFLAGS_ALLOW=".*" go build -v -ldflags="-X 'github.com/noxworld-dev/opennox/v1/internal/version.commit=58eb2dfa9' -X 'github.com/noxworld-dev/opennox/v1/internal/version.version=v1.9.0-dev'" -gcflags=-trimpath=/home/blmarket/proj/opennox/src -asmflags=-trimpath=/home/blmarket/proj/opennox/src -o test-audio ./cmd/opennox-audio

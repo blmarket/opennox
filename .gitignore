@@ -1,5 +1,13 @@
 src/dialog/
 src/music/
+src/opennox
+src/opennox-hd
+src/opennox-server
+src/opennox.yml
+src/dialog/*.WAV
+src/legacy/prompt*.md
+__pycache__/
+CLAUDE.md
 build/
 .flatpak-builder/
 CMakeFiles/
