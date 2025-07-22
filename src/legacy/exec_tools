@@ -1,0 +1,69 @@
+#!/bin/bash
+echo '#include "defs.h"' > audio.c
+echo '#include "operators.h"' >> audio.c
+python -m tools.move_func sub_451920 audio.c
+python -m tools.move_func sub_452010 audio.c
+python -m tools.move_func sub_452190 audio.c
+python -m tools.move_func sub_4521A0 audio.c
+python -m tools.move_func sub_4521F0 audio.c
+python -m tools.move_func sub_452230 audio.c
+python -m tools.move_func nox_xxx_draw_452270 audio.c
+python -m tools.move_func sub_4526F0 audio.c
+python -m tools.move_func sub_451CA0 audio.c
+python -m tools.move_func sub_451F30 audio.c
+python -m tools.move_func sub_451F90 audio.c
+python -m tools.move_func sub_451FE0 audio.c
+python -m tools.move_func sub_452120 audio.c
+python -m tools.move_func sub_4523D0 audio.c
+python -m tools.move_func sub_452410 audio.c
+python -m tools.move_func sub_452490 audio.c
+python -m tools.move_func sub_452510 audio.c
+python -m tools.move_func sub_452690 audio.c
+python -m tools.move_func nox_xxx_draw_452300 audio.c
+python -m tools.move_func sub_452E90 audio.c
+python -m tools.move_func sub_452EB0 audio.c
+python -m tools.move_func sub_452EE0 audio.c
+python -m tools.move_func sub_452F10 audio.c
+python -m tools.move_func sub_452F50 audio.c
+python -m tools.move_func sub_452F80 audio.c
+python -m tools.move_func sub_451CF0 audio.c
+python -m tools.move_func sub_451DC0 audio.c
+python -m tools.move_func sub_452580 audio.c
+python -m tools.move_func sub_451E80 audio.c
+python -m tools.move_func sub_452770 audio.c
+python -m tools.move_func sub_452050 audio.c
+python -m tools.move_func sub_451BE0 audio.c
+python -m tools.move_func sub_451970 audio.c
+python -m tools.move_func sub_4519C0 audio.c
+python -m tools.move_func sub_4BDB20 audio.c
+python -m tools.move_func sub_4BD710 audio.c
+python -m tools.move_func sub_4526D0 audio.c
+python -m tools.move_func sub_452FE0 audio.c
+python -m tools.move_func sub_452FA0 audio.c
+python -m tools.move_func sub_4BD650 audio.c
+python -m tools.move_func sub_4BD660 audio.c
+python -m tools.move_func nox_xxx_clientPlaySoundSpecial_452D80 audio.c
+python -m tools.move_func sub_452DC0 audio.c
+python -m tools.move_func sub_452E10 audio.c
+python -m tools.update sub_451920 0 'struct200*'
+python -m tools.update sub_451BE0 0 'struct576*'
+python -m tools.update sub_451CA0 0 'struct576*'
+python -m tools.update sub_451F30 0 'struct576*'
+python -m tools.update sub_451F90 0 'struct576*'
+python -m tools.update sub_451FE0 0 'struct576*'
+python -m tools.update sub_452050 0 'struct576*'
+python -m tools.update sub_452120 0 'struct576*'
+python -m tools.update sub_452190 0 'struct200*'
+python -m tools.update nox_xxx_draw_452300 0 'struct200*'
+python -m tools.update sub_4523D0 0 'struct576*'
+python -m tools.update sub_452410 0 'struct576*'
+python -m tools.update sub_452490 0 'struct576*'
+python -m tools.update sub_452510 0 'struct576*'
+python -m tools.update sub_452690 0 'struct576*'
+python -m tools.update sub_452E90 1 'struct576*'
+python -m tools.update sub_452EE0 0 'struct576*'
+python -m tools.update sub_452F10 0 'struct576*'
+python -m tools.update sub_452F50 0 'struct576*'
+python -m tools.update sub_452F80 0 'struct576*'
+python -m tools.update sub_452FE0 0 'struct576*'
+python -m tools.compile_audio
