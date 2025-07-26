@@ -38,6 +38,15 @@ This directory contains a comprehensive set of Python tools designed to assist i
 - **⚠️ Limitation**: Does NOT separate declarations from definitions - extracts both together
 - **Note**: Cannot be used directly to identify external dependencies, as external dependencies are declarations without corresponding definitions in the same file
 
+#### `external_funcs.py`
+**Usage**: `python -m tools.external_funcs <file.c> [--verbose]`
+- **NEW**: Identifies all external function dependencies in a C file
+- Finds functions that are called/declared but NOT defined in the same file
+- Uses tree-sitter when available, falls back to regex-based parsing
+- Returns sorted list of external dependencies
+- **Perfect for creating import files** like `audio_imports.go`
+- **Advantage over extract_functions.py**: Only shows external dependencies, not internal functions
+
 #### `find_decl.py`
 **Usage**: `python -m tools.find_decl <identifier> [-d directory]`
 - Finds proper declarations for global variables and functions
@@ -149,22 +158,25 @@ This directory contains a comprehensive set of Python tools designed to assist i
 ### 1. Creating External Dependencies (like audio_imports.go)
 
 ```bash
-# Method 1: Use compilation tool to automatically discover missing dependencies
+# Method 1: Use external_funcs.py to directly identify external dependencies (RECOMMENDED)
+python -m tools.external_funcs audio.c --verbose
+
+# Method 2: Use compilation tool to automatically discover missing dependencies  
 python -m tools.compile_audio
 
-# Method 2: Manual approach (when compilation tool isn't sufficient)
+# Method 3: Manual approach using older tools (when other methods aren't sufficient)
 # Step 1: Extract all function signatures from C file (includes both declarations and definitions)
 python -m tools.extract_functions audio.c > audio_functions.txt
 
 # Step 2: Manually identify which are external dependencies by checking if definitions exist
 # (External dependencies = declarations without definitions in the same file)
-# This requires manual analysis or a custom tool to separate declarations from definitions
+# This requires manual analysis
 
 # Step 3: Find proper declarations for identified external dependencies
 python -m tools.find_decl some_external_function
 ```
 
-**⚠️ Important Note**: `extract_functions.py` alone cannot identify external dependencies because it extracts both function declarations and definitions together. External dependencies are specifically functions that have declarations but no definitions in the source file. A custom tool would be needed to separate these, or the compilation approach should be preferred.
+**✅ Recommended**: Use `external_funcs.py` as it directly identifies external dependencies without needing manual analysis.
 
 ### 2. Translating Individual Functions
 
@@ -206,16 +218,20 @@ These tools are designed to be used by Claude agents for automated C-to-Go trans
 
 ## Next Steps for audio_imports.go Creation
 
-**Recommended Approach:**
-1. Use `compile_audio.py` to iteratively discover missing declarations (most effective method)
-2. Use `find_decl.py` to locate proper declarations for discovered missing symbols
+**Recommended Approach (EASIEST):**
+1. Use `external_funcs.py audio.c` to directly identify all external dependencies
+2. Use `find_decl.py` to locate proper declarations for each external dependency
 3. Create audio_imports.go following the pattern of music_imports.go and dialog_imports.go
 
-**Alternative Manual Approach (if needed):**
+**Alternative Approach:**
+1. Use `compile_audio.py` to iteratively discover missing declarations through compilation
+2. Use `find_decl.py` to locate proper declarations for discovered missing symbols
+3. Create audio_imports.go following existing patterns
+
+**Legacy Manual Approach (if needed):**
 1. Use `extract_functions.py` to get all function signatures from audio.c
 2. Manually analyze output to identify declarations without definitions (external dependencies)
-3. Create a custom tool to separate function declarations from definitions if systematic approach is needed
-4. Use `find_decl.py` to find external dependencies
-5. Create audio_imports.go following existing patterns
+3. Use `find_decl.py` to find external dependencies
+4. Create audio_imports.go following existing patterns
 
-**Note**: The compilation-based approach is preferred as it automatically identifies actual missing external dependencies through compiler errors.
+**Note**: The `external_funcs.py` approach is now preferred as it directly identifies external dependencies without manual analysis or compilation errors.
