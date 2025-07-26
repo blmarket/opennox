@@ -79,7 +79,7 @@ class TranslationContext(object):
         # Return the right operand as the index
         return source_code[right_operand.start_byte:right_operand.end_byte]
 
-    def replace_translation(self, node: Node):
+    def replace_translation(self, node: Node) -> bool:
         """ 
         Given the node, perform in-place translation in the code. Update file in source_file.
         Returns the updated source_code.
@@ -101,7 +101,7 @@ class TranslationContext(object):
         # Only proceed if there's actually a change to make
         original_text = source_code[node.start_byte:node.end_byte]
         if original_text == translated_text:
-            return source_code
+            return False
         
         # Replace the text in source_code
         new_source_code = (
@@ -118,6 +118,7 @@ class TranslationContext(object):
             f.write(new_source_code)
         
         print(f"Replaced '{original_text}' with '{translated_text}' in {file_path}")
+        return True
 
     def translate(self, node: Node) -> str:
         """

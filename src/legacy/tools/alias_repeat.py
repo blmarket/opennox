@@ -80,6 +80,7 @@ while True:
 
         if context.replace_translation( src_references[1:][-1]):
             has_change = True
+    print(has_change)
     if not has_change:
         break
 
