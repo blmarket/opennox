@@ -139,6 +139,9 @@ def compile_audio():
         if not declarations:
             print("No declarations found for any unknown symbols.")
             return False
+
+        # Sort declarations: variables (extern) first, then functions
+        declarations.sort(key=lambda x: (not x.strip().startswith('extern'), x))
         
         # Add declarations to the file
         add_declarations_to_file("audio.c", declarations)
