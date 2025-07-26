@@ -50,6 +50,39 @@ def get_external_dependencies(c_file_path: str) -> str:
         sys.exit(1)
 
 
+def parse_external_dependencies(external_deps: str) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str, List[Tuple[str, str]], str]]]:
+    """Parse external dependencies into variables and functions.
+    
+    Returns:
+        (variables, functions) where:
+        - variables: List of (type, name) tuples
+        - functions: List of (return_type, func_name, parameters, original_decl) tuples
+    """
+    variables = []
+    functions = []
+    
+    for line in external_deps.split('\n'):
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+            
+        # Check if it's a function declaration (contains parentheses)
+        if '(' in line and ')' in line:
+            parsed = parse_function_declaration(line)
+            if parsed:
+                functions.append(parsed)
+        # Check if it's an extern variable declaration
+        elif line.startswith('extern'):
+            # Parse variable declaration: extern type name;
+            var_match = re.match(r'extern\s+(.+?)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*;?$', line)
+            if var_match:
+                var_type = var_match.group(1).strip()
+                var_name = var_match.group(2).strip()
+                variables.append((var_type, var_name))
+    
+    return variables, functions
+
+
 def parse_function_declaration(decl: str) -> Optional[Tuple[str, str, List[Tuple[str, str]], str]]:
     """Parse C function declaration and return (return_type, func_name, parameters, original_decl)."""
     # Remove semicolon and strip
@@ -184,9 +217,160 @@ def generate_go_wrapper(return_type: str, func_name: str, parameters: List[Tuple
     return "\n".join(lines)
 
 
-def generate_imports_file(c_file_path: str, external_deps: str) -> str:
+def generate_module_struct(module_name: str, variables: List[Tuple[str, str]], functions: List[Tuple[str, str, List[Tuple[str, str]], str]]) -> str:
+    """Generate the module struct definition."""
+    lines = []
+    struct_name = f"{module_name.capitalize()}Module"
+    
+    lines.append(f"type {struct_name} struct {{")
+    lines.append("\tmoduleName string")
+    lines.append("")
+    lines.append("\t// External variables")
+    
+    for var_type, var_name in variables:
+        try:
+            go_type = map_c_type_to_go(var_type)
+            if go_type == 'unsafe.Pointer':
+                # Try to map to a more specific type if possible
+                cgo_type = map_c_type_to_cgo(var_type)
+                lines.append(f"\t{var_name} {cgo_type}")
+            else:
+                lines.append(f"\t{var_name} *{go_type}")
+        except (ValueError, RuntimeError):
+            # Fall back to unsafe.Pointer for unknown types
+            lines.append(f"\t{var_name} unsafe.Pointer")
+    
+    if functions:
+        lines.append("")
+        lines.append("\t// External functions")
+        for return_type, func_name, parameters, _ in functions:
+            # Generate function field type
+            try:
+                param_types = []
+                for param_type, _ in parameters:
+                    go_type = map_c_type_to_go(param_type)
+                    param_types.append(go_type)
+                
+                go_return_type = map_c_type_to_go(return_type)
+                return_annotation = go_return_type if go_return_type else ""
+                
+                if return_annotation:
+                    func_type = f"func({', '.join(param_types)}) {return_annotation}"
+                else:
+                    func_type = f"func({', '.join(param_types)})"
+                    
+                lines.append(f"\t{func_name} {func_type}")
+            except (ValueError, RuntimeError):
+                # Skip functions with unknown types
+                lines.append(f"\t// TODO: {func_name} - unknown parameter types")
+    
+    lines.append("}")
+    
+    return "\n".join(lines)
+
+
+def generate_module_constructor(module_name: str, variables: List[Tuple[str, str]], functions: List[Tuple[str, str, List[Tuple[str, str]], str]]) -> str:
+    """Generate the module constructor function."""
+    lines = []
+    struct_name = f"{module_name.capitalize()}Module"
+    constructor_name = f"New{module_name.capitalize()}Module"
+    
+    # Generate constructor signature
+    params = [f"moduleName string"]
+    
+    for var_type, var_name in variables:
+        try:
+            go_type = map_c_type_to_go(var_type)
+            if go_type == 'unsafe.Pointer':
+                cgo_type = map_c_type_to_cgo(var_type)
+                params.append(f"{var_name} {cgo_type}")
+            else:
+                params.append(f"{var_name} *{go_type}")
+        except (ValueError, RuntimeError):
+            params.append(f"{var_name} unsafe.Pointer")
+    
+    for return_type, func_name, parameters, _ in functions:
+        try:
+            param_types = []
+            for param_type, _ in parameters:
+                go_type = map_c_type_to_go(param_type)
+                param_types.append(go_type)
+            
+            go_return_type = map_c_type_to_go(return_type)
+            return_annotation = go_return_type if go_return_type else ""
+            
+            if return_annotation:
+                func_type = f"func({', '.join(param_types)}) {return_annotation}"
+            else:
+                func_type = f"func({', '.join(param_types)})"
+                
+            params.append(f"{func_name} {func_type}")
+        except (ValueError, RuntimeError):
+            # Skip functions with unknown types
+            continue
+    
+    lines.append(f"func {constructor_name}(")
+    for i, param in enumerate(params):
+        if i == len(params) - 1:
+            lines.append(f"\t{param},")
+        else:
+            lines.append(f"\t{param},")
+    lines.append(f") *{struct_name} {{")
+    
+    # Generate constructor body
+    lines.append(f"\treturn &{struct_name}{{")
+    lines.append(f"\t\tmoduleName: moduleName,")
+    
+    for var_type, var_name in variables:
+        lines.append(f"\t\t{var_name}: {var_name},")
+    
+    for return_type, func_name, parameters, _ in functions:
+        try:
+            # Check if we can map all types
+            for param_type, _ in parameters:
+                map_c_type_to_go(param_type)
+            map_c_type_to_go(return_type)
+            lines.append(f"\t\t{func_name}: {func_name},")
+        except (ValueError, RuntimeError):
+            # Skip functions with unknown types
+            continue
+    
+    lines.append("\t}")
+    lines.append("}")
+    
+    return "\n".join(lines)
+
+
+def generate_module_file(module_name: str, variables: List[Tuple[str, str]], functions: List[Tuple[str, str, List[Tuple[str, str]], str]]) -> str:
+    """Generate the module Go file (xxx/xxx.go)."""
+    lines = []
+    
+    # Package declaration
+    lines.append(f"package {module_name}")
+    lines.append("")
+    
+    # Imports
+    lines.append("import (")
+    lines.append('\t"unsafe"')
+    lines.append(")")
+    lines.append("")
+    
+    # Generate struct
+    struct_def = generate_module_struct(module_name, variables, functions)
+    lines.append(struct_def)
+    lines.append("")
+    
+    # Generate constructor
+    constructor_def = generate_module_constructor(module_name, variables, functions)
+    lines.append(constructor_def)
+    
+    return "\n".join(lines)
+
+
+def generate_imports_file(c_file_path: str, external_deps: str, module_name: str) -> str:
     """Generate the complete Go imports file."""
     lines = []
+    variables, functions = parse_external_dependencies(external_deps)
     
     # Package declaration
     lines.append("package legacy")
@@ -202,36 +386,91 @@ def generate_imports_file(c_file_path: str, external_deps: str) -> str:
     # Go imports
     lines.append("import (")
     lines.append('\t"unsafe"')
+    lines.append("")
+    lines.append(f'\t"github.com/noxworld-dev/opennox/v1/legacy/{module_name}"')
     lines.append(")")
     lines.append("")
     
-    # Parse external dependencies to extract functions
-    func_declarations = []
-    for line in external_deps.split('\n'):
-        line = line.strip()
-        if line and not line.startswith('#') and not line.startswith('extern') and '(' in line:
-            func_declarations.append(line)
+    # Package variable
+    struct_name = f"{module_name.capitalize()}Module"
+    var_name = f"{module_name.capitalize()}Module"
+    lines.append("var (")
+    lines.append(f"\t{var_name} *{module_name}.{struct_name}")
+    lines.append(")")
+    lines.append("")
+    
+    # Generate init function
+    init_func = generate_init_function(module_name, variables, functions)
+    lines.append(init_func)
+    lines.append("")
     
     # Generate wrapper functions
-    for decl in func_declarations:
+    for return_type, func_name, parameters, original_decl in functions:
         try:
-            parsed = parse_function_declaration(decl)
-            if parsed:
-                return_type, func_name, parameters, original_decl = parsed
-                wrapper = generate_go_wrapper(return_type, func_name, parameters, original_decl)
-                lines.append(wrapper)
-                lines.append("")
+            wrapper = generate_go_wrapper(return_type, func_name, parameters, original_decl)
+            lines.append(wrapper)
+            lines.append("")
         except ValueError as e:
-            print(f"Error generating wrapper for '{decl}': {e}", file=sys.stderr)
-            print(f"Skipping function {decl}", file=sys.stderr)
+            print(f"Error generating wrapper for '{original_decl}': {e}", file=sys.stderr)
+            print(f"Skipping function {func_name}", file=sys.stderr)
             continue
+    
+    return "\n".join(lines)
+
+
+def generate_init_function(module_name: str, variables: List[Tuple[str, str]], functions: List[Tuple[str, str, List[Tuple[str, str]], str]]) -> str:
+    """Generate the initXxx() function."""
+    lines = []
+    init_func_name = f"init{module_name.capitalize()}"
+    var_name = f"{module_name.capitalize()}Module"
+    constructor_name = f"New{module_name.capitalize()}Module"
+    
+    lines.append(f"func {init_func_name}() {{")
+    
+    # Generate variable declarations for CGO access
+    if variables:
+        lines.append("\tvar (")
+        for var_type, var_name_local in variables:
+            try:
+                go_type = map_c_type_to_go(var_type)
+                if go_type == 'unsafe.Pointer':
+                    cgo_type = map_c_type_to_cgo(var_type)
+                    lines.append(f"\t\t{var_name_local} {cgo_type} = ({cgo_type})(unsafe.Pointer(&C.{var_name_local}))")
+                else:
+                    lines.append(f"\t\t{var_name_local} *{go_type} = (*{go_type})(&C.{var_name_local})")
+            except (ValueError, RuntimeError):
+                lines.append(f"\t\t{var_name_local} unsafe.Pointer = unsafe.Pointer(&C.{var_name_local})")
+        lines.append("\t)")
+    
+    # Generate constructor call
+    lines.append(f"\t{var_name} = {module_name}.{constructor_name}(")
+    lines.append(f'\t\t"{module_name}",')
+    
+    # Add variable parameters
+    for var_type, var_name_local in variables:
+        lines.append(f"\t\t{var_name_local},")
+    
+    # Add function parameters - use the wrapper functions as parameters
+    for return_type, func_name, parameters, _ in functions:
+        try:
+            # Check if we can map all types
+            for param_type, _ in parameters:
+                map_c_type_to_go(param_type)
+            map_c_type_to_go(return_type)
+            lines.append(f"\t\t{func_name},")
+        except (ValueError, RuntimeError):
+            # Skip functions with unknown types
+            continue
+    
+    lines.append("\t)")
+    lines.append("}")
     
     return "\n".join(lines)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Generate Go imports file from C source file'
+        description='Generate Go imports file and module package from C source file'
     )
     parser.add_argument('c_file', help='C source file to analyze')
     parser.add_argument('-o', '--output', help='Output file path (default: <module>_imports.go)')
@@ -244,19 +483,32 @@ def main():
     
     # Get external dependencies
     external_deps = get_external_dependencies(args.c_file)
+    variables, functions = parse_external_dependencies(external_deps)
     
-    # Generate imports file
     try:
-        imports_content = generate_imports_file(args.c_file, external_deps)
+        # Create module directory
+        module_dir = module_name
+        os.makedirs(module_dir, exist_ok=True)
         
-        # Write output file
+        # Generate module file (xxx/xxx.go)
+        module_content = generate_module_file(module_name, variables, functions)
+        module_file_path = os.path.join(module_dir, f"{module_name}.go")
+        
+        with open(module_file_path, 'w', encoding='utf-8') as f:
+            f.write(module_content)
+        
+        print(f"Generated {module_file_path}")
+        
+        # Generate imports file (xxx_imports.go)
+        imports_content = generate_imports_file(args.c_file, external_deps, module_name)
+        
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(imports_content)
         
         print(f"Generated {output_file}")
         
     except Exception as e:
-        print(f"Error generating imports file: {e}", file=sys.stderr)
+        print(f"Error generating files: {e}", file=sys.stderr)
         sys.exit(1)
 
 
