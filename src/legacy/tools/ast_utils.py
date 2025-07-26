@@ -1,4 +1,5 @@
 from tree_sitter import Node
+from typing import List
 
 def find_function_definition(node: Node, func_name: str, source_code: str) -> Node:
     """Find function definition by name"""
@@ -55,3 +56,19 @@ def find_variable_references(node: Node, var_name: str, source_code: str) -> lis
     
     search_references(node)
     return references
+
+def enumerate_func_definitions(node: Node) -> List[Node]:
+    """
+    Find all function definitions and return them as a list.
+    """
+    func_definitions = []
+    
+    def search_func_definitions(node):
+        if node.type == "function_definition":
+            func_definitions.append(node)
+        
+        for child in node.children:
+            search_func_definitions(child)
+    
+    search_func_definitions(node)
+    return func_definitions
