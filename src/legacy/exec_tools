@@ -22,7 +22,6 @@ python -m tools.move_func sub_452510 audio.c
 python -m tools.move_func sub_452690 audio.c
 python -m tools.move_func nox_xxx_draw_452300 audio.c
 python -m tools.move_func sub_452E90 audio.c
-python -m tools.move_func sub_452EB0 audio.c
 python -m tools.move_func sub_452EE0 audio.c
 python -m tools.move_func sub_452F10 audio.c
 python -m tools.move_func sub_452F50 audio.c
