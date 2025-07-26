@@ -1,6 +1,7 @@
 #!/bin/bash
 echo '#include "defs.h"' > audio.c
 echo '#include "operators.h"' >> audio.c
+python -m tools.move_func sub_451850 audio.c
 python -m tools.move_func sub_451920 audio.c
 python -m tools.move_func sub_452010 audio.c
 python -m tools.move_func sub_452190 audio.c
@@ -66,4 +67,5 @@ python -m tools.update sub_452F10 0 'struct576*'
 python -m tools.update sub_452F50 0 'struct576*'
 python -m tools.update sub_452F80 0 'struct576*'
 python -m tools.update sub_452FE0 0 'struct576*'
+python -m tools.update sub_452580 0 'struct576*'
 python -m tools.compile_audio

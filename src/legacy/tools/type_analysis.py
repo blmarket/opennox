@@ -1,5 +1,7 @@
 from tree_sitter import Node
 
+from tools.inspect import dbg
+
 def extract_type_and_name(node: Node, source_code: str) -> tuple[str, str]:
     """Extract type and variable name from a declaration node"""
     decl_type = None
@@ -77,7 +79,8 @@ def find_variable_type(func_node: Node, var_name: str, source_code: str) -> str:
 
 def infer_from_func(node: Node, source_code: str) -> tuple[str, str]:
     """
-    Check the first statement of the function compound statement. If it's declaration with init_declarator then infer SRC, TGT from the assignment and return as a tuple.
+    Find the first init_declarator in the function compound statement and infer SRC, TGT from the assignment. Returns as a tuple.
+    The init_declarator can appear anywhere in the function, not just in the first statement.
     """
     # Find the compound statement (function body)
     compound_stmt = None
@@ -89,30 +92,23 @@ def infer_from_func(node: Node, source_code: str) -> tuple[str, str]:
     if not compound_stmt:
         return None, None
     
-    # Get the first statement in the compound statement
-    first_stmt = None
+    # Look through all statements in the compound statement to find the first init_declarator
     for child in compound_stmt.children:
         if child.type == "declaration":
-            first_stmt = child
-            break
-    
-    if not first_stmt:
-        return None, None
-    
-    # Look for init_declarator in the declaration
-    for child in first_stmt.children:
-        if child.type == "init_declarator":
-            # The structure should be: init_declarator -> identifier, "=", identifier
-            identifiers = []
-            for init_child in child.children:
-                if init_child.type == "identifier":
-                    identifiers.append(source_code[init_child.start_byte:init_child.end_byte])
-                elif init_child.type == "pointer_declarator":
-                    identifiers.append(source_code[init_child.children[1].start_byte:init_child.children[1].end_byte])
-            
-            # Should have exactly 2 identifiers: [declared_var, assigned_value]
-            if len(identifiers) == 2:
-                # Return (SRC, TGT) where SRC is the new variable and TGT is what it's assigned from
-                return identifiers[0], identifiers[1]
+            # Look for init_declarator in this declaration
+            for decl_child in child.children:
+                if decl_child.type == "init_declarator":
+                    # The structure should be: init_declarator -> identifier, "=", identifier
+                    identifiers = []
+                    for init_child in decl_child.children:
+                        if init_child.type == "identifier":
+                            identifiers.append(source_code[init_child.start_byte:init_child.end_byte])
+                        elif init_child.type == "pointer_declarator":
+                            identifiers.append(source_code[init_child.children[1].start_byte:init_child.children[1].end_byte])
+                    
+                    # Should have exactly 2 identifiers: [declared_var, assigned_value]
+                    if len(identifiers) == 2:
+                        # Return (SRC, TGT) where SRC is the new variable and TGT is what it's assigned from
+                        return identifiers[0], identifiers[1]
     
     return None, None

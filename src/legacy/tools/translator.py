@@ -88,7 +88,8 @@ class TranslationContext(object):
             raise ValueError("TranslationContext must have a source_file to perform replacement")
 
         node = node.parent
-        if node.type == "binary_expression" and node.parent.type == "binary_expression":
+        if node.type == "binary_expression" and node.children[1].type == '+' and node.parent.type == "binary_expression" and node.parent.children[1].type == '+':
+            # Special support for 3 entries addition case
             node = node.parent
         
         source_code = self.source_file.source_code
@@ -226,6 +227,7 @@ class TranslationContext(object):
                 ret = ""
                 for child in node.children:
                     child_txt = source_code[child.start_byte:child.end_byte]
+                    print(child.type, child_txt)
                     if child.type == "identifier" and child_txt == self.src:
                         ret += self.tgt
                         continue

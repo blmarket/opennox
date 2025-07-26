@@ -89,6 +89,8 @@ defs_file = SourceFile("defs.h")
 #%%
 struct200_node = find_struct_definition(defs_file.root_node, "struct200", defs_file.source_code)
 struct200_field_map = field_by_offset(struct200_node, defs_file.source_code)
+struct200_field_map[92] = "field_22.field_1"
+struct200_field_map[20] = "field_4.field_1"
 struct200_field_map
 
 # %%
@@ -97,6 +99,7 @@ struct200_field_map
 #%%
 struct576_field_map = field_by_offset(find_struct_definition(defs_file.root_node, "struct576", defs_file.source_code), defs_file.source_code)
 struct576_field_map[188] = "timerGroup_46.field_0.field_1"
+struct576_field_map[248] = "timerGroup_46.field_16"
 struct576_field_map
 
 #%%
