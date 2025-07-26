@@ -2,9 +2,9 @@
 
 import sys
 import argparse
-from pathlib import Path
 import tree_sitter_c as tsc
 from tree_sitter import Language, Parser
+from typing import Set, List
 
 
 def get_source_text(node, source_bytes):
@@ -12,38 +12,67 @@ def get_source_text(node, source_bytes):
     return source_bytes[node.start_byte:node.end_byte].decode('utf-8')
 
 
-def find_function_name_from_declarator(func_declarator, source_bytes):
-    """Extract function name from a function_declarator node."""
-    for child in func_declarator.children:
-        if child.type == 'identifier':
-            return get_source_text(child, source_bytes)
-    return None
-
-
-def find_function_declarations(tree, source_bytes):
-    """Find all function declarations in the parse tree."""
-    declarations = {}
-    
-    def find_function_declarator(node):
-        """Recursively find function_declarator nodes."""
-        if node.type == 'function_declarator':
-            return node
+def get_function_name(node, source_bytes):
+    """Extract function name from a function declarator node."""
+    def find_identifier(node):
+        if node.type == 'identifier':
+            return get_source_text(node, source_bytes)
         for child in node.children:
-            result = find_function_declarator(child)
+            result = find_identifier(child)
             if result:
                 return result
         return None
+    
+    return find_identifier(node)
+
+
+def find_function_declarator(node):
+    """Find function_declarator node within a declaration or definition."""
+    if node.type == 'function_declarator':
+        return node
+    for child in node.children:
+        result = find_function_declarator(child)
+        if result:
+            return result
+    return None
+
+
+def extract_extern_variables(tree, source_bytes):
+    """Extract all extern variable declarations."""
+    extern_vars = []
+    
+    def traverse(node):
+        if node.type == 'declaration':
+            # Check if it starts with extern and is not a function
+            decl_text = get_source_text(node, source_bytes).strip()
+            if decl_text.startswith('extern') and '(' not in decl_text:
+                # This is an extern variable declaration
+                extern_vars.append(decl_text)
+        
+        for child in node.children:
+            traverse(child)
+    
+    traverse(tree.root_node)
+    return extern_vars
+
+
+def extract_function_declarations(tree, source_bytes):
+    """Extract all function declarations (not definitions)."""
+    declarations = set()
     
     def traverse(node):
         if node.type == 'declaration':
             # Look for function declarator in this declaration
             func_declarator = find_function_declarator(node)
             if func_declarator:
-                # This is a function declaration
-                func_name = find_function_name_from_declarator(func_declarator, source_bytes)
-                if func_name:
-                    decl_text = get_source_text(node, source_bytes).strip()
-                    declarations[func_name] = decl_text
+                # This is a function declaration, get its text
+                decl_text = get_source_text(node, source_bytes).strip()
+                # Ensure it ends with semicolon (declaration, not definition)
+                if decl_text.endswith(';'):
+                    # Extract function name for deduplication
+                    func_name = get_function_name(func_declarator, source_bytes)
+                    if func_name:
+                        declarations.add((func_name, decl_text))
         
         for child in node.children:
             traverse(child)
@@ -52,43 +81,18 @@ def find_function_declarations(tree, source_bytes):
     return declarations
 
 
-def find_function_definitions(tree, source_bytes):
-    """Find all function definitions in the parse tree."""
-    definitions = {}
-    
-    def find_function_declarator(node):
-        """Recursively find function_declarator nodes."""
-        if node.type == 'function_declarator':
-            return node
-        # Handle pointer return types
-        if node.type == 'pointer_declarator':
-            for child in node.children:
-                if child.type == 'function_declarator':
-                    return child
-        for child in node.children:
-            result = find_function_declarator(child)
-            if result:
-                return result
-        return None
+def extract_function_definitions(tree, source_bytes):
+    """Extract all function definitions."""
+    definitions = set()
     
     def traverse(node):
         if node.type == 'function_definition':
-            # Look for function declarator in this definition
+            # Find the function declarator to get the name
             func_declarator = find_function_declarator(node)
             if func_declarator:
-                func_name = find_function_name_from_declarator(func_declarator, source_bytes)
+                func_name = get_function_name(func_declarator, source_bytes)
                 if func_name:
-                    # Extract just the signature part (without the body)
-                    for child in node.children:
-                        if child.type == 'compound_statement':
-                            # Everything before the compound statement is the signature
-                            signature_end = child.start_byte
-                            signature_text = source_bytes[:signature_end].decode('utf-8')
-                            # Find the start of this function definition
-                            signature_start = node.start_byte
-                            func_signature = source_bytes[signature_start:signature_end].decode('utf-8').strip()
-                            definitions[func_name] = func_signature + ";"
-                            break
+                    definitions.add(func_name)
         
         for child in node.children:
             traverse(child)
@@ -97,86 +101,77 @@ def find_function_definitions(tree, source_bytes):
     return definitions
 
 
-def find_external_functions(file_path):
-    """Find external function dependencies in a C file."""
-    # Set up tree-sitter
+def find_external_dependencies(c_file_path):
+    """Find all external dependencies in a C file."""
+    try:
+        with open(c_file_path, 'r', encoding='utf-8') as f:
+            source_code = f.read()
+    except FileNotFoundError:
+        print(f"Error: File '{c_file_path}' not found", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error reading file: {e}", file=sys.stderr)
+        sys.exit(1)
+    
+    # Initialize treesitter
     C_LANGUAGE = Language(tsc.language(), "c")
     parser = Parser()
     parser.set_language(C_LANGUAGE)
     
-    try:
-        with open(file_path, 'rb') as f:
-            source_bytes = f.read()
-        
-        tree = parser.parse(source_bytes)
-        
-        # Find all function declarations
-        declarations = find_function_declarations(tree, source_bytes)
-        
-        # Find all function definitions
-        definitions = find_function_definitions(tree, source_bytes)
-        
-        # External functions are declared but not defined
-        external_functions = {}
-        for func_name, decl_text in declarations.items():
-            if func_name not in definitions:
-                external_functions[func_name] = decl_text
-        
-        return external_functions, declarations, definitions
-        
-    except Exception as e:
-        print(f"Error parsing {file_path}: {e}", file=sys.stderr)
-        return {}, {}, {}
+    source_bytes = source_code.encode('utf-8')
+    tree = parser.parse(source_bytes)
+    
+    # Extract extern variables
+    extern_vars = extract_extern_variables(tree, source_bytes)
+    
+    # Extract function declarations and definitions
+    function_declarations = extract_function_declarations(tree, source_bytes)
+    function_definitions = extract_function_definitions(tree, source_bytes)
+    
+    # Find external function declarations (declarations - definitions)
+    external_functions = []
+    for func_name, decl_text in function_declarations:
+        if func_name not in function_definitions:
+            external_functions.append(decl_text)
+    
+    return extern_vars, external_functions
+
+
+def format_for_cgo(extern_vars, external_functions):
+    """Format the output for CGO import section."""
+    output_lines = []
+    
+    # Add standard includes that are commonly needed  
+    output_lines.append('#include "defs.h"')
+    output_lines.append("")
+    
+    # Add extern variables
+    for var in extern_vars:
+        output_lines.append(var)
+    
+    # Add external function declarations
+    for func in external_functions:
+        # Ensure function declarations end with semicolon
+        if not func.endswith(';'):
+            func += ';'
+        output_lines.append(func)
+    
+    return '\n'.join(output_lines)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Find external function dependencies in a C file using tree-sitter"
+        description='Extract external dependencies from C code for CGO imports'
     )
-    parser.add_argument("file_path", help="C source file to analyze")
-    parser.add_argument("-v", "--verbose", action="store_true", 
-                       help="Show all declarations and definitions")
-    parser.add_argument("--declarations-only", action="store_true",
-                       help="Show only declarations")
-    parser.add_argument("--definitions-only", action="store_true", 
-                       help="Show only definitions")
+    parser.add_argument('filename', help='C source file to analyze')
     
     args = parser.parse_args()
     
-    if not Path(args.file_path).exists():
-        print(f"Error: File '{args.file_path}' not found", file=sys.stderr)
-        sys.exit(1)
+    extern_vars, external_functions = find_external_dependencies(args.filename)
     
-    external_functions, declarations, definitions = find_external_functions(args.file_path)
-    
-    if args.declarations_only:
-        for func_name, decl_text in sorted(declarations.items()):
-            print(f"{func_name}: {decl_text}")
-    elif args.definitions_only:
-        for func_name, def_text in sorted(definitions.items()):
-            print(f"{func_name}: {def_text}")
-    else:
-        # Default: show external functions
-        if external_functions:
-            for func_name, decl_text in sorted(external_functions.items()):
-                print(f"{func_name}: {decl_text}")
-        
-        if args.verbose:
-            print(f"\n=== Summary ===")
-            print(f"Total declarations: {len(declarations)}")
-            print(f"Total definitions: {len(definitions)}")
-            print(f"External dependencies: {len(external_functions)}")
-            
-            if declarations:
-                print(f"\n=== All Declarations ===")
-                for func_name, decl_text in sorted(declarations.items()):
-                    print(f"{func_name}: {decl_text}")
-            
-            if definitions:
-                print(f"\n=== All Definitions ===")
-                for func_name, def_text in sorted(definitions.items()):
-                    print(f"{func_name}: {def_text}")
+    output = format_for_cgo(extern_vars, external_functions)
+    print(output)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

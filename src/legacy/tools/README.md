@@ -47,6 +47,16 @@ This directory contains a comprehensive set of Python tools designed to assist i
 - **Perfect for creating import files** like `audio_imports.go`
 - **Advantage over extract_functions.py**: Only shows external dependencies, not internal functions
 
+#### `create_imports.py`
+**Usage**: `python -m tools.create_imports <file.c> [-o output.go]`
+- **NEW**: Generates complete Go import files for C modules
+- Uses `external_funcs.py` to identify external dependencies
+- Creates CGO header with `#include "defs.h"` and external function declarations
+- Generates Go wrapper functions with proper C-to-Go type mapping
+- Maps C types to Go types (e.g., `uint32_t` → `uint32`, pointers → `unsafe.Pointer`)
+- **Perfect for automated creation** of files like `audio_imports.go`
+- Follows the same pattern as existing `music_imports.go` and `dialog_imports.go`
+
 #### `find_decl.py`
 **Usage**: `python -m tools.find_decl <identifier> [-d directory]`
 - Finds proper declarations for global variables and functions
@@ -158,13 +168,22 @@ This directory contains a comprehensive set of Python tools designed to assist i
 ### 1. Creating External Dependencies (like audio_imports.go)
 
 ```bash
-# Method 1: Use external_funcs.py to directly identify external dependencies (RECOMMENDED)
+# Method 1: FULLY AUTOMATED - Use create_imports.py (RECOMMENDED)
+python -m tools.create_imports audio.c
+
+# This single command:
+# - Identifies external dependencies using external_funcs.py
+# - Creates CGO header with #include "defs.h" 
+# - Generates Go wrapper functions with proper type mapping
+# - Creates complete audio_imports.go file following existing patterns
+
+# Method 2: Manual analysis using external_funcs.py
 python -m tools.external_funcs audio.c --verbose
 
-# Method 2: Use compilation tool to automatically discover missing dependencies  
+# Method 3: Use compilation tool to automatically discover missing dependencies  
 python -m tools.compile_audio
 
-# Method 3: Manual approach using older tools (when other methods aren't sufficient)
+# Method 4: Manual approach using older tools (when other methods aren't sufficient)
 # Step 1: Extract all function signatures from C file (includes both declarations and definitions)
 python -m tools.extract_functions audio.c > audio_functions.txt
 
@@ -176,7 +195,7 @@ python -m tools.extract_functions audio.c > audio_functions.txt
 python -m tools.find_decl some_external_function
 ```
 
-**✅ Recommended**: Use `external_funcs.py` as it directly identifies external dependencies without needing manual analysis.
+**✅ Recommended**: Use `create_imports.py` for fully automated Go import file generation.
 
 ### 2. Translating Individual Functions
 
@@ -216,14 +235,27 @@ These tools are designed to be used by Claude agents for automated C-to-Go trans
 - Error handling and progress reporting suitable for automation
 - Designed to work together as a translation pipeline
 
-## Next Steps for audio_imports.go Creation
+## Quick Start for audio_imports.go Creation
 
-**Recommended Approach (EASIEST):**
+**✅ READY TO USE (AUTOMATED):**
+```bash
+python -m tools.create_imports audio.c
+```
+
+This single command creates a complete `audio_imports.go` file with:
+- CGO header with `#include "defs.h"`
+- All external function declarations  
+- Go wrapper functions with proper type mapping
+- Following the same pattern as `music_imports.go` and `dialog_imports.go`
+
+**Alternative Approaches (if needed):**
+
+**Manual Analysis Approach:**
 1. Use `external_funcs.py audio.c` to directly identify all external dependencies
 2. Use `find_decl.py` to locate proper declarations for each external dependency
 3. Create audio_imports.go following the pattern of music_imports.go and dialog_imports.go
 
-**Alternative Approach:**
+**Compilation-Based Approach:**
 1. Use `compile_audio.py` to iteratively discover missing declarations through compilation
 2. Use `find_decl.py` to locate proper declarations for discovered missing symbols
 3. Create audio_imports.go following existing patterns
@@ -234,4 +266,4 @@ These tools are designed to be used by Claude agents for automated C-to-Go trans
 3. Use `find_decl.py` to find external dependencies
 4. Create audio_imports.go following existing patterns
 
-**Note**: The `external_funcs.py` approach is now preferred as it directly identifies external dependencies without manual analysis or compilation errors.
+**Note**: The `create_imports.py` tool is now available for fully automated import file generation.
