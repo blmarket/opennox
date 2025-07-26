@@ -1,7 +1,7 @@
 #include "defs.h"
 #include "operators.h"
 
-// Declarations added by compile_audio.py
+// External
 extern uint32_t dword_587000_126996;
 extern uint32_t dword_5d4594_1045420;
 extern uint32_t dword_5d4594_1045424;
@@ -9,8 +9,35 @@ extern uint32_t dword_5d4594_1045428;
 extern uint32_t dword_5d4594_1045432;
 extern uint32_t dword_5d4594_1045436;
 extern void* dword_587000_127004;
+// Go External
 char* nox_xxx_getSndName_40AF80(int a1);
 int nox_common_randomIntMinMax_415FF0(int min, int max, const char* file, int line);
+int sub_4862E0(void* a3, int a4);
+int sub_486350(void* a1, int a2);
+int sub_4863B0(void* a2);
+int sub_486520(void* a2);
+void* sub_486320(void* a1, int a2);
+void* sub_4864A0(void* a3);
+// C external
+int sub_4BD300(uint32_t* a1, int a2);
+int sub_4BDA80(int a1);
+int sub_4BDB30(int a1);
+int sub_4BDB40(int a2);
+int* sub_452810(int a1, char a2);
+nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
+uint32_t* sub_4BD280(int a1, int a2);
+uint32_t* sub_4BD2E0(uint32_t** a1);
+uint32_t* sub_4BD340(int a1, int a2, int a3, int a4);
+uint32_t* sub_4BD470(uint32_t** a1, int a2);
+void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
+void nox_common_list_clear_425760(nox_list_item_t* list);
+void nox_common_list_remove_425920(void* a1);
+void sub_4BD2D0(void* lpMem);
+void sub_4BD3C0(void* lpMem);
+void sub_4BDB90(uint32_t* a1, uint32_t* a2);
+void* sub_425770(void* a1);
+
+// owned
 int sub_451920(struct200* a2_);
 int sub_451CF0(uint32_t* a1);
 int sub_451E80(int a1);
@@ -21,35 +48,12 @@ int sub_452580(struct576* a1_);
 int sub_4526D0(int a1);
 int sub_452770(uint32_t* a1);
 int sub_452FA0(int a1);
-int sub_4862E0(void* a3, int a4);
-int sub_486350(void* a1, int a2);
-int sub_4863B0(void* a2);
-int sub_486520(void* a2);
-int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BD650(int a1);
 int sub_4BD660(int a1);
 int sub_4BD710(int a1);
-int sub_4BDA80(int a1);
 int sub_4BDB20(int a1);
-int sub_4BDB30(int a1);
-int sub_4BDB40(int a2);
-int* sub_452810(int a1, char a2);
 long long sub_452690(struct576* a3_, long long a4, int a5);
-nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
-uint32_t* sub_4BD280(int a1, int a2);
-uint32_t* sub_4BD2E0(uint32_t** a1);
-uint32_t* sub_4BD340(int a1, int a2, int a3, int a4);
-uint32_t* sub_4BD470(uint32_t** a1, int a2);
 unsigned int sub_452F10(struct576* a1_, int a2);
-void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
-void nox_common_list_clear_425760(nox_list_item_t* list);
-void nox_common_list_remove_425920(void* a1);
-void sub_4BD2D0(void* lpMem);
-void sub_4BD3C0(void* lpMem);
-void sub_4BDB90(uint32_t* a1, uint32_t* a2);
-void* sub_425770(void* a1);
-void* sub_486320(void* a1, int a2);
-void* sub_4864A0(void* a3);
 
 int sub_451850(int a2, void* a3p) {
 	int a3 = a3p;
