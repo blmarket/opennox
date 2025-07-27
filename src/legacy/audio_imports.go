@@ -32,9 +32,13 @@ void* sub_486320(void* a1, int a2);
 char* nox_xxx_getSndName_40AF80(int a1);
 void nox_common_list_remove_425920(void* a1);
 int sub_4862E0(void* a3, int a4);
-int nox_common_randomIntMinMax_415FF0(int min, int max, const char* file, int line);
+int nox_common_randomIntMinMax_415FF0(int min, int max, char* file, int line);
 int sub_4863B0(void* a2);
 void sub_4BD3C0(void* lpMem);
+
+int sub_452770(uint32_t* a1);
+int sub_4526D0(int a1);
+int sub_4526F0(int a1);
 */
 import "C"
 
@@ -42,6 +46,7 @@ import (
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/legacy/audio"
+	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 var (
@@ -61,6 +66,9 @@ func initAudio() {
 	AudioModule = audio.NewAudioModule(
 		"audio",
 		func() uint { return uint(PlatformTicks()) },
+		unsafe.Pointer(C.sub_452770),
+		unsafe.Pointer(C.sub_4526F0),
+		unsafe.Pointer(C.sub_4526D0),
 		dword_587000_126996,
 		dword_5d4594_1045420,
 		dword_5d4594_1045424,
@@ -87,10 +95,16 @@ func initAudio() {
 		sub_4BDA80,
 		nox_common_list_clear_425760,
 		sub_486320,
-		nox_xxx_getSndName_40AF80,
+		func(id int) unsafe.Pointer {
+			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
+		},
 		nox_common_list_remove_425920,
-		sub_4862E0,
-		nox_common_randomIntMinMax_415FF0,
+		func(a1 unsafe.Pointer, a2 int) int {
+			return bool2int((*timer.Timer)(a1).Init(a2))
+		},
+		func(min, max int, file unsafe.Pointer, line int) int {
+			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
+		},
 		sub_4863B0,
 		sub_4BD3C0,
 	)
@@ -118,18 +132,6 @@ func sub_4BDB90(a1 unsafe.Pointer, a2 unsafe.Pointer) {
 
 func sub_4BDB40(a2 int) int {
 	return int(C.sub_4BDB40(C.int(a2)))
-}
-
-func sub_4864A0(a3 unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_4864A0((unsafe.Pointer)(a3)))
-}
-
-func sub_486350(a1 unsafe.Pointer, a2 int) int {
-	return int(C.sub_486350((unsafe.Pointer)(a1), C.int(a2)))
-}
-
-func sub_486520(a2 unsafe.Pointer) int {
-	return int(C.sub_486520((unsafe.Pointer)(a2)))
 }
 
 func sub_4BD280(a1 int, a2 int) unsafe.Pointer {
@@ -168,30 +170,95 @@ func nox_common_list_clear_425760(list unsafe.Pointer) {
 	C.nox_common_list_clear_425760((*C.nox_list_item_t)(list))
 }
 
-func sub_486320(a1 unsafe.Pointer, a2 int) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_486320((unsafe.Pointer)(a1), C.int(a2)))
-}
-
-func nox_xxx_getSndName_40AF80(a1 int) unsafe.Pointer {
-	return unsafe.Pointer(C.nox_xxx_getSndName_40AF80(C.int(a1)))
-}
-
 func nox_common_list_remove_425920(a1 unsafe.Pointer) {
 	C.nox_common_list_remove_425920((unsafe.Pointer)(a1))
 }
 
-func sub_4862E0(a3 unsafe.Pointer, a4 int) int {
-	return int(C.sub_4862E0((unsafe.Pointer)(a3), C.int(a4)))
-}
-
-func nox_common_randomIntMinMax_415FF0(min int, max int, file unsafe.Pointer, line int) int {
-	return int(C.nox_common_randomIntMinMax_415FF0(C.int(min), C.int(max), (*C.char)(file), C.int(line)))
-}
-
-func sub_4863B0(a2 unsafe.Pointer) int {
-	return int(C.sub_4863B0((unsafe.Pointer)(a2)))
-}
-
 func sub_4BD3C0(lpMem unsafe.Pointer) {
 	C.sub_4BD3C0((unsafe.Pointer)(lpMem))
+}
+
+//export sub_452770
+func sub_452770(a1 *C.uint32_t) C.int {
+	return C.int(AudioModule.Sub_452770((*uint32)(a1)))
+}
+
+//export sub_4526F0
+func sub_4526F0(a1 C.int) C.int {
+	return C.int(AudioModule.Sub_4526F0(int32(a1)))
+}
+
+//export sub_4526D0
+func sub_4526D0(a1 C.int) C.int {
+	return C.int(AudioModule.Sub_4526D0(int32(a1)))
+}
+
+//export nox_xxx_clientPlaySoundSpecial_452D80
+func nox_xxx_clientPlaySoundSpecial_452D80(a1, a2 C.int) {
+	AudioModule.Nox_xxx_clientPlaySoundSpecial_452D80(int32(a1), int32(a2))
+}
+
+//export sub_451850
+func sub_451850(a2 int, a3 unsafe.Pointer) int32 {
+	return AudioModule.Sub_451850(int32(a2), a3)
+}
+
+//export sub_4519C0
+func sub_4519C0() {
+	AudioModule.Sub_4519C0()
+}
+
+//export sub_4523D0
+func sub_4523D0(a1 *C.struct576) int32 {
+	return AudioModule.Sub_4523D0((*audio.Struct576)(unsafe.Pointer(a1)))
+}
+
+//export sub_451970
+func sub_451970() {
+	AudioModule.Sub_451970()
+}
+
+//export sub_452FE0
+func sub_452FE0(a1 *C.struct576, a2 int32) int32 {
+	return AudioModule.Sub_452FE0((*audio.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export sub_452F50
+func sub_452F50(a1 *C.struct576, a2 int32) int32 {
+	return AudioModule.Sub_452F50((*audio.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export nox_xxx_draw_452300
+func nox_xxx_draw_452300(a1 *C.struct200) *uint32 {
+	return AudioModule.Nox_xxx_draw_452300((*audio.Struct200)(unsafe.Pointer(a1)))
+}
+
+//export nox_xxx_draw_452270
+func nox_xxx_draw_452270(a1 int32) *C.char {
+	return (*C.char)(unsafe.Pointer(AudioModule.Nox_xxx_draw_452270(a1)))
+}
+
+//export sub_452EE0
+func sub_452EE0(a1 *C.struct576, a2 int32) int32 {
+	return AudioModule.Sub_452EE0((*audio.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export sub_452F80
+func sub_452F80(a1 *C.struct576, a2 int32) *uint32 {
+	return AudioModule.Sub_452F80((*audio.Struct576)(unsafe.Pointer(a1)), a2)
+}
+
+//export sub_452E90
+func sub_452E90(a1 *uint32, a2 *C.struct576) int32 {
+	return AudioModule.Sub_452E90(a1, (*audio.Struct576)(unsafe.Pointer(a2)))
+}
+
+//export sub_452DC0
+func sub_452DC0(a1 int32, a2 int32, a3 int32) {
+	AudioModule.Sub_452DC0(a1, a2, a3)
+}
+
+//export sub_452E10
+func sub_452E10(a1 int32, a2 int32, a3 int32) {
+	AudioModule.Sub_452E10(a1, a2, a3)
 }
