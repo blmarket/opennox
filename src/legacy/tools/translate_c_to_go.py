@@ -9,11 +9,23 @@ import shutil
 from typing import Dict, List, Set
 from pathlib import Path
 
+def run_cxgo2():
+    try:
+        cmd = ['go', 'run', 'github.com/gotranspile/cxgo/cmd/cxgo@latest']
+        subprocess.run(cmd, cwd="../../")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running cxgo: {e.stderr}", file=sys.stderr)
+        sys.exit(1)
+    except FileNotFoundError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
 def run_cxgo(input_file: str, output_file: str = None) -> str:
     """Run cxgo on the input file and return the generated Go code."""
     try:
         # Run cxgo command
-        cmd = ['GOARCH=386', 'go', 'run', 'github.com/gotranspile/cxgo/cmd/cxgo@latest', 'file', input_file]
+        cmd = ['go', 'run', 'github.com/gotranspile/cxgo/cmd/cxgo@latest', 'file', input_file]
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
 
         # cxgo generates a .go file with same base name as input
@@ -118,21 +130,14 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
     print(f"Translating {c_file_path} to Go...")
 
     # Step 1: Generate Go code from audio.c
-    print("Running cxgo on audio.c...")
-    audio_go_content = run_cxgo(c_file_path)
-
-    # Step 2: Generate defs.go from defs.h
-    print("Running cxgo on defs.h...")
-    defs_h_path = os.path.join(os.path.dirname(c_file_path), 'defs.h')
-    if os.path.exists(defs_h_path):
-        defs_go_content = run_cxgo(defs_h_path)
-
-        # Step 3: Extract specific struct definitions
+    print("Running cxgo")
+    run_cxgo2()
+    with open("../../gonox/audio.go", 'r') as f:
+        audio_go_content = f.read()
+    with open("../../gonox/defs.go", "r") as f:
+        defs_go_content = f.read()
         target_structs = ['struct200', 'struct576', 'nox_list_item_t']
         struct_definitions = extract_struct_definitions(defs_go_content, target_structs)
-    else:
-        print("Warning: defs.h not found, skipping struct extraction", file=sys.stderr)
-        struct_definitions = ""
 
     # Step 4: Get external variables
     print("Getting external variables...")
@@ -156,7 +161,7 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
 
     for line in lines:
         if line.startswith('package '):
-            package_section.append(line)
+            package_section.append(f'package {c_file_path.replace(".c", "")}')
         elif line.startswith('import '):
             in_imports = True
             package_section.append(line)
