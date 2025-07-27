@@ -50,16 +50,17 @@ var (
 
 func initAudio() {
 	var (
-		dword_587000_126996 *uint32 = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045420 *uint32 = (*uint32)(&C.dword_5d4594_1045420)
-		dword_5d4594_1045424 *uint32 = (*uint32)(&C.dword_5d4594_1045424)
-		dword_5d4594_1045428 *uint32 = (*uint32)(&C.dword_5d4594_1045428)
-		dword_5d4594_1045432 *uint32 = (*uint32)(&C.dword_5d4594_1045432)
-		dword_5d4594_1045436 *uint32 = (*uint32)(&C.dword_5d4594_1045436)
-		dword_587000_127004 unsafe.Pointer = (unsafe.Pointer)(unsafe.Pointer(&C.dword_587000_127004))
+		dword_587000_126996  *uint32        = (*uint32)(&C.dword_587000_126996)
+		dword_5d4594_1045420 *uint32        = (*uint32)(&C.dword_5d4594_1045420)
+		dword_5d4594_1045424 *uint32        = (*uint32)(&C.dword_5d4594_1045424)
+		dword_5d4594_1045428 *uint32        = (*uint32)(&C.dword_5d4594_1045428)
+		dword_5d4594_1045432 *uint32        = (*uint32)(&C.dword_5d4594_1045432)
+		dword_5d4594_1045436 *uint32        = (*uint32)(&C.dword_5d4594_1045436)
+		dword_587000_127004  unsafe.Pointer = (unsafe.Pointer)(unsafe.Pointer(&C.dword_587000_127004))
 	)
 	AudioModule = audio.NewAudioModule(
 		"audio",
+		func() uint { return uint(PlatformTicks()) },
 		dword_587000_126996,
 		dword_5d4594_1045420,
 		dword_5d4594_1045424,
