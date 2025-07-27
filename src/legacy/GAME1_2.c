@@ -24,10 +24,10 @@
 #include "GAME5.h"
 #include "GAME5_2.h"
 #include "client__system__parsecmd.h"
+#include "common__crypt.h"
 #include "common__net_list.h"
 #include "common__system__settings.h"
 #include "common__system__team.h"
-#include "common__crypt.h"
 
 #include "client__drawable__drawable.h"
 #include "client__gui__gamewin__gamewin.h"
@@ -118,13 +118,11 @@ extern uint32_t dword_8531A0_2576;
 int nox_win_width = 0;
 int nox_win_height = 0;
 
-
 obj_5D4594_754088_t* ptr_5D4594_754088 = 0;
 int ptr_5D4594_754088_cnt = 0;
 
 obj_5D4594_754088_t* ptr_5D4594_754092 = 0;
 int ptr_5D4594_754092_cnt = 0;
-
 
 nox_screenParticle* nox_screenParticles_head = 0;
 nox_screenParticle* dword_5d4594_806052 = 0;
@@ -591,7 +589,7 @@ int nox_server_mapRWObjectTOC_428B30() {
 	unsigned short v2; // bp
 	int v3;            // esi
 	int v4;            // eax
-	char* v5;            // esi
+	char* v5;          // esi
 	int i;             // esi
 	unsigned short v7; // ax
 	int v8;            // [esp+4h] [ebp-110h]
@@ -1565,7 +1563,8 @@ int sub_42A150(short a1, uint32_t* a2) {
 					LOBYTE(v27) = v27 & 0x7F;
 					v19 = v18 >> 7;
 					if (!nox_common_gameFlags_check_40A5C0(0x400000)) {
-						v22 = (unsigned char*)nox_server_getWallAtGrid_410580(v17 + *getMemU32Ptr(0x5D4594, 741360), v4 + *getMemU32Ptr(0x5D4594, 741368));
+						v22 = (unsigned char*)nox_server_getWallAtGrid_410580(v17 + *getMemU32Ptr(0x5D4594, 741360),
+																			  v4 + *getMemU32Ptr(0x5D4594, 741368));
 						v21 = v22;
 						if (v22) {
 							if (v30 & 1) {
@@ -1574,7 +1573,8 @@ int sub_42A150(short a1, uint32_t* a2) {
 								v23 = v27;
 							}
 						} else {
-							v21 = (unsigned char*)nox_xxx_wallCreateAt_410250(v17 + *getMemU32Ptr(0x5D4594, 741360), v4 + *getMemU32Ptr(0x5D4594, 741368));
+							v21 = (unsigned char*)nox_xxx_wallCreateAt_410250(v17 + *getMemU32Ptr(0x5D4594, 741360),
+																			  v4 + *getMemU32Ptr(0x5D4594, 741368));
 							if (!v21) {
 								return 0;
 							}
@@ -1582,7 +1582,8 @@ int sub_42A150(short a1, uint32_t* a2) {
 						}
 						*v21 = v23;
 					} else {
-						v20 = (unsigned char**)sub_504290(v17 + getMemByte(0x5D4594, 741360), v4 + getMemByte(0x5D4594, 741368));
+						v20 = (unsigned char**)sub_504290(v17 + getMemByte(0x5D4594, 741360),
+														  v4 + getMemByte(0x5D4594, 741368));
 						v21 = *v20;
 						**v20 = v27;
 					}
@@ -3149,8 +3150,8 @@ void nox_xxx_clientTalk_42E7B0(nox_drawable* a1p) {
 	short v2; // ax
 
 	v1 = a1;
-	if (a1 && (!dword_8531A0_2576 || !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 3)) &&
-		sub_478030() != 1 && nox_gui_xxx_check_446360() != 1) {
+	if (a1 && (!dword_8531A0_2576 || !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 3)) && sub_478030() != 1 &&
+		nox_gui_xxx_check_446360() != 1) {
 		v2 = *(uint16_t*)(v1 + 128);
 		LOWORD(a1) = 464;
 		HIWORD(a1) = v2;
@@ -3177,8 +3178,8 @@ void nox_xxx_clientTrade_42E850(nox_drawable* a1p) {
 	int v1; // esi
 
 	v1 = a1;
-	if (a1 && (!dword_8531A0_2576 || !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 3)) &&
-		sub_47A260() != 1 && nox_gui_xxx_check_446360() != 1) {
+	if (a1 && (!dword_8531A0_2576 || !(*(uint8_t*)(dword_8531A0_2576 + 3680) & 3)) && sub_47A260() != 1 &&
+		nox_gui_xxx_check_446360() != 1) {
 		LOWORD(a1) = 5577;
 		HIWORD(a1) = nox_xxx_netGetUnitCodeCli_578B00(v1);
 		nox_netlist_addToMsgListCli_40EBC0(31, 0, &a1, 4);
@@ -3815,7 +3816,8 @@ int sub_438E30(uint32_t* a1, int a2) {
 		if (!(*(uint8_t*)(v3 + 4) & 0x10) && *(uint32_t*)(v3 + 44) == 2048) {
 			v4 = *(short***)(v3 + 32);
 			nox_xxx_drawSetTextColor_434390(nox_color_white_2523948);
-			nox_xxx_drawStringStyle_43F7B0(*(uint32_t*)(v3 + 236), *v4, v6 + *(uint32_t*)(v3 + 16), (int)a1 + *(uint32_t*)(v3 + 20));
+			nox_xxx_drawStringStyle_43F7B0(*(uint32_t*)(v3 + 236), *v4, v6 + *(uint32_t*)(v3 + 16),
+										   (int)a1 + *(uint32_t*)(v3 + 20));
 		}
 		v3 = *(uint32_t*)(v3 + 388);
 	} while (v3);
