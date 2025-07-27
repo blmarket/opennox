@@ -13,6 +13,10 @@ python -m tools.update sub_487680 0 'struct264*'
 python -m tools.move_func sub_431290 struct264.c
 python -m tools.move_func sub_487970 struct264.c
 python -m tools.update sub_487970 0 'struct264*'
+python -m tools.move_func sub_487590 struct264.c
+python -m tools.update sub_487590 0 'struct264*'
+python -m tools.move_func sub_4872C0 struct264.c
+python -m tools.update sub_4872C0 0 'struct264*'
 
 # python -m tools.update sub_451920 0 'struct200*'
 # python -m tools.update sub_451BE0 0 'struct576*'
