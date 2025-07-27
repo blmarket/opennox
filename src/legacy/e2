@@ -2,6 +2,7 @@
 echo '#include "defs.h"' > struct264.c
 echo '#include "operators.h"' >> struct264.c
 python -m tools.move_func sub_4871C0 struct264.c
+python -m tools.update sub_4871C0 -1 'struct264*'
 
 # python -m tools.update sub_451920 0 'struct200*'
 # python -m tools.update sub_451BE0 0 'struct576*'
