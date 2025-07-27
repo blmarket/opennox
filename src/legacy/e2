@@ -1,0 +1,29 @@
+#!/bin/bash
+echo '#include "defs.h"' > struct264.c
+echo '#include "operators.h"' >> struct264.c
+python -m tools.move_func sub_4871C0 struct264.c
+
+# python -m tools.update sub_451920 0 'struct200*'
+# python -m tools.update sub_451BE0 0 'struct576*'
+# python -m tools.update sub_451CA0 0 'struct576*'
+# python -m tools.update sub_451F30 0 'struct576*'
+# python -m tools.update sub_451F90 0 'struct576*'
+# python -m tools.update sub_451FE0 0 'struct576*'
+# python -m tools.update sub_452050 0 'struct576*'
+# python -m tools.update sub_452120 0 'struct576*'
+# python -m tools.update sub_452190 0 'struct200*'
+# python -m tools.update nox_xxx_draw_452300 0 'struct200*'
+# python -m tools.update sub_4523D0 0 'struct576*'
+# python -m tools.update sub_452410 0 'struct576*'
+# python -m tools.update sub_452490 0 'struct576*'
+# python -m tools.update sub_452510 0 'struct576*'
+# python -m tools.update sub_452690 0 'struct576*'
+# python -m tools.update sub_452E90 1 'struct576*'
+# python -m tools.update sub_452EE0 0 'struct576*'
+# python -m tools.update sub_452F10 0 'struct576*'
+# python -m tools.update sub_452F50 0 'struct576*'
+# python -m tools.update sub_452F80 0 'struct576*'
+# python -m tools.update sub_452FE0 0 'struct576*'
+# python -m tools.update sub_452580 0 'struct576*'
+# python -m tools.compile_audio
+# python -m tools.alias_repeat
