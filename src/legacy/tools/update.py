@@ -231,11 +231,14 @@ def extract_parameter_name(declarator_node):
     if declarator_node.type == 'identifier':
         return declarator_node.text.decode()
     elif declarator_node.type == 'pointer_declarator':
-        # Handle pointer parameters
+        # Handle pointer parameters - recursively search for identifier
         for child in declarator_node.children:
             if child.type == 'identifier':
                 return child.text.decode()
-    return "param"
+            elif child.type == 'pointer_declarator':
+                # Recursively search nested pointer declarators
+                return extract_parameter_name(child)
+    raise RuntimeError("cannot find parameter name")
 
 
 def extract_parameter_type(param_node, declarator_node):
