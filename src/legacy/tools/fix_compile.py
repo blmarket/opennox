@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Tool to iteratively compile audio.c and fix unknown type errors using find_decl.
+Tool to iteratively compile C files and fix unknown type errors using find_decl.
+Usage: python -m tools.fix_compile <filename.c>
 """
 
 import subprocess
@@ -154,11 +155,11 @@ def compile_audio():
     return compile_c_file("audio.c")
 
 if __name__ == "__main__":
-    # Support command line argument for filename, default to audio.c for backward compatibility
-    if len(sys.argv) > 1:
-        filename = sys.argv[1]
-    else:
-        filename = "audio.c"
+    if len(sys.argv) != 2:
+        print("Usage: python -m tools.fix_compile <filename.c>")
+        sys.exit(1)
+    
+    filename = sys.argv[1]
     
     if not os.path.exists(filename):
         print(f"Error: {filename} not found in current directory")
