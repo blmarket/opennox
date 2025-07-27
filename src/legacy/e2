@@ -40,6 +40,9 @@ python -m tools.move_func sub_4876A0 struct264.c
 python -m tools.update sub_4876A0 0 'struct264*'
 python -m tools.move_func sub_487910 struct264.c
 python -m tools.update sub_487910 0 'struct264*'
+python -m tools.move_func sub_452810 struct264.c
+python -m tools.move_func sub_487810 struct264.c
+python -m tools.update sub_487810 0 'struct264*'
 
 python -m tools.fix_compile struct264.c
 
