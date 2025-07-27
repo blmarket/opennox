@@ -12,6 +12,7 @@ define:
 #file_pref: cxgo_
 files:
   - name: '*.c'
+  - name: 'defs.h'
 replace:
   - old: 'libc.CString'
     new: 'internCStr'
@@ -55,3 +56,5 @@ replace:
     new: '*memmap.PtrInt16'
   - old: '*mem_getI8Ptr'
     new: '*memmap.PtrInt8'
+  - old: 'libc.MemSet'
+    new: 'alloc.Memset'
