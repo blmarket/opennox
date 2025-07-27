@@ -1368,4 +1368,9 @@ typedef struct struct576 {
 } struct576;
 _Static_assert(sizeof(struct576) == 576, "wrong size of struct576 structure!");
 
+typedef struct struct264 {
+	uint32_t field_0[66];
+} struct264;
+_Static_assert(sizeof(struct264) == 264, "wrong size of struct264 structure!");
+
 #endif // NOX_DEFS_H
