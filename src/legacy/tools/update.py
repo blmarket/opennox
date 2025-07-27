@@ -93,8 +93,12 @@ def get_parameter_list(declarator_node):
 
 
 def update_function_signature(source_code, function_node, param_index, new_type):
-    """Update function signature by changing parameter type and name"""
+    """Update function signature by changing parameter type and name, or return type if param_index is -1"""
     node_type, node = function_node
+    
+    # Handle return type update when param_index is -1
+    if param_index == -1:
+        return update_return_type(source_code, function_node, new_type)
     
     # Get the declarator
     declarator = node.child_by_field_name('declarator')
@@ -144,6 +148,82 @@ def update_function_signature(source_code, function_node, param_index, new_type)
                  source_code[end_byte:])
     
     return new_source, original_type, param_name
+
+
+def update_return_type(source_code, function_node, new_type):
+    """Update function return type"""
+    node_type, node = function_node
+    
+    # Find the type specifier(s) before the declarator
+    type_nodes = []
+    declarator = node.child_by_field_name('declarator')
+    
+    for child in node.children:
+        if child == declarator:
+            break
+        if child.type in ['type_qualifier', 'storage_class_specifier', 'primitive_type', 
+                         'type_identifier', 'struct_specifier', 'union_specifier']:
+            type_nodes.append(child)
+    
+    if not type_nodes:
+        return source_code, None, None
+    
+    # Get the original return type including any pointer indicators from the declarator
+    original_type = ' '.join(child.text.decode() for child in type_nodes)
+    
+    # Check if the declarator is a pointer_declarator and include the pointer part in original type
+    if declarator and declarator.type == 'pointer_declarator':
+        # Count the pointer levels
+        pointer_count = 0
+        node_ptr = declarator
+        while node_ptr and node_ptr.type == 'pointer_declarator':
+            pointer_count += 1
+            # Find the next declarator
+            for child in node_ptr.children:
+                if child.type in ['function_declarator', 'identifier', 'pointer_declarator']:
+                    node_ptr = child
+                    break
+            else:
+                break
+        original_type += '*' * pointer_count
+        
+        # For pointer declarators, we need to replace more than just the type specifiers
+        # We need to replace up to the start of the function declarator
+        end_byte = declarator.start_byte
+        # Find the actual function declarator within the pointer declarator
+        func_declarator = None
+        node_search = declarator
+        while node_search:
+            for child in node_search.children:
+                if child.type == 'function_declarator':
+                    func_declarator = child
+                    break
+                elif child.type == 'pointer_declarator':
+                    node_search = child
+                    break
+            else:
+                break
+            if func_declarator:
+                break
+        if func_declarator:
+            end_byte = func_declarator.start_byte
+    else:
+        # For non-pointer return types, just replace the type specifiers
+        end_byte = type_nodes[-1].end_byte
+    
+    # Calculate the range to replace
+    start_byte = type_nodes[0].start_byte
+    
+    # Add a space after the new type if it doesn't end with one
+    if not new_type.endswith(' '):
+        new_type += ' '
+    
+    # Replace the return type
+    new_source = (source_code[:start_byte] + 
+                 new_type.encode() + 
+                 source_code[end_byte:])
+    
+    return new_source, original_type, None
 
 
 def extract_parameter_name(declarator_node):
@@ -246,9 +326,8 @@ def process_file(file_path, function_name, param_index, new_type):
             current_source = new_source
             modified = True
             
-            # For function definitions, we need to re-parse to get correct positions
-            # after the signature change
-            if function_node[0] == 'definition':
+            # For function definitions and parameter changes (not return type), add variable declaration
+            if function_node[0] == 'definition' and param_index != -1:
                 # Re-parse the modified source
                 tree = parser.parse(current_source)
                 updated_function_nodes = find_function_nodes(tree, function_name)
@@ -273,6 +352,8 @@ def main():
     if len(sys.argv) != 4:
         print("Usage: python update.py <function_name> <param_index> <new_type>")
         print("Example: python update.py sub_451920 0 'struct200*'")
+        print("Use -1 for param_index to update return type:")
+        print("Example: python update.py sub_451920 -1 'struct264*'")
         sys.exit(1)
     
     function_name = sys.argv[1]
