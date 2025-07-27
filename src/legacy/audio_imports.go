@@ -65,7 +65,7 @@ func initAudio() {
 	)
 	AudioModule = audio.NewAudioModule(
 		"audio",
-		func() uint { return uint(PlatformTicks()) },
+		PlatformTicks,
 		unsafe.Pointer(C.sub_452770),
 		unsafe.Pointer(C.sub_4526F0),
 		unsafe.Pointer(C.sub_4526D0),
@@ -100,7 +100,7 @@ func initAudio() {
 		},
 		nox_common_list_remove_425920,
 		func(a1 unsafe.Pointer, a2 int) int {
-			return bool2int((*timer.Timer)(a1).Init(a2))
+			return bool2int((*timer.Timer)(a1).Init(int32(a2)))
 		},
 		func(min, max int, file unsafe.Pointer, line int) int {
 			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)

@@ -7,7 +7,7 @@ import (
 type AudioModule struct {
 	moduleName string
 
-	nox_platform_get_ticks func() uint
+	nox_platform_get_ticks func() uint64
 	sub_452770_ptr         unsafe.Pointer
 	sub_4526F0_ptr         unsafe.Pointer
 	sub_4526D0_ptr         unsafe.Pointer
@@ -51,7 +51,7 @@ type AudioModule struct {
 
 func NewAudioModule(
 	moduleName string,
-	nox_platform_get_ticks func() uint,
+	nox_platform_get_ticks func() uint64,
 	sub_452770_ptr unsafe.Pointer,
 	sub_4526F0_ptr unsafe.Pointer,
 	sub_4526D0_ptr unsafe.Pointer,
@@ -90,6 +90,10 @@ func NewAudioModule(
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
+		nox_platform_get_ticks:              nox_platform_get_ticks,
+		sub_452770_ptr:                      sub_452770_ptr,
+		sub_4526F0_ptr:                      sub_4526F0_ptr,
+		sub_4526D0_ptr:                      sub_4526D0_ptr,
 		dword_587000_126996:                 dword_587000_126996,
 		dword_5d4594_1045420:                dword_5d4594_1045420,
 		dword_5d4594_1045424:                dword_5d4594_1045424,

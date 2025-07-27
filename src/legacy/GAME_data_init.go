@@ -148,4 +148,5 @@ func InitBlobData() {
 	})
 	initMusic()
 	initDialog()
+	initAudio()
 }

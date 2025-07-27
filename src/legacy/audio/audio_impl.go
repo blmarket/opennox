@@ -477,9 +477,8 @@ func (m *AudioModule) sub_452510(a3_ *Struct576) {
 		m.Sub_4523D0(a3_)
 	}
 }
+
 func (m *AudioModule) sub_452690(a3_ *Struct576, a4 int64, a5 int32) int64 {
-	var a3 int32 = int32(uintptr(unsafe.Pointer(a3_)))
-	_ = a3
 	var result int64
 	a3_.field_8 = uint32(a5)
 	result = a4 + int64(m.nox_platform_get_ticks())
@@ -487,6 +486,7 @@ func (m *AudioModule) sub_452690(a3_ *Struct576, a4 int64, a5 int32) int64 {
 	a3_.field_7 = 2
 	return result
 }
+
 func (m *AudioModule) Nox_xxx_draw_452300(a1_ *Struct200) *uint32 {
 	if *m.dword_5d4594_1045432 == 0 {
 		return nil
