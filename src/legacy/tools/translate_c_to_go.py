@@ -125,6 +125,12 @@ def prefix_external_variables(go_content: str, external_vars: Set[str]) -> str:
 
     return re.sub(var_pattern, replace_var, go_content)
 
+def infer_module_name_from_filename(c_file_path: str) -> str:
+    """Infer module name from C filename: 'audio.c' => 'AudioModule'."""
+    base_name = os.path.splitext(os.path.basename(c_file_path))[0]
+    # Capitalize first letter and add 'Module' suffix
+    return base_name.capitalize() + 'Module'
+
 def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> str:
     """Create the complete audio_impl.go content."""
     print(f"Translating {c_file_path} to Go...")
@@ -204,13 +210,16 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
 def main():
     parser = argparse.ArgumentParser(description='Translate C file to Go implementation')
     parser.add_argument('c_file', help='Path to the C file to translate')
-    parser.add_argument('--module-name', default='AudioModule', help='Name of the module struct')
+    parser.add_argument('--module-name', help='Name of the module struct (default: inferred from filename)')
 
     args = parser.parse_args()
 
     if not os.path.exists(args.c_file):
         print(f"Error: C file {args.c_file} not found", file=sys.stderr)
         sys.exit(1)
+
+    # Infer module name from filename if not provided
+    module_name = args.module_name or infer_module_name_from_filename(args.c_file)
 
     # Get base name for output directory
     base_name = os.path.splitext(os.path.basename(args.c_file))[0]
@@ -222,7 +231,7 @@ def main():
 
     # Generate the Go implementation
     try:
-        go_content = create_audio_impl_go(args.c_file, args.module_name)
+        go_content = create_audio_impl_go(args.c_file, module_name)
 
         # Write to output file
         with open(output_file, 'w') as f:
