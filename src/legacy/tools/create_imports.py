@@ -30,6 +30,7 @@ TYPE_MAPPINGS = {
     'nox_list_item_t*': '*C.nox_list_item_t',
     'uint32_t**': '**C.uint32_t',
     'uint32_t*': '*C.uint32_t',
+    'int**': '**C.int',
     'char*': '*C.char',
 }
 
