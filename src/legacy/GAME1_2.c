@@ -114,6 +114,7 @@ extern nox_window* dword_5d4594_815004;
 extern nox_window* nox_wol_wnd_world_814980;
 extern uint32_t nox_color_white_2523948;
 extern uint32_t dword_8531A0_2576;
+extern void* dword_5d4594_805984;
 
 int nox_win_width = 0;
 int nox_win_height = 0;
