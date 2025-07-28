@@ -31,6 +31,7 @@ TYPE_MAPPINGS = {
     'uint32_t**': '**C.uint32_t',
     'uint32_t*': '*C.uint32_t',
     'int**': '**C.int',
+    'int*': '*C.int',
     'char*': '*C.char',
 }
 
