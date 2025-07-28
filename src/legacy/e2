@@ -1,24 +1,6 @@
 #!/bin/bash
 echo '#include "defs.h"' > struct264.c
 echo '#include "operators.h"' >> struct264.c
-echo '' >> struct264.c
-echo 'void* dword_5d4594_805984 = 0;' >> struct264.c
-
-patch -u << EOF
-diff --git a/src/legacy/GAME1_2.c b/src/legacy/GAME1_2.c
-index 35c741b1b..3896e229a 100644
---- a/src/legacy/GAME1_2.c
-+++ b/src/legacy/GAME1_2.c
-@@ -129,8 +129,6 @@ nox_screenParticle* dword_5d4594_806052 = 0;
-
- void* dword_5d4594_814624 = 0;
-
--void* dword_5d4594_805984 = 0;
--
- //----- (00427F30) --------------------------------------------------------
- int nox_xxx_wallMath_427F30(int2* a1, int* a2) {
-        int v2;  // esi
-EOF
 
 python -m tools.move_func sub_4871C0 struct264.c
 python -m tools.update sub_4871C0 -1 'struct264*'
