@@ -37,3 +37,4 @@ python -m tools.fix_compile struct264.c
 #
 python -m tools.create_imports struct264.c
 
+python -m tools.translate_c_to_go struct264.c
