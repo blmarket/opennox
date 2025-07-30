@@ -278,11 +278,7 @@ def generate_module_constructor(module_name: str, variables: List[Tuple[str, str
     for var_type, var_name in variables:
         try:
             go_type = map_c_type_to_go(var_type)
-            if go_type == 'unsafe.Pointer':
-                cgo_type = map_c_type_to_cgo(var_type)
-                params.append(f"{var_name} {cgo_type}")
-            else:
-                params.append(f"{var_name} *{go_type}")
+            params.append(f"{var_name} *{go_type}")
         except (ValueError, RuntimeError):
             params.append(f"{var_name} unsafe.Pointer")
 
