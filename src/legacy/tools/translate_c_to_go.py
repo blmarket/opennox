@@ -107,11 +107,16 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
     """Create the complete audio_impl.go content."""
     print(f"Translating {c_file_path} to Go...")
 
-    # Step 1: Generate Go code from audio.c
+    # Step 1: Generate Go code from C file
     print("Running cxgo")
     run_cxgo2()
-    with open("../../gonox/audio.go", 'r') as f:
-        audio_go_content = f.read()
+    
+    # Determine the corresponding Go file based on C filename
+    c_base_name = os.path.splitext(os.path.basename(c_file_path))[0]
+    go_file_path = f"../../gonox/{c_base_name}.go"
+    
+    with open(go_file_path, 'r') as f:
+        go_content = f.read()
     with open("../../gonox/defs.go", "r") as f:
         defs_go_content = f.read()
         # target_structs = ['struct200', 'struct576', 'nox_list_item_t']
@@ -124,18 +129,18 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
 
     # Step 5: Add module receivers to functions
     print("Adding module receivers...")
-    audio_go_content = add_module_receivers(audio_go_content, module_name)
+    go_content = add_module_receivers(go_content, module_name)
 
     # Step 6: Prefix external variable references
     print("Prefixing external variables...")
-    audio_go_content = prefix_external_variables(audio_go_content, external_vars)
+    go_content = prefix_external_variables(go_content, external_vars)
 
     # Step 7: Combine everything
     final_content = []
 
     # Add package declaration and imports (extract from original audio.go)
     package_section = []
-    lines = audio_go_content.split('\n')
+    lines = go_content.split('\n')
     in_imports = False
 
     for line in lines:
