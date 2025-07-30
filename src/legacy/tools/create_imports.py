@@ -232,12 +232,7 @@ def generate_module_struct(module_name: str, variables: List[Tuple[str, str]], f
     for var_type, var_name in variables:
         try:
             go_type = map_c_type_to_go(var_type)
-            if go_type == 'unsafe.Pointer':
-                # Try to map to a more specific type if possible
-                cgo_type = map_c_type_to_cgo(var_type)
-                lines.append(f"\t{var_name} {cgo_type}")
-            else:
-                lines.append(f"\t{var_name} *{go_type}")
+            lines.append(f"\t{var_name} *{go_type}")
         except (ValueError, RuntimeError):
             # Fall back to unsafe.Pointer for unknown types
             lines.append(f"\t{var_name} unsafe.Pointer")
