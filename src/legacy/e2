@@ -34,3 +34,6 @@ python -m tools.move_func sub_487360 struct264.c
 
 python -m tools.fix_compile struct264.c
 # python -m tools.alias_repeat
+#
+python -m tools.create_imports struct264.c
+
