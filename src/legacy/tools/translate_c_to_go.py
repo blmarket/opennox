@@ -21,34 +21,6 @@ def run_cxgo2():
         sys.exit(1)
 
 
-def run_cxgo(input_file: str, output_file: str = None) -> str:
-    """Run cxgo on the input file and return the generated Go code."""
-    try:
-        # Run cxgo command
-        cmd = ['go', 'run', 'github.com/gotranspile/cxgo/cmd/cxgo@latest', 'file', input_file]
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-
-        # cxgo generates a .go file with same base name as input
-        base_name = os.path.splitext(os.path.basename(input_file))[0]
-        generated_file = f"{base_name}.go"
-
-        if not os.path.exists(generated_file):
-            raise FileNotFoundError(f"Expected generated file {generated_file} not found")
-
-        with open(generated_file, 'r') as f:
-            content = f.read()
-
-        # Clean up the generated file
-        os.remove(generated_file)
-
-        return content
-    except subprocess.CalledProcessError as e:
-        print(f"Error running cxgo: {e.stderr}", file=sys.stderr)
-        sys.exit(1)
-    except FileNotFoundError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
 def extract_struct_definitions(defs_content: str, target_structs: List[str]) -> str:
     """Extract specific struct definitions from defs.go content."""
     extracted_structs = []
@@ -142,7 +114,8 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
         audio_go_content = f.read()
     with open("../../gonox/defs.go", "r") as f:
         defs_go_content = f.read()
-        target_structs = ['struct200', 'struct576', 'nox_list_item_t']
+        # target_structs = ['struct200', 'struct576', 'nox_list_item_t']
+        target_structs = [] # No hardcoded struct definitions for now.
         struct_definitions = extract_struct_definitions(defs_go_content, target_structs)
 
     # Step 4: Get external variables
