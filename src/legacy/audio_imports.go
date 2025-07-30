@@ -90,7 +90,9 @@ func initAudio() {
 		sub_4BD340,
 		sub_4BD2E0,
 		sub_4BD470,
-		sub_452810,
+		func(a1 int, a2 byte) unsafe.Pointer {
+			return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
+		},
 		sub_4BD2D0,
 		sub_4BDA80,
 		nox_common_list_clear_425760,
@@ -138,10 +140,6 @@ func sub_4BD280(a1 int, a2 int) unsafe.Pointer {
 	return unsafe.Pointer(C.sub_4BD280(C.int(a1), C.int(a2)))
 }
 
-func nox_common_list_getFirstSafe_425890(list unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.nox_common_list_getFirstSafe_425890((*C.nox_list_item_t)(list)))
-}
-
 func sub_4BD340(a1 int, a2 int, a3 int, a4 int) unsafe.Pointer {
 	return unsafe.Pointer(C.sub_4BD340(C.int(a1), C.int(a2), C.int(a3), C.int(a4)))
 }
@@ -154,24 +152,8 @@ func sub_4BD470(a1 unsafe.Pointer, a2 int) unsafe.Pointer {
 	return unsafe.Pointer(C.sub_4BD470((**C.uint32_t)(a1), C.int(a2)))
 }
 
-func sub_452810(a1 int, a2 byte) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
-}
-
 func sub_4BD2D0(lpMem unsafe.Pointer) {
 	C.sub_4BD2D0((unsafe.Pointer)(lpMem))
-}
-
-func sub_4BDA80(a1 int) int {
-	return int(C.sub_4BDA80(C.int(a1)))
-}
-
-func nox_common_list_clear_425760(list unsafe.Pointer) {
-	C.nox_common_list_clear_425760((*C.nox_list_item_t)(list))
-}
-
-func nox_common_list_remove_425920(a1 unsafe.Pointer) {
-	C.nox_common_list_remove_425920((unsafe.Pointer)(a1))
 }
 
 func sub_4BD3C0(lpMem unsafe.Pointer) {

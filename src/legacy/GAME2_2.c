@@ -4483,131 +4483,15 @@ int* sub_487100(int** a1) {
 }
 
 //----- (00487150) --------------------------------------------------------
-uint32_t* sub_487150(int a1, const void* a2) {
-	int v2;       // edi
-	uint32_t* v3; // esi
-	uint32_t* v4; // eax
-	int v6;       // [esp+8h] [ebp-4h]
-
-	v2 = a1;
-	if (a1 == -1) {
-		v2 = 0;
-	}
-	sub_487360(v2, (int**)&a1, &v6);
-	if (!a1) {
-		return 0;
-	}
-	v3 = *(uint32_t**)(a1 + 4 * v6 + 24);
-	if (!v3) {
-		v4 = sub_4871C0(a1, v6, a2);
-		v3 = v4;
-		if (!v4) {
-			return 0;
-		}
-		v4[47] = v2;
-		sub_487310(v4);
-	}
-	++v3[4];
-	return v3;
-}
 
 //----- (004871C0) --------------------------------------------------------
-uint32_t* sub_4871C0(int a1, int a2, const void* a3) {
-	int v3;       // ebp
-	uint32_t* v4; // esi
-
-	v3 = *(uint32_t*)(a1 + 12);
-	v4 = calloc(1, 0x108u);
-	memset(v4, 0, 0x108u);
-	sub_425770(v4);
-	v4[6] = a2;
-	v4[5] = a1;
-	v4[4] = 0;
-	++*(uint32_t*)(a1 + 16);
-	*(uint32_t*)(a1 + 4 * a2 + 24) = v4;
-	v4[64] = *(uint32_t*)(v3 + 36);
-	nox_common_list_clear_425760(v4 + 50);
-	sub_4864A0(v4 + 22);
-	v4[53] = 0;
-	v4[56] = 33;
-	v4[60] = 0;
-	v4[58] = 0;
-	v4[62] = 0;
-	v4[54] = sub_4873C0;
-	v4[57] = 0;
-	v4[61] = 0;
-	v4[59] = 0;
-	v4[63] = 0;
-	nullsub_10(v4 + 15);
-	nullsub_10(v4 + 8);
-	if (a3) {
-		sub_487590((int)v4, a3);
-	}
-	if (!(*(int (**)(uint32_t*))(v3 + 28))(v4)) {
-		return v4;
-	}
-	if (v4) {
-		sub_4872C0(v4);
-	}
-	return 0;
-}
 // 487CF0: using guessed type void  nullsub_10(uint32_t);
 
 //----- (004872C0) --------------------------------------------------------
-void sub_4872C0(void* lpMem) {
-	int v1; // eax
-	int v2; // ecx
-
-	sub_487910((int)lpMem, -1);
-	(*(void (**)(void*))(*(uint32_t*)(*((uint32_t*)lpMem + 5) + 12) + 32))(lpMem);
-	*(uint32_t*)(*((uint32_t*)lpMem + 5) + 4 * *((uint32_t*)lpMem + 6) + 24) = 0;
-	v1 = *((uint32_t*)lpMem + 5);
-	v2 = *(uint32_t*)(v1 + 16) - 1;
-	*(uint32_t*)(v1 + 16) = v2;
-	if (v2 < 0) {
-		*(uint32_t*)(*((uint32_t*)lpMem + 5) + 16) = 0;
-	}
-	free(lpMem);
-}
 
 //----- (00487310) --------------------------------------------------------
-int sub_487310(uint32_t* a1) {
-	int result; // eax
-
-	++*(uint32_t*)((uint32_t)dword_587000_155144 + 24);
-	nox_common_list_append_4258E0((uint32_t)dword_587000_155144 + 12, a1);
-	result = *(uint32_t*)((uint32_t)dword_587000_155144 + 24) - 1;
-	*(uint32_t*)((uint32_t)dword_587000_155144 + 24) = result;
-	if (result < 0) {
-		*(uint32_t*)((uint32_t)dword_587000_155144 + 24) = 0;
-	}
-	return result;
-}
 
 //----- (00487360) --------------------------------------------------------
-int* sub_487360(int a1, int** a2, int* a3) {
-	int* result; // eax
-	int i;       // esi
-	int v5;      // ecx
-	int* v6;     // [esp+4h] [ebp-4h]
-
-	result = sub_4870E0((int*)&v6);
-	for (i = a1; result; result = sub_487100(&v6)) {
-		v5 = result[5];
-		if (i < v5) {
-			break;
-		}
-		i -= v5;
-	}
-	*a2 = result;
-	if (result) {
-		result = a3;
-		*a3 = i;
-	} else {
-		*a3 = -1;
-	}
-	return result;
-}
 
 //----- (004873C0) --------------------------------------------------------
 int sub_4873C0(int a3) {
@@ -4689,13 +4573,6 @@ int sub_4873C0(int a3) {
 }
 
 //----- (00487590) --------------------------------------------------------
-int sub_487590(int a1, const void* a2) {
-	int result; // eax
-
-	result = a1;
-	memcpy((void*)(a1 + 60), a2, 0x1Cu);
-	return result;
-}
 
 //----- (004875B0) --------------------------------------------------------
 int* sub_4875B0(int* a1) {
@@ -4739,25 +4616,8 @@ int sub_4875F0() {
 }
 
 //----- (00487680) --------------------------------------------------------
-void sub_487680(void* lpMem) {
-	sub_4876A0((uint32_t**)lpMem);
-	sub_4872C0(lpMem);
-}
 
 //----- (004876A0) --------------------------------------------------------
-void* sub_4876A0(uint32_t** a1) {
-	void* result; // eax
-
-	++*(uint32_t*)((uint32_t)dword_587000_155144 + 24);
-	nox_common_list_remove_425920(a1);
-	result = (void*)(*(uint32_t*)((uint32_t)dword_587000_155144 + 24) - 1);
-	*(uint32_t*)((uint32_t)dword_587000_155144 + 24) = result;
-	if ((int)result < 0) {
-		result = *(void**)&dword_587000_155144;
-		*(uint32_t*)((uint32_t)dword_587000_155144 + 24) = 0;
-	}
-	return result;
-}
 
 //----- (00487750) --------------------------------------------------------
 uint32_t* sub_487750(int a1) {
@@ -4793,118 +4653,14 @@ int sub_487790(int a1, int a2) {
 }
 
 //----- (004877D0) --------------------------------------------------------
-int* sub_4877D0(int a1, int* a2) {
-	int* result; // eax
-
-	result = nox_common_list_getFirstSafe_425890((int*)(a1 + 200));
-	*a2 = (int)result;
-	return result;
-}
 
 //----- (004877F0) --------------------------------------------------------
-int* sub_4877F0(int** a1) {
-	if (*a1) {
-		*a1 = nox_common_list_getNextSafe_4258A0(*a1);
-	}
-	return *a1;
-}
 
 //----- (00487810) --------------------------------------------------------
-int* sub_487810(int a1, int a2) {
-	unsigned int v2; // esi
-	int v3;          // edi
-	int* v4;         // ebp
-	int* result;     // eax
-	int v6;          // ecx
-	unsigned int v7; // edx
-	int v8;          // [esp+10h] [ebp-8h]
-	int* v9;         // [esp+14h] [ebp-4h]
-
-	v2 = -1;
-	if (a2 == -1) {
-		a2 = 1;
-	}
-	v3 = 127;
-	v4 = 0;
-	v8 = 127;
-	v9 = 0;
-	for (result = sub_4877D0(a1, &a1); result; result = sub_4877F0((int**)&a1)) {
-		if (result[3] == a2) {
-			if (!(result[31] & 0x15)) {
-				return result;
-			}
-			v6 = result[30];
-			if (result[31] & 1) {
-				if (v6 >= v3) {
-					if (v6 == v3) {
-						v7 = result[45];
-						if (v7 < v2 && v2 - v7 >= 0x666) {
-							v3 = result[30];
-							v4 = result;
-							v2 = result[45];
-						}
-					}
-				} else {
-					v2 = result[45];
-					v3 = result[30];
-					v4 = result;
-				}
-			} else if (v6 < v8) {
-				v8 = result[30];
-				v9 = result;
-			}
-		}
-	}
-	result = v9;
-	if (!v9 || v8 > v3) {
-		result = v4;
-	}
-	return result;
-}
 
 //----- (00487910) --------------------------------------------------------
-int sub_487910(int a1, int a2) {
-	int* v2; // edi
-	int v3;  // ebx
-	int* v4; // esi
-
-	v2 = sub_4877D0(a1, &a1);
-	if (!v2) {
-		return 0;
-	}
-	v3 = a2;
-	do {
-		v4 = sub_4877F0((int**)&a1);
-		if (v3 == -1 || v2[3] == v3) {
-			sub_4BDA60(v2);
-		}
-		v2 = v4;
-	} while (v4);
-	return 0;
-}
 
 //----- (00487970) --------------------------------------------------------
-int* sub_487970(int a1, int a2) {
-	int* result; // eax
-	int* v3;     // edi
-	int v4;      // ebx
-	int* v5;     // esi
-
-	result = sub_4877D0(a1, &a1);
-	v3 = result;
-	if (result) {
-		v4 = a2;
-		do {
-			result = sub_4877F0((int**)&a1);
-			v5 = result;
-			if (v4 == -1 || v3[3] == v4) {
-				result = (int*)sub_4BDA80((int)v3);
-			}
-			v3 = v5;
-		} while (v5);
-	}
-	return result;
-}
 
 //----- (00487C30) --------------------------------------------------------
 void sub_487C30(uint32_t* a1) {

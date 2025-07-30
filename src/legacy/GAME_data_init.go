@@ -149,4 +149,5 @@ func InitBlobData() {
 	initMusic()
 	initDialog()
 	initAudio()
+	initStruct264()
 }
