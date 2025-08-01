@@ -27,11 +27,11 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/noxworld-dev/opennox/v1/legacy/struct264"
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
 var (
-	Struct264Module *struct264.Struct264Module
+	Struct264Module *audio.Struct264Module
 )
 
 func initStruct264() {
@@ -42,7 +42,7 @@ func initStruct264() {
 		dword_587000_155144  *unsafe.Pointer = (&C.dword_587000_155144)
 		dword_5d4594_805984  *unsafe.Pointer = (&C.dword_5d4594_805984)
 	)
-	Struct264Module = struct264.NewStruct264Module(
+	Struct264Module = audio.NewStruct264Module(
 		"struct264",
 		sub_4873C0_ptr,
 		dword_5d4594_1045428,
@@ -118,7 +118,7 @@ func sub_431270() {
 
 //export sub_487680
 func sub_487680(lpMem_ *C.struct264) {
-	Struct264Module.Sub_487680((*struct264.Struct264)(unsafe.Pointer(lpMem_)))
+	Struct264Module.Sub_487680((*audio.Struct264)(unsafe.Pointer(lpMem_)))
 }
 
 //export sub_487150

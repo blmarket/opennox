@@ -1,14 +1,13 @@
-package struct264
+package audio
 
 import (
 	"unsafe"
 
-	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 type Struct264 struct {
-	field_0  audio.Nox_list_item_t
+	field_0  Nox_list_item_t
 	field_3  uint32
 	field_4  uint32
 	field_5  unsafe.Pointer
@@ -24,7 +23,7 @@ type Struct264 struct {
 	field_47 uint32
 	field_48 uint32
 	field_49 uint32
-	field_50 audio.Nox_list_item_t
+	field_50 Nox_list_item_t
 	field_53 uint32
 	field_54 unsafe.Pointer // sub_4873C0_ptr
 	field_55 uint32

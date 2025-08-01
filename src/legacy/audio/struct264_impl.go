@@ -1,4 +1,4 @@
-package struct264
+package audio
 
 import (
 	"unsafe"
