@@ -250,15 +250,16 @@ func nox_audio_initall(a3 int) int {
 
 func sub_4311F0() int {
 	legacy.Sub_486FA0(int(memmap.Int32(0x587000, 94032)))
-	v2, free := alloc.Make([]int32{}, 7)
+	v2a, free := alloc.Make([][7]uint32{}, 1)
 	defer free()
+	v2 := v2a[0]
 	v2[2] = 22050
 	v2[1] = 0
 	v2[3] = 2
 	v2[4] = 2
 	v2[0] = 4
 	legacy.Sub_487D00(unsafe.Pointer(&v2[0]))
-	v0 := legacy.Struct264Module.Sub_487150(int32(-1), unsafe.Pointer(&v2[0]))
+	v0 := legacy.Struct264Module.Sub_487150(int32(-1), &v2)
 	legacy.Set_dword_5d4594_805984(v0)
 	return bool2int(v0 != nil && legacy.Struct264Module.Sub_487790(v0, 16) == 16)
 }

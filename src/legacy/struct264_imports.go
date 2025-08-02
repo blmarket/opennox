@@ -50,7 +50,9 @@ func initStruct264() {
 		dword_587000_155144,
 		dword_5d4594_805984,
 		nox_common_list_getFirstSafe_425890,
-		sub_487100,
+		func(a1 *unsafe.Pointer) unsafe.Pointer {
+			return Struct88Module.Sub_487100(a1)
+		},
 		nox_common_list_remove_425920,
 		nox_common_list_append_4258E0,
 		nullsub_10,
@@ -62,7 +64,9 @@ func initStruct264() {
 		sub_4BDA80,
 		sub_486320,
 		sub_425770,
-		sub_4870E0,
+		func(a1 *unsafe.Pointer) unsafe.Pointer {
+			return unsafe.Pointer(Struct88Module.Sub_4870E0(a1))
+		},
 		func(a1 *audio.Struct264) *audio.Struct312 {
 			return Struct312Module.Sub_4BD720(a1)
 		},
@@ -71,10 +75,6 @@ func initStruct264() {
 
 func nox_common_list_getFirstSafe_425890(list unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C.nox_common_list_getFirstSafe_425890((*C.nox_list_item_t)(list)))
-}
-
-func sub_487100(a1 unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_487100((**C.int)(a1)))
 }
 
 func nox_common_list_remove_425920(a1 unsafe.Pointer) {
@@ -105,10 +105,6 @@ func sub_4BDA80(a1 int) int {
 	return int(C.sub_4BDA80(C.int(a1)))
 }
 
-func sub_4870E0(a1 unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_4870E0((*C.int)(a1)))
-}
-
 //export sub_452810
 func sub_452810(a1 int32, a2 C.char) *int32 {
 	return Struct264Module.Sub_452810(a1, int8(a2))
@@ -122,11 +118,6 @@ func sub_431270() {
 //export sub_487680
 func sub_487680(lpMem_ *C.struct264) {
 	Struct264Module.Sub_487680((*audio.Struct264)(unsafe.Pointer(lpMem_)))
-}
-
-//export sub_487150
-func sub_487150(a1 C.int, a2 unsafe.Pointer) *C.struct264 {
-	return (*C.struct264)(unsafe.Pointer(Struct264Module.Sub_487150(int32(a1), a2)))
 }
 
 //export sub_431290

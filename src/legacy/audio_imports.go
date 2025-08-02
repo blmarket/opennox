@@ -114,6 +114,8 @@ func initAudio() {
 		sub_4863B0,
 		sub_4BD3C0,
 	)
+
+	initStruct88()
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {

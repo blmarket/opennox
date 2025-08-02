@@ -301,10 +301,10 @@ func (m *Struct264Module) sub_487360(a1 int32, a2 **int32, a3 *int32) *int32 {
 		result *int32
 		i      int32
 		v5     int32
-		v6     *int32
+		v6     unsafe.Pointer
 	)
-	result = (*int32)(m.sub_4870E0((unsafe.Pointer(&v6))))
-	for i = a1; result != nil; result = (*int32)(m.sub_487100(unsafe.Pointer(&v6))) {
+	result = (*int32)(m.sub_4870E0(&v6))
+	for i = a1; result != nil; result = (*int32)(m.sub_487100(&v6)) {
 		v5 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*5))
 		if i < v5 {
 			break
