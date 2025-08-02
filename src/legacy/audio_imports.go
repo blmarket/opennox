@@ -82,7 +82,9 @@ func initAudio() {
 		nox_common_list_append_4258E0,
 		sub_4BDB30,
 		sub_4BD300,
-		sub_4BDB90,
+		func(a1 unsafe.Pointer, a2 unsafe.Pointer) {
+			Struct312Module.Sub_4BDB90((*uint32)(a1), (*uint32)(a2))
+		},
 		sub_4BDB40,
 		sub_4864A0,
 		sub_486350,
@@ -128,10 +130,6 @@ func sub_4BDB30(a1 int) int {
 
 func sub_4BD300(a1 unsafe.Pointer, a2 int) int {
 	return int(C.sub_4BD300((*C.uint32_t)(a1), C.int(a2)))
-}
-
-func sub_4BDB90(a1 unsafe.Pointer, a2 unsafe.Pointer) {
-	C.sub_4BDB90((*C.uint32_t)(a1), (*C.uint32_t)(a2))
 }
 
 func sub_4BDB40(a2 int) int {

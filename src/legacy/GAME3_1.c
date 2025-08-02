@@ -642,52 +642,10 @@ int sub_4BD690(int a1) {
 //----- (004BD710) --------------------------------------------------------
 
 //----- (004BD720) --------------------------------------------------------
-uint32_t* sub_4BD720(int a1) {
-	uint32_t* v1; // esi
-
-	v1 = calloc(1, 0x138u);
-	memset(v1, 0, 0x138u);
-	sub_425770(v1);
-	sub_4BDC00((int)(v1 + 30));
-	sub_4864A0(v1 + 44);
-	sub_4BD7C0(v1);
-	v1[33] = a1;
-	v1[43] = *(uint32_t*)(a1 + 256);
-	if (!(*(int (**)(uint32_t*))(*(uint32_t*)(a1 + 256) + 4))(v1)) {
-		return v1;
-	}
-	if (v1) {
-		sub_4BD7A0(v1);
-	}
-	return 0;
-}
 
 //----- (004BD7A0) --------------------------------------------------------
-void sub_4BD7A0(void* lpMem) {
-	(*(void (**)(void*))(*((uint32_t*)lpMem + 43) + 8))(lpMem);
-	free(lpMem);
-}
 
 //----- (004BD7C0) --------------------------------------------------------
-uint32_t* sub_4BD7C0(uint32_t* a1) {
-	uint32_t* result; // eax
-
-	a1[69] = sub_4BD8C0;
-	a1[70] = sub_4BD940;
-	a1[71] = sub_4BD9B0;
-	a1[34] = 0;
-	a1[35] = 0;
-	a1[36] = 0;
-	a1[38] = 0;
-	a1[3] = 1;
-	sub_4BDC00((int)(a1 + 30));
-	a1[30] = 0;
-	a1[29] = *getMemU32Ptr(0x5D4594, 1193340);
-	a1[28] = 0;
-	result = sub_4864A0(a1 + 4);
-	a1[72] = 0;
-	return result;
-}
 
 //----- (004BD840) --------------------------------------------------------
 void sub_4BD840(int a3) {
@@ -717,80 +675,10 @@ void sub_4BD840(int a3) {
 }
 
 //----- (004BD8C0) --------------------------------------------------------
-int sub_4BD8C0(int a1) {
-	int (*v1)(int); // eax
-	int result;     // eax
-	int v3;         // eax
-	int v4;         // eax
-
-	v1 = *(int (**)(int))(a1 + 136);
-	if (v1) {
-		result = v1(a1);
-		if (result) {
-			*(uint32_t*)(a1 + 300) = 0;
-			*(uint32_t*)(a1 + 304) = 0;
-			*(uint32_t*)(a1 + 296) = 0;
-			return result;
-		}
-	} else {
-		if (*(uint32_t*)(a1 + 292)) {
-			v3 = nox_common_list_getNext_425940(*(int**)(a1 + 292));
-			*(uint32_t*)(a1 + 292) = v3;
-			if (v3) {
-				*(uint32_t*)(a1 + 296) = *(uint32_t*)(v3 + 12);
-				v4 = *(uint32_t*)(v3 + 16);
-				*(uint32_t*)(a1 + 300) = v4;
-				*(uint32_t*)(a1 + 304) = v4;
-				return 0;
-			}
-		}
-		*(uint32_t*)(a1 + 300) = 0;
-	}
-	return 0;
-}
 
 //----- (004BD940) --------------------------------------------------------
-int sub_4BD940(int a1) {
-	void (*v1)(int); // eax
-
-	if (*(uint32_t*)(a1 + 128)) {
-		if (*(int*)(a1 + 128) != -1) {
-			--*(uint32_t*)(a1 + 128);
-		}
-		sub_4BDB90((uint32_t*)a1, *(uint32_t**)(a1 + 288));
-	} else {
-		sub_4BDB90((uint32_t*)a1, 0);
-	}
-	v1 = *(void (**)(int))(a1 + 140);
-	if (v1) {
-		v1(a1);
-	}
-	if (*(uint32_t*)(a1 + 288)) {
-		(*(void (**)(int))(*(uint32_t*)(a1 + 172) + 36))(a1);
-	}
-	return 0;
-}
 
 //----- (004BD9B0) --------------------------------------------------------
-int sub_4BD9B0(uint32_t* a2) {
-	int v1;               // eax
-	int (*v2)(uint32_t*); // eax
-	int result;           // eax
-
-	a2[72] = 0;
-	v1 = a2[31];
-	LOBYTE(v1) = v1 & 0xFA;
-	a2[31] = v1;
-	a2[32] = 0;
-	sub_4864A0(a2 + 4);
-	v2 = (int (*)(uint32_t*))a2[36];
-	if (v2) {
-		result = v2(a2);
-	} else {
-		result = 0;
-	}
-	return result;
-}
 
 //----- (004BDA60) --------------------------------------------------------
 void sub_4BDA60(void* lpMem) {
@@ -846,41 +734,8 @@ int sub_4BDB40(int a2) {
 }
 
 //----- (004BDB90) --------------------------------------------------------
-void sub_4BDB90(uint32_t* a1, uint32_t* a2) {
-	int v2;       // eax
-	int v3;       // eax
-	uint32_t* v4; // eax
-	int v5;       // eax
-
-	a1[72] = a2;
-	if (a2) {
-		v2 = sub_487C80((int)a2);
-		a1[73] = v2;
-		if (v2) {
-			a1[74] = *(uint32_t*)(v2 + 12);
-			v3 = *(uint32_t*)(v2 + 16);
-			a1[75] = v3;
-			a1[76] = v3;
-			*a2 = 0;
-		} else {
-			v4 = (uint32_t*)a1[72];
-			a1[74] = *v4;
-			v5 = v4[1];
-			a1[75] = v5;
-			a1[76] = v5;
-		}
-	}
-}
 
 //----- (004BDC00) --------------------------------------------------------
-int sub_4BDC00(int a1) {
-	int result; // eax
-
-	result = a1;
-	*(uint32_t*)(a1 + 8) = 0;
-	*(uint32_t*)(a1 + 4) = 0;
-	return result;
-}
 
 //----- (004BDC10) --------------------------------------------------------
 int nox_xxx_loadAdvancedWnd_4BDC10(int* a1) {

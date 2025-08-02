@@ -33,8 +33,8 @@ func main() {
 	}
 
 	functionName := os.Args[1]
-	implFile := "struct264/struct264_impl.go"
-	importsFile := "struct264_imports.go"
+	implFile := "struct312/struct312_impl.go"
+	importsFile := "struct312_imports.go"
 
 	// Find and parse the function in impl file
 	funcInfo, err := findFunction(implFile, functionName)
@@ -133,7 +133,7 @@ func makeUppercase(filename, functionName string) error {
 	scanner := bufio.NewScanner(file)
 
 	// Create regex to match the function declaration
-	funcRegex := regexp.MustCompile(`^func\s+\(m\s+\*Struct264Module\)\s+` + regexp.QuoteMeta(functionName) + `\s*\(`)
+	funcRegex := regexp.MustCompile(`^func\s+\(m\s+\*Struct312Module\)\s+` + regexp.QuoteMeta(functionName) + `\s*\(`)
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -211,11 +211,11 @@ func generateExportFunction(funcInfo *FunctionInfo) []string {
 	if funcInfo.HasReturn {
 		funcDecl = fmt.Sprintf("func %s(%s) %s {", funcInfo.Name, paramStr, funcInfo.ReturnType)
 		lines = append(lines, funcDecl)
-		lines = append(lines, fmt.Sprintf("\treturn Struct264Module.%s(%s)", upperFuncName, argStr))
+		lines = append(lines, fmt.Sprintf("\treturn Struct312Module.%s(%s)", upperFuncName, argStr))
 	} else {
 		funcDecl = fmt.Sprintf("func %s(%s) {", funcInfo.Name, paramStr)
 		lines = append(lines, funcDecl)
-		lines = append(lines, fmt.Sprintf("\tStruct264Module.%s(%s)", upperFuncName, argStr))
+		lines = append(lines, fmt.Sprintf("\tStruct312Module.%s(%s)", upperFuncName, argStr))
 	}
 
 	lines = append(lines, "}")
