@@ -9,6 +9,7 @@ python -m tools.move_func sub_4BD8C0 struct312.c
 python -m tools.move_func sub_4BD940 struct312.c
 python -m tools.move_func sub_4BD9B0 struct312.c
 python -m tools.move_func sub_4BDC00 struct312.c
+python -m tools.move_func sub_4BDB90 struct312.c
 
 # python -m tools.update sub_4871C0 -1 'struct264*'
 # python -m tools.move_func sub_487150 struct264.c
