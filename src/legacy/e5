@@ -3,7 +3,13 @@ echo '#include "defs.h"' > struct88.c
 echo '#include "operators.h"' >> struct88.c
 
 python -m tools.move_func sub_486FE0 struct88.c
+python -m tools.update sub_486FE0 -1 'struct88*'
 python -m tools.move_func sub_487030 struct88.c
+python -m tools.update sub_487030 0 'struct88*'
+python -m tools.move_func sub_487050 struct88.c
+python -m tools.update sub_487050 0 'struct88*'
+python -m tools.move_func sub_4870A0 struct88.c
+python -m tools.move_func sub_4870E0 struct88.c
 
 # python -m tools.update sub_4871C0 -1 'struct264*'
 # python -m tools.move_func sub_487150 struct264.c
