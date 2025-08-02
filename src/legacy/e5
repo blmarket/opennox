@@ -10,6 +10,9 @@ python -m tools.move_func sub_487050 struct88.c
 python -m tools.update sub_487050 0 'struct88*'
 python -m tools.move_func sub_4870A0 struct88.c
 python -m tools.move_func sub_4870E0 struct88.c
+python -m tools.move_func sub_487070 struct88.c
+python -m tools.move_func sub_487090 struct88.c
+python -m tools.move_func sub_487100 struct88.c
 
 # python -m tools.update sub_4871C0 -1 'struct264*'
 # python -m tools.move_func sub_487150 struct264.c
