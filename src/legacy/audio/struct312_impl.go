@@ -1,4 +1,4 @@
-package struct312
+package audio
 
 import (
 	"unsafe"
@@ -8,30 +8,34 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 )
 
-func (m *Struct312Module) Sub_4BD720(a1 int32) *uint32 {
+func (m *Struct312Module) Sub_4BD720(a1 int32) *Struct312 {
 	var v1 *uint32
-	v1p, _ := alloc.Calloc(1, 0x138)
-	v1 = (*uint32)(v1p)
-	alloc.Memset(unsafe.Pointer(v1), 0, 0x138)
-	m.sub_425770(unsafe.Pointer(v1))
-	m.sub_4BDC00(int32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*30))))))
-	m.sub_4864A0(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*44))))
-	m.sub_4BD7C0(v1)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*33)) = uint32(a1)
+	v1pp, _ := alloc.Calloc(1, 0x138)
+	v1p := (*Struct312)(v1pp)
+	v1 = (*uint32)(v1pp)
+	alloc.Memset(unsafe.Pointer(v1p), 0, 0x138)
+	m.sub_425770(&v1p.field_0)
+	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&v1p.field_30))))
+	v1p.timerGroup_44.Init()
+	m.sub_4BD7C0(v1p)
+	v1p.field_33 = unsafe.Pointer(uintptr(a1))
 	*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*43)) = *(*uint32)(unsafe.Pointer(uintptr(a1 + 256)))
-	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 256))) + 4))), unsafe.Pointer(v1)) == 0 {
-		return v1
+	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 256))) + 4))), unsafe.Pointer(v1p)) == 0 {
+		return v1p
 	}
 	if v1 != nil {
 		m.Sub_4BD7A0(unsafe.Pointer(v1))
 	}
 	return nil
 }
+
 func (m *Struct312Module) Sub_4BD7A0(lpMem unsafe.Pointer) {
 	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*43))) + 8))), lpMem)
 	alloc.FreePtr(lpMem)
 }
-func (m *Struct312Module) sub_4BD7C0(a1 *uint32) *uint32 {
+
+func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) *uint32 {
+	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1p))
 	var result *uint32
 	*(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a1), 4*69)) = m.sub_4BD8C0_ptr
 	*(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a1), 4*70)) = m.sub_4BD940_ptr

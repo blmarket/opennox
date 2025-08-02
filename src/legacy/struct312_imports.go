@@ -15,19 +15,21 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/noxworld-dev/opennox/v1/legacy/struct312"
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
 var (
-	Struct312Module *struct312.Struct312Module
+	Struct312Module *audio.Struct312Module
 )
 
 func initStruct312() {
-	Struct312Module = struct312.NewStruct312Module(
+	Struct312Module = audio.NewStruct312Module(
 		"struct312",
 		sub_4864A0,
 		nox_common_list_getNext_425940,
-		sub_425770,
+		func(a1 *audio.Nox_list_item_t) unsafe.Pointer {
+			return unsafe.Pointer(C.sub_425770((unsafe.Pointer)(a1)))
+		},
 		unsafe.Pointer(C.sub_4BD8C0),
 		unsafe.Pointer(C.sub_4BD940),
 		unsafe.Pointer(C.sub_4BD9B0),
