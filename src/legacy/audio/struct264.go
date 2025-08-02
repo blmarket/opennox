@@ -15,9 +15,11 @@ type Struct264 struct {
 	field_7       uint32
 	field_8       uint32
 	field_9       uint32
-	field_10      [10]uint32
-	field_20      uint32
-	field_21      uint32
+	field_11      uint32
+	field_12      uint32
+	field_13      uint32
+	field_14      uint32
+	field_15      [7]uint32
 	TimerGroup_22 timer.TimerGroup
 	field_46      unsafe.Pointer
 	field_47      uint32

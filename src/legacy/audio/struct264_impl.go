@@ -7,7 +7,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 )
 
-func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 unsafe.Pointer) *Struct264 {
+func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 *[7]uint32) *Struct264 {
 	var (
 		v3 int32
 		v4 *uint32
@@ -50,7 +50,7 @@ func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 unsafe.Pointer) *Str
 	return nil
 }
 
-func (m *Struct264Module) Sub_487150(a1 int32, a2 unsafe.Pointer) *Struct264 {
+func (m *Struct264Module) Sub_487150(a1 int32, a2 *[7]uint32) *Struct264 {
 	var (
 		v2 int32
 		v6 int32
@@ -135,13 +135,13 @@ func (m *Struct264Module) sub_487970(a1_ *Struct264, a2 int32) *int32 {
 	return result
 }
 
-func (m *Struct264Module) sub_487590(a1_ *Struct264, a2 unsafe.Pointer) int32 {
+func (m *Struct264Module) sub_487590(a1_ *Struct264, a2 *[7]uint32) int32 {
 	var (
 		a1     int32 = int32(uintptr(unsafe.Pointer(a1_)))
 		result int32
 	)
 	result = a1
-	alloc.Memcpy(unsafe.Pointer(uintptr(a1+60)), a2, 0x1C)
+	alloc.Memcpy(unsafe.Pointer(&a1_.field_15), unsafe.Pointer(a2), 0x1C)
 	return result
 }
 func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
