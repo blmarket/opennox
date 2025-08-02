@@ -45,4 +45,8 @@ python -m tools.create_imports struct312.c
 
 python -m tools.translate_c_to_go struct312.c
 
+# Replace module inside calls to prefix `m.`
 go run ./gotools struct312/struct312_impl.go
+
+# Find all function pointer invocations. They should use ccall instead.
+go run ./tools/funcptr_analyzer struct312/struct312_impl.go
