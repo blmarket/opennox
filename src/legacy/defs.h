@@ -1372,4 +1372,6 @@ typedef struct struct264 struct264;
 
 typedef struct struct312 struct312;
 
+typedef struct struct88 struct88;
+
 #endif // NOX_DEFS_H
