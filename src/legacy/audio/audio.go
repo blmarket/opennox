@@ -2,6 +2,8 @@ package audio
 
 import (
 	"unsafe"
+
+	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 type AudioModule struct {
@@ -13,13 +15,14 @@ type AudioModule struct {
 	sub_4526D0_ptr         unsafe.Pointer
 
 	// External variables
-	dword_587000_126996  *uint32
-	dword_5d4594_1045420 *uint32
-	dword_5d4594_1045424 *uint32
-	dword_5d4594_1045428 *uint32
-	dword_5d4594_1045432 *uint32
-	dword_5d4594_1045436 *uint32
-	dword_587000_127004  unsafe.Pointer
+	dword_587000_126996       *uint32
+	dword_5d4594_1045420      *uint32
+	dword_5d4594_1045424      *uint32
+	dword_5d4594_1045428      **Struct264
+	dword_5d4594_1045432      *uint32
+	dword_5d4594_1045436      *uint32
+	dword_587000_127004       unsafe.Pointer
+	timerGroup_5d4594_1045228 *timer.TimerGroup
 
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
@@ -58,10 +61,11 @@ func NewAudioModule(
 	dword_587000_126996 *uint32,
 	dword_5d4594_1045420 *uint32,
 	dword_5d4594_1045424 *uint32,
-	dword_5d4594_1045428 *uint32,
+	dword_5d4594_1045428 **Struct264,
 	dword_5d4594_1045432 *uint32,
 	dword_5d4594_1045436 *uint32,
 	dword_587000_127004 unsafe.Pointer,
+	timerGroup_5d4594_1045228 *timer.TimerGroup,
 	sub_425770 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 	sub_4BDB30 func(int) int,
@@ -101,6 +105,7 @@ func NewAudioModule(
 		dword_5d4594_1045432:                dword_5d4594_1045432,
 		dword_5d4594_1045436:                dword_5d4594_1045436,
 		dword_587000_127004:                 dword_587000_127004,
+		timerGroup_5d4594_1045228:           timerGroup_5d4594_1045228,
 		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BDB30:                          sub_4BDB30,

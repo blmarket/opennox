@@ -75,7 +75,7 @@ type Nox_list_item_t struct {
 	field_2 *Nox_list_item_t
 }
 
-func (m *AudioModule) Sub_451850(a2 int32, a3p unsafe.Pointer) int32 {
+func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	var (
 		a3     int32 = int32(uintptr(a3p))
 		v2     int32
@@ -94,18 +94,18 @@ func (m *AudioModule) Sub_451850(a2 int32, a3p unsafe.Pointer) int32 {
 		}
 	}
 	*m.dword_5d4594_1045420 = uint32(a3)
-	*m.dword_5d4594_1045428 = uint32(a2)
+	*m.dword_5d4594_1045428 = a2p
 	if a3 != 0 {
 		*m.dword_5d4594_1045424 = uint32(uintptr(unsafe.Pointer(m.sub_4BD340(int(a3), 0x100000, 200, 0x2000))))
 		*m.dword_5d4594_1045436 = uint32(uintptr(unsafe.Pointer(m.sub_4BD280(200, 576))))
 	}
-	if *m.dword_5d4594_1045424 == 0 || *m.dword_5d4594_1045420 == 0 || *m.dword_5d4594_1045428 == 0 || *m.dword_5d4594_1045436 == 0 {
+	if *m.dword_5d4594_1045424 == 0 || *m.dword_5d4594_1045420 == 0 || *m.dword_5d4594_1045428 == nil || *m.dword_5d4594_1045436 == 0 {
 		return 0
 	}
 	m.nox_common_list_clear_425760((memmap.PtrOff(0x5D4594, 840612)))
-	m.sub_4864A0(memmap.PtrOff(0x5D4594, 1045228))
+	memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228).Init()
 	result = 1
-	*(*uint32)(unsafe.Pointer(uintptr(*m.dword_5d4594_1045428 + 184))) = uint32(uintptr(memmap.PtrOff(0x5D4594, 1045228)))
+	(*m.dword_5d4594_1045428).field_46 = memmap.PtrOff(0x5D4594, 1045228)
 	*m.dword_5d4594_1045432 = 1
 	return result
 }

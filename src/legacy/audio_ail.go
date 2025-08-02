@@ -36,6 +36,7 @@ import "C"
 import (
 	"unsafe"
 
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 	"github.com/noxworld-dev/opennox/v1/legacy/client/audio/ail"
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
@@ -326,16 +327,16 @@ func Sub_486640(a1 unsafe.Pointer, a2 int) int {
 	return int(C.sub_486640(a1, C.int(a2)))
 }
 
-func Get_dword_5d4594_805984() unsafe.Pointer {
-	return C.dword_5d4594_805984
+func Get_dword_5d4594_805984() *audio.Struct264 {
+	return (*audio.Struct264)(C.dword_5d4594_805984)
 }
 
-func Set_dword_5d4594_805984(v unsafe.Pointer) {
-	C.dword_5d4594_805984 = v
+func Set_dword_5d4594_805984(v *audio.Struct264) {
+	C.dword_5d4594_805984 = unsafe.Pointer(v)
 }
 
-func Set_dword_587000_81128(v unsafe.Pointer) {
-	C.dword_587000_81128 = v
+func Set_dword_587000_81128(v *timer.TimerGroup) {
+	C.dword_587000_81128 = unsafe.Pointer(v)
 }
 
 //export sub_4864A0
@@ -365,10 +366,6 @@ func Sub_486FA0(a1 int) {
 
 func Sub_487D00(a1 unsafe.Pointer) {
 	C.sub_487D00((*C.uint)(a1))
-}
-
-func Sub_487150(a1 int, a2 unsafe.Pointer) unsafe.Pointer {
-	return unsafe.Pointer(C.sub_487150(C.int(a1), a2))
 }
 
 func Sub_487790(a1 unsafe.Pointer, a2 int) int {

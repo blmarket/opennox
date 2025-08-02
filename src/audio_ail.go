@@ -219,7 +219,7 @@ func nox_audio_initall(a3 int) int {
 	if a3 != 0 {
 		sub_486F30()
 		if sub_4311F0() != 0 {
-			legacy.Set_dword_587000_81128(unsafe.Add(legacy.Get_dword_5d4594_805984(), 88))
+			legacy.Set_dword_587000_81128(&legacy.Get_dword_5d4594_805984().TimerGroup_22)
 			dword_5d4594_805980 = sub_4866F0("audio", "audio")
 		}
 	}
@@ -229,7 +229,7 @@ func nox_audio_initall(a3 int) int {
 	(*timer.TimerGroup)(legacy.Get_dword_587000_127004()).Init()
 	legacy.Dialogs.Nox_xxx_WorkerHurt_44D810()
 	legacy.MusicModule.Init()
-	legacy.Sub_451850(legacy.Get_dword_5d4594_805984(), unsafe.Pointer(dword_5d4594_805980))
+	legacy.AudioModule.Sub_451850(legacy.Get_dword_5d4594_805984(), unsafe.Pointer(dword_5d4594_805980))
 	v1 := configGetVolume(VolumeMusic)
 	if v1 == 0 {
 		legacy.Sub_43DC00()
@@ -258,9 +258,9 @@ func sub_4311F0() int {
 	v2[4] = 2
 	v2[0] = 4
 	legacy.Sub_487D00(unsafe.Pointer(&v2[0]))
-	v0 := legacy.Sub_487150(-1, unsafe.Pointer(&v2[0]))
+	v0 := legacy.Struct264Module.Sub_487150(int32(-1), unsafe.Pointer(&v2[0]))
 	legacy.Set_dword_5d4594_805984(v0)
-	return bool2int(v0 != nil && legacy.Sub_487790(v0, 16) == 16)
+	return bool2int(v0 != nil && legacy.Sub_487790(unsafe.Pointer(v0), 16) == 16)
 }
 
 func sub_486F30() int {

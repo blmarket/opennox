@@ -7,36 +7,36 @@ import (
 )
 
 type Struct264 struct {
-	field_0  Nox_list_item_t
-	field_3  uint32
-	field_4  uint32
-	field_5  unsafe.Pointer
-	field_6  uint32
-	field_7  uint32
-	field_8  uint32
-	field_9  uint32
-	field_10 [10]uint32
-	field_20 uint32
-	field_21 uint32
-	field_22 timer.TimerGroup
-	field_46 uint32
-	field_47 uint32
-	field_48 uint32
-	field_49 uint32
-	field_50 Nox_list_item_t
-	field_53 uint32
-	field_54 unsafe.Pointer // sub_4873C0_ptr
-	field_55 uint32
-	field_56 uint32
-	field_57 uint32
-	field_58 uint32
-	field_59 uint32
-	field_60 uint32
-	field_61 uint32
-	field_62 uint32
-	field_63 uint32
-	field_64 uint32
-	field_65 uint32
+	field_0       Nox_list_item_t
+	field_3       uint32
+	field_4       uint32
+	field_5       unsafe.Pointer
+	field_6       uint32
+	field_7       uint32
+	field_8       uint32
+	field_9       uint32
+	field_10      [10]uint32
+	field_20      uint32
+	field_21      uint32
+	TimerGroup_22 timer.TimerGroup
+	field_46      unsafe.Pointer
+	field_47      uint32
+	field_48      uint32
+	field_49      uint32
+	field_50      Nox_list_item_t
+	field_53      uint32
+	field_54      unsafe.Pointer // sub_4873C0_ptr
+	field_55      uint32
+	field_56      uint32
+	field_57      uint32
+	field_58      uint32
+	field_59      uint32
+	field_60      uint32
+	field_61      uint32
+	field_62      uint32
+	field_63      uint32
+	field_64      uint32
+	field_65      uint32
 }
 
 var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]

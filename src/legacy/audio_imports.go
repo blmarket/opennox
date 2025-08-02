@@ -45,6 +45,7 @@ import "C"
 import (
 	"unsafe"
 
+	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
@@ -55,13 +56,13 @@ var (
 
 func initAudio() {
 	var (
-		dword_587000_126996  *uint32        = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045420 *uint32        = (*uint32)(&C.dword_5d4594_1045420)
-		dword_5d4594_1045424 *uint32        = (*uint32)(&C.dword_5d4594_1045424)
-		dword_5d4594_1045428 *uint32        = (*uint32)(&C.dword_5d4594_1045428)
-		dword_5d4594_1045432 *uint32        = (*uint32)(&C.dword_5d4594_1045432)
-		dword_5d4594_1045436 *uint32        = (*uint32)(&C.dword_5d4594_1045436)
-		dword_587000_127004  unsafe.Pointer = (unsafe.Pointer)(unsafe.Pointer(&C.dword_587000_127004))
+		dword_587000_126996  *uint32           = (*uint32)(&C.dword_587000_126996)
+		dword_5d4594_1045420 *uint32           = (*uint32)(&C.dword_5d4594_1045420)
+		dword_5d4594_1045424 *uint32           = (*uint32)(&C.dword_5d4594_1045424)
+		dword_5d4594_1045428 **audio.Struct264 = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
+		dword_5d4594_1045432 *uint32           = (*uint32)(&C.dword_5d4594_1045432)
+		dword_5d4594_1045436 *uint32           = (*uint32)(&C.dword_5d4594_1045436)
+		dword_587000_127004  unsafe.Pointer    = unsafe.Pointer(&C.dword_587000_127004)
 	)
 	AudioModule = audio.NewAudioModule(
 		"audio",
@@ -76,6 +77,7 @@ func initAudio() {
 		dword_5d4594_1045432,
 		dword_5d4594_1045436,
 		dword_587000_127004,
+		memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
 		sub_425770,
 		nox_common_list_append_4258E0,
 		sub_4BDB30,
@@ -182,7 +184,7 @@ func nox_xxx_clientPlaySoundSpecial_452D80(a1, a2 C.int) {
 
 //export sub_451850
 func sub_451850(a2 int, a3 unsafe.Pointer) int32 {
-	return AudioModule.Sub_451850(int32(a2), a3)
+	return AudioModule.Sub_451850((*audio.Struct264)(unsafe.Pointer(uintptr(a2))), a3)
 }
 
 //export sub_4519C0
