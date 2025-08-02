@@ -63,6 +63,9 @@ func initStruct264() {
 		sub_486320,
 		sub_425770,
 		sub_4870E0,
+		func(a1 *audio.Struct264) *audio.Struct312 {
+			return Struct312Module.Sub_4BD720(a1)
+		},
 	)
 }
 

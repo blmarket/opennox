@@ -21,10 +21,10 @@ type Struct264 struct {
 	TimerGroup_22 timer.TimerGroup
 	field_46      unsafe.Pointer
 	field_47      uint32
-	field_48      uint32
-	field_49      uint32
-	field_50      Nox_list_item_t
-	field_53      uint32
+	field_48      int32
+	field_49      int32
+	field_50      Nox_list_item_t // List of *Struct312
+	field_53      int32
 	field_54      unsafe.Pointer // sub_4873C0_ptr
 	field_55      uint32
 	field_56      uint32
@@ -35,7 +35,7 @@ type Struct264 struct {
 	field_61      uint32
 	field_62      uint32
 	field_63      uint32
-	field_64      uint32
+	field_64      unsafe.Pointer
 	field_65      uint32
 }
 
@@ -66,6 +66,7 @@ type Struct264Module struct {
 	sub_486320                          func(unsafe.Pointer, int) unsafe.Pointer
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
 	sub_4870E0                          func(unsafe.Pointer) unsafe.Pointer
+	sub_4BD720                          func(*Struct264) *Struct312
 }
 
 func NewStruct264Module(
@@ -89,6 +90,7 @@ func NewStruct264Module(
 	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer,
 	sub_425770 func(unsafe.Pointer) unsafe.Pointer,
 	sub_4870E0 func(unsafe.Pointer) unsafe.Pointer,
+	sub_4BD720 func(*Struct264) *Struct312,
 ) *Struct264Module {
 	return &Struct264Module{
 		moduleName:                          moduleName,
@@ -111,5 +113,6 @@ func NewStruct264Module(
 		sub_486320:                          sub_486320,
 		sub_425770:                          sub_425770,
 		sub_4870E0:                          sub_4870E0,
+		sub_4BD720:                          sub_4BD720,
 	}
 }

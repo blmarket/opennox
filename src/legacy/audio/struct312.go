@@ -9,14 +9,31 @@ import (
 
 type Struct312 struct {
 	field_0       Nox_list_item_t
-	field_3       [27]uint32
+	field_3       uint32
+	timerGroup_4  timer.TimerGroup
+	field_28      uint32
+	field_29      uint32
 	field_30      uint32
 	field_31      uint32
 	field_32      uint32
-	field_33      unsafe.Pointer
-	field_34      [10]uint32
+	field_33      *Struct264
+	field_34      uint32
+	field_35      uint32
+	field_36      uint32
+	field_37      uint32
+	field_38      uint32
+	field_39      uint32
+	field_40      uint32
+	field_41      uint32
+	field_42      uint32
+	field_43      unsafe.Pointer
 	timerGroup_44 timer.TimerGroup
-	field_68      [10]uint32
+	field_68      uint32
+	field_69      unsafe.Pointer // sub_4BD8C0_ptr
+	field_70      unsafe.Pointer // sub_4BD940_ptr
+	field_71      unsafe.Pointer // sub_4BD9B0_ptr
+	field_72      uint32
+	field_73      [5]uint32
 }
 
 var _ = [1]struct{}{}[312-unsafe.Sizeof(Struct312{})]

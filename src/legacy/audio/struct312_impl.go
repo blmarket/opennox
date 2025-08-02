@@ -3,12 +3,11 @@ package audio
 import (
 	"unsafe"
 
-	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 )
 
-func (m *Struct312Module) Sub_4BD720(a1 int32) *Struct312 {
+func (m *Struct312Module) Sub_4BD720(a1p *Struct264) *Struct312 {
 	var v1 *uint32
 	v1pp, _ := alloc.Calloc(1, 0x138)
 	v1p := (*Struct312)(v1pp)
@@ -18,9 +17,9 @@ func (m *Struct312Module) Sub_4BD720(a1 int32) *Struct312 {
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&v1p.field_30))))
 	v1p.timerGroup_44.Init()
 	m.sub_4BD7C0(v1p)
-	v1p.field_33 = unsafe.Pointer(uintptr(a1))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*43)) = *(*uint32)(unsafe.Pointer(uintptr(a1 + 256)))
-	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 256))) + 4))), unsafe.Pointer(v1p)) == 0 {
+	v1p.field_33 = a1p
+	v1p.field_43 = a1p.field_64
+	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1p.field_64)) + 4))), unsafe.Pointer(v1p)) == 0 {
 		return v1p
 	}
 	if v1 != nil {
@@ -34,25 +33,23 @@ func (m *Struct312Module) Sub_4BD7A0(lpMem unsafe.Pointer) {
 	alloc.FreePtr(lpMem)
 }
 
-func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) *uint32 {
-	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1p))
-	var result *uint32
-	*(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a1), 4*69)) = m.sub_4BD8C0_ptr
-	*(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a1), 4*70)) = m.sub_4BD940_ptr
-	*(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a1), 4*71)) = m.sub_4BD9B0_ptr
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*34)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*35)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*36)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*38)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*3)) = 1
-	m.sub_4BDC00(int32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*30))))))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*30)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*29)) = *memmap.PtrUint32(0x5D4594, 1193340)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*28)) = 0
-	result = (*uint32)(m.sub_4864A0(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*4)))))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*72)) = 0
-	return result
+func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
+	a1p.field_69 = m.sub_4BD8C0_ptr
+	a1p.field_70 = m.sub_4BD940_ptr
+	a1p.field_71 = m.sub_4BD9B0_ptr
+	a1p.field_34 = 0
+	a1p.field_35 = 0
+	a1p.field_36 = 0
+	a1p.field_38 = 0
+	a1p.field_3 = 1
+	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&a1p.field_30))))
+	a1p.field_30 = 0
+	a1p.field_29 = *m.ptr_uint32_5d4594_1193340
+	a1p.field_28 = 0
+	a1p.timerGroup_4.Init()
+	a1p.field_72 = 0
 }
+
 func (m *Struct312Module) Sub_4BD8C0(a1 int32) int32 {
 	var (
 		v1     func(int32) int32

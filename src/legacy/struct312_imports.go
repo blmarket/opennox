@@ -45,11 +45,6 @@ func sub_4BDB90(a1 *uint32, a2 *uint32) {
 	Struct312Module.Sub_4BDB90(a1, a2)
 }
 
-//export sub_4BD720
-func sub_4BD720(a1 int32) *uint32 {
-	return Struct312Module.Sub_4BD720(a1)
-}
-
 //export sub_4BD7A0
 func sub_4BD7A0(lpMem unsafe.Pointer) {
 	Struct312Module.Sub_4BD7A0(lpMem)

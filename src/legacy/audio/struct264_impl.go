@@ -23,7 +23,7 @@ func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 unsafe.Pointer) *Str
 	v4m.field_4 = 0
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + 16)))++
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + a2*4 + 24))) = uint32(uintptr(unsafe.Pointer(v4m)))
-	v4m.field_64 = *(*uint32)(unsafe.Pointer(uintptr(v3 + 36)))
+	v4m.field_64 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 36)))
 	m.nox_common_list_clear_425760(unsafe.Pointer(&v4m.field_50))
 	m.sub_4864A0(unsafe.Pointer(&v4m.TimerGroup_22))
 	v4m.field_53 = 0
@@ -317,6 +317,51 @@ func (m *Struct264Module) sub_487360(a1 int32, a2 **int32, a3 *int32) *int32 {
 		*a3 = i
 	} else {
 		*a3 = -1
+	}
+	return result
+}
+
+func (m *Struct264Module) sub_487750(a1p *Struct264) *Struct312 {
+	if a1p.field_48 >= a1p.field_49 {
+		return nil
+	}
+	v1p := m.sub_4BD720(a1p)
+	v2p := v1p
+	if v1p == nil {
+		return nil
+	}
+	m.sub_486E30(a1p, v1p)
+	return v2p
+}
+
+func (m *Struct264Module) Sub_487790(a1p *Struct264, a2 int32) int32 {
+	var (
+		v2 int32
+		v3 int32
+	)
+	v2 = 0
+	if m.sub_487750(a1p) != nil {
+		v3 = a2
+		for {
+			v2++
+			v3--
+			if v3 == 0 || m.sub_487750(a1p) == nil {
+				break
+			}
+		}
+	}
+	return v2
+}
+
+func (m *Struct264Module) sub_486E30(a1p *Struct264, a2p *Struct312) int32 {
+	a2p.field_33 = a1p
+	a1p.field_48++
+	a1p.field_53++
+	m.nox_common_list_append_4258E0(unsafe.Pointer(&a1p.field_50), (unsafe.Pointer(a2p)))
+	result := a1p.field_53 - 1
+	a1p.field_53 = result
+	if result < 0 {
+		a1p.field_53 = 0
 	}
 	return result
 }
