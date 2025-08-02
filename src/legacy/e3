@@ -1,0 +1,48 @@
+#!/bin/bash
+echo '#include "defs.h"' > struct312.c
+echo '#include "operators.h"' >> struct312.c
+
+python -m tools.move_func sub_4BD720 struct312.c
+python -m tools.move_func sub_4BD7A0 struct312.c
+python -m tools.move_func sub_4BD7C0 struct312.c
+python -m tools.move_func sub_4BD8C0 struct312.c
+python -m tools.move_func sub_4BD940 struct312.c
+python -m tools.move_func sub_4BD9B0 struct312.c
+
+# python -m tools.update sub_4871C0 -1 'struct264*'
+# python -m tools.move_func sub_487150 struct264.c
+# python -m tools.update sub_487150 -1 'struct264*'
+# python -m tools.move_func sub_487310 struct264.c
+# python -m tools.update sub_487310 0 'struct264*'
+# python -m tools.move_func sub_431270 struct264.c
+# python -m tools.move_func sub_487680 struct264.c
+# python -m tools.update sub_487680 0 'struct264*'
+# python -m tools.move_func sub_431290 struct264.c
+# python -m tools.move_func sub_487970 struct264.c
+# python -m tools.update sub_487970 0 'struct264*'
+# python -m tools.move_func sub_487590 struct264.c
+# python -m tools.update sub_487590 0 'struct264*'
+# python -m tools.move_func sub_4872C0 struct264.c
+# python -m tools.update sub_4872C0 0 'struct264*'
+# python -m tools.move_func sub_4876A0 struct264.c
+# python -m tools.update sub_4876A0 0 'struct264*'
+# python -m tools.move_func sub_487910 struct264.c
+# python -m tools.update sub_487910 0 'struct264*'
+# python -m tools.move_func sub_452810 struct264.c
+# python -m tools.move_func sub_487810 struct264.c
+# python -m tools.update sub_487810 0 'struct264*'
+# python -m tools.move_func sub_4877D0 struct264.c
+# python -m tools.update sub_4877D0 0 'struct264*'
+# # Need function pointer for this one
+# # python -m tools.move_func sub_4873C0 struct264.c
+# python -m tools.move_func sub_4877F0 struct264.c
+# python -m tools.move_func sub_487360 struct264.c
+
+python -m tools.fix_compile struct312.c
+# python -m tools.alias_repeat
+#
+python -m tools.create_imports struct312.c
+
+python -m tools.translate_c_to_go struct312.c
+
+go run ./gotools struct312/struct312_impl.go
