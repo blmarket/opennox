@@ -10,31 +10,34 @@ import (
 
 // Extracted struct definitions from defs.h
 type Struct200 struct {
-	field_0  uint32
-	field_1  uint32
-	field_2  uint32
-	field_3  uint32
-	field_4  timer.Timer
-	field_12 uint32
-	field_13 uint32
-	field_14 uint32
-	field_15 uint32
-	field_16 uint32
-	field_17 uint32
-	field_18 uint32
-	field_19 uint32
-	field_20 uint32
-	snd_name uint32
-	field_22 Nox_list_item_t
-	field_25 uint32
-	field_26 uint32
-	field_27 uint32
-	field_28 Nox_list_item_t
-	field_31 uint32
-	field_32 [32]uint16
-	field_48 uint32
-	field_49 uint32
+	field_0    uint32
+	field_1    uint32
+	field_2    uint32
+	field_3    uint32
+	field_4    timer.Timer
+	field_12   uint32
+	field_13   uint32
+	field_14   uint32
+	field_15   uint32
+	field_16   uint32
+	field_17   uint32
+	field_18   uint32
+	field_19   uint32
+	field_20   uint32
+	sndName_21 unsafe.Pointer // pointer to string
+	field_22   Nox_list_item_t
+	field_25   uint32
+	field_26   uint32
+	field_27   uint32
+	field_28   Nox_list_item_t
+	field_31   uint32
+	field_32   [32]uint16
+	field_48   uint32
+	field_49   uint32
 }
+
+var _ = [1]struct{}{}[200-unsafe.Sizeof(Struct200{})]
+var _ = [1]struct{}{}[unsafe.Sizeof(Struct200{})-200]
 
 type Struct576 struct {
 	next          *Struct576
@@ -69,6 +72,8 @@ type Struct576 struct {
 	field_143     uint32
 }
 
+var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})]
+
 type Nox_list_item_t struct {
 	field_0 *Nox_list_item_t
 	field_1 *Nox_list_item_t
@@ -78,20 +83,12 @@ type Nox_list_item_t struct {
 func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	var (
 		a3     int32 = int32(uintptr(a3p))
-		v2     int32
-		v3     *uint8
 		result int32
 	)
-	v2 = 0
-	v3 = (*uint8)(memmap.PtrOff(0x5D4594, 840712))
-	for {
-		m.sub_451920((*Struct200)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v3))), -int(4*21))))))
-		*(*uint32)(unsafe.Pointer(v3)) = uint32(uintptr(unsafe.Pointer(m.nox_xxx_getSndName_40AF80(int(v2)))))
-		v3 = (*uint8)(unsafe.Add(unsafe.Pointer(v3), 200))
-		v2++
-		if int32(uintptr(unsafe.Pointer(v3))) >= int32(uintptr(memmap.PtrOff(0x5D4594, 1045312))) {
-			break
-		}
+	v4 := memmap.PtrT[[1023]Struct200](0x5D4594, 840628)
+	for i := int32(0); i < 1023; i++ {
+		m.sub_451920(&v4[i])
+		v4[i].sndName_21 = unsafe.Pointer(m.nox_xxx_getSndName_40AF80(int(i)))
 	}
 	*m.dword_5d4594_1045420 = uint32(a3)
 	*m.dword_5d4594_1045428 = a2p
@@ -109,24 +106,30 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	*m.dword_5d4594_1045432 = 1
 	return result
 }
-func (m *AudioModule) sub_451920(a2_ *Struct200) int32 {
-	var a2 *uint32 = &a2_.field_0
-	_ = a2
-	a2_.field_0 = 0
-	a2_.field_1 = 0
-	a2_.field_2 = 0
-	a2_.field_14 = 0
-	a2_.field_15 = 0
-	a2_.field_19 = 0
-	a2_.field_20 = 0
-	a2_.field_12 = 1
-	a2_.field_48 = 0
-	a2_.field_18 = 0
-	a2_.field_17 = 0
-	a2_.field_25 = 0
-	a2_.field_26 = 0
-	a2_.field_16 = 600
-	return int32(m.sub_4862E0(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a2_.field_4))))), 0x4000))
+
+func bool2int32(v bool) int32 {
+	if v {
+		return 1
+	}
+	return 0
+}
+
+func (m *AudioModule) sub_451920(a2p *Struct200) int32 {
+	a2p.field_0 = 0
+	a2p.field_1 = 0
+	a2p.field_2 = 0
+	a2p.field_14 = 0
+	a2p.field_15 = 0
+	a2p.field_19 = 0
+	a2p.field_20 = 0
+	a2p.field_12 = 1
+	a2p.field_48 = 0
+	a2p.field_18 = 0
+	a2p.field_17 = 0
+	a2p.field_25 = 0
+	a2p.field_26 = 0
+	a2p.field_16 = 600
+	return bool2int32(a2p.field_4.Init(0x4000))
 }
 func (m *AudioModule) sub_452010() int32 {
 	var (
