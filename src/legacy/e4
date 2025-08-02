@@ -1,0 +1,57 @@
+#!/bin/bash
+echo '#include "defs.h"' > struct264_v2.c
+echo '#include "operators.h"' >> struct264_v2.c
+
+python -m tools.move_func sub_487750 struct264_v2.c
+python -m tools.move_func sub_487790 struct264_v2.c
+python -m tools.move_func sub_486E30 struct264_v2.c
+# python -m tools.move_func sub_4BD7C0 struct312.c
+# python -m tools.move_func sub_4BD8C0 struct312.c
+# python -m tools.move_func sub_4BD940 struct312.c
+# python -m tools.move_func sub_4BD9B0 struct312.c
+# python -m tools.move_func sub_4BDC00 struct312.c
+# python -m tools.move_func sub_4BDB90 struct312.c
+# python -m tools.move_func sub_487C80 struct312.c
+# python -m tools.move_func sub_4BDA60 struct312.c
+
+# python -m tools.update sub_4871C0 -1 'struct264*'
+# python -m tools.move_func sub_487150 struct264.c
+# python -m tools.update sub_487150 -1 'struct264*'
+# python -m tools.move_func sub_487310 struct264.c
+# python -m tools.update sub_487310 0 'struct264*'
+# python -m tools.move_func sub_431270 struct264.c
+# python -m tools.move_func sub_487680 struct264.c
+# python -m tools.update sub_487680 0 'struct264*'
+# python -m tools.move_func sub_431290 struct264.c
+# python -m tools.move_func sub_487970 struct264.c
+# python -m tools.update sub_487970 0 'struct264*'
+# python -m tools.move_func sub_487590 struct264.c
+# python -m tools.update sub_487590 0 'struct264*'
+# python -m tools.move_func sub_4872C0 struct264.c
+# python -m tools.update sub_4872C0 0 'struct264*'
+# python -m tools.move_func sub_4876A0 struct264.c
+# python -m tools.update sub_4876A0 0 'struct264*'
+# python -m tools.move_func sub_487910 struct264.c
+# python -m tools.update sub_487910 0 'struct264*'
+# python -m tools.move_func sub_452810 struct264.c
+# python -m tools.move_func sub_487810 struct264.c
+# python -m tools.update sub_487810 0 'struct264*'
+# python -m tools.move_func sub_4877D0 struct264.c
+# python -m tools.update sub_4877D0 0 'struct264*'
+# # Need function pointer for this one
+# # python -m tools.move_func sub_4873C0 struct264.c
+# python -m tools.move_func sub_4877F0 struct264.c
+# python -m tools.move_func sub_487360 struct264.c
+
+python -m tools.fix_compile struct264_v2.c
+# python -m tools.alias_repeat
+#
+python -m tools.create_imports struct264_v2.c
+
+python -m tools.translate_c_to_go struct264_v2.c
+
+# Replace module inside calls to prefix `m.`
+# go run ./gotools struct312/struct312_impl.go
+
+# Find all function pointer invocations. They should use ccall instead.
+go run ./tools/funcptr_analyzer struct264_v2/struct264_v2_impl.go
