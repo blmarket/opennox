@@ -206,8 +206,8 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *int32 {
 		v3 *int32
 	)
 	v2 = nil
-	if *m.dword_5d4594_1045428 != 0 {
-		v3 = m.sub_487810((*Struct264)(unsafe.Pointer(uintptr(*(*int32)(unsafe.Pointer(&*m.dword_5d4594_1045428))))), 1)
+	if *m.dword_5d4594_1045428 != nil {
+		v3 = m.sub_487810(*m.dword_5d4594_1045428, 1)
 		v2 = v3
 		if v3 != nil {
 			if *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*31))&0x15 != 0 && *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*30)) > a1 {

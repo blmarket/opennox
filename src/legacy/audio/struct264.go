@@ -22,7 +22,7 @@ type Struct264 struct {
 	field_14      uint32
 	field_15      [7]uint32
 	TimerGroup_22 timer.TimerGroup
-	field_46      unsafe.Pointer
+	field_46      *timer.TimerGroup
 	field_47      uint32
 	field_48      int32
 	field_49      int32
@@ -49,7 +49,7 @@ type Struct264Module struct {
 
 	// External variables
 	sub_4873C0_ptr       unsafe.Pointer
-	dword_5d4594_1045428 *uint32
+	dword_5d4594_1045428 **Struct264
 	dword_587000_127004  *unsafe.Pointer
 	dword_587000_155144  *unsafe.Pointer
 	dword_5d4594_805984  *unsafe.Pointer
@@ -75,7 +75,7 @@ type Struct264Module struct {
 func NewStruct264Module(
 	moduleName string,
 	sub_4873C0_ptr unsafe.Pointer,
-	dword_5d4594_1045428 *uint32,
+	dword_5d4594_1045428 **Struct264,
 	dword_587000_127004 *unsafe.Pointer,
 	dword_587000_155144 *unsafe.Pointer,
 	dword_5d4594_805984 *unsafe.Pointer,

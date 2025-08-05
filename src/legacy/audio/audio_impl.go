@@ -56,7 +56,7 @@ type Struct576 struct {
 	field_10      [32]unsafe.Pointer
 	field_42      uint32
 	field_43      uint32
-	field_44      uint32
+	field_44      uint32 // unsafe.Pointer
 	field_45      uint32
 	timerGroup_46 timer.TimerGroup
 	field_70      uint32
@@ -100,9 +100,9 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 		return 0
 	}
 	m.nox_common_list_clear_425760((memmap.PtrOff(0x5D4594, 840612)))
-	memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228).Init()
+	m.timerGroup_5d4594_1045228.Init()
 	result = 1
-	(*m.dword_5d4594_1045428).field_46 = memmap.PtrOff(0x5D4594, 1045228)
+	(*m.dword_5d4594_1045428).field_46 = m.timerGroup_5d4594_1045228
 	*m.dword_5d4594_1045432 = 1
 	return result
 }
@@ -967,11 +967,11 @@ func (m *AudioModule) Sub_4519C0() {
 		}
 	}
 	if v3 <= 100 {
-		m.sub_486350(unsafe.Pointer(uintptr(int32(uintptr(memmap.PtrOff(0x5D4594, 1045228))))), 0x4000)
+		m.timerGroup_5d4594_1045228.Timers[0].SetInterp(0x4000)
 	} else {
-		m.sub_486350(unsafe.Pointer(uintptr(int32(uintptr(memmap.PtrOff(0x5D4594, 1045228))))), int(0x190000/uint32(v3)))
+		m.timerGroup_5d4594_1045228.Timers[0].SetInterp(0x4000 * 100 / uint32(v3))
 	}
-	result = int32(m.sub_486520(unsafe.Pointer(memmap.PtrUint32(0x5D4594, 1045228))))
+	m.timerGroup_5d4594_1045228.Update()
 	v6 = *(**uint8)(memmap.PtrOff(0x5D4594, 840612))
 	if unsafe.Pointer(*(**uint8)(memmap.PtrOff(0x5D4594, 840612))) != memmap.PtrOff(0x5D4594, 840612) {
 		for {

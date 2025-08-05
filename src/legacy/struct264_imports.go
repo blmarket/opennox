@@ -36,11 +36,11 @@ var (
 
 func initStruct264() {
 	var (
-		sub_4873C0_ptr                       = unsafe.Pointer(C.sub_4873C0)
-		dword_5d4594_1045428 *uint32         = (*uint32)(&C.dword_5d4594_1045428)
-		dword_587000_127004  *unsafe.Pointer = (&C.dword_587000_127004)
-		dword_587000_155144  *unsafe.Pointer = (&C.dword_587000_155144)
-		dword_5d4594_805984  *unsafe.Pointer = (&C.dword_5d4594_805984)
+		sub_4873C0_ptr                         = unsafe.Pointer(C.sub_4873C0)
+		dword_5d4594_1045428 **audio.Struct264 = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
+		dword_587000_127004  *unsafe.Pointer   = (&C.dword_587000_127004)
+		dword_587000_155144  *unsafe.Pointer   = (&C.dword_587000_155144)
+		dword_5d4594_805984  *unsafe.Pointer   = (&C.dword_5d4594_805984)
 	)
 	Struct264Module = audio.NewStruct264Module(
 		"struct264",
