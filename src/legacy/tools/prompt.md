@@ -14,6 +14,10 @@ Some example replacements:
 => *&v1.field_12
 (*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*12))
 => &v1.field_12
+(*uint32)(unsafe.Add(unsafe.Pointer(v1), 48))
+=> &v1.field_12
+(*uint32)(unsafe.Add(unsafe.Pointer(v1), 36))
+=> &v1.field_9
 ```
 
 Create the program under convert_pointer_arithmetic/ and it can be run with following command:
@@ -22,6 +26,4 @@ Create the program under convert_pointer_arithmetic/ and it can be run with foll
 go run ./convert_pointer_arithmetic/ <file.go>
 ```
 
----
-
-Update the program to just update the code in-place.
+It should print all list of places, and update the file in-place.
