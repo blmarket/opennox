@@ -13,7 +13,7 @@ func (m *Struct312Module) Sub_4BD720(a1p *Struct264) *Struct312 {
 	v1p := (*Struct312)(v1pp)
 	v1 = (*uint32)(v1pp)
 	alloc.Memset(unsafe.Pointer(v1p), 0, 0x138)
-	m.sub_425770(&v1p.field_0)
+	m.sub_425770(&v1p.ListItem)
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&v1p.field_30))))
 	v1p.timerGroup_44.Init()
 	m.sub_4BD7C0(v1p)

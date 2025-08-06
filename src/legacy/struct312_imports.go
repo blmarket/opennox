@@ -27,7 +27,7 @@ func initStruct312() {
 		"struct312",
 		sub_4864A0,
 		nox_common_list_getNext_425940,
-		func(a1 *audio.Nox_list_item_t) unsafe.Pointer {
+		func(a1 *audio.ListItem) unsafe.Pointer {
 			return unsafe.Pointer(C.sub_425770((unsafe.Pointer)(a1)))
 		},
 		unsafe.Pointer(C.sub_4BD8C0),

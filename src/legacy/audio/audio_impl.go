@@ -25,7 +25,7 @@ type Struct200 struct {
 	field_19   uint32
 	field_20   uint32
 	sndName_21 unsafe.Pointer // pointer to string
-	field_22   listItem
+	field_22   ListItem
 	field_25   uint32
 	field_26   uint32
 	field_27   int32
@@ -37,11 +37,11 @@ type Struct200 struct {
 }
 
 type Struct200Field28 struct {
-	listItem
+	ListItem
 }
 
-func (s *Struct200Field28) getList() *listItem {
-	return &s.listItem
+func (s *Struct200Field28) getList() *ListItem {
+	return &s.ListItem
 }
 
 func (s *Struct200Field28) getStruct() *Struct200 {
@@ -52,8 +52,8 @@ var _ = [1]struct{}{}[200-unsafe.Sizeof(Struct200{})]
 var _ = [1]struct{}{}[unsafe.Sizeof(Struct200{})-200]
 
 type Struct576 struct {
-	listItem
-	field_3       listItem
+	ListItem
+	field_3       ListItem
 	field_6       uint8
 	field_6_1     uint8
 	field_6_2     uint8
@@ -80,8 +80,8 @@ type Struct576 struct {
 	field_143     uint32
 }
 
-func (s *Struct576) getList() *listItem {
-	return &s.listItem
+func (s *Struct576) getList() *ListItem {
+	return &s.ListItem
 }
 
 var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})]
@@ -183,8 +183,8 @@ func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
 func (m *AudioModule) sub_4521F0() int32 {
 	var (
 		result int32
-		v1     *listItem
-		v2     *listItem
+		v1     *ListItem
+		v2     *ListItem
 	)
 	result = int32(*m.dword_5d4594_1045432)
 	if *m.dword_5d4594_1045432 != 0 {

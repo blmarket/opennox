@@ -26,7 +26,7 @@ type Struct264 struct {
 	field_47      uint32
 	field_48      int32
 	field_49      int32
-	field_50      Nox_list_item_t // List of *Struct312
+	field_50      ListHead[Struct312, *Struct312]
 	field_53      int32
 	field_54      unsafe.Pointer // sub_4873C0_ptr
 	field_55      uint32

@@ -8,7 +8,7 @@ import (
 )
 
 type Struct312 struct {
-	field_0       Nox_list_item_t
+	ListItem
 	field_3       uint32
 	timerGroup_4  timer.TimerGroup
 	field_28      uint32
@@ -38,6 +38,10 @@ type Struct312 struct {
 
 var _ = [1]struct{}{}[312-unsafe.Sizeof(Struct312{})]
 
+func (s *Struct312) getList() *ListItem {
+	return &s.ListItem
+}
+
 type Struct312Module struct {
 	moduleName string
 
@@ -46,7 +50,7 @@ type Struct312Module struct {
 	// External functions
 	sub_4864A0                     func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
-	sub_425770                     func(*Nox_list_item_t) unsafe.Pointer
+	sub_425770                     func(*ListItem) unsafe.Pointer
 	sub_4BD8C0_ptr                 unsafe.Pointer
 	sub_4BD940_ptr                 unsafe.Pointer
 	sub_4BD9B0_ptr                 unsafe.Pointer
@@ -57,7 +61,7 @@ func NewStruct312Module(
 	moduleName string,
 	sub_4864A0 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
-	sub_425770 func(*Nox_list_item_t) unsafe.Pointer,
+	sub_425770 func(*ListItem) unsafe.Pointer,
 	sub_4BD8C0_ptr unsafe.Pointer,
 	sub_4BD940_ptr unsafe.Pointer,
 	sub_4BD9B0_ptr unsafe.Pointer,

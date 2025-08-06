@@ -4,9 +4,9 @@ import "unsafe"
 
 type ListHead[T any, P interface {
 	*T
-	getList() *listItem
+	getList() *ListItem
 }] struct {
-	listItem
+	ListItem
 }
 
 func (l *ListHead[T, P]) First() *T {
@@ -14,9 +14,9 @@ func (l *ListHead[T, P]) First() *T {
 }
 
 func (l *ListHead[T, P]) Clear() {
-	l.next = &l.listItem
-	l.prev = &l.listItem
-	l.head = &l.listItem
+	l.next = &l.ListItem
+	l.prev = &l.ListItem
+	l.head = &l.ListItem
 }
 
 func (l *ListHead[T, P]) Append(p P) {
@@ -35,7 +35,7 @@ func (l *ListHead[T, P]) Append(p P) {
 		}
 	}
 
-	cur.next = &l.listItem
+	cur.next = &l.ListItem
 	cur.prev = it
 
 	l.prev = cur
@@ -44,17 +44,17 @@ func (l *ListHead[T, P]) Append(p P) {
 	}
 }
 
-type listItem struct {
-	next *listItem
-	prev *listItem
-	head *listItem
+type ListItem struct {
+	next *ListItem
+	prev *ListItem
+	head *ListItem
 }
 
-func (l *listItem) getList() *listItem {
+func (l *ListItem) getList() *ListItem {
 	return l
 }
 
-func (l *listItem) Next() *listItem {
+func (l *ListItem) Next() *ListItem {
 	if l == nil {
 		return nil
 	}
@@ -65,7 +65,7 @@ func (l *listItem) Next() *listItem {
 	return it
 }
 
-func (l *listItem) Remove() {
+func (l *ListItem) Remove() {
 	l.prev.next = l.next
 	l.next.prev = l.prev
 	l.next = l
