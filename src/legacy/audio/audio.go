@@ -24,6 +24,7 @@ type AudioModule struct {
 	dword_587000_127004       unsafe.Pointer
 	timerGroup_5d4594_1045228 *timer.TimerGroup
 	listHeads_5d4594_839892   *[6][10]ListHead[Struct200Field28, *Struct200Field28]
+	listHead_5d4594_840612    *ListHead[Struct576, *Struct576]
 
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
@@ -68,6 +69,7 @@ func NewAudioModule(
 	dword_587000_127004 unsafe.Pointer,
 	timerGroup_5d4594_1045228 *timer.TimerGroup,
 	listHeads_5d4594_839892 *[6][10]ListHead[Struct200Field28, *Struct200Field28],
+	listHead_5d4594_840612 *ListHead[Struct576, *Struct576],
 	sub_425770 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 	sub_4BDB30 func(int) int,
@@ -109,6 +111,7 @@ func NewAudioModule(
 		dword_587000_127004:                 dword_587000_127004,
 		timerGroup_5d4594_1045228:           timerGroup_5d4594_1045228,
 		listHeads_5d4594_839892:             listHeads_5d4594_839892,
+		listHead_5d4594_840612:              listHead_5d4594_840612,
 		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BDB30:                          sub_4BDB30,
