@@ -1,7 +1,6 @@
 package audio
 
 import (
-	"fmt"
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
@@ -765,7 +764,6 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	var v1 *Struct200
 	var v2 int32
 	var v3 uint32
-	var v4 *uint8
 	var result *uint32
 	var v6 **uint32
 	var v7 **uint32
@@ -774,8 +772,6 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	v2 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*12)) + a1p.field_75)
 	v3 = (a1p.timerGroup_46.Timers[0].Current >> 16) / 0x666
 	v0 := (memmap.PtrT[[6][10]listHead[Struct200Field28, *Struct200Field28]](0x5D4594, 839892))
-	v4 = (*uint8)(memmap.PtrOff(0x5D4594, uintptr(uint32(v2*120)+839892)))
-	fmt.Printf("%x %d %x %x %x\n", v4, v3, (unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer((*uint8)(unsafe.Add(unsafe.Pointer(v4), v3*12)))))))), unsafe.Pointer(v0[v2][v3].head), &v0[v2][v3])
 	if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*26)) == *memmap.PtrUint32(0x5D4594, 1045444) {
 		result = (*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*27)))))
 		if v2 <= int32(uintptr(unsafe.Pointer(result))) {
@@ -783,14 +779,14 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 				*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
 				v7 = (**uint32)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))))
 				m.nox_common_list_remove_425920(unsafe.Pointer(v7))
-				m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer((*uint8)(unsafe.Add(unsafe.Pointer(v4), v3*12)))))))), (unsafe.Pointer(v7)))
+				m.nox_common_list_append_4258E0((unsafe.Pointer(&v0[v2][v3])), (unsafe.Pointer(v7)))
 			}
 		} else {
 			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*27)) = uint32(v2)
 			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
 			v6 = (**uint32)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))))
 			m.nox_common_list_remove_425920(unsafe.Pointer(v6))
-			m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer((*uint8)(unsafe.Add(unsafe.Pointer(v4), v3*12)))))))), (unsafe.Pointer(v6)))
+			m.nox_common_list_append_4258E0((unsafe.Pointer(&v0[v2][v3])), (unsafe.Pointer(v6)))
 		}
 	} else {
 		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*26)) = *memmap.PtrUint32(0x5D4594, 1045444)
@@ -798,7 +794,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
 		v8 = (*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))
 		m.sub_425770(unsafe.Pointer(v8))
-		m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer((*uint8)(unsafe.Add(unsafe.Pointer(v4), v3*12)))))))), (unsafe.Pointer(v8)))
+		m.nox_common_list_append_4258E0((unsafe.Pointer(&v0[v2][v3])), (unsafe.Pointer(v8)))
 	}
 }
 
