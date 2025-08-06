@@ -764,35 +764,34 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	var v1 *Struct200
 	var v2 int32
 	var v3 uint32
-	var result *uint32
 	var v6 **uint32
 	var v7 **uint32
 	var v8 *uint32
 	v1 = a1p.field_9
-	v2 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*12)) + a1p.field_75)
+	v2 = int32(*(*uint32)(&v1.field_12) + a1p.field_75)
 	v3 = (a1p.timerGroup_46.Timers[0].Current >> 16) / 0x666
 	heads := m.listHeads_5d4594_839892
-	if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*26)) == *memmap.PtrUint32(0x5D4594, 1045444) {
-		result = (*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*27)))))
-		if v2 <= int32(uintptr(unsafe.Pointer(result))) {
-			if (*uint32)(unsafe.Pointer(uintptr(v2))) == result && v3 > *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) {
-				*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
-				v7 = (**uint32)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))))
+	if *(*uint32)(&v1.field_26) == *memmap.PtrUint32(0x5D4594, 1045444) {
+		result := v1.field_27
+		if v2 <= result {
+			if v2 == result && v3 > v1.field_31 {
+				v1.field_31 = v3
+				v7 = (**uint32)(unsafe.Pointer((&v1.field_28)))
 				m.nox_common_list_remove_425920(unsafe.Pointer(v7))
 				m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v7)))
 			}
 		} else {
-			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*27)) = uint32(v2)
-			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
-			v6 = (**uint32)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))))
+			v1.field_27 = v2
+			*(*uint32)(&v1.field_31) = v3
+			v6 = (**uint32)(unsafe.Pointer((&v1.field_28)))
 			m.nox_common_list_remove_425920(unsafe.Pointer(v6))
 			m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v6)))
 		}
 	} else {
-		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*26)) = *memmap.PtrUint32(0x5D4594, 1045444)
-		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*27)) = uint32(v2)
-		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*31)) = v3
-		v8 = (*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*28))
+		*(*uint32)(&v1.field_26) = *memmap.PtrUint32(0x5D4594, 1045444)
+		v1.field_27 = v2
+		*(*uint32)(&v1.field_31) = v3
+		v8 = (*uint32)(unsafe.Pointer(&v1.field_28))
 		m.sub_425770(unsafe.Pointer(v8))
 		m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v8)))
 	}
