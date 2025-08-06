@@ -78,6 +78,7 @@ func initAudio() {
 		dword_5d4594_1045436,
 		dword_587000_127004,
 		memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
+		memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
 		sub_425770,
 		nox_common_list_append_4258E0,
 		sub_4BDB30,

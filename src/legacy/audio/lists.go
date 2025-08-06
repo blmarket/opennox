@@ -2,24 +2,24 @@ package audio
 
 import "unsafe"
 
-type listHead[T any, P interface {
+type ListHead[T any, P interface {
 	*T
 	getList() *listItem
 }] struct {
 	listItem
 }
 
-func (l *listHead[T, P]) First() *T {
+func (l *ListHead[T, P]) First() *T {
 	return (*T)(unsafe.Pointer(l.Next()))
 }
 
-func (l *listHead[T, P]) Clear() {
+func (l *ListHead[T, P]) Clear() {
 	l.next = &l.listItem
 	l.prev = &l.listItem
 	l.head = &l.listItem
 }
 
-func (l *listHead[T, P]) Append(p P) {
+func (l *ListHead[T, P]) Append(p P) {
 	if l == nil || p == nil {
 		panic("nil list or item")
 	}
