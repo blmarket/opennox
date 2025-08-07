@@ -11,7 +11,6 @@ func (m *Struct312Module) Sub_4BD720(a1p *Struct264) *Struct312 {
 	var v1 *uint32
 	v1pp, _ := alloc.Calloc(1, 0x138)
 	v1p := (*Struct312)(v1pp)
-	v1 = (*uint32)(v1pp)
 	alloc.Memset(unsafe.Pointer(v1p), 0, 0x138)
 	m.sub_425770(&v1p.ListItem)
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&v1p.field_30))))
@@ -23,14 +22,14 @@ func (m *Struct312Module) Sub_4BD720(a1p *Struct264) *Struct312 {
 		return v1p
 	}
 	if v1 != nil {
-		m.Sub_4BD7A0(unsafe.Pointer(v1))
+		m.Sub_4BD7A0(v1p)
 	}
 	return nil
 }
 
-func (m *Struct312Module) Sub_4BD7A0(lpMem unsafe.Pointer) {
-	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*43))) + 8))), lpMem)
-	alloc.FreePtr(lpMem)
+func (m *Struct312Module) Sub_4BD7A0(lpMem *Struct312) {
+	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((lpMem)), 4*43))) + 8))), unsafe.Pointer(lpMem))
+	alloc.FreePtr(unsafe.Pointer(lpMem))
 }
 
 func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {

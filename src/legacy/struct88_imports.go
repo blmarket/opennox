@@ -24,7 +24,7 @@ var (
 
 func initStruct88() {
 	var (
-		dword_587000_155144 *unsafe.Pointer = (*unsafe.Pointer)(unsafe.Pointer(&C.dword_587000_155144))
+		dword_587000_155144 **audio.Struct587000_155144 = (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144))
 	)
 	Struct88Module = audio.NewStruct88Module(
 		"struct88",
@@ -32,7 +32,7 @@ func initStruct88() {
 		Struct264Module.Sub_487680,
 		nox_common_list_getNextSafe_4258A0,
 		nox_common_list_remove_425920,
-		func(a1 *audio.Nox_list_item_t) unsafe.Pointer {
+		func(a1 *audio.ListItem) unsafe.Pointer {
 			return C.sub_425770(unsafe.Pointer(a1))
 		},
 		nox_common_list_getFirstSafe_425890,

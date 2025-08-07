@@ -7,7 +7,7 @@ import (
 )
 
 type Struct264 struct {
-	field_0       Nox_list_item_t
+	field_0       ListItem
 	field_3       uint32
 	field_4       uint32
 	field_5       unsafe.Pointer

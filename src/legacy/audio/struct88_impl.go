@@ -34,7 +34,7 @@ func (m *Struct88Module) sub_487030(a1p *Struct88) {
 
 func (m *Struct88Module) Sub_487050(a1_ *Struct88) {
 	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1_))
-	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(*(*int32)(unsafe.Pointer(&*m.dword_587000_155144))))), (unsafe.Pointer(a1)))
+	m.nox_common_list_append_4258E0((unsafe.Pointer(&(*m.dword_587000_155144).field_0)), (unsafe.Pointer(a1)))
 }
 
 func (m *Struct88Module) Sub_4870A0() {
@@ -76,7 +76,7 @@ func (m *Struct88Module) Sub_487100(a1 *unsafe.Pointer) unsafe.Pointer {
 }
 func (m *Struct88Module) sub_4875B0(a1 *int32) *int32 {
 	var result *int32
-	result = (*int32)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 12))))))
+	result = (*int32)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(&(*m.dword_587000_155144).field_3)))))
 	*a1 = int32(uintptr(unsafe.Pointer(result)))
 	return result
 }
@@ -93,7 +93,7 @@ func (m *Struct88Module) Sub_4875F0() int32 {
 		result int32
 		v3     *int32
 	)
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24)))++
+	(*m.dword_587000_155144).field_6 += 1
 	v0 = m.sub_4875B0((*int32)(unsafe.Pointer(&v3)))
 	if v0 != nil {
 		for {
@@ -105,10 +105,10 @@ func (m *Struct88Module) Sub_4875F0() int32 {
 			}
 		}
 	}
-	result = int32(*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = uint32(result)
+	result = int32((*m.dword_587000_155144).field_6 - 1)
+	(*m.dword_587000_155144).field_6 = uint32(result)
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = 0
+		(*m.dword_587000_155144).field_6 = 0
 	}
 	return result
 }

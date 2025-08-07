@@ -86,12 +86,6 @@ func (s *Struct576) getList() *ListItem {
 
 var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})]
 
-type Nox_list_item_t struct {
-	field_0 *Nox_list_item_t
-	field_1 *Nox_list_item_t
-	field_2 *Nox_list_item_t
-}
-
 func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	var (
 		a3     int32 = int32(uintptr(a3p))

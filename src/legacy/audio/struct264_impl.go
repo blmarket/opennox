@@ -108,23 +108,23 @@ func (m *Struct264Module) Sub_431290() {
 	}
 }
 
-func (m *Struct264Module) sub_487970(a1_ *Struct264, a2 int32) *int32 {
+func (m *Struct264Module) sub_487970(a1_ *Struct264, a2 int32) *Struct312 {
 	var (
 		a1     int32 = int32(uintptr(unsafe.Pointer(a1_)))
-		result *int32
-		v3     *int32
+		a1x    *Struct312
+		result *Struct312
+		v3     *Struct312
 		v4     int32
-		v5     *int32
 	)
-	result = m.sub_4877D0((*Struct264)(unsafe.Pointer(uintptr(a1))), &a1)
+	result = m.sub_4877D0((*Struct264)(unsafe.Pointer(uintptr(a1))), &a1x)
 	v3 = result
 	if result != nil {
 		v4 = a2
 		for {
-			result = m.sub_4877F0((**int32)(unsafe.Pointer(&a1)))
-			v5 = result
+			result = m.sub_4877F0(&a1x)
+			v5 := result
 			if v4 == -1 || *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*3)) == v4 {
-				result = (*int32)(unsafe.Pointer(uintptr(m.sub_4BDA80(int(uintptr(unsafe.Pointer(v3)))))))
+				result = (*Struct312)(unsafe.Pointer(uintptr(m.sub_4BDA80(int(uintptr(unsafe.Pointer(v3)))))))
 			}
 			v3 = v5
 			if v5 == nil {
@@ -176,21 +176,22 @@ func (m *Struct264Module) sub_4876A0(a1_ *Struct264) unsafe.Pointer {
 	}
 	return result
 }
-func (m *Struct264Module) sub_487910(a1_ *Struct264, a2 int32) int32 {
+
+func (m *Struct264Module) sub_487910(a1p *Struct264, a2 int32) int32 {
 	var (
-		a1 int32 = int32(uintptr(unsafe.Pointer(a1_)))
-		v2 *int32
-		v3 int32
-		v4 *int32
+		// v2 *int32
+		a1x *Struct312
+		v3  int32
+		// v4 *int32
 	)
-	v2 = m.sub_4877D0((*Struct264)(unsafe.Pointer(uintptr(a1))), &a1)
+	v2 := m.sub_4877D0(a1p, &a1x)
 	if v2 == nil {
 		return 0
 	}
 	v3 = a2
 	for {
-		v4 = m.sub_4877F0((**int32)(unsafe.Pointer(&a1)))
-		if v3 == -1 || *(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*3)) == v3 {
+		v4 := m.sub_4877F0(&a1x)
+		if v3 == -1 || v2.field_3 == v3 {
 			m.sub_4BDA60(unsafe.Pointer(v2))
 		}
 		v2 = v4
@@ -200,6 +201,7 @@ func (m *Struct264Module) sub_487910(a1_ *Struct264, a2 int32) int32 {
 	}
 	return 0
 }
+
 func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *int32 {
 	var (
 		v2 *int32
@@ -226,6 +228,7 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *int32 {
 	}
 	return v2
 }
+
 func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *int32 {
 	var (
 		a1     int32 = int32(uintptr(unsafe.Pointer(a1p)))
@@ -280,18 +283,15 @@ func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *int32 {
 	return result
 }
 
-func (m *Struct264Module) sub_4877D0(a1p *Struct264, a2 *int32) *int32 {
-	var (
-		result *int32
-	)
-	result = (*int32)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&a1p.field_50))))
-	*a2 = int32(uintptr(unsafe.Pointer(result)))
+func (m *Struct264Module) sub_4877D0(a1p *Struct264, a2 **Struct312) *Struct312 {
+	result := (*Struct312)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&a1p.field_50))))
+	*a2 = result
 	return result
 }
 
-func (m *Struct264Module) sub_4877F0(a1 **int32) *int32 {
+func (m *Struct264Module) sub_4877F0(a1 **Struct312) *Struct312 {
 	if *a1 != nil {
-		*a1 = (*int32)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
+		*a1 = (*Struct312)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
 	}
 	return *a1
 }

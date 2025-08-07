@@ -9,7 +9,7 @@ import (
 
 type Struct312 struct {
 	ListItem
-	field_3       uint32
+	field_3       int32
 	timerGroup_4  timer.TimerGroup
 	field_28      uint32
 	field_29      uint32
