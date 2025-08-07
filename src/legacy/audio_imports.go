@@ -187,11 +187,6 @@ func nox_xxx_clientPlaySoundSpecial_452D80(a1, a2 C.int) {
 	AudioModule.Nox_xxx_clientPlaySoundSpecial_452D80(int32(a1), int32(a2))
 }
 
-//export sub_451850
-func sub_451850(a2 int, a3 unsafe.Pointer) int32 {
-	return AudioModule.Sub_451850((*audio.Struct264)(unsafe.Pointer(uintptr(a2))), a3)
-}
-
 //export sub_4519C0
 func sub_4519C0() {
 	AudioModule.Sub_4519C0()
