@@ -20,4 +20,4 @@ python -m tools.translate_c_to_go phase6.c
 # go run ./gotools struct312/struct312_impl.go
 
 # Find all function pointer invocations. They should use ccall instead.
-go run ./tools/funcptr_analyzer phase6/phase6_impl.go
+go run ./tools/funcptr_analyzer audio/phase6_impl.go
