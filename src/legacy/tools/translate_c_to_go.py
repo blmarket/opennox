@@ -110,11 +110,11 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
     # Step 1: Generate Go code from C file
     print("Running cxgo")
     run_cxgo2()
-    
+
     # Determine the corresponding Go file based on C filename
     c_base_name = os.path.splitext(os.path.basename(c_file_path))[0]
     go_file_path = f"../../gonox/{c_base_name}.go"
-    
+
     with open(go_file_path, 'r') as f:
         go_content = f.read()
     with open("../../gonox/defs.go", "r") as f:
@@ -201,7 +201,7 @@ def main():
 
     # Get base name for output directory
     base_name = os.path.splitext(os.path.basename(args.c_file))[0]
-    output_dir = base_name
+    output_dir = "audio"
     output_file = os.path.join(output_dir, f'{base_name}_impl.go')
 
     # Create output directory
