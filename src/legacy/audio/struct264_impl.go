@@ -202,10 +202,10 @@ func (m *Struct264Module) sub_487910(a1p *Struct264, a2 int32) int32 {
 	return 0
 }
 
-func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *int32 {
+func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *Struct312 {
 	var (
-		v2 *int32
-		v3 *int32
+		v2 *Struct312
+		v3 *Struct312
 	)
 	v2 = nil
 	if *m.dword_5d4594_1045428 != nil {
@@ -229,17 +229,17 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *int32 {
 	return v2
 }
 
-func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *int32 {
+func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *Struct312 {
 	var (
-		a1     int32 = int32(uintptr(unsafe.Pointer(a1p)))
 		v2     uint32
 		v3     int32
-		v4     *int32
-		result *int32
+		v4     *Struct312
+		result *Struct312
 		v6     int32
 		v7     uint32
 		v8     int32
-		v9     *int32
+		v9     *Struct312
+		a1x    *Struct312
 	)
 	v2 = 4294967295
 	if a2 == -1 {
@@ -249,7 +249,7 @@ func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *int32 {
 	v4 = nil
 	v8 = 127
 	v9 = nil
-	for result = m.sub_4877D0((*Struct264)(unsafe.Pointer(uintptr(a1))), &a1); result != nil; result = m.sub_4877F0((**int32)(unsafe.Pointer(&a1))) {
+	for result = m.sub_4877D0(a1p, &a1x); result != nil; result = m.sub_4877F0(&a1x) {
 		if *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*3)) == a2 {
 			if (*(*int32)(unsafe.Add(unsafe.Pointer(result), 4*31)) & 0x15) == 0 {
 				return result

@@ -47,7 +47,7 @@ func sub_4BDB90(a1 *uint32, a2 *uint32) {
 
 //export sub_4BD7A0
 func sub_4BD7A0(lpMem unsafe.Pointer) {
-	Struct312Module.Sub_4BD7A0(lpMem)
+	Struct312Module.Sub_4BD7A0((*audio.Struct312)(lpMem))
 }
 
 //export sub_4BD8C0

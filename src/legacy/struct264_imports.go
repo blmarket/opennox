@@ -107,7 +107,7 @@ func sub_4BDA80(a1 int) int {
 
 //export sub_452810
 func sub_452810(a1 int32, a2 C.char) *int32 {
-	return Struct264Module.Sub_452810(a1, int8(a2))
+	return (*int32)(unsafe.Pointer(Struct264Module.Sub_452810(a1, int8(a2))))
 }
 
 //export sub_431270
