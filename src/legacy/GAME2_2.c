@@ -4359,22 +4359,6 @@ FILE* sub_486E00(int a1) {
 //----- (00486E30) --------------------------------------------------------
 
 //----- (00486E90) --------------------------------------------------------
-int sub_486E90(int a1) {
-	int v1;     // esi
-	int result; // eax
-
-	v1 = *(uint32_t*)(a1 + 132);
-	nox_common_list_remove_425920((uint32_t**)a1);
-	--*(uint32_t*)(v1 + 192);
-	++*(uint32_t*)(v1 + 212);
-	nox_common_list_remove_425920((uint32_t**)a1);
-	result = *(uint32_t*)(v1 + 212) - 1;
-	*(uint32_t*)(v1 + 212) = result;
-	if (result < 0) {
-		*(uint32_t*)(v1 + 212) = 0;
-	}
-	return result;
-}
 
 //----- (00486FA0) --------------------------------------------------------
 uint32_t* sub_486FA0(int a1) {
@@ -4425,83 +4409,6 @@ uint32_t* sub_486FA0(int a1) {
 //----- (00487360) --------------------------------------------------------
 
 //----- (004873C0) --------------------------------------------------------
-int sub_4873C0(int a3) {
-	int v1;           // esi
-	long long v3;     // rax
-	unsigned int v4;  // ecx
-	int v5;           // ebp
-	bool v6;          // cf
-	unsigned int v7;  // ebx
-	unsigned int v8;  // ecx
-	int v9;           // edi
-	unsigned int v10; // eax
-	uint32_t* v11;    // ebx
-	int v12;          // edi
-	int v13;          // ebp
-	uint32_t* v14;    // esi
-	int v15;          // [esp+10h] [ebp-Ch]
-	int v16;          // [esp+18h] [ebp-4h]
-	int v17;          // [esp+20h] [ebp+4h]
-
-	v1 = a3;
-	if (*(uint32_t*)(a3 + 212)) {
-		return -2146304000;
-	}
-	v3 = nox_platform_get_ticks();
-	v4 = *(uint32_t*)(a3 + 248);
-	v5 = v3;
-	v6 = (unsigned int)v3 < v4;
-	v7 = v3 - v4;
-	v8 = *(uint32_t*)(a3 + 224);
-	v16 = HIDWORD(v3);
-	v9 = HIDWORD(v3) - (v6 + *(uint32_t*)(a3 + 252));
-	v10 = *(uint32_t*)(a3 + 228);
-	if (__PAIR64__(v9, v7) >= __PAIR64__(v10, v8)) {
-		*(uint32_t*)(a3 + 232) = v7;
-		*(uint32_t*)(a3 + 236) = v9;
-		if (*(uint64_t*)(a3 + 240) > 10 * __PAIR64__(v10, v8)) {
-			*(uint32_t*)(a3 + 240) = 0;
-			*(uint32_t*)(a3 + 244) = 0;
-		}
-		if (__PAIR64__(v9, v7) > *(uint64_t*)(a3 + 240)) {
-			*(uint32_t*)(a3 + 240) = v7;
-			*(uint32_t*)(a3 + 244) = v9;
-		}
-		v11 = (uint32_t*)(a3 + 88);
-		v15 = a3 + 88;
-		sub_486520((unsigned int*)(a3 + 88));
-		if (*(uint32_t*)(a3 + 184)) {
-			sub_486520(*(unsigned int**)(a3 + 184));
-		}
-		if (!*(uint32_t*)(a3 + 184) || !(v17 = sub_486550(*(uint8_t**)(a3 + 184)))) {
-			v17 = sub_486550((uint8_t*)(v1 + 88));
-		}
-		*(uint32_t*)(v1 + 248) = v5;
-		*(uint32_t*)(v1 + 252) = v16;
-		v12 = *(uint32_t*)(v1 + 200);
-		if (v12 != v1 + 200) {
-			do {
-				v13 = *(uint32_t*)v12;
-				if (*(uint8_t*)(v12 + 124) & 1 && *(uint32_t*)(v12 + 288)) {
-					if ((sub_486520((unsigned int*)(v12 + 16)), v17) || sub_486550((uint8_t*)(v12 + 16)) ||
-						*(uint32_t*)(v12 + 116) && sub_486550(*(uint8_t**)(v12 + 116)) ||
-						*(uint32_t*)(v12 + 112) && sub_486550(*(uint8_t**)(v12 + 112))) {
-						sub_4BD840(v12);
-						(*(void (**)(int))(*(uint32_t*)(v12 + 172) + 32))(v12);
-					}
-				}
-				v12 = v13;
-			} while (v13 != v1 + 200);
-			v11 = (uint32_t*)v15;
-		}
-		v14 = *(uint32_t**)(v1 + 184);
-		if (v14) {
-			sub_486620(v14);
-		}
-		sub_486620(v11);
-	}
-	return 0;
-}
 
 //----- (00487590) --------------------------------------------------------
 

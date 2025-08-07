@@ -26,7 +26,7 @@ uint32_t* sub_4BD2E0(uint32_t** a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int* sub_452810(int a1, char a2);
 void sub_4BD2D0(void* lpMem);
-int sub_4BDA80(int a1);
+int sub_4BDA80(struct312* a1);
 void nox_common_list_clear_425760(nox_list_item_t* list);
 void* sub_486320(void* a1, int a2);
 char* nox_xxx_getSndName_40AF80(int a1);
@@ -100,7 +100,9 @@ func initAudio() {
 			return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
 		},
 		sub_4BD2D0,
-		sub_4BDA80,
+		func(a1 int) int {
+			return int(sub_4BDA80((*C.struct312)(unsafe.Pointer(uintptr(a1)))))
+		},
 		nox_common_list_clear_425760,
 		sub_486320,
 		func(id int) unsafe.Pointer {
@@ -118,6 +120,7 @@ func initAudio() {
 	)
 
 	initStruct88()
+	initPhase6()
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {
@@ -129,7 +132,7 @@ func nox_common_list_append_4258E0(list unsafe.Pointer, cur unsafe.Pointer) {
 }
 
 func sub_4BDB30(a1 int) int {
-	return int(C.sub_4BDB30(C.int(a1)))
+	return int(Phase6Module.Sub_4BDB30(int32(a1)))
 }
 
 func sub_4BD300(a1 unsafe.Pointer, a2 int) int {
@@ -137,7 +140,7 @@ func sub_4BD300(a1 unsafe.Pointer, a2 int) int {
 }
 
 func sub_4BDB40(a2 int) int {
-	return int(C.sub_4BDB40(C.int(a2)))
+	return int(Phase6Module.Sub_4BDB40(int32(a2)))
 }
 
 func sub_4BD280(a1 int, a2 int) unsafe.Pointer {

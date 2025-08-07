@@ -33,8 +33,8 @@ func main() {
 	}
 
 	functionName := os.Args[1]
-	implFile := "audio/struct88_impl.go"
-	importsFile := "struct88_imports.go"
+	implFile := "audio/phase6_impl.go"
+	importsFile := "phase6_imports.go"
 
 	// Find and parse the function in impl file
 	funcInfo, err := findFunction(implFile, functionName)

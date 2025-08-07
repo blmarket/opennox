@@ -12,12 +12,12 @@ int* sub_487100(int** a1);
 void nox_common_list_remove_425920(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nullsub_10(uint32_t a1);
-void sub_4BDA60(void* lpMem);
+void sub_4BDA60(struct312* lpMem);
 void nox_common_list_clear_425760(nox_list_item_t* list);
 void* sub_4864A0(void* a3);
 int sub_4873C0(int a3);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
-int sub_4BDA80(int a1);
+int sub_4BDA80(struct312* a1);
 void* sub_486320(void* a1, int a2);
 void* sub_425770(void* a1);
 int* sub_4870E0(int* a1);
@@ -56,12 +56,18 @@ func initStruct264() {
 		nox_common_list_remove_425920,
 		nox_common_list_append_4258E0,
 		nullsub_10,
-		sub_4BDA60,
+		func(a1 unsafe.Pointer) {
+			sub_4BDA60((*C.struct312)(a1))
+		},
 		nox_common_list_clear_425760,
 		sub_4864A0,
-		sub_4873C0,
+		func(a1 int) int {
+			return int(sub_4873C0(int32(a1)))
+		},
 		nox_common_list_getNextSafe_4258A0,
-		sub_4BDA80,
+		func(a1 int) int {
+			return int(sub_4BDA80((*C.struct312)(unsafe.Pointer(uintptr(a1)))))
+		},
 		sub_486320,
 		sub_425770,
 		func(a1 *unsafe.Pointer) unsafe.Pointer {
@@ -85,24 +91,12 @@ func nullsub_10(a1 uint32) {
 	C.nullsub_10(C.uint32_t(a1))
 }
 
-func sub_4BDA60(lpMem unsafe.Pointer) {
-	C.sub_4BDA60((unsafe.Pointer)(lpMem))
-}
-
 func nox_common_list_clear_425760(list unsafe.Pointer) {
 	C.nox_common_list_clear_425760((*C.nox_list_item_t)(list))
 }
 
-func sub_4873C0(a3 int) int {
-	return int(C.sub_4873C0(C.int(a3)))
-}
-
 func nox_common_list_getNextSafe_4258A0(list unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C.nox_common_list_getNextSafe_4258A0((*C.nox_list_item_t)(list)))
-}
-
-func sub_4BDA80(a1 int) int {
-	return int(C.sub_4BDA80(C.int(a1)))
 }
 
 //export sub_452810

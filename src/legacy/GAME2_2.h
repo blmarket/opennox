@@ -114,7 +114,7 @@ int sub_486B60(int a1, int a2);
 signed int sub_486DB0(int a1, char* a2, signed int a3);
 FILE* sub_486E00(int a1);
 int sub_486E30(int a1, uint32_t* a2);
-int sub_486E90(int a1);
+int sub_486E90(struct312* a1_);
 uint32_t* sub_486FA0(int a1);
 struct88* sub_486FE0(int a1);
 void sub_487030(struct88* lpMem_);
