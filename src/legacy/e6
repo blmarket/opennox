@@ -9,6 +9,7 @@ python -m tools.update sub_486E90 0 'struct312*'
 python -m tools.move_func sub_4BDA60 phase6.c
 python -m tools.update sub_4BDA60 0 'struct312*'
 python -m tools.move_func sub_4873C0 phase6.c
+python -m tools.move_func sub_4BD840 phase6.c
 
 python -m tools.fix_compile phase6.c
 
