@@ -339,7 +339,7 @@ def generate_module_file(module_name: str, variables: List[Tuple[str, str]], fun
     lines = []
 
     # Package declaration
-    lines.append(f"package {module_name}")
+    lines.append(f"package audio")
     lines.append("")
 
     # Imports
@@ -480,7 +480,7 @@ def main():
 
     try:
         # Create module directory
-        module_dir = module_name
+        module_dir = "audio"
         os.makedirs(module_dir, exist_ok=True)
 
         # Generate module file (xxx/xxx.go)
