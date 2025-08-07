@@ -4,8 +4,8 @@ echo '#include "operators.h"' >> phase6.c
 
 python -m tools.move_func sub_4BDA80 phase6.c
 python -m tools.update sub_4BDA80 0 'struct312*'
-python -m tools.move_func sub_4B6E90 phase6.c
-python -m tools.update sub_4B6E90 0 'struct312*'
+python -m tools.move_func sub_486E90 phase6.c
+python -m tools.update sub_486E90 0 'struct312*'
 python -m tools.move_func sub_4BDA60 phase6.c
 python -m tools.update sub_4BDA60 0 'struct312*'
 
