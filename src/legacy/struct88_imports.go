@@ -22,11 +22,12 @@ var (
 	Struct88Module *audio.Struct88Module
 )
 
-func initStruct88() {
+func initStruct88(externs *audio.AudioExterns) {
 	var (
 		dword_587000_155144 **audio.Struct587000_155144 = (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144))
 	)
 	Struct88Module = audio.NewStruct88Module(
+		externs,
 		"struct88",
 		dword_587000_155144,
 		Struct264Module.Sub_487680,

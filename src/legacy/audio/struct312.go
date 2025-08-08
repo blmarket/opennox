@@ -44,6 +44,7 @@ func (s *Struct312) getList() *ListItem {
 
 type Struct312Module struct {
 	moduleName string
+	externs    *AudioExterns
 
 	// External variables
 
@@ -58,6 +59,7 @@ type Struct312Module struct {
 }
 
 func NewStruct312Module(
+	externs *AudioExterns,
 	moduleName string,
 	sub_4864A0 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
@@ -69,6 +71,7 @@ func NewStruct312Module(
 ) *Struct312Module {
 	return &Struct312Module{
 		moduleName:                     moduleName,
+		externs:                        externs,
 		sub_4864A0:                     sub_4864A0,
 		nox_common_list_getNext_425940: nox_common_list_getNext_425940,
 		sub_425770:                     sub_425770,

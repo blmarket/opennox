@@ -46,6 +46,7 @@ import (
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap/nox/blobdata"
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
 func InitBlobData() {
@@ -148,7 +149,8 @@ func InitBlobData() {
 	})
 	initMusic()
 	initDialog()
-	initAudio()
-	initStruct264()
-	initStruct312()
+	externs := &audio.AudioExterns{}
+	initAudio(externs)
+	initStruct264(externs)
+	initStruct312(externs)
 }

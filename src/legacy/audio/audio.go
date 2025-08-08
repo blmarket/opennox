@@ -6,8 +6,12 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
+type AudioExterns struct {
+}
+
 type AudioModule struct {
 	moduleName string
+	externs    *AudioExterns
 
 	nox_platform_get_ticks func() uint64
 	sub_452770_ptr         unsafe.Pointer
@@ -55,6 +59,7 @@ type AudioModule struct {
 }
 
 func NewAudioModule(
+	externs *AudioExterns,
 	moduleName string,
 	nox_platform_get_ticks func() uint64,
 	sub_452770_ptr unsafe.Pointer,
@@ -98,6 +103,7 @@ func NewAudioModule(
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
+		externs:                             externs,
 		nox_platform_get_ticks:              nox_platform_get_ticks,
 		sub_452770_ptr:                      sub_452770_ptr,
 		sub_4526F0_ptr:                      sub_4526F0_ptr,

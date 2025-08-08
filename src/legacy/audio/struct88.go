@@ -21,6 +21,7 @@ type Struct587000_155144 struct {
 
 type Struct88Module struct {
 	moduleName string
+	externs    *AudioExterns
 
 	// External variables
 	dword_587000_155144 **Struct587000_155144
@@ -35,6 +36,7 @@ type Struct88Module struct {
 }
 
 func NewStruct88Module(
+	externs *AudioExterns,
 	moduleName string,
 	dword_587000_155144 **Struct587000_155144,
 	sub_487680 func(*Struct264),
@@ -46,6 +48,7 @@ func NewStruct88Module(
 ) *Struct88Module {
 	return &Struct88Module{
 		moduleName:                          moduleName,
+		externs:                             externs,
 		dword_587000_155144:                 dword_587000_155144,
 		sub_487680:                          sub_487680,
 		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,

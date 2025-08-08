@@ -46,6 +46,7 @@ var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]
 
 type Struct264Module struct {
 	moduleName string
+	externs    *AudioExterns
 
 	// External variables
 	sub_4873C0_ptr       unsafe.Pointer
@@ -73,6 +74,7 @@ type Struct264Module struct {
 }
 
 func NewStruct264Module(
+	externs *AudioExterns,
 	moduleName string,
 	sub_4873C0_ptr unsafe.Pointer,
 	dword_5d4594_1045428 **Struct264,
@@ -97,6 +99,7 @@ func NewStruct264Module(
 ) *Struct264Module {
 	return &Struct264Module{
 		moduleName:                          moduleName,
+		externs:                             externs,
 		sub_4873C0_ptr:                      sub_4873C0_ptr,
 		dword_5d4594_1045428:                dword_5d4594_1045428,
 		dword_587000_127004:                 dword_587000_127004,

@@ -51,10 +51,11 @@ import (
 )
 
 var (
-	AudioModule *audio.AudioModule
+	AudioModule  *audio.AudioModule
+	AudioExterns *audio.AudioExterns
 )
 
-func initAudio() {
+func initAudio(externs *audio.AudioExterns) {
 	var (
 		dword_587000_126996  *uint32           = (*uint32)(&C.dword_587000_126996)
 		dword_5d4594_1045420 *uint32           = (*uint32)(&C.dword_5d4594_1045420)
@@ -65,6 +66,7 @@ func initAudio() {
 		dword_587000_127004  unsafe.Pointer    = unsafe.Pointer(&C.dword_587000_127004)
 	)
 	AudioModule = audio.NewAudioModule(
+		externs,
 		"audio",
 		PlatformTicks,
 		unsafe.Pointer(C.sub_452770),
@@ -119,8 +121,8 @@ func initAudio() {
 		sub_4BD3C0,
 	)
 
-	initStruct88()
-	initPhase6()
+	initStruct88(externs)
+	initPhase6(externs)
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {

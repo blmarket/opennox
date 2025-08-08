@@ -22,8 +22,9 @@ var (
 	Phase6Module *audio.Phase6Module
 )
 
-func initPhase6() {
+func initPhase6(externs *audio.AudioExterns) {
 	Phase6Module = audio.NewPhase6Module(
+		externs,
 		"phase6",
 		PlatformTicks,
 		sub_486620,

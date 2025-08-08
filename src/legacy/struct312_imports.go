@@ -22,8 +22,9 @@ var (
 	Struct312Module *audio.Struct312Module
 )
 
-func initStruct312() {
+func initStruct312(externs *audio.AudioExterns) {
 	Struct312Module = audio.NewStruct312Module(
+		externs,
 		"struct312",
 		sub_4864A0,
 		nox_common_list_getNext_425940,
