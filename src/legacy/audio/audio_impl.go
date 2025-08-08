@@ -896,7 +896,7 @@ func (m *AudioModule) Sub_4519C0() {
 		return
 	}
 	*memmap.PtrUint32(0x5D4594, 1045448) = 1
-	m.sub_486520(unsafe.Pointer(*(**uint32)(unsafe.Pointer(m.dword_587000_127004))))
+	(*m.ptr_TimerGroup_587000_127004).Update()
 	v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
 	*memmap.PtrUint32(0x5D4594, 1045440)++
 	if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.listHead_5d4594_840612))) != unsafe.Pointer(m.listHead_5d4594_840612) {

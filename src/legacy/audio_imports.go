@@ -51,19 +51,22 @@ import (
 )
 
 var (
-	AudioModule  *audio.AudioModule
-	AudioExterns *audio.AudioExterns
+	AudioModule *audio.AudioModule
 )
+
+func initExterns() *audio.AudioExterns {
+	return &audio.AudioExterns{}
+}
 
 func initAudio(externs *audio.AudioExterns) {
 	var (
-		dword_587000_126996  *uint32           = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045420 *uint32           = (*uint32)(&C.dword_5d4594_1045420)
-		dword_5d4594_1045424 *uint32           = (*uint32)(&C.dword_5d4594_1045424)
-		dword_5d4594_1045428 **audio.Struct264 = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
-		dword_5d4594_1045432 *uint32           = (*uint32)(&C.dword_5d4594_1045432)
-		dword_5d4594_1045436 *uint32           = (*uint32)(&C.dword_5d4594_1045436)
-		dword_587000_127004  unsafe.Pointer    = unsafe.Pointer(&C.dword_587000_127004)
+		dword_587000_126996  *uint32            = (*uint32)(&C.dword_587000_126996)
+		dword_5d4594_1045420 *uint32            = (*uint32)(&C.dword_5d4594_1045420)
+		dword_5d4594_1045424 *uint32            = (*uint32)(&C.dword_5d4594_1045424)
+		dword_5d4594_1045428 **audio.Struct264  = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
+		dword_5d4594_1045432 *uint32            = (*uint32)(&C.dword_5d4594_1045432)
+		dword_5d4594_1045436 *uint32            = (*uint32)(&C.dword_5d4594_1045436)
+		dword_587000_127004  **timer.TimerGroup = (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004))
 	)
 	AudioModule = audio.NewAudioModule(
 		externs,

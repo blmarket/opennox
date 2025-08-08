@@ -19,16 +19,16 @@ type AudioModule struct {
 	sub_4526D0_ptr         unsafe.Pointer
 
 	// External variables
-	dword_587000_126996       *uint32
-	dword_5d4594_1045420      *uint32
-	dword_5d4594_1045424      *uint32
-	dword_5d4594_1045428      **Struct264
-	dword_5d4594_1045432      *uint32
-	dword_5d4594_1045436      *uint32
-	dword_587000_127004       unsafe.Pointer
-	timerGroup_5d4594_1045228 *timer.TimerGroup
-	listHeads_5d4594_839892   *[6][10]ListHead[Struct200Field28, *Struct200Field28]
-	listHead_5d4594_840612    *ListHead[Struct576, *Struct576]
+	dword_587000_126996          *uint32
+	dword_5d4594_1045420         *uint32
+	dword_5d4594_1045424         *uint32
+	dword_5d4594_1045428         **Struct264
+	dword_5d4594_1045432         *uint32
+	dword_5d4594_1045436         *uint32
+	ptr_TimerGroup_587000_127004 **timer.TimerGroup
+	timerGroup_5d4594_1045228    *timer.TimerGroup
+	listHeads_5d4594_839892      *[6][10]ListHead[Struct200Field28, *Struct200Field28]
+	listHead_5d4594_840612       *ListHead[Struct576, *Struct576]
 
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
@@ -71,7 +71,7 @@ func NewAudioModule(
 	dword_5d4594_1045428 **Struct264,
 	dword_5d4594_1045432 *uint32,
 	dword_5d4594_1045436 *uint32,
-	dword_587000_127004 unsafe.Pointer,
+	dword_587000_127004 **timer.TimerGroup,
 	timerGroup_5d4594_1045228 *timer.TimerGroup,
 	listHeads_5d4594_839892 *[6][10]ListHead[Struct200Field28, *Struct200Field28],
 	listHead_5d4594_840612 *ListHead[Struct576, *Struct576],
@@ -114,7 +114,7 @@ func NewAudioModule(
 		dword_5d4594_1045428:                dword_5d4594_1045428,
 		dword_5d4594_1045432:                dword_5d4594_1045432,
 		dword_5d4594_1045436:                dword_5d4594_1045436,
-		dword_587000_127004:                 dword_587000_127004,
+		ptr_TimerGroup_587000_127004:        dword_587000_127004,
 		timerGroup_5d4594_1045228:           timerGroup_5d4594_1045228,
 		listHeads_5d4594_839892:             listHeads_5d4594_839892,
 		listHead_5d4594_840612:              listHead_5d4594_840612,
