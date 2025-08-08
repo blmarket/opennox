@@ -55,37 +55,44 @@ func (m *Struct88Module) Sub_4870A0() {
 		}
 	}
 }
+
 func (m *Struct88Module) Sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
 	result := m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(*(**int32)(unsafe.Pointer(&*m.dword_587000_155144)))))
 	*a1 = result
 	return result
 }
+
 func (m *Struct88Module) sub_487070(lpMem unsafe.Pointer) {
 	m.sub_487090((**uint32)(lpMem))
 	m.sub_487030((*Struct88)(lpMem))
 	*memmap.PtrUint32(0x5D4594, 1193332) = 0
 }
+
 func (m *Struct88Module) sub_487090(a1 **uint32) {
 	m.nox_common_list_remove_425920(unsafe.Pointer(a1))
 }
+
 func (m *Struct88Module) Sub_487100(a1 *unsafe.Pointer) unsafe.Pointer {
 	if *a1 != nil {
 		*a1 = (unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
 	}
 	return *a1
 }
+
 func (m *Struct88Module) sub_4875B0(a1 *int32) *int32 {
 	var result *int32
 	result = (*int32)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(&(*m.dword_587000_155144).field_3)))))
 	*a1 = int32(uintptr(unsafe.Pointer(result)))
 	return result
 }
+
 func (m *Struct88Module) sub_4875D0(a1 **int32) *int32 {
 	if *a1 != nil {
 		*a1 = (*int32)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
 	}
 	return *a1
 }
+
 func (m *Struct88Module) Sub_4875F0() int32 {
 	var (
 		v0     *int32

@@ -47,7 +47,7 @@ func processFile(filename, functionName, variableName string) error {
 	modified := false
 	inTargetFunction := false
 	braceCount := 0
-	
+
 	for i, line := range lines {
 		// Check if we're entering the target function
 		if !inTargetFunction && strings.Contains(line, "func") && strings.Contains(line, functionName) {
@@ -55,18 +55,18 @@ func processFile(filename, functionName, variableName string) error {
 			braceCount = 0
 			continue
 		}
-		
+
 		if inTargetFunction {
 			// Count braces to determine when the function ends
 			braceCount += strings.Count(line, "{") - strings.Count(line, "}")
-			
+
 			// Process the line for unsafe.Add calls
 			newLine := processLine(line, variableName)
 			if newLine != line {
 				lines[i] = newLine
 				modified = true
 			}
-			
+
 			// Check if we've reached the end of the function
 			if braceCount <= 0 && strings.Contains(line, "}") {
 				inTargetFunction = false
@@ -101,23 +101,23 @@ func processLine(line, variableName string) string {
 	// This regex captures the offset part
 	pattern := fmt.Sprintf(`unsafe\.Add\(unsafe\.Pointer\(%s\),\s*([^)]+)\)`, regexp.QuoteMeta(variableName))
 	re := regexp.MustCompile(pattern)
-	
+
 	return re.ReplaceAllStringFunc(line, func(match string) string {
 		// Extract the offset from the match
 		submatches := re.FindStringSubmatch(match)
 		if len(submatches) != 2 {
 			return match // Return original if we can't parse
 		}
-		
+
 		offsetStr := strings.TrimSpace(submatches[1])
 		offset := parseOffset(offsetStr)
 		if offset < 0 {
 			return match // Return original if we can't parse offset
 		}
-		
+
 		// Calculate field number (4 bytes per field for 32-bit)
 		fieldNum := offset / 4
-		
+
 		// Return the field access
 		return fmt.Sprintf("&%s.field_%d", variableName, fieldNum)
 	})
@@ -128,20 +128,20 @@ func parseOffset(offsetStr string) int {
 	if val, err := strconv.Atoi(offsetStr); err == nil {
 		return val
 	}
-	
+
 	// Handle multiplication like "4*26"
 	parts := strings.Split(offsetStr, "*")
 	if len(parts) == 2 {
 		left := strings.TrimSpace(parts[0])
 		right := strings.TrimSpace(parts[1])
-		
+
 		leftVal, err1 := strconv.Atoi(left)
 		rightVal, err2 := strconv.Atoi(right)
-		
+
 		if err1 == nil && err2 == nil {
 			return leftVal * rightVal
 		}
 	}
-	
+
 	return -1 // Cannot parse
 }

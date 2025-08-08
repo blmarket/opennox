@@ -21,6 +21,7 @@ func (m *Phase6Module) Sub_4BDA80(a1_ *Struct312) int32 {
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + 288))) = 0
 	return result
 }
+
 func (m *Phase6Module) sub_486E90(a1_ *Struct312) int32 {
 	var (
 		a1     int32 = int32(uintptr(unsafe.Pointer(a1_)))
@@ -39,6 +40,7 @@ func (m *Phase6Module) sub_486E90(a1_ *Struct312) int32 {
 	}
 	return result
 }
+
 func (m *Phase6Module) Sub_4BDA60(lpMem_ *Struct312) {
 	var lpMem unsafe.Pointer = unsafe.Pointer(lpMem_)
 	m.Sub_4BDA80((*Struct312)(unsafe.Pointer(uintptr(int32(uintptr(lpMem))))))
@@ -131,6 +133,7 @@ func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
 	}
 	return 0
 }
+
 func (m *Phase6Module) sub_4BD840(a3 int32) {
 	var (
 		v1     int32

@@ -81,6 +81,7 @@ func (m *Struct312Module) Sub_4BD8C0(a1 int32) int32 {
 	}
 	return 0
 }
+
 func (m *Struct312Module) Sub_4BD940(a1 int32) int32 {
 	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 128))) != 0 {
 		if *(*int32)(unsafe.Pointer(uintptr(a1 + 128))) != -1 {
@@ -99,6 +100,7 @@ func (m *Struct312Module) Sub_4BD940(a1 int32) int32 {
 	}
 	return 0
 }
+
 func (m *Struct312Module) Sub_4BD9B0(a2 *uint32) int32 {
 	var (
 		v1     int32
@@ -118,6 +120,7 @@ func (m *Struct312Module) Sub_4BD9B0(a2 *uint32) int32 {
 	}
 	return result
 }
+
 func (m *Struct312Module) sub_4BDC00(a1 int32) int32 {
 	var result int32
 	result = a1
@@ -125,6 +128,7 @@ func (m *Struct312Module) sub_4BDC00(a1 int32) int32 {
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) = 0
 	return result
 }
+
 func (m *Struct312Module) Sub_4BDB90(a1 *uint32, a2 *uint32) {
 	var (
 		v2 int32
@@ -151,6 +155,7 @@ func (m *Struct312Module) Sub_4BDB90(a1 *uint32, a2 *uint32) {
 		}
 	}
 }
+
 func (m *Struct312Module) sub_487C80(a1 int32) int32 {
 	return int32(uintptr(unsafe.Pointer(m.nox_common_list_getNext_425940((unsafe.Pointer(uintptr(a1 + 8)))))))
 }

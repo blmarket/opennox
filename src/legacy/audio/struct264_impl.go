@@ -97,11 +97,13 @@ func (m *Struct264Module) Sub_431270() {
 		*m.dword_5d4594_805984 = nil
 	}
 }
+
 func (m *Struct264Module) Sub_487680(lpMem_ *Struct264) {
 	var lpMem unsafe.Pointer = unsafe.Pointer(lpMem_)
 	m.sub_4876A0((*Struct264)(unsafe.Pointer((**uint32)(lpMem))))
 	m.sub_4872C0((*Struct264)(lpMem))
 }
+
 func (m *Struct264Module) Sub_431290() {
 	if *m.dword_5d4594_805984 != nil {
 		m.sub_487970((*Struct264)(*m.dword_5d4594_805984), -1)
@@ -144,6 +146,7 @@ func (m *Struct264Module) sub_487590(a1_ *Struct264, a2 *[7]uint32) int32 {
 	alloc.Memcpy(unsafe.Pointer(&a1_.field_15), unsafe.Pointer(a2), 0x1C)
 	return result
 }
+
 func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
 	var (
 		// lpMem unsafe.Pointer = unsafe.Pointer(a1p)
@@ -161,6 +164,7 @@ func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
 	}
 	alloc.Free(a1p)
 }
+
 func (m *Struct264Module) sub_4876A0(a1_ *Struct264) unsafe.Pointer {
 	var (
 		a1     **uint32 = (**uint32)(unsafe.Pointer(a1_))
