@@ -7,6 +7,13 @@ import (
 )
 
 type AudioExterns struct {
+	Dword_587000_126996          *uint32
+	Dword_5d4594_1045420         *uint32
+	Dword_5d4594_1045424         *uint32
+	Dword_5d4594_1045428         **Struct264
+	Dword_5d4594_1045432         *uint32
+	Dword_5d4594_1045436         *uint32
+	Ptr_TimerGroup_587000_127004 **timer.TimerGroup
 }
 
 type AudioModule struct {
@@ -19,7 +26,6 @@ type AudioModule struct {
 	sub_4526D0_ptr         unsafe.Pointer
 
 	// External variables
-	dword_587000_126996          *uint32
 	dword_5d4594_1045420         *uint32
 	dword_5d4594_1045424         *uint32
 	dword_5d4594_1045428         **Struct264
@@ -108,7 +114,6 @@ func NewAudioModule(
 		sub_452770_ptr:                      sub_452770_ptr,
 		sub_4526F0_ptr:                      sub_4526F0_ptr,
 		sub_4526D0_ptr:                      sub_4526D0_ptr,
-		dword_587000_126996:                 dword_587000_126996,
 		dword_5d4594_1045420:                dword_5d4594_1045420,
 		dword_5d4594_1045424:                dword_5d4594_1045424,
 		dword_5d4594_1045428:                dword_5d4594_1045428,
