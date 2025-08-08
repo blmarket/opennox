@@ -10,6 +10,11 @@ extern uint32_t dword_5d4594_1045428;
 extern uint32_t dword_5d4594_1045432;
 extern uint32_t dword_5d4594_1045436;
 extern void* dword_587000_127004;
+extern void* dword_587000_155144;
+int sub_4873C0(int a1);
+void* sub_4BD8C0(void* a1);
+void* sub_4BD940(void* a1);
+void* sub_4BD9B0(void* a1);
 void* sub_425770(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 int sub_4BDB30(int a1);
@@ -51,35 +56,40 @@ import (
 )
 
 var (
-	AudioModule *audio.AudioModule
+	AudioModule      *audio.AudioModule
+	AudioExternalVars *audio.AudioExternalVars
 )
 
 func initAudio() {
-	var (
-		dword_587000_126996  *uint32           = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045420 *uint32           = (*uint32)(&C.dword_5d4594_1045420)
-		dword_5d4594_1045424 *uint32           = (*uint32)(&C.dword_5d4594_1045424)
-		dword_5d4594_1045428 **audio.Struct264 = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
-		dword_5d4594_1045432 *uint32           = (*uint32)(&C.dword_5d4594_1045432)
-		dword_5d4594_1045436 *uint32           = (*uint32)(&C.dword_5d4594_1045436)
-		dword_587000_127004  unsafe.Pointer    = unsafe.Pointer(&C.dword_587000_127004)
-	)
-	AudioModule = audio.NewAudioModule(
-		"audio",
+	// Create shared external variables first
+	AudioExternalVars = audio.NewAudioExternalVars(
+		(*uint32)(&C.dword_587000_126996),
+		(*uint32)(&C.dword_5d4594_1045420),
+		(*uint32)(&C.dword_5d4594_1045424),
+		(**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428)),
+		(*uint32)(&C.dword_5d4594_1045432),
+		(*uint32)(&C.dword_5d4594_1045436),
+		unsafe.Pointer(&C.dword_587000_127004),
+		memmap.PtrT[unsafe.Pointer](0x587000, 155144),
+		memmap.PtrT[unsafe.Pointer](0x5D4594, 805984),
+		(**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
+		memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
+		memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
+		memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
+		unsafe.Pointer(C.sub_4873C0),
+		unsafe.Pointer(C.sub_4BD8C0),
+		unsafe.Pointer(C.sub_4BD940),
+		unsafe.Pointer(C.sub_4BD9B0),
+		memmap.PtrUint32(0x5D4594, 1193340),
 		PlatformTicks,
 		unsafe.Pointer(C.sub_452770),
 		unsafe.Pointer(C.sub_4526F0),
 		unsafe.Pointer(C.sub_4526D0),
-		dword_587000_126996,
-		dword_5d4594_1045420,
-		dword_5d4594_1045424,
-		dword_5d4594_1045428,
-		dword_5d4594_1045432,
-		dword_5d4594_1045436,
-		dword_587000_127004,
-		memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
-		memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
-		memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
+	)
+
+	AudioModule = audio.NewAudioModule(
+		"audio",
+		AudioExternalVars,
 		sub_425770,
 		nox_common_list_append_4258E0,
 		sub_4BDB30,

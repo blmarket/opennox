@@ -25,7 +25,7 @@ var (
 func initPhase6() {
 	Phase6Module = audio.NewPhase6Module(
 		"phase6",
-		PlatformTicks,
+		AudioExternalVars,
 		sub_486620,
 		sub_486550,
 		sub_486570,

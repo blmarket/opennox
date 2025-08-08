@@ -45,14 +45,8 @@ type Struct264 struct {
 var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]
 
 type Struct264Module struct {
-	moduleName string
-
-	// External variables
-	sub_4873C0_ptr       unsafe.Pointer
-	dword_5d4594_1045428 **Struct264
-	dword_587000_127004  *unsafe.Pointer
-	dword_587000_155144  *unsafe.Pointer
-	dword_5d4594_805984  *unsafe.Pointer
+	moduleName   string
+	externalVars *AudioExternalVars
 
 	// External functions
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
@@ -74,11 +68,7 @@ type Struct264Module struct {
 
 func NewStruct264Module(
 	moduleName string,
-	sub_4873C0_ptr unsafe.Pointer,
-	dword_5d4594_1045428 **Struct264,
-	dword_587000_127004 *unsafe.Pointer,
-	dword_587000_155144 *unsafe.Pointer,
-	dword_5d4594_805984 *unsafe.Pointer,
+	externalVars *AudioExternalVars,
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer,
 	sub_487100 func(*unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_remove_425920 func(unsafe.Pointer),
@@ -97,11 +87,7 @@ func NewStruct264Module(
 ) *Struct264Module {
 	return &Struct264Module{
 		moduleName:                          moduleName,
-		sub_4873C0_ptr:                      sub_4873C0_ptr,
-		dword_5d4594_1045428:                dword_5d4594_1045428,
-		dword_587000_127004:                 dword_587000_127004,
-		dword_587000_155144:                 dword_587000_155144,
-		dword_5d4594_805984:                 dword_5d4594_805984,
+		externalVars:                        externalVars,
 		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
 		sub_487100:                          sub_487100,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,

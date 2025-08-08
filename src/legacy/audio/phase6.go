@@ -5,12 +5,10 @@ import (
 )
 
 type Phase6Module struct {
-	moduleName string
-
-	// External variables
+	moduleName   string
+	externalVars *AudioExternalVars
 
 	// External functions
-	nox_platform_get_ticks        func() uint64
 	sub_486620                    func(unsafe.Pointer)
 	sub_486550                    func(unsafe.Pointer) int
 	sub_486570                    func(unsafe.Pointer, unsafe.Pointer)
@@ -22,7 +20,7 @@ type Phase6Module struct {
 
 func NewPhase6Module(
 	moduleName string,
-	nox_platform_get_ticks func() uint64,
+	externalVars *AudioExternalVars,
 	sub_486620 func(unsafe.Pointer),
 	sub_486550 func(unsafe.Pointer) int,
 	sub_486570 func(unsafe.Pointer, unsafe.Pointer),
@@ -33,7 +31,7 @@ func NewPhase6Module(
 ) *Phase6Module {
 	return &Phase6Module{
 		moduleName:                    moduleName,
-		nox_platform_get_ticks:        nox_platform_get_ticks,
+		externalVars:                  externalVars,
 		sub_486620:                    sub_486620,
 		sub_486550:                    sub_486550,
 		sub_486570:                    sub_486570,

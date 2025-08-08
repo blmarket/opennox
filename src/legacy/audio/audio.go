@@ -2,29 +2,11 @@ package audio
 
 import (
 	"unsafe"
-
-	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 type AudioModule struct {
 	moduleName string
-
-	nox_platform_get_ticks func() uint64
-	sub_452770_ptr         unsafe.Pointer
-	sub_4526F0_ptr         unsafe.Pointer
-	sub_4526D0_ptr         unsafe.Pointer
-
-	// External variables
-	dword_587000_126996       *uint32
-	dword_5d4594_1045420      *uint32
-	dword_5d4594_1045424      *uint32
-	dword_5d4594_1045428      **Struct264
-	dword_5d4594_1045432      *uint32
-	dword_5d4594_1045436      *uint32
-	dword_587000_127004       unsafe.Pointer
-	timerGroup_5d4594_1045228 *timer.TimerGroup
-	listHeads_5d4594_839892   *[6][10]ListHead[Struct200Field28, *Struct200Field28]
-	listHead_5d4594_840612    *ListHead[Struct576, *Struct576]
+	externalVars *AudioExternalVars
 
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
@@ -56,20 +38,7 @@ type AudioModule struct {
 
 func NewAudioModule(
 	moduleName string,
-	nox_platform_get_ticks func() uint64,
-	sub_452770_ptr unsafe.Pointer,
-	sub_4526F0_ptr unsafe.Pointer,
-	sub_4526D0_ptr unsafe.Pointer,
-	dword_587000_126996 *uint32,
-	dword_5d4594_1045420 *uint32,
-	dword_5d4594_1045424 *uint32,
-	dword_5d4594_1045428 **Struct264,
-	dword_5d4594_1045432 *uint32,
-	dword_5d4594_1045436 *uint32,
-	dword_587000_127004 unsafe.Pointer,
-	timerGroup_5d4594_1045228 *timer.TimerGroup,
-	listHeads_5d4594_839892 *[6][10]ListHead[Struct200Field28, *Struct200Field28],
-	listHead_5d4594_840612 *ListHead[Struct576, *Struct576],
+	externalVars *AudioExternalVars,
 	sub_425770 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 	sub_4BDB30 func(int) int,
@@ -98,20 +67,7 @@ func NewAudioModule(
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
-		nox_platform_get_ticks:              nox_platform_get_ticks,
-		sub_452770_ptr:                      sub_452770_ptr,
-		sub_4526F0_ptr:                      sub_4526F0_ptr,
-		sub_4526D0_ptr:                      sub_4526D0_ptr,
-		dword_587000_126996:                 dword_587000_126996,
-		dword_5d4594_1045420:                dword_5d4594_1045420,
-		dword_5d4594_1045424:                dword_5d4594_1045424,
-		dword_5d4594_1045428:                dword_5d4594_1045428,
-		dword_5d4594_1045432:                dword_5d4594_1045432,
-		dword_5d4594_1045436:                dword_5d4594_1045436,
-		dword_587000_127004:                 dword_587000_127004,
-		timerGroup_5d4594_1045228:           timerGroup_5d4594_1045228,
-		listHeads_5d4594_839892:             listHeads_5d4594_839892,
-		listHead_5d4594_840612:              listHead_5d4594_840612,
+		externalVars:                        externalVars,
 		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BDB30:                          sub_4BDB30,

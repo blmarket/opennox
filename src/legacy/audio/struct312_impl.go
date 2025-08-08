@@ -33,9 +33,9 @@ func (m *Struct312Module) Sub_4BD7A0(lpMem *Struct312) {
 }
 
 func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
-	a1p.field_69 = m.sub_4BD8C0_ptr
-	a1p.field_70 = m.sub_4BD940_ptr
-	a1p.field_71 = m.sub_4BD9B0_ptr
+	a1p.field_69 = m.externalVars.Sub_4BD8C0_ptr
+	a1p.field_70 = m.externalVars.Sub_4BD940_ptr
+	a1p.field_71 = m.externalVars.Sub_4BD9B0_ptr
 	a1p.field_34 = 0
 	a1p.field_35 = 0
 	a1p.field_36 = 0
@@ -43,7 +43,7 @@ func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
 	a1p.field_3 = 1
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&a1p.field_30))))
 	a1p.field_30 = 0
-	a1p.field_29 = *m.ptr_uint32_5d4594_1193340
+	a1p.field_29 = *m.externalVars.Ptr_uint32_5d4594_1193340
 	a1p.field_28 = 0
 	a1p.timerGroup_4.Init()
 	a1p.field_72 = 0

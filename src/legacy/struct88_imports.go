@@ -23,12 +23,9 @@ var (
 )
 
 func initStruct88() {
-	var (
-		dword_587000_155144 **audio.Struct587000_155144 = (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144))
-	)
 	Struct88Module = audio.NewStruct88Module(
 		"struct88",
-		dword_587000_155144,
+		AudioExternalVars,
 		Struct264Module.Sub_487680,
 		nox_common_list_getNextSafe_4258A0,
 		nox_common_list_remove_425920,

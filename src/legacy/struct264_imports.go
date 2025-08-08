@@ -35,20 +35,9 @@ var (
 )
 
 func initStruct264() {
-	var (
-		sub_4873C0_ptr                         = unsafe.Pointer(C.sub_4873C0)
-		dword_5d4594_1045428 **audio.Struct264 = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
-		dword_587000_127004  *unsafe.Pointer   = (&C.dword_587000_127004)
-		dword_587000_155144  *unsafe.Pointer   = (&C.dword_587000_155144)
-		dword_5d4594_805984  *unsafe.Pointer   = (&C.dword_5d4594_805984)
-	)
 	Struct264Module = audio.NewStruct264Module(
 		"struct264",
-		sub_4873C0_ptr,
-		dword_5d4594_1045428,
-		dword_587000_127004,
-		dword_587000_155144,
-		dword_5d4594_805984,
+		AudioExternalVars,
 		nox_common_list_getFirstSafe_425890,
 		func(a1 *unsafe.Pointer) unsafe.Pointer {
 			return Struct88Module.Sub_487100(a1)

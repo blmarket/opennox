@@ -71,7 +71,7 @@ func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
 	if *(*uint32)(unsafe.Pointer(uintptr(a3 + 212))) != 0 {
 		return -2146304000
 	}
-	v3 = int64(m.nox_platform_get_ticks())
+	v3 = int64(m.externalVars.Nox_platform_get_ticks())
 	v4 = *(*uint32)(unsafe.Pointer(uintptr(a3 + 248)))
 	v5 = int32(v3)
 	v6 = uint32(int32(v3)) < v4
