@@ -110,7 +110,7 @@ var (
 )
 
 func Sub_4519C0() {
-	C.sub_4519C0()
+	AudioModule.Sub_4519C0()
 }
 
 func Sub_495430() {
