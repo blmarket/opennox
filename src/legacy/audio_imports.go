@@ -100,6 +100,7 @@ func initExterns() *audio.AudioExterns {
 		ListHeads_5d4594_839892:    memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
 		ListHead_5d4594_840612:     memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
 		Struct200Arr_5d4594_840628: memmap.PtrT[[1023]audio.Struct200](0x5D4594, 840628),
+		Ptr_uint32_5d4594_1045444:  memmap.PtrUint32(0x5D4594, 1045444),
 
 		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
 		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),

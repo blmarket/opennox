@@ -146,11 +146,8 @@ func (m *AudioModule) sub_452010() int32 {
 			heads[v1][v2].Clear()
 		}
 	}
-	return int32(func() uint32 {
-		p_ := memmap.PtrUint32(0x5D4594, 1045444)
-		*p_++
-		return *p_
-	}())
+	(*m.externs.Ptr_uint32_5d4594_1045444)++
+	return int32(*m.externs.Ptr_uint32_5d4594_1045444)
 }
 
 func (m *AudioModule) sub_452190(a1_ *Struct200) {
@@ -770,7 +767,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	v2 = int32(v1.field_12 + a1p.field_75)
 	v3 = (a1p.timerGroup_46.Timers[0].Current >> 16) / 0x666
 	heads := m.externs.ListHeads_5d4594_839892
-	if v1.field_26 == *memmap.PtrUint32(0x5D4594, 1045444) {
+	if v1.field_26 == *m.externs.Ptr_uint32_5d4594_1045444 {
 		result := v1.field_27
 		if v2 <= result {
 			if v2 == result && v3 > v1.field_31 {
@@ -787,7 +784,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 			m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v6)))
 		}
 	} else {
-		v1.field_26 = *memmap.PtrUint32(0x5D4594, 1045444)
+		v1.field_26 = *m.externs.Ptr_uint32_5d4594_1045444
 		v1.field_27 = v2
 		v1.field_31 = v3
 		v8 := unsafe.Pointer(&v1.field_28)
@@ -894,7 +891,7 @@ func (m *AudioModule) Sub_4519C0() {
 	(*m.externs.Ptr_TimerGroup_587000_127004).Update()
 	v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
 	*memmap.PtrUint32(0x5D4594, 1045440)++
-	if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
+	if unsafe.Pointer(m.externs.ListHead_5d4594_840612.next) != unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
 		for {
 			v2 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 36))))
 			if *(*uint32)(unsafe.Pointer(uintptr(v2 + 100))) != *memmap.PtrUint32(0x5D4594, 1045440) {
