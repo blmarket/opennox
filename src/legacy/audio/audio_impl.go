@@ -488,7 +488,7 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *uint32 {
 	v1p.field_142 = 0
 	v1p.field_108 = 0
 	v1p.field_42 = 0
-	m.sub_4864A0(unsafe.Pointer(&v1p.timerGroup_46))
+	v1p.timerGroup_46.Init()
 	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(m.externs.ListHead_5d4594_840612)))))), (unsafe.Pointer(v1p)))
 	v1p.field_70 = func() uint32 {
 		p_ := memmap.PtrUint32(0x587000, 127000)
