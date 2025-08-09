@@ -225,7 +225,8 @@ func (m *AudioModule) Nox_xxx_draw_452270(a1 int32) *Struct200 {
 	return nil
 }
 
-func (m *AudioModule) Sub_4526F0(a1 int32) int32 {
+func (m *AudioModule) Sub_4526F0(a1p *Struct312) int32 {
+	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
 		v1 *uint32
 		v2 int32

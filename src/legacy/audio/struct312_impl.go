@@ -102,18 +102,16 @@ func (m *Struct312Module) Sub_4BD940(a1p *Struct312) int32 {
 	return 0
 }
 
-func (m *Struct312Module) Sub_4BD9B0(a2 *uint32) int32 {
+func (m *Struct312Module) Sub_4BD9B0(a2p *Struct312) int32 {
+	var a2 *uint32 = (*uint32)(unsafe.Pointer(a2p))
 	var (
-		v1     int32
 		result int32
 	)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*72)) = 0
-	v1 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*31)))
-	*((*uint8)(unsafe.Pointer(&v1))) = uint8(int8(v1 & 0xFA))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*31)) = uint32(v1)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*32)) = 0
-	m.sub_4864A0(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*4))))
-	v2 := *(*unsafe.Pointer)(unsafe.Add(unsafe.Pointer(a2), 4*36))
+	a2p.field_72 = 0
+	a2p.field_31 &= 0xFA
+	a2p.field_32 = 0
+	a2p.timerGroup_4.Init()
+	v2 := a2p.field_36
 	if v2 != nil {
 		result = int32(ccall.CallIntPtr(v2, unsafe.Pointer(a2)))
 	} else {

@@ -8,7 +8,7 @@ nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
 void* sub_425770(void* a1);
 int sub_4BD8C0(int a1);
 int sub_4BD940(struct312* a1);
-int sub_4BD9B0(uint32_t* a2);
+int sub_4BD9B0(struct312* a2);
 */
 import "C"
 
@@ -48,6 +48,6 @@ func sub_4BD940(a1 *C.struct312) int32 {
 }
 
 //export sub_4BD9B0
-func sub_4BD9B0(a2 *uint32) int32 {
-	return Struct312Module.Sub_4BD9B0(a2)
+func sub_4BD9B0(a2 *C.struct312) int32 {
+	return Struct312Module.Sub_4BD9B0((*audio.Struct312)(unsafe.Pointer(a2)))
 }

@@ -26,7 +26,7 @@ uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int* sub_452810(int a1, char a2);
 int sub_4BD8C0(int a1);
 int sub_4BD940(struct312* a1);
-int sub_4BD9B0(uint32_t* a2);
+int sub_4BD9B0(struct312* a2);
 void sub_4BD2D0(void* lpMem);
 int sub_4BDA80(struct312* a1);
 void nox_common_list_clear_425760(nox_list_item_t* list);
@@ -40,7 +40,7 @@ void sub_4BD3C0(void* lpMem);
 
 int sub_452770(struct312* a1);
 int sub_4526D0(int a1);
-int sub_4526F0(int a1);
+int sub_4526F0(struct312* a1);
 int sub_4873C0(int a3);
 extern uint32_t dword_5d4594_1045428;
 extern void* dword_587000_127004;
@@ -168,8 +168,8 @@ func sub_452770(a1 *C.struct312) C.int {
 }
 
 //export sub_4526F0
-func sub_4526F0(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_4526F0(int32(a1)))
+func sub_4526F0(a1 *C.struct312) C.int {
+	return C.int(AudioModule.Sub_4526F0((*audio.Struct312)(unsafe.Pointer(a1))))
 }
 
 //export sub_4526D0
