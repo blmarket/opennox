@@ -57,7 +57,6 @@ type Struct264Module struct {
 	sub_4BDA60                          func(unsafe.Pointer)
 	nox_common_list_clear_425760        func(unsafe.Pointer)
 	sub_4864A0                          func(unsafe.Pointer) unsafe.Pointer
-	sub_4873C0                          func(int) int
 	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
 	sub_4BDA80                          func(*Struct312) int32
 	sub_486320                          func(unsafe.Pointer, int) unsafe.Pointer
@@ -66,10 +65,7 @@ type Struct264Module struct {
 	sub_4BD720                          func(*Struct264) *Struct312
 }
 
-func NewStruct264Module(externs *AudioExterns, moduleName string, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_487100 func(*unsafe.Pointer) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), nullsub_10 func(uint32), sub_4BDA60, nox_common_list_clear_425760 func(unsafe.Pointer), sub_4864A0 func(unsafe.Pointer) unsafe.Pointer, sub_4873C0 func(int) int, nox_common_list_getNextSafe_4258A0 func(unsafe.Pointer) unsafe.Pointer,
-	sub_4BDA80 func(*Struct312) int32,
-	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, sub_425770 func(unsafe.Pointer) unsafe.Pointer, sub_4870E0 func(*unsafe.Pointer) unsafe.Pointer, sub_4BD720 func(*Struct264) *Struct312,
-) *Struct264Module {
+func NewStruct264Module(externs *AudioExterns, moduleName string, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_487100 func(*unsafe.Pointer) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), nullsub_10 func(uint32), sub_4BDA60, nox_common_list_clear_425760 func(unsafe.Pointer), sub_4864A0, nox_common_list_getNextSafe_4258A0 func(unsafe.Pointer) unsafe.Pointer, sub_4BDA80 func(*Struct312) int32, sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, sub_425770 func(unsafe.Pointer) unsafe.Pointer, sub_4870E0 func(*unsafe.Pointer) unsafe.Pointer, sub_4BD720 func(*Struct264) *Struct312) *Struct264Module {
 	return &Struct264Module{
 		moduleName:                          moduleName,
 		externs:                             externs,
@@ -81,7 +77,6 @@ func NewStruct264Module(externs *AudioExterns, moduleName string, nox_common_lis
 		sub_4BDA60:                          sub_4BDA60,
 		nox_common_list_clear_425760:        nox_common_list_clear_425760,
 		sub_4864A0:                          sub_4864A0,
-		sub_4873C0:                          sub_4873C0,
 		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
 		sub_4BDA80:                          sub_4BDA80,
 		sub_486320:                          sub_486320,

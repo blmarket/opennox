@@ -217,7 +217,7 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *Struct312 {
 			if *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*31))&0x15 != 0 && *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*30)) > a1 {
 				return nil
 			}
-			m.sub_4BDA80(int(uintptr(unsafe.Pointer(v3))))
+			m.sub_4BDA80(v3)
 			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*29)) = int32(uintptr(*m.externs.Dword_587000_127004))
 			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*30)) = a1
 			if int32(a2)&1 != 0 {

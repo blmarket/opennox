@@ -107,9 +107,6 @@ func initExterns() *audio.AudioExterns {
 
 func initAudio(externs *audio.AudioExterns) {
 	AudioModule = audio.NewAudioModule(externs, "audio", PlatformTicks, sub_425770, nox_common_list_append_4258E0,
-		func(a1 *audio.Struct312) {
-			Phase6Module.Sub_4BDB30(a1)
-		},
 		sub_4BD300,
 		func(a1 *audio.Struct312, a2 unsafe.Pointer) {
 			Struct312Module.Sub_4BDB90(a1, (*uint32)(a2))

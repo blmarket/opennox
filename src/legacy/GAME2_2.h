@@ -129,7 +129,6 @@ struct264* sub_4871C0(int a1, int a2, const void* a3);
 void sub_4872C0(struct264* lpMem_);
 int sub_487310(struct264* a1_);
 int* sub_487360(int a1, int** a2, int* a3);
-int sub_4873C0(int a3);
 int sub_487590(struct264* a1_, const void* a2);
 int* sub_4875B0(int* a1);
 int* sub_4875D0(int** a1);
