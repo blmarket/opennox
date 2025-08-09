@@ -134,7 +134,8 @@ func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
 	return 0
 }
 
-func (m *Phase6Module) sub_4BD840(a3 int32) {
+func (m *Phase6Module) sub_4BD840(a3p *Struct312) {
+	var a3 int32 = int32(uintptr(unsafe.Pointer(a3p)))
 	var (
 		v1     int32
 		v2     *uint32
@@ -166,19 +167,18 @@ func (m *Phase6Module) Sub_4BDB30(a1 *Struct312) {
 }
 
 func (m *Phase6Module) Sub_4BDB40(a2p *Struct312) int32 {
-	var a2 int32 = int32(uintptr(unsafe.Pointer(a2p)))
 	var result int32
-	if int32(*(*uint8)(unsafe.Pointer(uintptr(a2 + 124))))&5 != 0 {
+	if int32(*(*uint8)(unsafe.Pointer(&a2p.field_31)))&5 != 0 {
 		return -2146500608
 	}
-	if *(*uint32)(unsafe.Pointer(uintptr(a2 + 288))) == 0 {
+	if a2p.field_72 == 0 {
 		return -2147024896
 	}
-	m.sub_486520(unsafe.Pointer(uintptr(a2 + 16)))
-	m.sub_4BD840(a2)
-	result = int32(ccall.CallIntInt(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a2 + 172))) + 12))), int(a2)))
+	a2p.timerGroup_4.Update()
+	m.sub_4BD840(a2p)
+	result = int32(ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a2p.field_43)) + 12))), unsafe.Pointer(a2p)))
 	if result == 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(a2 + 124))) |= 1
+		a2p.field_31 |= 1
 	}
 	return result
 }
