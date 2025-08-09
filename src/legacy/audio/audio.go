@@ -18,6 +18,7 @@ type AudioExterns struct {
 	Sub_4873C0_ptr               unsafe.Pointer
 	Dword_587000_127004          *unsafe.Pointer
 	Dword_5d4594_805984          *unsafe.Pointer
+	Ptr_uint32_5d4594_1193340    *uint32
 }
 
 type AudioModule struct {

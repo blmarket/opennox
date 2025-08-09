@@ -43,7 +43,7 @@ func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
 	a1p.field_3 = 1
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&a1p.field_30))))
 	a1p.field_30 = 0
-	a1p.field_29 = *m.ptr_uint32_5d4594_1193340
+	a1p.field_29 = *m.externs.Ptr_uint32_5d4594_1193340
 	a1p.field_28 = 0
 	a1p.timerGroup_4.Init()
 	a1p.field_72 = 0
