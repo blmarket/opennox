@@ -40,6 +40,25 @@ void sub_4BD3C0(void* lpMem);
 int sub_452770(uint32_t* a1);
 int sub_4526D0(int a1);
 int sub_4526F0(int a1);
+int sub_4873C0(int a3);
+extern uint32_t dword_5d4594_1045428;
+extern void* dword_587000_127004;
+extern void* dword_587000_155144;
+extern void* dword_5d4594_805984;
+nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
+int* sub_487100(int** a1);
+void nox_common_list_remove_425920(void* a1);
+void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
+void nullsub_10(uint32_t a1);
+void sub_4BDA60(struct312* lpMem);
+void nox_common_list_clear_425760(nox_list_item_t* list);
+void* sub_4864A0(void* a3);
+int sub_4873C0(int a3);
+nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
+int sub_4BDA80(struct312* a1);
+void* sub_486320(void* a1, int a2);
+void* sub_425770(void* a1);
+int* sub_4870E0(int* a1);
 */
 import "C"
 
@@ -65,6 +84,9 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
+		Sub_4873C0_ptr:               unsafe.Pointer(C.sub_4873C0),
+		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
+		Dword_5d4594_805984:          (*unsafe.Pointer)(&C.dword_5d4594_805984),
 	}
 }
 

@@ -15,6 +15,9 @@ type AudioExterns struct {
 	Dword_5d4594_1045436         *uint32
 	Ptr_TimerGroup_587000_127004 **timer.TimerGroup
 	Dword_587000_155144          **Struct587000_155144
+	Sub_4873C0_ptr               unsafe.Pointer
+	Dword_587000_127004          *unsafe.Pointer
+	Dword_5d4594_805984          *unsafe.Pointer
 }
 
 type AudioModule struct {
