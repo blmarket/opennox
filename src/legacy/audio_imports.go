@@ -122,7 +122,6 @@ func initAudio(externs *audio.AudioExterns) {
 		func(a2 *audio.Struct312) int {
 			return int(Phase6Module.Sub_4BDB40(a2))
 		},
-		sub_486350,
 		sub_486520,
 		sub_4BD280,
 		nox_common_list_getFirstSafe_425890,

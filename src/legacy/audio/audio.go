@@ -42,7 +42,6 @@ type AudioModule struct {
 	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 	sub_4BD300                          func(unsafe.Pointer, int) int
 	sub_4BDB40                          func(*Struct312) int
-	sub_486350                          func(unsafe.Pointer, int) int
 	sub_486520                          func(unsafe.Pointer) int
 	sub_4BD280                          func(int, int) unsafe.Pointer
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
@@ -58,7 +57,6 @@ type AudioModule struct {
 	nox_common_list_remove_425920       func(unsafe.Pointer)
 	sub_4862E0                          func(unsafe.Pointer, int) int
 	nox_common_randomIntMinMax_415FF0   func(int, int, unsafe.Pointer, int) int
-	sub_4863B0                          func(unsafe.Pointer) int
 	sub_4BD3C0                          func(unsafe.Pointer)
 	nox_common_list_getNext_425940      func(unsafe.Pointer) unsafe.Pointer
 }
@@ -71,7 +69,6 @@ func NewAudioModule(
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 	sub_4BD300 func(unsafe.Pointer, int) int,
 	sub_4BDB40 func(*Struct312) int,
-	sub_486350 func(unsafe.Pointer, int) int,
 	sub_486520 func(unsafe.Pointer) int,
 	sub_4BD280 func(int, int) unsafe.Pointer,
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer,
@@ -99,7 +96,6 @@ func NewAudioModule(
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BD300:                          sub_4BD300,
 		sub_4BDB40:                          sub_4BDB40,
-		sub_486350:                          sub_486350,
 		sub_486520:                          sub_486520,
 		sub_4BD280:                          sub_4BD280,
 		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
@@ -115,7 +111,6 @@ func NewAudioModule(
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
 		sub_4862E0:                          sub_4862E0,
 		nox_common_randomIntMinMax_415FF0:   nox_common_randomIntMinMax_415FF0,
-		sub_4863B0:                          sub_4863B0,
 		sub_4BD3C0:                          sub_4BD3C0,
 		nox_common_list_getNext_425940:      nox_common_list_getNext_425940,
 	}

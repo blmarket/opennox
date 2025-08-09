@@ -518,7 +518,7 @@ func (m *AudioModule) Sub_452E90(a1 *uint32, a2_ *Struct576) int32 {
 func (m *AudioModule) Sub_452EE0(a1_ *Struct576, a2 int32) int32 {
 	var v2 int32 = int32(m.sub_452F10(a1_, a2))
 	m.sub_486320(unsafe.Pointer((*uint32)(unsafe.Pointer(&a1_.timerGroup_46))), int(v2))
-	return int32(m.sub_4863B0(unsafe.Pointer((*uint32)(unsafe.Pointer(&a1_.timerGroup_46)))))
+	return bool2int32(a1_.timerGroup_46.Timers[0].Update())
 }
 
 func (m *AudioModule) sub_452F10(a1_ *Struct576, a2 int32) uint32 {
@@ -536,9 +536,10 @@ func (m *AudioModule) sub_452F10(a1_ *Struct576, a2 int32) uint32 {
 	return (uint32(v2*163) * (*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1_.field_9)) + 20))) >> 16)) >> 14
 }
 
-func (m *AudioModule) Sub_452F50(a1_ *Struct576, a2 int32) int32 {
-	var v2 int32 = int32(m.sub_452F10(a1_, a2))
-	return int32(m.sub_486350(unsafe.Pointer(&a1_.timerGroup_46), int(v2)))
+func (m *AudioModule) Sub_452F50(a1p *Struct576, a2 int32) int32 {
+	var v2 int32 = int32(m.sub_452F10(a1p, a2))
+	a1p.timerGroup_46.Timers[0].SetInterp(uint32(v2))
+	return 0
 }
 
 func (m *AudioModule) Sub_452F80(a1_ *Struct576, a2 int32) *uint32 {
@@ -1004,9 +1005,10 @@ func (m *AudioModule) Sub_4526D0(a1 int32) int32 {
 	return 0
 }
 
-func (m *AudioModule) Sub_452FE0(a1_ *Struct576, a2 int32) int32 {
+func (m *AudioModule) Sub_452FE0(a1p *Struct576, a2 int32) int32 {
 	var v2 int32 = m.sub_452FA0(a2)
-	return int32(m.sub_486350(unsafe.Pointer(&a1_.timerGroup_46.Timers[0]), int(v2)))
+	a1p.timerGroup_46.Timers[0].SetInterp(uint32(v2))
+	return 0
 }
 
 func (m *AudioModule) sub_452FA0(a1 int32) int32 {
