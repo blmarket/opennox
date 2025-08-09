@@ -10,6 +10,7 @@ extern uint32_t dword_5d4594_1045428;
 extern uint32_t dword_5d4594_1045432;
 extern uint32_t dword_5d4594_1045436;
 extern void* dword_587000_127004;
+extern void* dword_587000_155144;
 void* sub_425770(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 int sub_4BDB30(int a1);
@@ -63,74 +64,24 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1045432:         (*uint32)(&C.dword_5d4594_1045432),
 		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
+		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
 	}
 }
 
 func initAudio(externs *audio.AudioExterns) {
-	var (
-		dword_587000_126996  *uint32            = (*uint32)(&C.dword_587000_126996)
-		dword_5d4594_1045420 *uint32            = (*uint32)(&C.dword_5d4594_1045420)
-		dword_5d4594_1045424 *uint32            = (*uint32)(&C.dword_5d4594_1045424)
-		dword_5d4594_1045428 **audio.Struct264  = (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428))
-		dword_5d4594_1045432 *uint32            = (*uint32)(&C.dword_5d4594_1045432)
-		dword_5d4594_1045436 *uint32            = (*uint32)(&C.dword_5d4594_1045436)
-		dword_587000_127004  **timer.TimerGroup = (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004))
-	)
-	AudioModule = audio.NewAudioModule(
-		externs,
-		"audio",
-		PlatformTicks,
-		unsafe.Pointer(C.sub_452770),
-		unsafe.Pointer(C.sub_4526F0),
-		unsafe.Pointer(C.sub_4526D0),
-		dword_587000_126996,
-		dword_5d4594_1045420,
-		dword_5d4594_1045424,
-		dword_5d4594_1045428,
-		dword_5d4594_1045432,
-		dword_5d4594_1045436,
-		dword_587000_127004,
-		memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
-		memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
-		memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
-		sub_425770,
-		nox_common_list_append_4258E0,
-		sub_4BDB30,
-		sub_4BD300,
-		func(a1 unsafe.Pointer, a2 unsafe.Pointer) {
-			Struct312Module.Sub_4BDB90((*uint32)(a1), (*uint32)(a2))
-		},
-		sub_4BDB40,
-		sub_4864A0,
-		sub_486350,
-		sub_486520,
-		sub_4BD280,
-		nox_common_list_getFirstSafe_425890,
-		sub_4BD340,
-		sub_4BD2E0,
-		sub_4BD470,
-		func(a1 int, a2 byte) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
-		},
-		sub_4BD2D0,
-		func(a1 int) int {
-			return int(sub_4BDA80((*C.struct312)(unsafe.Pointer(uintptr(a1)))))
-		},
-		nox_common_list_clear_425760,
-		sub_486320,
-		func(id int) unsafe.Pointer {
-			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
-		},
-		nox_common_list_remove_425920,
-		func(a1 unsafe.Pointer, a2 int) int {
-			return bool2int((*timer.Timer)(a1).Init(int32(a2)))
-		},
-		func(min, max int, file unsafe.Pointer, line int) int {
-			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
-		},
-		sub_4863B0,
-		sub_4BD3C0,
-	)
+	AudioModule = audio.NewAudioModule(externs, "audio", PlatformTicks, unsafe.Pointer(C.sub_452770), unsafe.Pointer(C.sub_4526F0), unsafe.Pointer(C.sub_4526D0), memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228), memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892), memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612), sub_425770, nox_common_list_append_4258E0, sub_4BDB30, sub_4BD300, func(a1 unsafe.Pointer, a2 unsafe.Pointer) {
+		Struct312Module.Sub_4BDB90((*uint32)(a1), (*uint32)(a2))
+	}, sub_4BDB40, sub_4864A0, sub_486350, sub_486520, sub_4BD280, nox_common_list_getFirstSafe_425890, sub_4BD340, sub_4BD2E0, sub_4BD470, func(a1 int, a2 byte) unsafe.Pointer {
+		return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
+	}, sub_4BD2D0, func(a1 int) int {
+		return int(sub_4BDA80((*C.struct312)(unsafe.Pointer(uintptr(a1)))))
+	}, nox_common_list_clear_425760, sub_486320, func(id int) unsafe.Pointer {
+		return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
+	}, nox_common_list_remove_425920, func(a1 unsafe.Pointer, a2 int) int {
+		return bool2int((*timer.Timer)(a1).Init(int32(a2)))
+	}, func(min, max int, file unsafe.Pointer, line int) int {
+		return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
+	}, sub_4863B0, sub_4BD3C0)
 
 	initStruct88(externs)
 	initPhase6(externs)

@@ -23,9 +23,6 @@ type Struct88Module struct {
 	moduleName string
 	externs    *AudioExterns
 
-	// External variables
-	dword_587000_155144 **Struct587000_155144
-
 	// External functions
 	sub_487680                          func(*Struct264)
 	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
@@ -35,21 +32,10 @@ type Struct88Module struct {
 	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 }
 
-func NewStruct88Module(
-	externs *AudioExterns,
-	moduleName string,
-	dword_587000_155144 **Struct587000_155144,
-	sub_487680 func(*Struct264),
-	nox_common_list_getNextSafe_4258A0 func(unsafe.Pointer) unsafe.Pointer,
-	nox_common_list_remove_425920 func(unsafe.Pointer),
-	sub_425770 func(*ListItem) unsafe.Pointer,
-	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer,
-	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
-) *Struct88Module {
+func NewStruct88Module(externs *AudioExterns, moduleName string, sub_487680 func(*Struct264), nox_common_list_getNextSafe_4258A0 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), sub_425770 func(*ListItem) unsafe.Pointer, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer)) *Struct88Module {
 	return &Struct88Module{
 		moduleName:                          moduleName,
 		externs:                             externs,
-		dword_587000_155144:                 dword_587000_155144,
 		sub_487680:                          sub_487680,
 		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
