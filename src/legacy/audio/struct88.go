@@ -2,6 +2,8 @@ package audio
 
 import (
 	"unsafe"
+
+	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 type Struct88 struct {
@@ -14,9 +16,11 @@ type Struct88 struct {
 var _ = [1]struct{}{}[88-unsafe.Sizeof(Struct88{})]
 
 type Struct587000_155144 struct {
-	field_0 ListItem
-	field_3 ListItem
-	field_6 uint32
+	field_0      ListItem
+	field_3      ListItem
+	field_6      uint32
+	field_7      uint32 // unknown
+	timerGroup_8 timer.TimerGroup
 }
 
 type Struct88Module struct {

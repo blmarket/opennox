@@ -11,7 +11,7 @@ type Struct312 struct {
 	field_3       int32
 	timerGroup_4  timer.TimerGroup
 	field_28      *timer.TimerGroup
-	field_29      uint32
+	field_29      *timer.TimerGroup
 	field_30      uint32
 	field_31      uint32
 	field_32      uint32

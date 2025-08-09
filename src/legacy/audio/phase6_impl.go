@@ -114,7 +114,7 @@ func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
 						m.sub_486520(unsafe.Pointer(uintptr(v12 + 16)))
 						return v17
 					}()) != 0 || m.sub_486550(unsafe.Pointer(uintptr(v12+16))) != 0 || *(*uint32)(unsafe.Pointer(uintptr(v12 + 116))) != 0 && m.sub_486550(unsafe.Pointer(*(**uint8)(unsafe.Pointer(uintptr(v12 + 116))))) != 0 || *(*uint32)(unsafe.Pointer(uintptr(v12 + 112))) != 0 && m.sub_486550(unsafe.Pointer(*(**uint8)(unsafe.Pointer(uintptr(v12 + 112))))) != 0 {
-						m.sub_4BD840(v12)
+						m.sub_4BD840((*Struct312)(unsafe.Pointer(uintptr(v12))))
 						ccall.CallVoidInt(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(v12 + 172))) + 32))), int(v12))
 					}
 				}
@@ -135,30 +135,21 @@ func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
 }
 
 func (m *Phase6Module) sub_4BD840(a3p *Struct312) {
-	var a3 int32 = int32(uintptr(unsafe.Pointer(a3p)))
-	var (
-		v1     int32
-		v2     *uint32
-		v3     *uint32
-		result int32
-	)
-	v1 = int32(*(*uint32)(unsafe.Pointer(uintptr(a3 + 132))))
-	v2 = (*uint32)(unsafe.Pointer(uintptr(a3 + 176)))
-	m.sub_4864A0(unsafe.Pointer(uintptr(a3 + 176)))
-	m.sub_486570(unsafe.Pointer(uintptr(a3+176)), unsafe.Pointer(uintptr(a3+16)))
-	m.sub_486620(unsafe.Pointer(uintptr(a3 + 16)))
-	if *(*uint32)(unsafe.Pointer(uintptr(a3 + 112))) != 0 {
-		m.sub_486570(unsafe.Pointer(v2), unsafe.Pointer(*(**uint32)(unsafe.Pointer(uintptr(a3 + 112)))))
-		m.sub_486620(unsafe.Pointer(*(**uint32)(unsafe.Pointer(uintptr(a3 + 112)))))
+	var v1p *Struct264 = a3p.field_33
+
+	a3p.timerGroup_44.Init()
+	a3p.timerGroup_44.Mix(&a3p.timerGroup_4)
+	a3p.timerGroup_4.ClearUpdated()
+	if a3p.field_28 != nil {
+		a3p.timerGroup_44.Mix(a3p.field_28)
+		a3p.field_28.ClearUpdated()
 	}
-	v3 = *(**uint32)(unsafe.Pointer(uintptr(a3 + 116)))
-	if v3 != nil {
-		m.sub_486570(unsafe.Pointer(v2), unsafe.Pointer(v3))
+	if a3p.field_29 != nil {
+		a3p.timerGroup_44.Mix(a3p.field_29)
 	}
-	m.sub_486570(unsafe.Pointer(v2), unsafe.Pointer(uintptr(v1+88)))
-	result = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 184))))
-	if result != 0 {
-		m.sub_486570(unsafe.Pointer(v2), unsafe.Pointer(*(**uint32)(unsafe.Pointer(uintptr(v1 + 184)))))
+	a3p.timerGroup_44.Mix(&v1p.TimerGroup_22)
+	if v1p.field_46 != nil {
+		a3p.timerGroup_44.Mix(v1p.field_46)
 	}
 }
 
