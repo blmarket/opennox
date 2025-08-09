@@ -28,6 +28,7 @@ type AudioExterns struct {
 	TimerGroup_5d4594_1045228    *timer.TimerGroup
 	ListHeads_5d4594_839892      *[6][10]ListHead[Struct200Field28, *Struct200Field28]
 	ListHead_5d4594_840612       *ListHead[Struct576, *Struct576]
+	Struct200Arr_5d4594_840628   *[1023]Struct200
 }
 
 type AudioModule struct {
