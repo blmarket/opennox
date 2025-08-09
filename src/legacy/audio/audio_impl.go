@@ -387,7 +387,7 @@ func (m *AudioModule) sub_452410(a1p *Struct576) {
 		if int32(a1p.field_6)&2 != 0 {
 			m.sub_4BDA80(a1p.field_44)
 		}
-		m.sub_4BDB30(a1p.field_44)
+		m.Sub_4BDB30(a1p.field_44)
 		a1p.field_44.field_38 = nil
 		a1p.field_44.field_37 = nil
 		a1p.field_44.field_35 = nil
@@ -1090,4 +1090,8 @@ func (m *AudioModule) Sub_452E10(a1 int32, a2 int32, a3 int32) {
 	m.Sub_452F80((*Struct576)(unsafe.Pointer(v4)), a3)
 	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*75)) = 2
 	m.sub_452510((*Struct576)(unsafe.Pointer(v4)))
+}
+
+func (m *AudioModule) Sub_4BDB30(a1 *Struct312) {
+	a1.field_31 &= 0xFFFFFFEF
 }

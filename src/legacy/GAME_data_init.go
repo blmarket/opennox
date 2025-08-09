@@ -150,6 +150,4 @@ func InitBlobData() {
 	initDialog()
 	externs := initExterns()
 	initAudio(externs)
-	initStruct264(externs)
-	initStruct312(externs)
 }

@@ -126,7 +126,7 @@ func (m *Struct264Module) sub_487970(a1_ *Struct264, a2 int32) *Struct312 {
 			result = m.sub_4877F0(&a1x)
 			v5 := result
 			if v4 == -1 || *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*3)) == v4 {
-				result = (*Struct312)(unsafe.Pointer(uintptr(m.sub_4BDA80(int(uintptr(unsafe.Pointer(v3)))))))
+				result = (*Struct312)(unsafe.Pointer(uintptr(m.sub_4BDA80(v3))))
 			}
 			v3 = v5
 			if v5 == nil {

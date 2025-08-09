@@ -33,7 +33,6 @@ void sub_4BD840(int a3);
 int sub_4BD8C0(int a1);
 int sub_4BD9B0(uint32_t* a2);
 void sub_4BDA60(struct312* lpMem_);
-int sub_4BDA80(struct312* a1_);
 int sub_4BDB20(int a1);
 int sub_4BDC00(int a1);
 int nox_xxx_loadAdvancedWnd_4BDC10(int* a1);

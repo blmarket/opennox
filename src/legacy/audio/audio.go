@@ -40,7 +40,6 @@ type AudioModule struct {
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
-	sub_4BDB30                          func(*Struct312)
 	sub_4BD300                          func(unsafe.Pointer, int) int
 	sub_4BDB90                          func(*Struct312, unsafe.Pointer)
 	sub_4BDB40                          func(*Struct312) int
@@ -77,7 +76,6 @@ func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_t
 		nox_platform_get_ticks:              nox_platform_get_ticks,
 		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
-		sub_4BDB30:                          sub_4BDB30,
 		sub_4BD300:                          sub_4BD300,
 		sub_4BDB90:                          sub_4BDB90,
 		sub_4BDB40:                          sub_4BDB40,

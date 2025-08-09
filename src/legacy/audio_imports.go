@@ -86,20 +86,22 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
-		Sub_4873C0_ptr:               unsafe.Pointer(C.sub_4873C0),
-		Sub_4BD8C0_ptr:               unsafe.Pointer(C.sub_4BD8C0),
-		Sub_4BD940_ptr:               unsafe.Pointer(C.sub_4BD940),
-		Sub_4BD9B0_ptr:               unsafe.Pointer(C.sub_4BD9B0),
 		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
 		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
-		Ptr_uint32_5d4594_1193340:    memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
-		Sub_452770_ptr:               unsafe.Pointer(C.sub_452770),
-		Sub_4526F0_ptr:               unsafe.Pointer(C.sub_4526F0),
-		Sub_4526D0_ptr:               unsafe.Pointer(C.sub_4526D0),
-		TimerGroup_5d4594_1045228:    memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
-		ListHeads_5d4594_839892:      memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
-		ListHead_5d4594_840612:       memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
-		Struct200Arr_5d4594_840628:   memmap.PtrT[[1023]audio.Struct200](0x5D4594, 840628),
+
+		Ptr_uint32_5d4594_1193340:  memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
+		TimerGroup_5d4594_1045228:  memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
+		ListHeads_5d4594_839892:    memmap.PtrT[[6][10]audio.ListHead[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
+		ListHead_5d4594_840612:     memmap.PtrT[audio.ListHead[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
+		Struct200Arr_5d4594_840628: memmap.PtrT[[1023]audio.Struct200](0x5D4594, 840628),
+
+		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
+		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),
+		Sub_4BD940_ptr: unsafe.Pointer(C.sub_4BD940),
+		Sub_4BD9B0_ptr: unsafe.Pointer(C.sub_4BD9B0),
+		Sub_452770_ptr: unsafe.Pointer(C.sub_452770),
+		Sub_4526F0_ptr: unsafe.Pointer(C.sub_4526F0),
+		Sub_4526D0_ptr: unsafe.Pointer(C.sub_4526D0),
 	}
 }
 
@@ -131,6 +133,8 @@ func initAudio(externs *audio.AudioExterns) {
 
 	initStruct88(externs)
 	initPhase6(externs)
+	initStruct264(externs)
+	initStruct312(externs)
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {

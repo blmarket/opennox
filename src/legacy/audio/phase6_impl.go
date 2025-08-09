@@ -6,9 +6,9 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 )
 
-func (m *Phase6Module) Sub_4BDA80(a1_ *Struct312) int32 {
+func (m *Phase6Module) Sub_4BDA80(a1p *Struct312) int32 {
 	var (
-		a1     int32 = int32(uintptr(unsafe.Pointer(a1_)))
+		a1     int32 = int32(uintptr(unsafe.Pointer(a1p)))
 		result int32 = 0
 	)
 	if int32(*(*uint8)(unsafe.Pointer(uintptr(a1 + 124))))&5 != 0 {
@@ -151,10 +151,6 @@ func (m *Phase6Module) sub_4BD840(a3p *Struct312) {
 	if v1p.field_46 != nil {
 		a3p.timerGroup_44.Mix(v1p.field_46)
 	}
-}
-
-func (m *Phase6Module) Sub_4BDB30(a1 *Struct312) {
-	a1.field_31 &= 0xFFFFFFEF
 }
 
 func (m *Phase6Module) Sub_4BDB40(a2p *Struct312) int32 {
