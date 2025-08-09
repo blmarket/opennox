@@ -147,7 +147,6 @@ func initAudio(externs *audio.AudioExterns) {
 		func(min, max int, file unsafe.Pointer, line int) int {
 			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
 		},
-		sub_4863B0,
 		sub_4BD3C0,
 		func(list unsafe.Pointer) unsafe.Pointer {
 			return unsafe.Pointer(C.nox_common_list_getNext_425940((*C.nox_list_item_t)(list)))
