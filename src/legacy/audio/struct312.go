@@ -45,8 +45,6 @@ type Struct312Module struct {
 	moduleName string
 	externs    *AudioExterns
 
-	// External variables
-
 	// External functions
 	sub_4864A0                     func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer

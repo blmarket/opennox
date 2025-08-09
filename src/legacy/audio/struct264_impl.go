@@ -31,7 +31,7 @@ func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 *[7]uint32) *Struct2
 	v4m.field_60 = 0
 	v4m.field_58 = 0
 	v4m.field_62 = 0
-	v4m.field_54 = m.sub_4873C0_ptr
+	v4m.field_54 = m.externs.Sub_4873C0_ptr
 	v4m.field_57 = 0
 	v4m.field_61 = 0
 	v4m.field_59 = 0
@@ -81,20 +81,20 @@ func (m *Struct264Module) sub_487310(a1_ *Struct264) int32 {
 	var (
 		result int32
 	)
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24)))++
-	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 12))), (unsafe.Pointer(a1_)))
-	result = int32(*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = uint32(result)
+	(*m.externs.Dword_587000_155144).field_6++
+	m.nox_common_list_append_4258E0(unsafe.Pointer(&(*m.externs.Dword_587000_155144).field_3), (unsafe.Pointer(a1_)))
+	result = int32((*m.externs.Dword_587000_155144).field_6 - 1)
+	(*m.externs.Dword_587000_155144).field_6 = uint32(result)
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = 0
+		(*m.externs.Dword_587000_155144).field_6 = 0
 	}
 	return result
 }
 
 func (m *Struct264Module) Sub_431270() {
-	if *m.dword_5d4594_805984 != nil {
-		m.Sub_487680((*Struct264)(*m.dword_5d4594_805984))
-		*m.dword_5d4594_805984 = nil
+	if *m.externs.Dword_5d4594_805984 != nil {
+		m.Sub_487680((*Struct264)(*m.externs.Dword_5d4594_805984))
+		*m.externs.Dword_5d4594_805984 = nil
 	}
 }
 
@@ -105,8 +105,8 @@ func (m *Struct264Module) Sub_487680(lpMem_ *Struct264) {
 }
 
 func (m *Struct264Module) Sub_431290() {
-	if *m.dword_5d4594_805984 != nil {
-		m.sub_487970((*Struct264)(*m.dword_5d4594_805984), -1)
+	if *m.externs.Dword_5d4594_805984 != nil {
+		m.sub_487970((*Struct264)(*m.externs.Dword_5d4594_805984), -1)
 	}
 }
 
@@ -165,20 +165,18 @@ func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
 	alloc.Free(a1p)
 }
 
-func (m *Struct264Module) sub_4876A0(a1_ *Struct264) unsafe.Pointer {
+func (m *Struct264Module) sub_4876A0(a1_ *Struct264) {
 	var (
 		a1     **uint32 = (**uint32)(unsafe.Pointer(a1_))
-		result unsafe.Pointer
+		result int32
 	)
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24)))++
+	(*m.externs.Dword_587000_155144).field_6++
 	m.nox_common_list_remove_425920(unsafe.Pointer(a1))
-	result = unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) - 1))
-	*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = uint32(uintptr(result))
-	if int32(uintptr(result)) < 0 {
-		result = *m.dword_587000_155144
-		*(*uint32)(unsafe.Pointer(uintptr(uint32(uintptr(*m.dword_587000_155144)) + 24))) = 0
+	result = int32((*m.externs.Dword_587000_155144).field_6 - 1)
+	(*m.externs.Dword_587000_155144).field_6 = uint32(result)
+	if result < 0 {
+		(*m.externs.Dword_587000_155144).field_6 = 0
 	}
-	return result
 }
 
 func (m *Struct264Module) sub_487910(a1p *Struct264, a2 int32) int32 {
@@ -212,15 +210,15 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *Struct312 {
 		v3 *Struct312
 	)
 	v2 = nil
-	if *m.dword_5d4594_1045428 != nil {
-		v3 = m.sub_487810(*m.dword_5d4594_1045428, 1)
+	if *m.externs.Dword_5d4594_1045428 != nil {
+		v3 = m.sub_487810(*m.externs.Dword_5d4594_1045428, 1)
 		v2 = v3
 		if v3 != nil {
 			if *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*31))&0x15 != 0 && *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*30)) > a1 {
 				return nil
 			}
 			m.sub_4BDA80(int(uintptr(unsafe.Pointer(v3))))
-			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*29)) = int32(uintptr(*m.dword_587000_127004))
+			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*29)) = int32(uintptr(*m.externs.Dword_587000_127004))
 			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*30)) = a1
 			if int32(a2)&1 != 0 {
 				*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*32)) = -1

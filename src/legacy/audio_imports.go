@@ -92,7 +92,7 @@ func initExterns() *audio.AudioExterns {
 		Sub_4BD940_ptr:               unsafe.Pointer(C.sub_4BD940),
 		Sub_4BD9B0_ptr:               unsafe.Pointer(C.sub_4BD9B0),
 		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
-		Dword_5d4594_805984:          (*unsafe.Pointer)(&C.dword_5d4594_805984),
+		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
 		Ptr_uint32_5d4594_1193340:    memmap.PtrUint32(0x5D4594, 1193340),
 	}
 }

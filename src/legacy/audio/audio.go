@@ -20,7 +20,7 @@ type AudioExterns struct {
 	Sub_4BD940_ptr               unsafe.Pointer
 	Sub_4BD9B0_ptr               unsafe.Pointer
 	Dword_587000_127004          *unsafe.Pointer
-	Dword_5d4594_805984          *unsafe.Pointer
+	Dword_5d4594_805984          **Struct264
 	Ptr_uint32_5d4594_1193340    *uint32
 }
 
