@@ -22,6 +22,12 @@ type AudioExterns struct {
 	Dword_587000_127004          *unsafe.Pointer
 	Dword_5d4594_805984          **Struct264
 	Ptr_uint32_5d4594_1193340    *uint32
+	Sub_452770_ptr               unsafe.Pointer
+	Sub_4526F0_ptr               unsafe.Pointer
+	Sub_4526D0_ptr               unsafe.Pointer
+	TimerGroup_5d4594_1045228    *timer.TimerGroup
+	ListHeads_5d4594_839892      *[6][10]ListHead[Struct200Field28, *Struct200Field28]
+	ListHead_5d4594_840612       *ListHead[Struct576, *Struct576]
 }
 
 type AudioModule struct {
@@ -29,14 +35,6 @@ type AudioModule struct {
 	externs    *AudioExterns
 
 	nox_platform_get_ticks func() uint64
-	sub_452770_ptr         unsafe.Pointer
-	sub_4526F0_ptr         unsafe.Pointer
-	sub_4526D0_ptr         unsafe.Pointer
-
-	// External variables
-	timerGroup_5d4594_1045228 *timer.TimerGroup
-	listHeads_5d4594_839892   *[6][10]ListHead[Struct200Field28, *Struct200Field28]
-	listHead_5d4594_840612    *ListHead[Struct576, *Struct576]
 
 	// External functions
 	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
@@ -66,17 +64,11 @@ type AudioModule struct {
 	sub_4BD3C0                          func(unsafe.Pointer)
 }
 
-func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_ticks func() uint64, sub_452770_ptr, sub_4526F0_ptr, sub_4526D0_ptr unsafe.Pointer, timerGroup_5d4594_1045228 *timer.TimerGroup, listHeads_5d4594_839892 *[6][10]ListHead[Struct200Field28, *Struct200Field28], listHead_5d4594_840612 *ListHead[Struct576, *Struct576], sub_425770 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), sub_4BDB30 func(int) int, sub_4BD300 func(unsafe.Pointer, int) int, sub_4BDB90 func(unsafe.Pointer, unsafe.Pointer), sub_4BDB40 func(int) int, sub_4864A0 func(unsafe.Pointer) unsafe.Pointer, sub_486350 func(unsafe.Pointer, int) int, sub_486520 func(unsafe.Pointer) int, sub_4BD280 func(int, int) unsafe.Pointer, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_4BD340 func(int, int, int, int) unsafe.Pointer, sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer, sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer, sub_452810 func(int, byte) unsafe.Pointer, sub_4BD2D0 func(unsafe.Pointer), sub_4BDA80 func(int) int, nox_common_list_clear_425760 func(unsafe.Pointer), sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), sub_4862E0 func(unsafe.Pointer, int) int, nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int, sub_4863B0 func(unsafe.Pointer) int, sub_4BD3C0 func(unsafe.Pointer)) *AudioModule {
+func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_ticks func() uint64, sub_425770 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), sub_4BDB30 func(int) int, sub_4BD300 func(unsafe.Pointer, int) int, sub_4BDB90 func(unsafe.Pointer, unsafe.Pointer), sub_4BDB40 func(int) int, sub_4864A0 func(unsafe.Pointer) unsafe.Pointer, sub_486350 func(unsafe.Pointer, int) int, sub_486520 func(unsafe.Pointer) int, sub_4BD280 func(int, int) unsafe.Pointer, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_4BD340 func(int, int, int, int) unsafe.Pointer, sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer, sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer, sub_452810 func(int, byte) unsafe.Pointer, sub_4BD2D0 func(unsafe.Pointer), sub_4BDA80 func(int) int, nox_common_list_clear_425760 func(unsafe.Pointer), sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), sub_4862E0 func(unsafe.Pointer, int) int, nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int, sub_4863B0 func(unsafe.Pointer) int, sub_4BD3C0 func(unsafe.Pointer)) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
 		externs:                             externs,
 		nox_platform_get_ticks:              nox_platform_get_ticks,
-		sub_452770_ptr:                      sub_452770_ptr,
-		sub_4526F0_ptr:                      sub_4526F0_ptr,
-		sub_4526D0_ptr:                      sub_4526D0_ptr,
-		timerGroup_5d4594_1045228:           timerGroup_5d4594_1045228,
-		listHeads_5d4594_839892:             listHeads_5d4594_839892,
-		listHead_5d4594_840612:              listHead_5d4594_840612,
 		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BDB30:                          sub_4BDB30,
