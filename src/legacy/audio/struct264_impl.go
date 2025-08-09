@@ -25,7 +25,7 @@ func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 *[7]uint32) *Struct2
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + a2*4 + 24))) = uint32(uintptr(unsafe.Pointer(v4m)))
 	v4m.field_64 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 36)))
 	m.nox_common_list_clear_425760(unsafe.Pointer(&v4m.field_50))
-	m.sub_4864A0(unsafe.Pointer(&v4m.TimerGroup_22))
+	v4m.TimerGroup_22.Init()
 	v4m.field_53 = 0
 	v4m.field_56 = 33
 	v4m.field_60 = 0

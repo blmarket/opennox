@@ -39,7 +39,7 @@ func initStruct264(externs *audio.AudioExterns) {
 		return Struct88Module.Sub_487100(a1)
 	}, nox_common_list_remove_425920, nox_common_list_append_4258E0, nullsub_10, func(a1 unsafe.Pointer) {
 		sub_4BDA60((*C.struct312)(a1))
-	}, nox_common_list_clear_425760, sub_4864A0, nox_common_list_getNextSafe_4258A0, func(a1 *audio.Struct312) int32 {
+	}, nox_common_list_clear_425760, nox_common_list_getNextSafe_4258A0, func(a1 *audio.Struct312) int32 {
 		return Phase6Module.Sub_4BDA80(a1)
 	}, sub_486320, sub_425770, func(a1 *unsafe.Pointer) unsafe.Pointer {
 		return unsafe.Pointer(Struct88Module.Sub_4870E0(a1))

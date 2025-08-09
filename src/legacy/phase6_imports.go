@@ -23,18 +23,7 @@ var (
 )
 
 func initPhase6(externs *audio.AudioExterns) {
-	Phase6Module = audio.NewPhase6Module(
-		externs,
-		"phase6",
-		PlatformTicks,
-		sub_486620,
-		sub_486550,
-		sub_486570,
-		sub_4864A0,
-		sub_4BD7A0,
-		sub_486520,
-		nox_common_list_remove_425920,
-	)
+	Phase6Module = audio.NewPhase6Module(externs, "phase6", PlatformTicks, sub_486620, sub_486550, sub_486570, sub_4BD7A0, sub_486520, nox_common_list_remove_425920)
 }
 
 //export sub_4873C0

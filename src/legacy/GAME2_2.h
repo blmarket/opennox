@@ -101,7 +101,6 @@ void* sub_486320(void* a1, int a2);
 int sub_486350(void* a1, int a2);
 int sub_486380(void* a1, uint32_t a2, int32_t a3, uint32_t a4);
 int sub_4863B0(void* a2);
-void* sub_4864A0(void* a3);
 int sub_486520(void* a2);
 int sub_486550(void* a1);
 void sub_486570(void* a1, void* a2);

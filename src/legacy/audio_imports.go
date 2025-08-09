@@ -16,7 +16,6 @@ void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 int sub_4BDB30(int a1);
 int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BDB40(int a2);
-void* sub_4864A0(void* a3);
 int sub_486350(void* a1, int a2);
 int sub_486520(void* a2);
 uint32_t* sub_4BD280(int a1, int a2);
@@ -54,7 +53,6 @@ void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nullsub_10(uint32_t a1);
 void sub_4BDA60(struct312* lpMem);
 void nox_common_list_clear_425760(nox_list_item_t* list);
-void* sub_4864A0(void* a3);
 int sub_4873C0(int a3);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
 int sub_4BDA80(struct312* a1);
@@ -106,27 +104,21 @@ func initExterns() *audio.AudioExterns {
 }
 
 func initAudio(externs *audio.AudioExterns) {
-	AudioModule = audio.NewAudioModule(externs, "audio", PlatformTicks, sub_425770, nox_common_list_append_4258E0,
-		sub_4BD300,
-		func(a1 *audio.Struct312, a2 unsafe.Pointer) {
-			Struct312Module.Sub_4BDB90(a1, (*uint32)(a2))
-		},
-		func(a2 *audio.Struct312) int {
-			return int(Phase6Module.Sub_4BDB40(a2))
-		},
-		sub_4864A0, sub_486350, sub_486520, sub_4BD280, nox_common_list_getFirstSafe_425890, sub_4BD340, sub_4BD2E0, sub_4BD470, func(a1 int, a2 byte) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
-		}, sub_4BD2D0,
-		func(a1 *audio.Struct312) {
-			Phase6Module.Sub_4BDA80(a1)
-		},
-		nox_common_list_clear_425760, sub_486320, func(id int) unsafe.Pointer {
-			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
-		}, nox_common_list_remove_425920, func(a1 unsafe.Pointer, a2 int) int {
-			return bool2int((*timer.Timer)(a1).Init(int32(a2)))
-		}, func(min, max int, file unsafe.Pointer, line int) int {
-			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
-		}, sub_4863B0, sub_4BD3C0)
+	AudioModule = audio.NewAudioModule(externs, "audio", PlatformTicks, sub_425770, nox_common_list_append_4258E0, sub_4BD300, func(a1 *audio.Struct312, a2 unsafe.Pointer) {
+		Struct312Module.Sub_4BDB90(a1, (*uint32)(a2))
+	}, func(a2 *audio.Struct312) int {
+		return int(Phase6Module.Sub_4BDB40(a2))
+	}, sub_486350, sub_486520, sub_4BD280, nox_common_list_getFirstSafe_425890, sub_4BD340, sub_4BD2E0, sub_4BD470, func(a1 int, a2 byte) unsafe.Pointer {
+		return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
+	}, sub_4BD2D0, func(a1 *audio.Struct312) {
+		Phase6Module.Sub_4BDA80(a1)
+	}, nox_common_list_clear_425760, sub_486320, func(id int) unsafe.Pointer {
+		return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
+	}, nox_common_list_remove_425920, func(a1 unsafe.Pointer, a2 int) int {
+		return bool2int((*timer.Timer)(a1).Init(int32(a2)))
+	}, func(min, max int, file unsafe.Pointer, line int) int {
+		return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
+	}, sub_4863B0, sub_4BD3C0)
 
 	initStruct88(externs)
 	initPhase6(externs)

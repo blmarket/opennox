@@ -43,7 +43,6 @@ type AudioModule struct {
 	sub_4BD300                          func(unsafe.Pointer, int) int
 	sub_4BDB90                          func(*Struct312, unsafe.Pointer)
 	sub_4BDB40                          func(*Struct312) int
-	sub_4864A0                          func(unsafe.Pointer) unsafe.Pointer
 	sub_486350                          func(unsafe.Pointer, int) int
 	sub_486520                          func(unsafe.Pointer) int
 	sub_4BD280                          func(int, int) unsafe.Pointer
@@ -64,7 +63,7 @@ type AudioModule struct {
 	sub_4BD3C0                          func(unsafe.Pointer)
 }
 
-func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_ticks func() uint64, sub_425770 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), sub_4BD300 func(unsafe.Pointer, int) int, sub_4BDB90 func(*Struct312, unsafe.Pointer), sub_4BDB40 func(*Struct312) int, sub_4864A0 func(unsafe.Pointer) unsafe.Pointer, sub_486350 func(unsafe.Pointer, int) int, sub_486520 func(unsafe.Pointer) int, sub_4BD280 func(int, int) unsafe.Pointer, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_4BD340 func(int, int, int, int) unsafe.Pointer, sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer, sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer, sub_452810 func(int, byte) unsafe.Pointer, sub_4BD2D0 func(unsafe.Pointer), sub_4BDA80 func(*Struct312), nox_common_list_clear_425760 func(unsafe.Pointer), sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), sub_4862E0 func(unsafe.Pointer, int) int, nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int, sub_4863B0 func(unsafe.Pointer) int, sub_4BD3C0 func(unsafe.Pointer)) *AudioModule {
+func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_ticks func() uint64, sub_425770 func(unsafe.Pointer) unsafe.Pointer, nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer), sub_4BD300 func(unsafe.Pointer, int) int, sub_4BDB90 func(*Struct312, unsafe.Pointer), sub_4BDB40 func(*Struct312) int, sub_486350 func(unsafe.Pointer, int) int, sub_486520 func(unsafe.Pointer) int, sub_4BD280 func(int, int) unsafe.Pointer, nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer, sub_4BD340 func(int, int, int, int) unsafe.Pointer, sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer, sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer, sub_452810 func(int, byte) unsafe.Pointer, sub_4BD2D0 func(unsafe.Pointer), sub_4BDA80 func(*Struct312), nox_common_list_clear_425760 func(unsafe.Pointer), sub_486320 func(unsafe.Pointer, int) unsafe.Pointer, nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer, nox_common_list_remove_425920 func(unsafe.Pointer), sub_4862E0 func(unsafe.Pointer, int) int, nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int, sub_4863B0 func(unsafe.Pointer) int, sub_4BD3C0 func(unsafe.Pointer)) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
 		externs:                             externs,
@@ -74,7 +73,6 @@ func NewAudioModule(externs *AudioExterns, moduleName string, nox_platform_get_t
 		sub_4BD300:                          sub_4BD300,
 		sub_4BDB90:                          sub_4BDB90,
 		sub_4BDB40:                          sub_4BDB40,
-		sub_4864A0:                          sub_4864A0,
 		sub_486350:                          sub_486350,
 		sub_486520:                          sub_486520,
 		sub_4BD280:                          sub_4BD280,
