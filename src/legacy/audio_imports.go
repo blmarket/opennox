@@ -13,6 +13,7 @@ extern void* dword_587000_127004;
 extern void* dword_587000_155144;
 void* sub_425770(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
+nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
 int sub_4BDB30(int a1);
 int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BDB40(int a2);
@@ -59,6 +60,13 @@ int sub_4BDA80(struct312* a1);
 void* sub_486320(void* a1, int a2);
 void* sub_425770(void* a1);
 int* sub_4870E0(int* a1);
+
+void* sub_4864A0(void* a3);
+nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
+void* sub_425770(void* a1);
+int sub_4BD8C0(int a1);
+int sub_4BD940(struct312* a1);
+int sub_4BD9B0(struct312* a2);
 */
 import "C"
 
@@ -142,13 +150,14 @@ func initAudio(externs *audio.AudioExterns) {
 		},
 		sub_4863B0,
 		sub_4BD3C0,
-		nox_common_list_getNext_425940,
+		func(list unsafe.Pointer) unsafe.Pointer {
+			return unsafe.Pointer(C.nox_common_list_getNext_425940((*C.nox_list_item_t)(list)))
+		},
 	)
 
 	initStruct88(externs)
 	initPhase6(externs)
 	initStruct264(externs)
-	initStruct312(externs)
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {
@@ -265,4 +274,24 @@ func sub_452DC0(a1 int32, a2 int32, a3 int32) {
 //export sub_452E10
 func sub_452E10(a1 int32, a2 int32, a3 int32) {
 	AudioModule.Sub_452E10(a1, a2, a3)
+}
+
+//export sub_4BD7A0
+func sub_4BD7A0(lpMem unsafe.Pointer) {
+	AudioModule.Sub_4BD7A0((*audio.Struct312)(lpMem))
+}
+
+//export sub_4BD8C0
+func sub_4BD8C0(a1 int32) int32 {
+	return AudioModule.Sub_4BD8C0(a1)
+}
+
+//export sub_4BD940
+func sub_4BD940(a1 *C.struct312) int32 {
+	return AudioModule.Sub_4BD940((*audio.Struct312)(unsafe.Pointer(a1)))
+}
+
+//export sub_4BD9B0
+func sub_4BD9B0(a2 *C.struct312) int32 {
+	return AudioModule.Sub_4BD9B0((*audio.Struct312)(unsafe.Pointer(a2)))
 }

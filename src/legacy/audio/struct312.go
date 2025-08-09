@@ -40,26 +40,3 @@ var _ = [1]struct{}{}[312-unsafe.Sizeof(Struct312{})]
 func (s *Struct312) getList() *ListItem {
 	return &s.ListItem
 }
-
-type Struct312Module struct {
-	moduleName string
-	externs    *AudioExterns
-
-	// External functions
-	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
-	sub_425770                     func(*ListItem) unsafe.Pointer
-}
-
-func NewStruct312Module(
-	externs *AudioExterns,
-	moduleName string,
-	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
-	sub_425770 func(*ListItem) unsafe.Pointer,
-) *Struct312Module {
-	return &Struct312Module{
-		moduleName:                     moduleName,
-		externs:                        externs,
-		nox_common_list_getNext_425940: nox_common_list_getNext_425940,
-		sub_425770:                     sub_425770,
-	}
-}
