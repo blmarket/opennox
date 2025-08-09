@@ -33,9 +33,9 @@ func (m *Struct312Module) Sub_4BD7A0(lpMem *Struct312) {
 }
 
 func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
-	a1p.field_69 = m.sub_4BD8C0_ptr
-	a1p.field_70 = m.sub_4BD940_ptr
-	a1p.field_71 = m.sub_4BD9B0_ptr
+	a1p.field_69 = m.externs.Sub_4BD8C0_ptr
+	a1p.field_70 = m.externs.Sub_4BD940_ptr
+	a1p.field_71 = m.externs.Sub_4BD9B0_ptr
 	a1p.field_34 = 0
 	a1p.field_35 = 0
 	a1p.field_36 = 0

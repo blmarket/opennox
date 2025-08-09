@@ -26,6 +26,9 @@ uint32_t* sub_4BD340(int a1, int a2, int a3, int a4);
 uint32_t* sub_4BD2E0(uint32_t** a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int* sub_452810(int a1, char a2);
+int sub_4BD8C0(int a1);
+int sub_4BD940(int a1);
+int sub_4BD9B0(uint32_t* a2);
 void sub_4BD2D0(void* lpMem);
 int sub_4BDA80(struct312* a1);
 void nox_common_list_clear_425760(nox_list_item_t* list);
@@ -85,6 +88,9 @@ func initExterns() *audio.AudioExterns {
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
 		Sub_4873C0_ptr:               unsafe.Pointer(C.sub_4873C0),
+		Sub_4BD8C0_ptr:               unsafe.Pointer(C.sub_4BD8C0),
+		Sub_4BD940_ptr:               unsafe.Pointer(C.sub_4BD940),
+		Sub_4BD9B0_ptr:               unsafe.Pointer(C.sub_4BD9B0),
 		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
 		Dword_5d4594_805984:          (*unsafe.Pointer)(&C.dword_5d4594_805984),
 		Ptr_uint32_5d4594_1193340:    memmap.PtrUint32(0x5D4594, 1193340),
