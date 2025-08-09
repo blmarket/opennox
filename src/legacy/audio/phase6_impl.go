@@ -161,14 +161,12 @@ func (m *Phase6Module) sub_4BD840(a3 int32) {
 	}
 }
 
-func (m *Phase6Module) Sub_4BDB30(a1 int32) int32 {
-	var result int32
-	result = a1
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 124))) &= 0xFFFFFFEF
-	return result
+func (m *Phase6Module) Sub_4BDB30(a1 *Struct312) {
+	a1.field_31 &= 0xFFFFFFEF
 }
 
-func (m *Phase6Module) Sub_4BDB40(a2 int32) int32 {
+func (m *Phase6Module) Sub_4BDB40(a2p *Struct312) int32 {
+	var a2 int32 = int32(uintptr(unsafe.Pointer(a2p)))
 	var result int32
 	if int32(*(*uint8)(unsafe.Pointer(uintptr(a2 + 124))))&5 != 0 {
 		return -2146500608

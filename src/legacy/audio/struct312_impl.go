@@ -37,14 +37,14 @@ func (m *Struct312Module) sub_4BD7C0(a1p *Struct312) {
 	a1p.field_70 = m.externs.Sub_4BD940_ptr
 	a1p.field_71 = m.externs.Sub_4BD9B0_ptr
 	a1p.field_34 = 0
-	a1p.field_35 = 0
-	a1p.field_36 = 0
-	a1p.field_38 = 0
+	a1p.field_35 = nil
+	a1p.field_36 = nil
+	a1p.field_38 = nil
 	a1p.field_3 = 1
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&a1p.field_30))))
 	a1p.field_30 = 0
 	a1p.field_29 = *m.externs.Ptr_uint32_5d4594_1193340
-	a1p.field_28 = 0
+	a1p.field_28 = nil
 	a1p.timerGroup_4.Init()
 	a1p.field_72 = 0
 }
@@ -82,14 +82,15 @@ func (m *Struct312Module) Sub_4BD8C0(a1 int32) int32 {
 	return 0
 }
 
-func (m *Struct312Module) Sub_4BD940(a1 int32) int32 {
+func (m *Struct312Module) Sub_4BD940(a1p *Struct312) int32 {
+	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 128))) != 0 {
 		if *(*int32)(unsafe.Pointer(uintptr(a1 + 128))) != -1 {
 			*(*uint32)(unsafe.Pointer(uintptr(a1 + 128)))--
 		}
-		m.Sub_4BDB90((*uint32)(unsafe.Pointer(uintptr(a1))), *(**uint32)(unsafe.Pointer(uintptr(a1 + 288))))
+		m.Sub_4BDB90(a1p, *(**uint32)(unsafe.Pointer(uintptr(a1 + 288))))
 	} else {
-		m.Sub_4BDB90((*uint32)(unsafe.Pointer(uintptr(a1))), nil)
+		m.Sub_4BDB90(a1p, nil)
 	}
 	v1 := *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 140)))
 	if v1 != nil {
@@ -129,7 +130,8 @@ func (m *Struct312Module) sub_4BDC00(a1 int32) int32 {
 	return result
 }
 
-func (m *Struct312Module) Sub_4BDB90(a1 *uint32, a2 *uint32) {
+func (m *Struct312Module) Sub_4BDB90(a1p *Struct312, a2 *uint32) {
+	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1p))
 	var (
 		v2 int32
 		v3 int32

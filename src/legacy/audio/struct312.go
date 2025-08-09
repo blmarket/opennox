@@ -10,17 +10,17 @@ type Struct312 struct {
 	ListItem
 	field_3       int32
 	timerGroup_4  timer.TimerGroup
-	field_28      uint32
+	field_28      *timer.TimerGroup
 	field_29      uint32
 	field_30      uint32
 	field_31      uint32
 	field_32      uint32
 	field_33      *Struct264
 	field_34      uint32
-	field_35      uint32
-	field_36      uint32
-	field_37      uint32
-	field_38      uint32
+	field_35      unsafe.Pointer // sub_452770_ptr
+	field_36      unsafe.Pointer // sub_4526F0_ptr
+	field_37      unsafe.Pointer // sub_4526D0_ptr
+	field_38      *Struct576
 	field_39      uint32
 	field_40      uint32
 	field_41      uint32
