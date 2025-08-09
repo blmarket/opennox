@@ -158,7 +158,7 @@ func (m *Phase6Module) Sub_4BDB40(a2p *Struct312) int32 {
 	if int32(*(*uint8)(unsafe.Pointer(&a2p.field_31)))&5 != 0 {
 		return -2146500608
 	}
-	if a2p.field_72 == 0 {
+	if a2p.field_72 == nil {
 		return -2147024896
 	}
 	a2p.timerGroup_4.Update()

@@ -31,7 +31,7 @@ type Struct312 struct {
 	field_69      unsafe.Pointer // sub_4BD8C0_ptr
 	field_70      unsafe.Pointer // sub_4BD940_ptr
 	field_71      unsafe.Pointer // sub_4BD9B0_ptr
-	field_72      uint32
+	field_72      unsafe.Pointer
 	field_73      [5]uint32
 }
 
@@ -46,16 +46,19 @@ type Struct312Module struct {
 	externs    *AudioExterns
 
 	// External functions
-	sub_4864A0                     func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
 	sub_425770                     func(*ListItem) unsafe.Pointer
 }
 
-func NewStruct312Module(externs *AudioExterns, moduleName string, sub_4864A0, nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer, sub_425770 func(*ListItem) unsafe.Pointer) *Struct312Module {
+func NewStruct312Module(
+	externs *AudioExterns,
+	moduleName string,
+	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
+	sub_425770 func(*ListItem) unsafe.Pointer,
+) *Struct312Module {
 	return &Struct312Module{
 		moduleName:                     moduleName,
 		externs:                        externs,
-		sub_4864A0:                     sub_4864A0,
 		nox_common_list_getNext_425940: nox_common_list_getNext_425940,
 		sub_425770:                     sub_425770,
 	}
