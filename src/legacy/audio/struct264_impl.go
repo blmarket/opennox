@@ -32,10 +32,6 @@ func (m *Struct264Module) sub_4871C0(a1 int32, a2 int32, a3 *[7]uint32) *Struct2
 	v4m.field_58 = 0
 	v4m.field_62 = 0
 	v4m.field_54 = m.externs.Sub_4873C0_ptr
-	v4m.field_57 = 0
-	v4m.field_61 = 0
-	v4m.field_59 = 0
-	v4m.field_63 = 0
 	m.nullsub_10(uint32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*15))))))
 	m.nullsub_10(uint32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*8))))))
 	if a3 != nil {

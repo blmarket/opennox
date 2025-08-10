@@ -30,14 +30,10 @@ type Struct264 struct {
 	field_53      int32
 	field_54      unsafe.Pointer // sub_4873C0_ptr, takes *Struct264
 	field_55      uint32
-	field_56      uint32
-	field_57      uint32
-	field_58      uint32
-	field_59      uint32
-	field_60      uint32
-	field_61      uint32
-	field_62      uint32
-	field_63      uint32
+	field_56      int64
+	field_58      int64
+	field_60      int64
+	field_62      int64
 	field_64      unsafe.Pointer
 	field_65      uint32
 }

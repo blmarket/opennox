@@ -4,6 +4,7 @@ import (
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
+	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
 func (m *Phase6Module) Sub_4BDA80(a1p *Struct312) int32 {
@@ -49,88 +50,64 @@ func (m *Phase6Module) Sub_4BDA60(lpMem_ *Struct312) {
 }
 
 func (m *Phase6Module) Sub_4873C0(a3p *Struct264) int32 {
-	var a3 int32 = int32(uintptr(unsafe.Pointer(a3p)))
 	var (
-		v1  int32
 		v3  int64
-		v4  uint32
-		v5  int32
-		v6  bool
-		v7  uint32
-		v8  uint32
-		v9  int32
-		v10 uint32
-		v11 *uint32
-		v12 int32
-		v13 int32
-		v14 *uint32
-		v15 int32
-		v16 int32
-		v17 int32
+		v11 *timer.TimerGroup
+		v15 *timer.TimerGroup
+		v17 bool
 	)
-	v1 = a3
-	if *(*uint32)(unsafe.Pointer(uintptr(a3 + 212))) != 0 {
+	if a3p.field_53 != 0 {
 		return -2146304000
 	}
 	v3 = int64(m.nox_platform_get_ticks())
-	v4 = *(*uint32)(unsafe.Pointer(uintptr(a3 + 248)))
-	v5 = int32(v3)
-	v6 = uint32(int32(v3)) < v4
-	v7 = uint32(int32(v3 - int64(v4)))
-	v8 = *(*uint32)(unsafe.Pointer(uintptr(a3 + 224)))
-	v16 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(&v3))), 4*1)))
-	v9 = int32((*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(&v3))), 4*1))) - (uint32(bool2int32(v6)) + *(*uint32)(unsafe.Pointer(uintptr(a3 + 252)))))
-	v10 = *(*uint32)(unsafe.Pointer(uintptr(a3 + 228)))
-	if (((uint64(v9)) << 32) | uint64(v7)) >= (((uint64(v10)) << 32) | uint64(v8)) {
-		*(*uint32)(unsafe.Pointer(uintptr(a3 + 232))) = v7
-		*(*uint32)(unsafe.Pointer(uintptr(a3 + 236))) = uint32(v9)
-		if *(*uint64)(unsafe.Pointer(uintptr(a3 + 240))) > (((uint64(v10))<<32)|uint64(v8))*10 {
-			*(*uint32)(unsafe.Pointer(uintptr(a3 + 240))) = 0
-			*(*uint32)(unsafe.Pointer(uintptr(a3 + 244))) = 0
+
+	diff1 := v3 - a3p.field_62
+	if diff1 >= a3p.field_56 {
+		a3p.field_58 = diff1
+		if a3p.field_60 > a3p.field_56*10 {
+			a3p.field_60 = 0
 		}
-		if (((uint64(v9)) << 32) | uint64(v7)) > *(*uint64)(unsafe.Pointer(uintptr(a3 + 240))) {
-			*(*uint32)(unsafe.Pointer(uintptr(a3 + 240))) = v7
-			*(*uint32)(unsafe.Pointer(uintptr(a3 + 244))) = uint32(v9)
+		if diff1 > a3p.field_60 {
+			a3p.field_60 = diff1
 		}
-		v11 = (*uint32)(unsafe.Pointer(uintptr(a3 + 88)))
-		v15 = a3 + 88
-		m.sub_486520(unsafe.Pointer(uintptr(a3 + 88)))
-		if *(*uint32)(unsafe.Pointer(uintptr(a3 + 184))) != 0 {
-			m.sub_486520(unsafe.Pointer(*(**uint32)(unsafe.Pointer(uintptr(a3 + 184)))))
+
+		v11 = &a3p.TimerGroup_22
+		v15 = &a3p.TimerGroup_22
+		a3p.TimerGroup_22.Update()
+
+		if a3p.field_46 != nil {
+			a3p.field_46.Update()
+			v17 = a3p.field_46.IsUpdated()
 		}
-		if *(*uint32)(unsafe.Pointer(uintptr(a3 + 184))) == 0 || (func() int32 {
-			v17 = int32(m.sub_486550(unsafe.Pointer(*(**uint8)(unsafe.Pointer(uintptr(a3 + 184))))))
-			return v17
-		}()) == 0 {
-			v17 = int32(m.sub_486550(unsafe.Pointer(uintptr(v1 + 88))))
+		if a3p.field_46 == nil || v17 == false {
+			v17 = a3p.TimerGroup_22.IsUpdated()
 		}
-		*(*uint32)(unsafe.Pointer(uintptr(v1 + 248))) = uint32(v5)
-		*(*uint32)(unsafe.Pointer(uintptr(v1 + 252))) = uint32(v16)
-		v12 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 200))))
-		if v12 != v1+200 {
+		a3p.field_62 = v3
+
+		v12 := a3p.field_50.next
+		if v12 != &a3p.field_50 {
 			for {
-				v13 = int32(*(*uint32)(unsafe.Pointer(uintptr(v12))))
-				if int32(*(*uint8)(unsafe.Pointer(uintptr(v12 + 124))))&1 != 0 && *(*uint32)(unsafe.Pointer(uintptr(v12 + 288))) != 0 {
-					if (func() int32 {
-						m.sub_486520(unsafe.Pointer(uintptr(v12 + 16)))
-						return v17
-					}()) != 0 || m.sub_486550(unsafe.Pointer(uintptr(v12+16))) != 0 || *(*uint32)(unsafe.Pointer(uintptr(v12 + 116))) != 0 && m.sub_486550(unsafe.Pointer(*(**uint8)(unsafe.Pointer(uintptr(v12 + 116))))) != 0 || *(*uint32)(unsafe.Pointer(uintptr(v12 + 112))) != 0 && m.sub_486550(unsafe.Pointer(*(**uint8)(unsafe.Pointer(uintptr(v12 + 112))))) != 0 {
-						m.sub_4BD840((*Struct312)(unsafe.Pointer(uintptr(v12))))
-						ccall.CallVoidInt(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(v12 + 172))) + 32))), int(v12))
+				v13 := v12.next
+				v12p := v12.PromoteUnsafe()
+				if (v12p.field_31&1) != 0 && v12p.field_72 != nil {
+					v12p.timerGroup_4.Update()
+					if v17 || v12p.timerGroup_4.IsUpdated() || (v12p.field_29 != nil && v12p.field_29.IsUpdated()) || (v12p.field_28 != nil && v12p.field_28.IsUpdated()) {
+						m.sub_4BD840(v12p)
+						ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Add(v12p.field_43, 32)), unsafe.Pointer(v12p))
 					}
 				}
 				v12 = v13
-				if v13 == v1+200 {
+				if v13 == &a3p.field_50 {
 					break
 				}
 			}
-			v11 = (*uint32)(unsafe.Pointer(uintptr(v15)))
+			v11 = v15
 		}
-		v14 = *(**uint32)(unsafe.Pointer(uintptr(v1 + 184)))
+		v14 := a3p.field_46
 		if v14 != nil {
-			m.sub_486620(unsafe.Pointer(v14))
+			v14.ClearUpdated()
 		}
-		m.sub_486620(unsafe.Pointer(v11))
+		v11.ClearUpdated()
 	}
 	return 0
 }
