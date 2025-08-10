@@ -82,7 +82,7 @@ func (m *Struct264Module) sub_487310(a1_ *Struct264) int32 {
 		result int32
 	)
 	(*m.externs.Dword_587000_155144).field_6++
-	m.nox_common_list_append_4258E0(unsafe.Pointer(&(*m.externs.Dword_587000_155144).field_3), (unsafe.Pointer(a1_)))
+	(*m.externs.Dword_587000_155144).field_3.Append_4258E0(&a1_.field_0)
 	result = int32((*m.externs.Dword_587000_155144).field_6 - 1)
 	(*m.externs.Dword_587000_155144).field_6 = uint32(result)
 	if result < 0 {
@@ -359,7 +359,7 @@ func (m *Struct264Module) sub_486E30(a1p *Struct264, a2p *Struct312) int32 {
 	a2p.field_33 = a1p
 	a1p.field_48++
 	a1p.field_53++
-	m.nox_common_list_append_4258E0(unsafe.Pointer(&a1p.field_50), (unsafe.Pointer(a2p)))
+	a1p.field_50.Append_4258E0(&a2p.ListElement)
 	result := a1p.field_53 - 1
 	a1p.field_53 = result
 	if result < 0 {

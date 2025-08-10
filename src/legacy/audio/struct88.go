@@ -20,7 +20,7 @@ type UnknownListElement struct {
 }
 
 type Struct587000_155144 struct {
-	field_0      ListElement[UnknownListElement, *UnknownListElement]
+	field_0      ListElement[Struct88, *Struct88]
 	field_3      ListElement[Struct264, *Struct264]
 	field_6      uint32
 	field_7      uint32 // unknown
@@ -36,7 +36,6 @@ type Struct88Module struct {
 	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_remove_425920       func(unsafe.Pointer)
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
-	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 }
 
 func NewStruct88Module(
@@ -55,6 +54,5 @@ func NewStruct88Module(
 		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
 		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
-		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 	}
 }

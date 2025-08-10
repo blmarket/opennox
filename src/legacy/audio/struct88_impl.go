@@ -32,9 +32,8 @@ func (m *Struct88Module) sub_487030(a1p *Struct88) {
 	alloc.Free(a1p)
 }
 
-func (m *Struct88Module) Sub_487050(a1_ *Struct88) {
-	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1_))
-	m.nox_common_list_append_4258E0((unsafe.Pointer(&(*m.externs.Dword_587000_155144).field_0)), (unsafe.Pointer(a1)))
+func (m *Struct88Module) Sub_487050(a1p *Struct88) {
+	(*m.externs.Dword_587000_155144).field_0.Append_4258E0(&a1p.field_0)
 }
 
 func (m *Struct88Module) Sub_4870A0() {

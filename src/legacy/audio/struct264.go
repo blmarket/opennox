@@ -52,7 +52,6 @@ type Struct264Module struct {
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
 	sub_487100                          func(*unsafe.Pointer) unsafe.Pointer
 	nox_common_list_remove_425920       func(unsafe.Pointer)
-	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 	nullsub_10                          func(uint32)
 	sub_4BDA60                          func(unsafe.Pointer)
 	nox_common_list_clear_425760        func(unsafe.Pointer)
@@ -86,7 +85,6 @@ func NewStruct264Module(
 		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
 		sub_487100:                          sub_487100,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
-		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		nullsub_10:                          nullsub_10,
 		sub_4BDA60:                          sub_4BDA60,
 		nox_common_list_clear_425760:        nox_common_list_clear_425760,

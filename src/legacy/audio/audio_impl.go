@@ -26,7 +26,7 @@ type Struct200 struct {
 	field_19   uint32
 	field_20   uint32
 	sndName_21 unsafe.Pointer // pointer to string
-	field_22   ListElement[UnknownListElement, *UnknownListElement]
+	field_22   ListElement[Struct576Field3, *Struct576Field3]
 	field_25   uint32
 	field_26   uint32
 	field_27   int32
@@ -486,7 +486,7 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *uint32 {
 	v1p.field_108 = 0
 	v1p.field_42 = 0
 	v1p.timerGroup_46.Init()
-	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(m.Externs.ListHead_5d4594_840612)))))), (unsafe.Pointer(v1p)))
+	m.Externs.ListHead_5d4594_840612.Append_4258E0(&v1p.ListElement)
 	v1p.field_70 = func() uint32 {
 		p_ := memmap.PtrUint32(0x587000, 127000)
 		x := *p_
@@ -770,16 +770,16 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 		if v2 <= result {
 			if v2 == result && v3 > v1.field_31 {
 				v1.field_31 = v3
-				v7 := (unsafe.Pointer((&v1.field_28)))
+				v7 := &v1.field_28
 				m.nox_common_list_remove_425920(unsafe.Pointer(v7))
-				m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v7)))
+				heads[v2][v3].Append_4258E0(&v7.ListElement)
 			}
 		} else {
 			v1.field_27 = v2
 			v1.field_31 = v3
-			v6 := (unsafe.Pointer((&v1.field_28)))
+			v6 := &v1.field_28
 			m.nox_common_list_remove_425920(unsafe.Pointer(v6))
-			m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v6)))
+			heads[v2][v3].Append_4258E0(&v6.ListElement)
 		}
 	} else {
 		v1.field_26 = *m.Externs.Ptr_uint32_5d4594_1045444
@@ -787,7 +787,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 		v1.field_31 = v3
 		v8 := &v1.field_28
 		v8.Init_425770()
-		m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v8)))
+		heads[v2][v3].Append_4258E0(&v8.ListElement)
 	}
 }
 
@@ -796,7 +796,6 @@ func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
 	var v3 uint32
 	var v5 int32
 	var v6 int32
-	var v7 *uint32
 	var result int32
 	var v9 int32
 	var v10 *uint32
@@ -831,9 +830,9 @@ func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
 		}
 		v1 = a1_
 	}
-	v7 = (*uint32)(unsafe.Pointer(&v1.field_3))
+	v7 := &v1.field_3.ListElement
 	v1.field_3.Init_425770()
-	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v4)))))), (unsafe.Pointer(v7)))
+	v4.Append_4258E0(v7)
 	result = int32(*(*uint32)(unsafe.Pointer(&v2p.field_14)))
 	v9 = int32(*(*uint32)(unsafe.Pointer(&v2p.field_13)) + 1)
 	*(*uint32)(unsafe.Pointer(&v2p.field_13)) = uint32(v9)
