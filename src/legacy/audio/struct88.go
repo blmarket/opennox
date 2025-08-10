@@ -21,7 +21,7 @@ type UnknownListElement struct {
 
 type Struct587000_155144 struct {
 	field_0      ListElement[UnknownListElement, *UnknownListElement]
-	field_3      ListElement[UnknownListElement, *UnknownListElement]
+	field_3      ListElement[Struct264, *Struct264]
 	field_6      uint32
 	field_7      uint32 // unknown
 	timerGroup_8 timer.TimerGroup

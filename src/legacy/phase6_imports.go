@@ -27,8 +27,8 @@ func initPhase6(externs *audio.AudioExterns) {
 }
 
 //export sub_4873C0
-func sub_4873C0(a3 int32) int32 {
-	return Phase6Module.Sub_4873C0(a3)
+func sub_4873C0(a3 *C.struct264) int32 {
+	return Phase6Module.Sub_4873C0((*audio.Struct264)(unsafe.Pointer(a3)))
 }
 
 //export sub_4BDA60

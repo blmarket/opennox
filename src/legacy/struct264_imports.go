@@ -15,7 +15,6 @@ void nullsub_10(uint32_t a1);
 void sub_4BDA60(struct312* lpMem);
 void nox_common_list_clear_425760(nox_list_item_t* list);
 void* sub_4864A0(void* a3);
-int sub_4873C0(int a3);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
 int sub_4BDA80(struct312* a1);
 void* sub_486320(void* a1, int a2);

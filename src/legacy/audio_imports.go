@@ -42,7 +42,7 @@ void sub_4BD3C0(void* lpMem);
 int sub_452770(struct312* a1);
 int sub_4526D0(int a1);
 int sub_4526F0(struct312* a1);
-int sub_4873C0(int a3);
+int sub_4873C0(struct264* a3);
 extern uint32_t dword_5d4594_1045428;
 extern void* dword_587000_127004;
 extern void* dword_587000_155144;
@@ -54,7 +54,6 @@ void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nullsub_10(uint32_t a1);
 void sub_4BDA60(struct312* lpMem);
 void nox_common_list_clear_425760(nox_list_item_t* list);
-int sub_4873C0(int a3);
 nox_list_item_t* nox_common_list_getNextSafe_4258A0(nox_list_item_t* list);
 int sub_4BDA80(struct312* a1);
 void* sub_486320(void* a1, int a2);
@@ -84,6 +83,8 @@ var (
 
 func initExterns() *audio.AudioExterns {
 	return &audio.AudioExterns{
+		Dword_5d4594_1193336: 0,
+
 		Dword_587000_126996:          (*uint32)(&C.dword_587000_126996),
 		Dword_5d4594_1045420:         (*uint32)(&C.dword_5d4594_1045420),
 		Dword_5d4594_1045424:         (*uint32)(&C.dword_5d4594_1045424),

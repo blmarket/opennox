@@ -7,6 +7,8 @@ import (
 )
 
 type AudioExterns struct {
+	Dword_5d4594_1193336 uint32
+
 	Dword_587000_126996          *uint32
 	Dword_5d4594_1045420         *uint32
 	Dword_5d4594_1045424         *uint32
@@ -34,12 +36,11 @@ type AudioExterns struct {
 
 type AudioModule struct {
 	moduleName string
-	externs    *AudioExterns
+	Externs    *AudioExterns
 
 	nox_platform_get_ticks func() uint64
 
 	// External functions
-	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 	sub_4BD300                          func(unsafe.Pointer, int) int
 	sub_4BDB40                          func(*Struct312) int
@@ -90,9 +91,8 @@ func NewAudioModule(
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                          moduleName,
-		externs:                             externs,
+		Externs:                             externs,
 		nox_platform_get_ticks:              nox_platform_get_ticks,
-		sub_425770:                          sub_425770,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 		sub_4BD300:                          sub_4BD300,
 		sub_4BDB40:                          sub_4BDB40,

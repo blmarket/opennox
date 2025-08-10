@@ -48,7 +48,8 @@ func (m *Phase6Module) Sub_4BDA60(lpMem_ *Struct312) {
 	m.sub_4BD7A0(lpMem)
 }
 
-func (m *Phase6Module) Sub_4873C0(a3 int32) int32 {
+func (m *Phase6Module) Sub_4873C0(a3p *Struct264) int32 {
+	var a3 int32 = int32(uintptr(unsafe.Pointer(a3p)))
 	var (
 		v1  int32
 		v3  int64
