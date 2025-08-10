@@ -45,16 +45,20 @@ func (s *Struct200Field28) GetStruct200() *Struct200 {
 	return (*Struct200)(unsafe.Pointer(uintptr(unsafe.Pointer(s)) - 28*4))
 }
 
-func (s *Struct200Field28) GetStruct() *Struct200Field28 {
-	return s
-}
-
 var _ = [1]struct{}{}[200-unsafe.Sizeof(Struct200{})]
 var _ = [1]struct{}{}[unsafe.Sizeof(Struct200{})-200]
 
+type Struct576Field3 struct {
+	ListElement[Struct576Field3, *Struct576Field3]
+}
+
+func (s *Struct576Field3) GetStruct576() *Struct576 {
+	return (*Struct576)(unsafe.Pointer(uintptr(unsafe.Pointer(s)) - 3*4))
+}
+
 type Struct576 struct {
 	ListElement[Struct576, *Struct576]
-	field_3       UnknownListElement
+	field_3       Struct576Field3
 	field_6       uint8
 	field_6_1     uint8
 	field_6_2     uint8
@@ -79,10 +83,6 @@ type Struct576 struct {
 	field_110     [32]uint32
 	field_142     uint32
 	field_143     uint32
-}
-
-func (s *Struct576) GetStruct() *Struct576 {
-	return s
 }
 
 var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})]
@@ -479,7 +479,7 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *uint32 {
 	}
 	alloc.Memset(unsafe.Pointer(v1p), 0, 0x240)
 	v1p.field_9 = a1p
-	m.sub_425770(unsafe.Pointer(v1p))
+	v1p.Init_425770()
 	v1p.field_7 = 0
 	v1p.field_75 = 0
 	v1p.field_142 = 0
@@ -785,8 +785,8 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 		v1.field_26 = *m.externs.Ptr_uint32_5d4594_1045444
 		v1.field_27 = v2
 		v1.field_31 = v3
-		v8 := unsafe.Pointer(&v1.field_28)
-		m.sub_425770(unsafe.Pointer(v8))
+		v8 := &v1.field_28
+		v8.Init_425770()
 		m.nox_common_list_append_4258E0((unsafe.Pointer(&heads[v2][v3])), (unsafe.Pointer(v8)))
 	}
 }
@@ -832,7 +832,7 @@ func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
 		v1 = a1_
 	}
 	v7 = (*uint32)(unsafe.Pointer(&v1.field_3))
-	m.sub_425770(unsafe.Pointer(&v1.field_3))
+	v1.field_3.Init_425770()
 	m.nox_common_list_append_4258E0((unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v4)))))), (unsafe.Pointer(v7)))
 	result = int32(*(*uint32)(unsafe.Pointer(&v2p.field_14)))
 	v9 = int32(*(*uint32)(unsafe.Pointer(&v2p.field_13)) + 1)

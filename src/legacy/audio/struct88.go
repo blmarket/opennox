@@ -13,18 +13,10 @@ type Struct88 struct {
 	field_5 [17]uint32
 }
 
-func (s *Struct88) GetStruct() *Struct88 {
-	return s
-}
-
 var _ = [1]struct{}{}[88-unsafe.Sizeof(Struct88{})]
 
 type UnknownListElement struct {
 	ListElement[UnknownListElement, *UnknownListElement]
-}
-
-func (s *UnknownListElement) GetStruct() *UnknownListElement {
-	return s
 }
 
 type Struct587000_155144 struct {
@@ -43,7 +35,6 @@ type Struct88Module struct {
 	sub_487680                          func(*Struct264)
 	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_remove_425920       func(unsafe.Pointer)
-	sub_425770                          func(unsafe.Pointer /* ListElement[T, P] */) unsafe.Pointer
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
 	nox_common_list_append_4258E0       func(unsafe.Pointer, unsafe.Pointer)
 }
@@ -54,7 +45,6 @@ func NewStruct88Module(
 	sub_487680 func(*Struct264),
 	nox_common_list_getNextSafe_4258A0 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_remove_425920 func(unsafe.Pointer),
-	sub_425770 func(unsafe.Pointer /* ListElement[T, P] */) unsafe.Pointer,
 	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer,
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 ) *Struct88Module {
@@ -64,7 +54,6 @@ func NewStruct88Module(
 		sub_487680:                          sub_487680,
 		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
-		sub_425770:                          sub_425770,
 		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
 		nox_common_list_append_4258E0:       nox_common_list_append_4258E0,
 	}

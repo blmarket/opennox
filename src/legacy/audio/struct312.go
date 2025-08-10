@@ -36,7 +36,3 @@ type Struct312 struct {
 }
 
 var _ = [1]struct{}{}[312-unsafe.Sizeof(Struct312{})]
-
-func (s *Struct312) GetStruct() *Struct312 {
-	return s
-}

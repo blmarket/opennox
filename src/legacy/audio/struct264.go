@@ -42,10 +42,6 @@ type Struct264 struct {
 	field_65      uint32
 }
 
-func (s *Struct264) GetStruct() *Struct264 {
-	return s
-}
-
 var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]
 
 type Struct264Module struct {
