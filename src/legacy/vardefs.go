@@ -1090,9 +1090,6 @@ func Get_dword_5d4594_2516356() int {
 func Get_dword_5d4594_1548524() int {
 	return int(C.dword_5d4594_1548524)
 }
-func Get_dword_587000_155144() unsafe.Pointer {
-	return C.dword_587000_155144
-}
 func Get_nox_alloc_magicEnt_1569668() unsafe.Pointer {
 	return C.nox_alloc_magicEnt_1569668
 }

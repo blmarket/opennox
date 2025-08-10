@@ -96,12 +96,12 @@ func initExterns() *audio.AudioExterns {
 		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
 		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
 
-		Ptr_uint32_5d4594_1193340:  memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
-		TimerGroup_5d4594_1045228:  memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
-		ListHeads_5d4594_839892:    memmap.PtrT[[6][10]audio.ListElement[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
-		ListHead_5d4594_840612:     memmap.PtrT[audio.ListElement[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
-		Struct200Arr_5d4594_840628: memmap.PtrT[[1023]audio.Struct200](0x5D4594, 840628),
-		Ptr_uint32_5d4594_1045444:  memmap.PtrUint32(0x5D4594, 1045444),
+		Ptr_TimerGroup_5d4594_1193340: memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
+		TimerGroup_5d4594_1045228:     memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
+		ListHeads_5d4594_839892:       memmap.PtrT[[6][10]audio.ListElement[audio.Struct200Field28, *audio.Struct200Field28]](0x5D4594, 839892),
+		ListHead_5d4594_840612:        memmap.PtrT[audio.ListElement[audio.Struct576, *audio.Struct576]](0x5D4594, 840612),
+		Struct200Arr_5d4594_840628:    memmap.PtrT[[1023]audio.Struct200](0x5D4594, 840628),
+		Ptr_uint32_5d4594_1045444:     memmap.PtrUint32(0x5D4594, 1045444),
 
 		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
 		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),

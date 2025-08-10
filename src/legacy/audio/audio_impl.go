@@ -1131,7 +1131,7 @@ func (m *AudioModule) sub_4BD7C0(a1p *Struct312) {
 	a1p.field_3 = 1
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&a1p.field_30))))
 	a1p.field_30 = 0
-	a1p.field_29 = *m.Externs.Ptr_uint32_5d4594_1193340
+	a1p.field_29 = *m.Externs.Ptr_TimerGroup_5d4594_1193340
 	a1p.field_28 = nil
 	a1p.timerGroup_4.Init()
 	a1p.field_72 = nil
@@ -1253,7 +1253,7 @@ func (m *AudioModule) Sub_486F30() int {
 	(*m.Externs.Dword_587000_155144).field_0.Clear_425760()
 	(*m.Externs.Dword_587000_155144).field_3.Clear_425760()
 	(*m.Externs.Dword_587000_155144).field_6 = 0
-	*memmap.PtrPtr(0x5D4594, 1193340) = unsafe.Pointer(&(*m.Externs.Dword_587000_155144).timerGroup_8)
+	(*m.Externs.Ptr_TimerGroup_5d4594_1193340) = &(*m.Externs.Dword_587000_155144).timerGroup_8
 	(*m.Externs.Dword_587000_155144).timerGroup_8.Init()
 	m.Externs.Dword_5d4594_1193336 = 1
 	return 0
