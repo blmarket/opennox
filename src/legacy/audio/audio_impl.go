@@ -26,7 +26,7 @@ type Struct200 struct {
 	field_19   uint32
 	field_20   uint32
 	sndName_21 unsafe.Pointer // pointer to string
-	field_22   ListItem
+	field_22   ListElement[UnknownListElement, *UnknownListElement]
 	field_25   uint32
 	field_26   uint32
 	field_27   int32
@@ -38,23 +38,23 @@ type Struct200 struct {
 }
 
 type Struct200Field28 struct {
-	ListItem
+	ListElement[Struct200Field28, *Struct200Field28]
 }
 
-func (s *Struct200Field28) getList() *ListItem {
-	return &s.ListItem
-}
-
-func (s *Struct200Field28) getStruct() *Struct200 {
+func (s *Struct200Field28) GetStruct200() *Struct200 {
 	return (*Struct200)(unsafe.Pointer(uintptr(unsafe.Pointer(s)) - 28*4))
+}
+
+func (s *Struct200Field28) GetStruct() *Struct200Field28 {
+	return s
 }
 
 var _ = [1]struct{}{}[200-unsafe.Sizeof(Struct200{})]
 var _ = [1]struct{}{}[unsafe.Sizeof(Struct200{})-200]
 
 type Struct576 struct {
-	ListItem
-	field_3       ListItem
+	ListElement[Struct576, *Struct576]
+	field_3       UnknownListElement
 	field_6       uint8
 	field_6_1     uint8
 	field_6_2     uint8
@@ -81,8 +81,8 @@ type Struct576 struct {
 	field_143     uint32
 }
 
-func (s *Struct576) getList() *ListItem {
-	return &s.ListItem
+func (s *Struct576) GetStruct() *Struct576 {
+	return s
 }
 
 var _ = [1]struct{}{}[576-unsafe.Sizeof(Struct576{})]
@@ -143,7 +143,7 @@ func (m *AudioModule) sub_452010() int32 {
 	heads := m.externs.ListHeads_5d4594_839892
 	for v1 := 0; v1 < 6; v1++ {
 		for v2 := 0; v2 < 10; v2++ {
-			heads[v1][v2].Clear()
+			heads[v1][v2].Clear_425760()
 		}
 	}
 	(*m.externs.Ptr_uint32_5d4594_1045444)++
@@ -163,9 +163,9 @@ func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
 			v2 := heads[v1]
 			for v3 := 0; v3 < 10; v3++ {
 				v4 := v2[v3]
-				v5 := v4.First()
+				v5 := v4.FirstSafe_4258A0()
 				if v5 != nil {
-					return v5.getStruct()
+					return v5.PromoteUnsafe().GetStruct200()
 				}
 			}
 		}
@@ -176,19 +176,17 @@ func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
 func (m *AudioModule) sub_4521F0() int32 {
 	var (
 		result int32
-		v1     *ListItem
-		v2     *ListItem
 	)
 	result = int32(*m.externs.Dword_5d4594_1045432)
 	if *m.externs.Dword_5d4594_1045432 != 0 {
-		v1 = m.externs.ListHead_5d4594_840612.next
-		if unsafe.Pointer(m.externs.ListHead_5d4594_840612.next) != unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
+		v1 := m.externs.ListHead_5d4594_840612.Next()
+		if m.externs.ListHead_5d4594_840612.Next() != m.externs.ListHead_5d4594_840612 {
 			for {
-				v2 = v1.next
-				m.Sub_4523D0((*Struct576)(unsafe.Pointer(v1)))
-				result = m.sub_451FE0((*Struct576)(unsafe.Pointer(v1)))
+				v2 := v1.next
+				m.Sub_4523D0(v1.PromoteUnsafe())
+				result = m.sub_451FE0(v1.PromoteUnsafe())
 				v1 = v2
-				if unsafe.Pointer(v2) == unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
+				if v2 == m.externs.ListHead_5d4594_840612 {
 					break
 				}
 			}
@@ -202,16 +200,16 @@ func (m *AudioModule) sub_452230() {
 		return
 	}
 	if unsafe.Pointer(m.externs.ListHead_5d4594_840612.next) != unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
-		res := m.externs.ListHead_5d4594_840612.First()
+		res := m.externs.ListHead_5d4594_840612.Next().PromoteUnsafe()
 		for {
 			v1 := res.next
 			if res.field_6&1 != 0 {
 				m.sub_451FE0(res)
 			}
-			if unsafe.Pointer(v1) == unsafe.Pointer(m.externs.ListHead_5d4594_840612) {
+			if v1 == m.externs.ListHead_5d4594_840612 {
 				break
 			}
-			res = (*Struct576)(unsafe.Pointer(v1))
+			res = v1.PromoteUnsafe()
 		}
 	}
 }
@@ -1102,7 +1100,7 @@ func (m *AudioModule) Sub_4BD720(a1p *Struct264) *Struct312 {
 	v1pp, _ := alloc.Calloc(1, 0x138)
 	v1p := (*Struct312)(v1pp)
 	alloc.Memset(unsafe.Pointer(v1p), 0, 0x138)
-	m.sub_425770(unsafe.Pointer(&v1p.ListItem))
+	v1p.Init_425770()
 	m.sub_4BDC00(int32(uintptr(unsafe.Pointer(&v1p.field_30))))
 	v1p.timerGroup_44.Init()
 	m.sub_4BD7C0(v1p)

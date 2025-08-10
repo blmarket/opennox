@@ -7,7 +7,7 @@ import (
 )
 
 type Struct264 struct {
-	field_0       ListItem
+	field_0       ListElement[Struct264, *Struct264]
 	field_3       uint32
 	field_4       uint32
 	field_5       unsafe.Pointer
@@ -26,7 +26,7 @@ type Struct264 struct {
 	field_47      uint32
 	field_48      int32
 	field_49      int32
-	field_50      ListHead[Struct312, *Struct312]
+	field_50      ListElement[Struct312, *Struct312]
 	field_53      int32
 	field_54      unsafe.Pointer // sub_4873C0_ptr
 	field_55      uint32
@@ -40,6 +40,10 @@ type Struct264 struct {
 	field_63      uint32
 	field_64      unsafe.Pointer
 	field_65      uint32
+}
+
+func (s *Struct264) GetStruct() *Struct264 {
+	return s
 }
 
 var _ = [1]struct{}{}[264-unsafe.Sizeof(Struct264{})]

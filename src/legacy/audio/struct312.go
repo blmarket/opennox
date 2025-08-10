@@ -7,7 +7,7 @@ import (
 )
 
 type Struct312 struct {
-	ListItem
+	ListElement[Struct312, *Struct312]
 	field_3       int32
 	timerGroup_4  timer.TimerGroup
 	field_28      *timer.TimerGroup
@@ -37,6 +37,6 @@ type Struct312 struct {
 
 var _ = [1]struct{}{}[312-unsafe.Sizeof(Struct312{})]
 
-func (s *Struct312) getList() *ListItem {
-	return &s.ListItem
+func (s *Struct312) GetStruct() *Struct312 {
+	return s
 }

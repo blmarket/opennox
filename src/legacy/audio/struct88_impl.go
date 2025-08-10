@@ -12,7 +12,7 @@ func (m *Struct88Module) Sub_486FE0(a1 unsafe.Pointer) *Struct88 {
 	v1p, _ := alloc.Calloc(1, 0x58)
 	v1pp := (*Struct88)(v1p)
 	alloc.Memset(v1p, 0, 0x58)
-	m.sub_425770(&v1pp.field_0)
+	v1pp.field_0.Init_425770()
 	v1pp.field_4 = 0
 	v1pp.field_3 = a1
 

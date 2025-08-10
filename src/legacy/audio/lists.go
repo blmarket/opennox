@@ -2,95 +2,55 @@ package audio
 
 import "unsafe"
 
-type ListHead[T any, P interface {
-	*T
-	getList() *ListItem
-}] struct {
-	ListItem
-}
-
-func (l *ListHead[T, P]) First() *T {
-	return (*T)(unsafe.Pointer(l.Next()))
-}
-
-func (l *ListHead[T, P]) Clear() {
-	l.next = &l.ListItem
-	l.prev = &l.ListItem
-	l.head = &l.ListItem
-}
-
-func (l *ListHead[T, P]) Append(p P) {
-	if l == nil || p == nil {
-		panic("nil list or item")
-	}
-	cur := p.getList()
-	it := l.prev
-
-	// FIXME: in some cases 'it' is null, which suggests that some lists are not initialized properly
-	//        auto-initializing them however leads to more serious issues like double-free
-	if false {
-		if it == nil && l.next == nil && l.head == nil {
-			l.Clear()
-			it = l.prev
-		}
-	}
-
-	cur.next = &l.ListItem
-	cur.prev = it
-
-	l.prev = cur
-	if it != nil { // see above note
-		it.next = cur
-	}
-}
-
 type ListItem struct {
 	next *ListItem
 	prev *ListItem
 	head *ListItem
 }
 
-func (l *ListItem) getList() *ListItem {
+type ListElement[T any, P interface {
+	*T
+}] struct {
+	next *ListElement[T, P]
+	prev *ListElement[T, P]
+	head *ListElement[T, P]
+}
+
+func (l *ListElement[T, P]) PromoteUnsafe() *T {
+	return (*T)(unsafe.Pointer(l))
+}
+
+func (l *ListElement[T, P]) IsHead() bool {
+	return l.head == l
+}
+
+func (l *ListElement[T, P]) Next() *ListElement[T, P] {
+	return l.next
+}
+
+func (l *ListElement[T, P]) Init_425770() *ListElement[T, P] {
+	l.next = l
+	l.prev = l
+	l.head = nil
 	return l
 }
 
-func (l *ListItem) Next() *ListItem {
+func (l *ListElement[T, P]) Clear_425760() {
+	l.next = l
+	l.prev = l
+	l.head = l
+}
+
+func (l *ListElement[T, P]) NextSafe_425940() *ListElement[T, P] {
+	if l.next != nil && l.next == l.head {
+		return nil
+	}
+	return l.next
+}
+
+func (l *ListElement[T, P]) FirstSafe_4258A0() *ListElement[T, P] {
 	if l == nil {
 		return nil
 	}
-	it := l.next
-	if it == it.head {
-		return nil
-	}
-	return it
+	return l.NextSafe_425940()
 }
-
-func (l *ListItem) Remove() {
-	l.prev.next = l.next
-	l.next.prev = l.prev
-	l.next = l
-	l.prev = l
-}
-
-// func nox_common_list_getFirstSafe_425890(list unsafe.Pointer) unsafe.Pointer {
-// 	return unsafe.Pointer((*listHead[listItem, *listItem])(list).First())
-// }
-
-// func nox_common_list_getNextSafe_4258A0(list unsafe.Pointer) unsafe.Pointer {
-// 	if list == nil {
-// 		return nil
-// 	}
-// 	return nox_common_list_getNext_425940(list)
-// }
-
-// func nox_common_list_getNext_425940(list unsafe.Pointer) unsafe.Pointer {
-// 	return unsafe.Pointer((*listItem)(list).Next())
-// }
-
-// func nox_common_list_clear_425760(list unsafe.Pointer) {
-// 	(*listHead[listItem, *listItem])(list).Clear()
-// }
-
-// func nox_common_list_append_4258E0(list, cur unsafe.Pointer) {
-// 	(*listHead[listItem, *listItem])(list).Append((*listItem)(cur))
-// }
