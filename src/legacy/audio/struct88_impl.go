@@ -26,9 +26,9 @@ func (m *Struct88Module) Sub_486FE0(a1 unsafe.Pointer) *Struct88 {
 }
 
 func (m *Struct88Module) sub_487030(a1p *Struct88) {
-	var lpMem unsafe.Pointer = unsafe.Pointer(a1p)
-	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*3))) + 24))), lpMem)
-	*(*uint32)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*3))) + 12))) &= 0xFFFFFFFE
+	// var lpMem unsafe.Pointer = unsafe.Pointer(a1p)
+	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1p.field_3) + 24)), unsafe.Pointer(a1p))
+	*(*uint32)(unsafe.Pointer(uintptr(a1p.field_3) + 12)) &= 0xFFFFFFFE
 	alloc.Free(a1p)
 }
 
