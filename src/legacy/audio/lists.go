@@ -43,14 +43,18 @@ func (l *ListElement[T, P]) Clear_425760() {
 	l.head = l
 }
 
-func (l *ListElement[T, P]) NextSafe_425940() *ListElement[T, P] {
+func (l *ListElement[T, P]) NextSafe_425940() *T {
 	if l.next != nil && l.next == l.head {
 		return nil
 	}
-	return l.next
+	return l.next.PromoteUnsafe()
 }
 
-func (l *ListElement[T, P]) FirstSafe_4258A0() *ListElement[T, P] {
+func (l *ListElement[T, P]) FirstSafe_425890() *T {
+	return l.FirstSafe_4258A0()
+}
+
+func (l *ListElement[T, P]) FirstSafe_4258A0() *T {
 	if l == nil {
 		return nil
 	}
