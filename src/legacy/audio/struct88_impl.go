@@ -46,7 +46,7 @@ func (m *Struct88Module) Sub_4870A0() {
 	if v1 != nil {
 		for {
 			v2 = m.Sub_487100(&v3)
-			m.sub_487070(unsafe.Pointer(v1))
+			m.sub_487070(v1)
 			v1 = v2
 			if v2 == nil {
 				break
@@ -61,14 +61,14 @@ func (m *Struct88Module) Sub_4870E0(a1 **Struct88) *Struct88 {
 	return result
 }
 
-func (m *Struct88Module) sub_487070(lpMem unsafe.Pointer) {
-	m.sub_487090((**uint32)(lpMem))
-	m.sub_487030((*Struct88)(lpMem))
+func (m *Struct88Module) sub_487070(a1 *Struct88) {
+	m.sub_487090(a1)
+	m.sub_487030(a1)
 	*memmap.PtrUint32(0x5D4594, 1193332) = 0
 }
 
-func (m *Struct88Module) sub_487090(a1 **uint32) {
-	m.nox_common_list_remove_425920(unsafe.Pointer(a1))
+func (m *Struct88Module) sub_487090(a1 *Struct88) {
+	a1.field_0.Remove_425920()
 }
 
 func (m *Struct88Module) Sub_487100(a1 **Struct88) *Struct88 {
@@ -79,33 +79,32 @@ func (m *Struct88Module) Sub_487100(a1 **Struct88) *Struct88 {
 	return *a1
 }
 
-func (m *Struct88Module) sub_4875B0(a1 *int32) *int32 {
-	var result *int32
-	result = (*int32)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(&(*m.externs.Dword_587000_155144).field_3)))))
-	*a1 = int32(uintptr(unsafe.Pointer(result)))
+func (m *Struct88Module) sub_4875B0(a1 **Struct264) *Struct264 {
+	result := (*m.externs.Dword_587000_155144).field_3.FirstSafe_425890()
+	*a1 = result
 	return result
 }
 
-func (m *Struct88Module) sub_4875D0(a1 **int32) *int32 {
+func (m *Struct88Module) sub_4875D0(a1 **Struct264) *Struct264 {
 	if *a1 != nil {
-		*a1 = (*int32)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
+		*a1 = (*a1).field_0.NextSafe_4258A0()
 	}
 	return *a1
 }
 
 func (m *Struct88Module) Sub_4875F0() int32 {
 	var (
-		v0     *int32
-		v1     *int32
+		v0     *Struct264
+		v1     *Struct264
 		result int32
-		v3     *int32
+		v3     *Struct264
 	)
 	(*m.externs.Dword_587000_155144).field_6 += 1
-	v0 = m.sub_4875B0((*int32)(unsafe.Pointer(&v3)))
+	v0 = m.sub_4875B0(&v3)
 	if v0 != nil {
 		for {
 			v1 = m.sub_4875D0(&v3)
-			m.sub_487680((*Struct264)(unsafe.Pointer(v0)))
+			m.sub_487680(v0)
 			v0 = v1
 			if v1 == nil {
 				break

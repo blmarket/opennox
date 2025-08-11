@@ -32,10 +32,7 @@ type Struct88Module struct {
 	externs    *AudioExterns
 
 	// External functions
-	sub_487680                          func(*Struct264)
-	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
-	nox_common_list_remove_425920       func(unsafe.Pointer)
-	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
+	sub_487680 func(*Struct264)
 }
 
 func NewStruct88Module(
@@ -48,11 +45,8 @@ func NewStruct88Module(
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 ) *Struct88Module {
 	return &Struct88Module{
-		moduleName:                          moduleName,
-		externs:                             externs,
-		sub_487680:                          sub_487680,
-		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
-		nox_common_list_remove_425920:       nox_common_list_remove_425920,
-		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
+		moduleName: moduleName,
+		externs:    externs,
+		sub_487680: sub_487680,
 	}
 }

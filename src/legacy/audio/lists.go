@@ -90,3 +90,10 @@ func (list *ListElement[T, P]) Append_4258E0(cur *ListElement[T, P]) {
 		lastOrHead.next = cur
 	}
 }
+
+func (e *ListElement[T, P]) Remove_425920() {
+	e.prev.next = e.next
+	e.next.prev = e.prev
+	e.next = e
+	e.prev = e
+}
