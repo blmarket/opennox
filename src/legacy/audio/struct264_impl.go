@@ -26,7 +26,7 @@ func (m *Struct264Module) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *St
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + 16)))++
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + a2*4 + 24))) = uint32(uintptr(unsafe.Pointer(v4m)))
 	v4m.field_64 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 36)))
-	m.nox_common_list_clear_425760(unsafe.Pointer(&v4m.field_50))
+	v4m.field_50.Clear_425760()
 	v4m.TimerGroup_22.Init()
 	v4m.field_53 = 0
 	v4m.field_56 = 33
@@ -164,13 +164,12 @@ func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
 	alloc.Free(a1p)
 }
 
-func (m *Struct264Module) sub_4876A0(a1_ *Struct264) {
+func (m *Struct264Module) sub_4876A0(a1 *Struct264) {
 	var (
-		a1     **uint32 = (**uint32)(unsafe.Pointer(a1_))
 		result int32
 	)
 	(*m.externs.Dword_587000_155144).field_6++
-	m.nox_common_list_remove_425920(unsafe.Pointer(a1))
+	a1.field_0.Remove_425920()
 	result = int32((*m.externs.Dword_587000_155144).field_6 - 1)
 	(*m.externs.Dword_587000_155144).field_6 = uint32(result)
 	if result < 0 {
@@ -285,14 +284,14 @@ func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *Struct312 {
 }
 
 func (m *Struct264Module) sub_4877D0(a1p *Struct264, a2 **Struct312) *Struct312 {
-	result := (*Struct312)(unsafe.Pointer(m.nox_common_list_getFirstSafe_425890(unsafe.Pointer(&a1p.field_50))))
+	result := a1p.field_50.FirstSafe_425890()
 	*a2 = result
 	return result
 }
 
 func (m *Struct264Module) sub_4877F0(a1 **Struct312) *Struct312 {
 	if *a1 != nil {
-		*a1 = (*Struct312)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
+		*a1 = (*a1).NextSafe_4258A0()
 	}
 	return *a1
 }
