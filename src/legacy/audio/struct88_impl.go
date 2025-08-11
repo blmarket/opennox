@@ -38,9 +38,9 @@ func (m *Struct88Module) Sub_487050(a1p *Struct88) {
 
 func (m *Struct88Module) Sub_4870A0() {
 	var (
-		v1 unsafe.Pointer
-		v2 unsafe.Pointer
-		v3 unsafe.Pointer
+		v1 *Struct88
+		v2 *Struct88
+		v3 *Struct88
 	)
 	v1 = m.Sub_4870E0(&v3)
 	if v1 != nil {
@@ -55,8 +55,9 @@ func (m *Struct88Module) Sub_4870A0() {
 	}
 }
 
-func (m *Struct88Module) Sub_4870E0(a1 *unsafe.Pointer) unsafe.Pointer {
-	result := m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(*(**int32)(unsafe.Pointer(&*m.externs.Dword_587000_155144)))))
+func (m *Struct88Module) Sub_4870E0(a1 **Struct88) *Struct88 {
+	result := (*Struct88)(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(*(**int32)(unsafe.Pointer(&*m.externs.Dword_587000_155144))))))
+	// result := (*m.externs.Dword_587000_155144).field_0.FirstSafe_425890()
 	*a1 = result
 	return result
 }
@@ -71,9 +72,11 @@ func (m *Struct88Module) sub_487090(a1 **uint32) {
 	m.nox_common_list_remove_425920(unsafe.Pointer(a1))
 }
 
-func (m *Struct88Module) Sub_487100(a1 *unsafe.Pointer) unsafe.Pointer {
+func (m *Struct88Module) Sub_487100(a1 **Struct88) *Struct88 {
 	if *a1 != nil {
-		*a1 = (unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
+		*a1 = (*Struct88)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
+		// res := (*a1).field_0.NextSafe_4258A0()
+		// *a1 = res
 	}
 	return *a1
 }

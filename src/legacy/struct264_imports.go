@@ -39,7 +39,7 @@ func initStruct264(externs *audio.AudioExterns) {
 		"struct264",
 		nox_common_list_getFirstSafe_425890,
 		func(a1 *unsafe.Pointer) unsafe.Pointer {
-			return Struct88Module.Sub_487100(a1)
+			return unsafe.Pointer(Struct88Module.Sub_487100((**audio.Struct88)(unsafe.Pointer(a1))))
 		},
 		nox_common_list_remove_425920,
 		nox_common_list_append_4258E0,
@@ -55,7 +55,7 @@ func initStruct264(externs *audio.AudioExterns) {
 		sub_486320,
 		sub_425770,
 		func(a1 *unsafe.Pointer) unsafe.Pointer {
-			return unsafe.Pointer(Struct88Module.Sub_4870E0(a1))
+			return unsafe.Pointer(Struct88Module.Sub_4870E0((**audio.Struct88)(unsafe.Pointer(a1))))
 		},
 		func(a1 *audio.Struct264) *audio.Struct312 {
 			return AudioModule.Sub_4BD720(a1)
