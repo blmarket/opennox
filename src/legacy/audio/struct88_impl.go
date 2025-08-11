@@ -56,8 +56,7 @@ func (m *Struct88Module) Sub_4870A0() {
 }
 
 func (m *Struct88Module) Sub_4870E0(a1 **Struct88) *Struct88 {
-	result := (*Struct88)(m.nox_common_list_getFirstSafe_425890((unsafe.Pointer(*(**int32)(unsafe.Pointer(&*m.externs.Dword_587000_155144))))))
-	// result := (*m.externs.Dword_587000_155144).field_0.FirstSafe_425890()
+	result := (*m.externs.Dword_587000_155144).field_0.FirstSafe_425890()
 	*a1 = result
 	return result
 }
@@ -74,9 +73,8 @@ func (m *Struct88Module) sub_487090(a1 **uint32) {
 
 func (m *Struct88Module) Sub_487100(a1 **Struct88) *Struct88 {
 	if *a1 != nil {
-		*a1 = (*Struct88)(unsafe.Pointer(m.nox_common_list_getNextSafe_4258A0((unsafe.Pointer(*a1)))))
-		// res := (*a1).field_0.NextSafe_4258A0()
-		// *a1 = res
+		res := (*a1).field_0.NextSafe_4258A0()
+		*a1 = res
 	}
 	return *a1
 }

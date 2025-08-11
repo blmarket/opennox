@@ -44,10 +44,11 @@ func (l *ListElement[T, P]) Clear_425760() {
 }
 
 func (l *ListElement[T, P]) NextSafe_425940() *T {
-	if l.next != nil && l.next == l.head {
+	it := l.next
+	if it != nil && it == it.head {
 		return nil
 	}
-	return l.next.PromoteUnsafe()
+	return it.PromoteUnsafe()
 }
 
 func (l *ListElement[T, P]) NextSafe_4258A0() *T {
