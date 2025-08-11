@@ -45,16 +45,12 @@ type Struct264Module struct {
 	externs    *AudioExterns
 
 	// External functions
-	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
-	nox_common_list_remove_425920       func(unsafe.Pointer)
-	nullsub_10                          func(uint32)
-	sub_4BDA60                          func(unsafe.Pointer)
-	nox_common_list_clear_425760        func(unsafe.Pointer)
-	nox_common_list_getNextSafe_4258A0  func(unsafe.Pointer) unsafe.Pointer
-	sub_4BDA80                          func(*Struct312) int32
-	sub_486320                          func(unsafe.Pointer, int) unsafe.Pointer
-	sub_425770                          func(unsafe.Pointer) unsafe.Pointer
-	sub_4BD720                          func(*Struct264) *Struct312
+	nullsub_10 func(uint32)
+	sub_4BDA60 func(unsafe.Pointer)
+	sub_4BDA80 func(*Struct312) int32
+	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer
+	sub_425770 func(unsafe.Pointer) unsafe.Pointer
+	sub_4BD720 func(*Struct264) *Struct312
 }
 
 func NewStruct264Module(
@@ -72,17 +68,13 @@ func NewStruct264Module(
 	sub_4BD720 func(*Struct264) *Struct312,
 ) *Struct264Module {
 	return &Struct264Module{
-		moduleName:                          moduleName,
-		externs:                             externs,
-		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
-		nox_common_list_remove_425920:       nox_common_list_remove_425920,
-		nullsub_10:                          nullsub_10,
-		sub_4BDA60:                          sub_4BDA60,
-		nox_common_list_clear_425760:        nox_common_list_clear_425760,
-		nox_common_list_getNextSafe_4258A0:  nox_common_list_getNextSafe_4258A0,
-		sub_4BDA80:                          sub_4BDA80,
-		sub_486320:                          sub_486320,
-		sub_425770:                          sub_425770,
-		sub_4BD720:                          sub_4BD720,
+		moduleName: moduleName,
+		externs:    externs,
+		nullsub_10: nullsub_10,
+		sub_4BDA60: sub_4BDA60,
+		sub_4BDA80: sub_4BDA80,
+		sub_486320: sub_486320,
+		sub_425770: sub_425770,
+		sub_4BD720: sub_4BD720,
 	}
 }
