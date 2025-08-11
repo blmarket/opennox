@@ -155,7 +155,6 @@ func initAudio(externs *audio.AudioExterns) {
 		},
 	)
 
-	initStruct88(externs)
 	initPhase6(externs)
 	initStruct264(externs)
 }

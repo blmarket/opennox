@@ -18,42 +18,24 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
-var (
-	Struct88Module *audio.Struct88Module
-)
-
-func initStruct88(externs *audio.AudioExterns) {
-	var (
-		dword_587000_155144 **audio.Struct587000_155144 = (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144))
-	)
-	var _ **audio.Struct587000_155144 = dword_587000_155144
-	Struct88Module = audio.NewStruct88Module(
-		externs,
-		"struct88",
-		Struct264Module.Sub_487680,
-		nox_common_list_getNextSafe_4258A0,
-		nox_common_list_remove_425920,
-		nox_common_list_getFirstSafe_425890,
-		nox_common_list_append_4258E0,
-	)
-}
-
+// TODO: No need to use C binding.
+//
 //export sub_4870A0
 func sub_4870A0() {
-	Struct88Module.Sub_4870A0()
+	Struct264Module.Sub_4870A0()
 }
 
 //export sub_4875F0
 func sub_4875F0() int32 {
-	return Struct88Module.Sub_4875F0()
+	return Struct264Module.Sub_4875F0()
 }
 
 //export sub_486FE0
 func sub_486FE0(a1 int) *C.struct88 {
-	return (*C.struct88)(unsafe.Pointer(Struct88Module.Sub_486FE0(unsafe.Pointer(uintptr(a1)))))
+	return (*C.struct88)(unsafe.Pointer(Struct264Module.Sub_486FE0(unsafe.Pointer(uintptr(a1)))))
 }
 
 //export sub_487050
 func sub_487050(a1 *C.struct88) {
-	Struct88Module.Sub_487050((*audio.Struct88)(unsafe.Pointer(a1)))
+	Struct264Module.Sub_487050((*audio.Struct88)(unsafe.Pointer(a1)))
 }
