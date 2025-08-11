@@ -50,6 +50,13 @@ func (l *ListElement[T, P]) NextSafe_425940() *T {
 	return l.next.PromoteUnsafe()
 }
 
+func (l *ListElement[T, P]) NextSafe_4258A0() *T {
+	if l == nil {
+		return nil
+	}
+	return l.NextSafe_425940()
+}
+
 func (l *ListElement[T, P]) FirstSafe_425890() *T {
 	return l.FirstSafe_4258A0()
 }
