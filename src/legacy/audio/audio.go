@@ -21,7 +21,7 @@ type AudioExterns struct {
 	Sub_4BD8C0_ptr                unsafe.Pointer
 	Sub_4BD940_ptr                unsafe.Pointer
 	Sub_4BD9B0_ptr                unsafe.Pointer
-	Dword_587000_127004           *unsafe.Pointer
+	Dword_587000_127004           **timer.TimerGroup
 	Dword_5d4594_805984           **Struct264
 	Ptr_TimerGroup_5d4594_1193340 **timer.TimerGroup
 	Sub_452770_ptr                unsafe.Pointer
@@ -53,7 +53,6 @@ type AudioModule struct {
 	sub_4BD2D0                          func(unsafe.Pointer)
 	sub_4BDA80                          func(*Struct312)
 	nox_common_list_clear_425760        func(unsafe.Pointer)
-	sub_486320                          func(unsafe.Pointer, int) unsafe.Pointer
 	nox_xxx_getSndName_40AF80           func(int) unsafe.Pointer
 	nox_common_list_remove_425920       func(unsafe.Pointer)
 	sub_4862E0                          func(unsafe.Pointer, int) int
@@ -104,7 +103,6 @@ func NewAudioModule(
 		sub_4BD2D0:                          sub_4BD2D0,
 		sub_4BDA80:                          sub_4BDA80,
 		nox_common_list_clear_425760:        nox_common_list_clear_425760,
-		sub_486320:                          sub_486320,
 		nox_xxx_getSndName_40AF80:           nox_xxx_getSndName_40AF80,
 		nox_common_list_remove_425920:       nox_common_list_remove_425920,
 		sub_4862E0:                          sub_4862E0,

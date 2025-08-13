@@ -12,9 +12,9 @@ type Struct312 struct {
 	timerGroup_4  timer.TimerGroup
 	field_28      *timer.TimerGroup
 	field_29      *timer.TimerGroup
-	field_30      uint32
+	field_30      int32
 	field_31      uint32
-	field_32      uint32
+	field_32      int32
 	field_33      *Struct264
 	field_34      uint32
 	field_35      unsafe.Pointer // sub_452770_ptr

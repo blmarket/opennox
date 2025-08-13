@@ -14,7 +14,7 @@ func (m *Struct264Module) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *St
 		v3 int32
 		v4 *uint32
 	)
-	v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 12))))
+	v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_3)))))))
 	v4p, _ := alloc.Calloc(1, 0x108)
 	v4m := (*Struct264)(v4p)
 	v4 = (*uint32)(v4p)
@@ -23,8 +23,8 @@ func (m *Struct264Module) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *St
 	v4m.field_6 = uint32(a2)
 	v4m.field_5 = unsafe.Pointer(uintptr(a1))
 	v4m.field_4 = 0
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 16)))++
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + a2*4 + 24))) = uint32(uintptr(unsafe.Pointer(v4m)))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_4))))))++
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_6[a2])))))) = uint32(uintptr(unsafe.Pointer(v4m)))
 	v4m.field_64 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 36)))
 	v4m.field_50.Clear_425760()
 	v4m.TimerGroup_22.Init()
@@ -212,18 +212,18 @@ func (m *Struct264Module) Sub_452810(a1 int32, a2 int8) *Struct312 {
 		v3 = m.sub_487810(*m.externs.Dword_5d4594_1045428, 1)
 		v2 = v3
 		if v3 != nil {
-			if *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*31))&0x15 != 0 && *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*30)) > a1 {
+			if *(*int32)(unsafe.Add(unsafe.Pointer(&v3.field_31), 0))&0x15 != 0 && *(*int32)(unsafe.Add(unsafe.Pointer(&v3.field_30), 0)) > a1 {
 				return nil
 			}
 			m.sub_4BDA80(v3)
-			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*29)) = int32(uintptr(*m.externs.Dword_587000_127004))
-			*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*30)) = a1
+			v2.field_29 = (*m.externs.Dword_587000_127004)
+			v2.field_30 = a1
 			if int32(a2)&1 != 0 {
-				*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*32)) = -1
+				v2.field_32 = -1
 			} else {
-				*(*int32)(unsafe.Add(unsafe.Pointer(v2), 4*32)) = 0
+				v2.field_32 = 0
 			}
-			m.sub_486320(unsafe.Pointer((*int32)(unsafe.Add(unsafe.Pointer(v2), 4*4))), 0x4000)
+			v2.timerGroup_4.Timers[0].SetRaw(0x4000)
 		}
 	}
 	return v2

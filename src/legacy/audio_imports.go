@@ -93,7 +93,7 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
-		Dword_587000_127004:          (*unsafe.Pointer)(&C.dword_587000_127004),
+		Dword_587000_127004:          (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
 
 		Ptr_TimerGroup_5d4594_1193340: memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
@@ -241,8 +241,8 @@ func sub_452F50(a1 *C.struct576, a2 int32) int32 {
 }
 
 //export nox_xxx_draw_452300
-func nox_xxx_draw_452300(a1 *C.struct200) *uint32 {
-	return AudioModule.Nox_xxx_draw_452300((*audio.Struct200)(unsafe.Pointer(a1)))
+func nox_xxx_draw_452300(a1 *C.struct200) *C.struct576 {
+	return (*C.struct576)(unsafe.Pointer(AudioModule.Nox_xxx_draw_452300((*audio.Struct200)(unsafe.Pointer(a1)))))
 }
 
 //export nox_xxx_draw_452270
@@ -256,8 +256,8 @@ func sub_452EE0(a1 *C.struct576, a2 int32) int32 {
 }
 
 //export sub_452F80
-func sub_452F80(a1 *C.struct576, a2 int32) *uint32 {
-	return AudioModule.Sub_452F80((*audio.Struct576)(unsafe.Pointer(a1)), a2)
+func sub_452F80(a1 *C.struct576, a2 int32) {
+	AudioModule.Sub_452F80((*audio.Struct576)(unsafe.Pointer(a1)), a2)
 }
 
 //export sub_452E90

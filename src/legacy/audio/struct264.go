@@ -48,7 +48,6 @@ type Struct264Module struct {
 	nullsub_10 func(uint32)
 	sub_4BDA60 func(unsafe.Pointer)
 	sub_4BDA80 func(*Struct312) int32
-	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer
 	sub_425770 func(unsafe.Pointer) unsafe.Pointer
 	sub_4BD720 func(*Struct264) *Struct312
 }
@@ -73,7 +72,6 @@ func NewStruct264Module(
 		nullsub_10: nullsub_10,
 		sub_4BDA60: sub_4BDA60,
 		sub_4BDA80: sub_4BDA80,
-		sub_486320: sub_486320,
 		sub_425770: sub_425770,
 		sub_4BD720: sub_4BD720,
 	}

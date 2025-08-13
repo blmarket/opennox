@@ -458,7 +458,7 @@ func (m *AudioModule) sub_452690(a3_ *Struct576, a4 int64, a5 int32) int64 {
 	return result
 }
 
-func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *uint32 {
+func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *Struct576 {
 	if *m.Externs.Dword_5d4594_1045432 == 0 {
 		return nil
 	}
@@ -493,7 +493,7 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *uint32 {
 		*p_++
 		return x
 	}()
-	return (*uint32)(unsafe.Pointer(v1p))
+	return v1p
 }
 
 func (m *AudioModule) Sub_452E90(a1 *uint32, a2_ *Struct576) int32 {
@@ -510,10 +510,10 @@ func (m *AudioModule) Sub_452E90(a1 *uint32, a2_ *Struct576) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_452EE0(a1_ *Struct576, a2 int32) int32 {
-	var v2 int32 = int32(m.sub_452F10(a1_, a2))
-	m.sub_486320(unsafe.Pointer((*uint32)(unsafe.Pointer(&a1_.timerGroup_46))), int(v2))
-	return bool2int32(a1_.timerGroup_46.Timers[0].Update())
+func (m *AudioModule) Sub_452EE0(a1p *Struct576, a2 int32) int32 {
+	var v2 int32 = int32(m.sub_452F10(a1p, a2))
+	a1p.timerGroup_46.Timers[0].SetRaw(uint32(v2))
+	return bool2int32(a1p.timerGroup_46.Timers[0].Update())
 }
 
 func (m *AudioModule) sub_452F10(a1_ *Struct576, a2 int32) uint32 {
@@ -537,9 +537,9 @@ func (m *AudioModule) Sub_452F50(a1p *Struct576, a2 int32) int32 {
 	return 0
 }
 
-func (m *AudioModule) Sub_452F80(a1_ *Struct576, a2 int32) *uint32 {
+func (m *AudioModule) Sub_452F80(a1p *Struct576, a2 int32) {
 	var v2 int32 = m.sub_452FA0(a2)
-	return (*uint32)(m.sub_486320(unsafe.Pointer(&a1_.timerGroup_46.Timers[2]), int(v2)))
+	a1p.timerGroup_46.Timers[2].SetRaw(uint32(v2))
 }
 
 func (m *AudioModule) sub_451CF0(a1 *uint32) int32 {
@@ -1036,58 +1036,48 @@ func (m *AudioModule) sub_4BD660(a1 int32) int32 {
 func (m *AudioModule) Nox_xxx_clientPlaySoundSpecial_452D80(a1 int32, a2 int32) {
 	var (
 		result *uint32
-		v3     *uint32
 	)
 	result = (*uint32)(unsafe.Pointer(m.Nox_xxx_draw_452270(a1)))
 	if result == nil {
 		return
 	}
-	result = m.Nox_xxx_draw_452300((*Struct200)(unsafe.Pointer(result)))
-	v3 = result
-	if result == nil {
+	res := m.Nox_xxx_draw_452300((*Struct200)(unsafe.Pointer(result)))
+	if res == nil {
 		return
 	}
-	m.Sub_452EE0((*Struct576)(unsafe.Pointer(result)), a2)
-	m.sub_452510((*Struct576)(unsafe.Pointer(v3)))
+	m.Sub_452EE0(res, a2)
+	m.sub_452510(res)
 }
 
 func (m *AudioModule) Sub_452DC0(a1 int32, a2 int32, a3 int32) {
-	var (
-		result *uint32
-		v4     *uint32
-	)
-	result = (*uint32)(unsafe.Pointer(m.Nox_xxx_draw_452270(a1)))
-	if result == nil {
+	res := m.Nox_xxx_draw_452270(a1)
+	if res == nil {
 		return
 	}
-	result = m.Nox_xxx_draw_452300((*Struct200)(unsafe.Pointer(result)))
-	v4 = result
-	if result == nil {
+	res2 := m.Nox_xxx_draw_452300(res)
+	v4 := res2
+	if res2 == nil {
 		return
 	}
-	m.Sub_452EE0((*Struct576)(unsafe.Pointer(result)), a2)
-	m.Sub_452F80((*Struct576)(unsafe.Pointer(v4)), a3)
-	m.sub_452510((*Struct576)(unsafe.Pointer(v4)))
+	m.Sub_452EE0(res2, a2)
+	m.Sub_452F80(v4, a3)
+	m.sub_452510(v4)
 }
 
 func (m *AudioModule) Sub_452E10(a1 int32, a2 int32, a3 int32) {
-	var (
-		result *uint32
-		v4     *uint32
-	)
-	result = (*uint32)(unsafe.Pointer(m.Nox_xxx_draw_452270(a1)))
-	if result == nil {
+	res1 := m.Nox_xxx_draw_452270(a1)
+	if res1 == nil {
 		return
 	}
-	result = m.Nox_xxx_draw_452300((*Struct200)(unsafe.Pointer(result)))
-	v4 = result
-	if result == nil {
+	res2 := m.Nox_xxx_draw_452300(res1)
+	v4 := res2
+	if res2 == nil {
 		return
 	}
-	m.Sub_452EE0((*Struct576)(unsafe.Pointer(result)), a2)
-	m.Sub_452F80((*Struct576)(unsafe.Pointer(v4)), a3)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*75)) = 2
-	m.sub_452510((*Struct576)(unsafe.Pointer(v4)))
+	m.Sub_452EE0(res2, a2)
+	m.Sub_452F80(v4, a3)
+	v4.field_75 = 2
+	m.sub_452510(v4)
 }
 
 func (m *AudioModule) Sub_4BDB30(a1 *Struct312) {
