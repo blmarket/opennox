@@ -8,13 +8,26 @@ import (
 
 type Struct88 struct {
 	field_0 ListElement[Struct88, *Struct88]
-	field_3 unsafe.Pointer
+	field_3 *Struct587000_94032
 	field_4 uint32
 	field_5 uint32
 	field_6 [16]*Struct264
 }
 
 var _ = [1]struct{}{}[88-unsafe.Sizeof(Struct88{})]
+
+type Struct587000_94032 struct {
+	field_0 unsafe.Pointer
+	field_1 unsafe.Pointer
+	field_2 unsafe.Pointer
+	field_3 uint32
+	field_4 unsafe.Pointer
+	field_5 unsafe.Pointer
+	field_6 unsafe.Pointer
+	field_7 unsafe.Pointer
+	field_8 unsafe.Pointer
+	field_9 unsafe.Pointer
+}
 
 type UnknownListElement struct {
 	ListElement[UnknownListElement, *UnknownListElement]

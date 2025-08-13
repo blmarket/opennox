@@ -32,7 +32,7 @@ func sub_4875F0() int32 {
 
 //export sub_486FE0
 func sub_486FE0(a1 int) *C.struct88 {
-	return (*C.struct88)(unsafe.Pointer(Struct264Module.Sub_486FE0(unsafe.Pointer(uintptr(a1)))))
+	return (*C.struct88)(unsafe.Pointer(Struct264Module.Sub_486FE0((*audio.Struct587000_94032)(unsafe.Pointer(uintptr(a1))))))
 }
 
 //export sub_487050

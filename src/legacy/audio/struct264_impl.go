@@ -9,23 +9,20 @@ import (
 )
 
 func (m *Struct264Module) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *Struct264 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
-		v3 int32
-		v4 *uint32
+		v3 *Struct587000_94032
 	)
-	v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_3)))))))
+	v3 = a1p.field_3
 	v4p, _ := alloc.Calloc(1, 0x108)
 	v4m := (*Struct264)(v4p)
-	v4 = (*uint32)(v4p)
 	alloc.Memset(unsafe.Pointer(v4m), 0, 0x108)
 	m.sub_425770(unsafe.Pointer(&v4m.field_0))
 	v4m.field_6 = uint32(a2)
-	v4m.field_5 = unsafe.Pointer(uintptr(a1))
+	v4m.field_5 = a1p
 	v4m.field_4 = 0
 	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_4))))))++
 	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_6[a2])))))) = uint32(uintptr(unsafe.Pointer(v4m)))
-	v4m.field_64 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 36)))
+	v4m.field_64 = v3.field_9
 	v4m.field_50.Clear_425760()
 	v4m.TimerGroup_22.Init()
 	v4m.field_53 = 0
@@ -34,15 +31,13 @@ func (m *Struct264Module) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *St
 	v4m.field_58 = 0
 	v4m.field_62 = 0
 	v4m.field_54 = m.externs.Sub_4873C0_ptr
-	m.nullsub_10(uint32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*15))))))
-	m.nullsub_10(uint32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*8))))))
 	if a3 != nil {
 		m.sub_487590(v4m, a3)
 	}
-	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(v3 + 28))), unsafe.Pointer(v4m)) == 0 {
+	if ccall.CallIntPtr(v3.field_7, unsafe.Pointer(v4m)) == 0 {
 		return v4m
 	}
-	if v4 != nil {
+	if v4m != nil {
 		m.sub_4872C0(v4m)
 	}
 	return nil
@@ -149,17 +144,17 @@ func (m *Struct264Module) sub_487590(a1_ *Struct264, a2 *[7]uint32) int32 {
 func (m *Struct264Module) sub_4872C0(a1p *Struct264) {
 	var (
 		// lpMem unsafe.Pointer = unsafe.Pointer(a1p)
-		v1 int32
+		v1 *Struct88
 		v2 int32
 	)
 	m.sub_487910(a1p, -1)
-	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1p.field_5) + 12)) + 32))), unsafe.Pointer(a1p))
-	*(*uint32)(unsafe.Pointer(uintptr(a1p.field_5) + uintptr(a1p.field_6*4) + uintptr(24))) = 0
-	v1 = int32(uintptr(a1p.field_5))
-	v2 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 16))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(v1 + 16))) = uint32(v2)
+	ccall.CallVoidPtr(a1p.field_5.field_3.field_8, unsafe.Pointer(a1p))
+	a1p.field_5.field_6[a1p.field_6] = nil
+	v1 = a1p.field_5
+	v2 = int32(v1.field_4) - 1
+	v1.field_4 = uint32(v2)
 	if v2 < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(a1p.field_5) + uintptr(16))) = 0
+		v1.field_4 = 0
 	}
 	alloc.Free(a1p)
 }
@@ -364,7 +359,7 @@ func (m *Struct264Module) sub_486E30(a1p *Struct264, a2p *Struct312) int32 {
 	return result
 }
 
-func (m *Struct264Module) Sub_486FE0(a1 unsafe.Pointer) *Struct88 {
+func (m *Struct264Module) Sub_486FE0(a1 *Struct587000_94032) *Struct88 {
 	v1p, _ := alloc.Calloc(1, 0x58)
 	v1pp := (*Struct88)(v1p)
 	alloc.Memset(v1p, 0, 0x58)
@@ -372,7 +367,7 @@ func (m *Struct264Module) Sub_486FE0(a1 unsafe.Pointer) *Struct88 {
 	v1pp.field_4 = 0
 	v1pp.field_3 = a1
 
-	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1) + 20)), unsafe.Pointer(v1pp)) == 0 {
+	if ccall.CallIntPtr(a1.field_5, unsafe.Pointer(v1pp)) == 0 {
 		return v1pp
 	}
 	if v1pp != nil {
@@ -383,8 +378,8 @@ func (m *Struct264Module) Sub_486FE0(a1 unsafe.Pointer) *Struct88 {
 
 func (m *Struct264Module) sub_487030(a1p *Struct88) {
 	// var lpMem unsafe.Pointer = unsafe.Pointer(a1p)
-	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1p.field_3) + 24)), unsafe.Pointer(a1p))
-	*(*uint32)(unsafe.Pointer(uintptr(a1p.field_3) + 12)) &= 0xFFFFFFFE
+	ccall.CallVoidPtr(a1p.field_3.field_6, unsafe.Pointer(a1p))
+	a1p.field_3.field_3 &= 0xFFFFFFFE
 	alloc.Free(a1p)
 }
 

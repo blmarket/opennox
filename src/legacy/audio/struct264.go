@@ -10,7 +10,7 @@ type Struct264 struct {
 	field_0       ListElement[Struct264, *Struct264]
 	field_3       uint32
 	field_4       uint32
-	field_5       unsafe.Pointer
+	field_5       *Struct88
 	field_6       uint32
 	field_7       uint32
 	field_8       uint32
