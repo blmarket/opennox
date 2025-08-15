@@ -6,6 +6,19 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
+// Size unknown
+type Struct264Field64 struct {
+	field_0 unsafe.Pointer
+	field_1 unsafe.Pointer // function pointer takes *Struct312 as argument
+	field_2 unsafe.Pointer
+	field_3 unsafe.Pointer
+	field_4 unsafe.Pointer
+	field_5 unsafe.Pointer
+	field_6 unsafe.Pointer
+	field_7 unsafe.Pointer
+	field_8 unsafe.Pointer // function pointer takes *Struct312 as an argument
+}
+
 type Struct264 struct {
 	field_0       ListElement[Struct264, *Struct264]
 	field_3       uint32
@@ -34,7 +47,7 @@ type Struct264 struct {
 	field_58      int64
 	field_60      int64
 	field_62      int64
-	field_64      unsafe.Pointer
+	field_64      *Struct264Field64
 	field_65      uint32
 }
 

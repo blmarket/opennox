@@ -1095,7 +1095,7 @@ func (m *AudioModule) Sub_4BD720(a1p *Struct264) *Struct312 {
 	m.sub_4BD7C0(v1p)
 	v1p.field_33 = a1p
 	v1p.field_43 = a1p.field_64
-	if ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1p.field_64)) + 4))), unsafe.Pointer(v1p)) == 0 {
+	if ccall.CallIntPtr(a1p.field_64.field_1, unsafe.Pointer(v1p)) == 0 {
 		return v1p
 	}
 	if v1 != nil {

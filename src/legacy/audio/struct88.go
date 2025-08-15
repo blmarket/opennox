@@ -26,7 +26,7 @@ type Struct587000_94032 struct {
 	field_6 unsafe.Pointer
 	field_7 unsafe.Pointer
 	field_8 unsafe.Pointer
-	field_9 unsafe.Pointer
+	field_9 *Struct264Field64
 }
 
 type UnknownListElement struct {

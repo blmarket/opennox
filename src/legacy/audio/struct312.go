@@ -25,7 +25,7 @@ type Struct312 struct {
 	field_40      uint32
 	field_41      uint32
 	field_42      uint32
-	field_43      unsafe.Pointer // Function pointer
+	field_43      *Struct264Field64
 	timerGroup_44 timer.TimerGroup
 	field_68      uint32
 	field_69      unsafe.Pointer // sub_4BD8C0_ptr

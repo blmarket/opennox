@@ -93,7 +93,7 @@ func (m *Phase6Module) Sub_4873C0(a3p *Struct264) int32 {
 					v12p.timerGroup_4.Update()
 					if v17 || v12p.timerGroup_4.IsUpdated() || (v12p.field_29 != nil && v12p.field_29.IsUpdated()) || (v12p.field_28 != nil && v12p.field_28.IsUpdated()) {
 						m.sub_4BD840(v12p)
-						ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Add(v12p.field_43, 32)), unsafe.Pointer(v12p))
+						ccall.CallVoidPtr(v12p.field_43.field_8, unsafe.Pointer(v12p))
 					}
 				}
 				v12 = v13
