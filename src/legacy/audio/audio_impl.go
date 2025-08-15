@@ -571,7 +571,8 @@ func (m *AudioModule) sub_451CF0(a1p *Struct576) int32 {
 	return result
 }
 
-func (m *AudioModule) sub_451DC0(a1 int32) int32 {
+func (m *AudioModule) sub_451DC0(a1p *Struct576) int32 {
+	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
 		v1     *uint32
 		result int32
