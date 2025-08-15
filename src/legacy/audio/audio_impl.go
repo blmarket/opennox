@@ -842,11 +842,7 @@ func (m *AudioModule) Sub_451970() {
 func (m *AudioModule) Sub_4519C0() {
 	var (
 		result int32
-		v1     int32
-		v2     int32
 		v3     int32
-		v4     int32
-		v5     *uint8
 		v6     *uint8
 		v7     *uint8
 		v8     int32
@@ -863,54 +859,59 @@ func (m *AudioModule) Sub_4519C0() {
 	}
 	*memmap.PtrUint32(0x5D4594, 1045448) = 1
 	(*m.Externs.Ptr_TimerGroup_587000_127004).Update()
-	v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
+	// v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
+	v1p := m.Externs.ListHead_5d4594_840612.next
 	*memmap.PtrUint32(0x5D4594, 1045440)++
-	if unsafe.Pointer(m.Externs.ListHead_5d4594_840612.next) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+	if m.Externs.ListHead_5d4594_840612.next != m.Externs.ListHead_5d4594_840612 {
 		for {
-			v2 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 36))))
-			if *(*uint32)(unsafe.Pointer(uintptr(v2 + 100))) != *memmap.PtrUint32(0x5D4594, 1045440) {
-				m.nox_common_list_clear_425760((unsafe.Pointer(uintptr(v2 + 88))))
-				*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(v1 + 36))) + 52))) = 0
-				*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(v1 + 36))) + 100))) = *memmap.PtrUint32(0x5D4594, 1045440)
+			v1pp := v1p.PromoteUnsafe()
+			v2p := v1pp.field_9
+			if v2p.field_25 != *memmap.PtrUint32(0x5D4594, 1045440) {
+				v2p.field_22.Clear_425760()
+				v2p.field_13 = 0
+				v2p.field_25 = *memmap.PtrUint32(0x5D4594, 1045440)
 			}
-			m.sub_486520(unsafe.Pointer(uintptr(v1 + 184)))
-			if *(*uint32)(unsafe.Pointer(uintptr(v1 + 28))) != 4 {
-				m.sub_451BE0((*Struct576)(unsafe.Pointer(uintptr(v1))))
+
+			v1pp.timerGroup_46.Update()
+			if v1pp.field_7 != 4 {
+				m.sub_451BE0(v1pp)
 			}
-			v1 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1))))
-			if unsafe.Pointer((*uint8)(unsafe.Pointer(uintptr(v1)))) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+			v1p = v1p.next
+			if v1p == m.Externs.ListHead_5d4594_840612 {
 				break
 			}
 		}
-		v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
-		if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+		v1p = m.Externs.ListHead_5d4594_840612.next
+		if v1p != m.Externs.ListHead_5d4594_840612 {
 			for {
-				m.sub_452510((*Struct576)(unsafe.Pointer(uintptr(v1))))
-				v1 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1))))
-				if unsafe.Pointer((*uint8)(unsafe.Pointer(uintptr(v1)))) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+				m.sub_452510(v1p.PromoteUnsafe())
+				v1p = v1p.next
+				if v1p == m.Externs.ListHead_5d4594_840612 {
 					break
 				}
 			}
-			v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
+			v1p = m.Externs.ListHead_5d4594_840612.next
 		}
 	}
 	v3 = 0
 	m.sub_452010()
-	if unsafe.Pointer((*uint8)(unsafe.Pointer(uintptr(v1)))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+	if v1p != m.Externs.ListHead_5d4594_840612 {
 		for {
-			v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 176))))
-			v5 = *(**uint8)(unsafe.Pointer(uintptr(v1)))
-			if v4 == 0 || uint32(v1) != *(*uint32)(unsafe.Pointer(uintptr(v4 + 152))) {
-				m.Sub_4523D0((*Struct576)(unsafe.Pointer(uintptr(v1))))
+			v1pp := v1p.PromoteUnsafe()
+			v4 := v1pp.field_44
+			// v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 176))))
+			v5 := v1p.next
+			if v4 == nil || v1pp != v4.field_38 {
+				m.Sub_4523D0(v1pp)
 			}
-			if int32(*(*uint8)(unsafe.Pointer(uintptr(v1 + 24))))&1 != 0 {
-				m.sub_451FE0((*Struct576)(unsafe.Pointer(uintptr(v1))))
+			if v1pp.field_6&1 != 0 {
+				m.sub_451FE0(v1pp)
 			} else {
-				v3 += int32(((*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(v1 + 36))) + 20))) >> 16) * 33) >> 14)
-				m.sub_452050((*Struct576)(unsafe.Pointer(uintptr(v1))))
+				v3 += int32(((v1pp.field_9.field_4.Current >> 16) * 33) >> 14)
+				m.sub_452050(v1pp)
 			}
-			v1 = int32(uintptr(unsafe.Pointer(v5)))
-			if unsafe.Pointer(v5) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+			v1p = v5
+			if v5 == m.Externs.ListHead_5d4594_840612 {
 				break
 			}
 		}
@@ -921,6 +922,7 @@ func (m *AudioModule) Sub_4519C0() {
 		m.Externs.TimerGroup_5d4594_1045228.Timers[0].SetInterp(0x4000 * 100 / uint32(v3))
 	}
 	m.Externs.TimerGroup_5d4594_1045228.Update()
+
 	v6 = *(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))
 	if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
 		for {
