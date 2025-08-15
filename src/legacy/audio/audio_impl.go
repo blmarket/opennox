@@ -1104,9 +1104,9 @@ func (m *AudioModule) Sub_4BD720(a1p *Struct264) *Struct312 {
 	return nil
 }
 
-func (m *AudioModule) Sub_4BD7A0(lpMem *Struct312) {
-	ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*((*uint32)(unsafe.Add(unsafe.Pointer((lpMem)), 4*43))) + 8))), unsafe.Pointer(lpMem))
-	alloc.FreePtr(unsafe.Pointer(lpMem))
+func (m *AudioModule) Sub_4BD7A0(a1 *Struct312) {
+	ccall.CallVoidPtr(a1.field_43.field_2, unsafe.Pointer(a1))
+	alloc.FreePtr(unsafe.Pointer(a1))
 }
 
 func (m *AudioModule) sub_4BD7C0(a1p *Struct312) {

@@ -9,8 +9,8 @@ import (
 // Size unknown
 type Struct264Field64 struct {
 	field_0 unsafe.Pointer
-	field_1 unsafe.Pointer // function pointer takes *Struct312 as argument
-	field_2 unsafe.Pointer
+	field_1 unsafe.Pointer // function pointer takes *Struct312 as an argument
+	field_2 unsafe.Pointer // Function pointer takes *Struct312 as an argument
 	field_3 unsafe.Pointer
 	field_4 unsafe.Pointer
 	field_5 unsafe.Pointer
