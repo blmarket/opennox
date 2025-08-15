@@ -222,26 +222,24 @@ func (m *AudioModule) Nox_xxx_draw_452270(a1 int32) *Struct200 {
 }
 
 func (m *AudioModule) Sub_4526F0(a1p *Struct312) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
-		v1 *uint32
 		v2 int32
 	)
-	v1 = *(**uint32)(unsafe.Pointer(uintptr(a1 + 152)))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*6)) &= 0xFFFFFFFD
+	v1p := a1p.field_38
+	v1p.field_6 &= 0xFD
 	v2 = 4
-	if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*7)) != 4 {
-		if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*74)) != 0 || *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*142)) != 0 {
+	if v1p.field_7 != 4 {
+		if v1p.field_74 != 0 || v1p.field_142 != 0 {
 			v2 = 1
 		} else {
-			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*71)) = 0
+			v1p.field_71 = 0
 		}
-		if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*71)) != 0 {
-			m.sub_452690((*Struct576)(unsafe.Pointer(v1)), int64(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*71))), v2)
-			*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*71)) = 0
+		if v1p.field_71 != 0 {
+			m.sub_452690(v1p, int64(v1p.field_71), v2)
+			v1p.field_71 = 0
 			return 0
 		}
-		*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*7)) = uint32(v2)
+		v1p.field_7 = uint32(v2)
 	}
 	return 0
 }
@@ -449,12 +447,12 @@ func (m *AudioModule) sub_452510(a3_ *Struct576) {
 	}
 }
 
-func (m *AudioModule) sub_452690(a3_ *Struct576, a4 int64, a5 int32) int64 {
+func (m *AudioModule) sub_452690(a3p *Struct576, a4 int64, a5 int32) int64 {
 	var result int64
-	a3_.field_8 = uint32(a5)
+	a3p.field_8 = uint32(a5)
 	result = a4 + int64(m.nox_platform_get_ticks())
-	a3_.field_72 = uint64(result)
-	a3_.field_7 = 2
+	a3p.field_72 = uint64(result)
+	a3p.field_7 = 2
 	return result
 }
 
