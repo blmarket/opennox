@@ -1,5 +1,5 @@
 #!/bin/bash
-echo '#include <stdio.h>"' > phase7.c
+echo '#include <stdio.h>' > phase7.c
 echo '' >> phase7.c
 echo '#include "defs.h"' >> phase7.c
 echo '#include "operators.h"' >> phase7.c
