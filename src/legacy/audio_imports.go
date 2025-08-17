@@ -117,15 +117,12 @@ func initAudio(externs *audio.AudioExterns) {
 		externs,
 		"audio",
 		PlatformTicks,
-		sub_425770,
-		nox_common_list_append_4258E0,
 		sub_4BD300,
 		func(a2 *audio.Struct312) int {
 			return int(Phase6Module.Sub_4BDB40(a2))
 		},
 		sub_486520,
 		sub_4BD280,
-		nox_common_list_getFirstSafe_425890,
 		sub_4BD340,
 		sub_4BD2E0,
 		sub_4BD470,
@@ -136,12 +133,9 @@ func initAudio(externs *audio.AudioExterns) {
 		func(a1 *audio.Struct312) {
 			Phase6Module.Sub_4BDA80(a1)
 		},
-		nox_common_list_clear_425760,
-		sub_486320,
 		func(id int) unsafe.Pointer {
 			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
 		},
-		nox_common_list_remove_425920,
 		func(a1 unsafe.Pointer, a2 int) int {
 			return bool2int((*timer.Timer)(a1).Init(int32(a2)))
 		},
