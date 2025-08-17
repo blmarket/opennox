@@ -1146,22 +1146,22 @@ func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p unsafe.Pointer) {
 		v4 *uint32
 		v5 int32
 	)
-	*(*uint32)(unsafe.Pointer(&a1p.field_72)) = uint32(uintptr(unsafe.Pointer(a2)))
+	a1p.field_72 = unsafe.Pointer(a2)
 	if a2 != nil {
 		v2 = m.sub_487C80(int32(uintptr(unsafe.Pointer(a2))))
-		*(*uint32)(unsafe.Pointer(&a1p.field_73)) = uint32(v2)
+		a1p.field_73 = uint32(v2)
 		if v2 != 0 {
-			*(*uint32)(unsafe.Pointer(&a1p.field_74)) = *(*uint32)(unsafe.Pointer(uintptr(v2 + 12)))
+			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(v2 + 12)))
 			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(v2 + 16))))
-			*(*uint32)(unsafe.Pointer(&a1p.field_75)) = uint32(v3)
-			*(*uint32)(unsafe.Pointer(&a1p.field_76)) = uint32(v3)
+			a1p.field_75 = uint32(v3)
+			a1p.field_76 = uint32(v3)
 			*a2 = 0
 		} else {
 			v4 = (*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1p.field_72)))))
-			*(*uint32)(unsafe.Pointer(&a1p.field_74)) = *v4
+			a1p.field_74 = *v4
 			v5 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*1)))
-			*(*uint32)(unsafe.Pointer(&a1p.field_75)) = uint32(v5)
-			*(*uint32)(unsafe.Pointer(&a1p.field_76)) = uint32(v5)
+			a1p.field_75 = uint32(v5)
+			a1p.field_76 = uint32(v5)
 		}
 	}
 }
