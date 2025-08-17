@@ -97,13 +97,13 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	v4 := m.Externs.Struct200Arr_5d4594_840628
 	for i := int32(0); i < 1023; i++ {
 		m.sub_451920(&v4[i])
-		v4[i].sndName_21 = unsafe.Pointer(m.nox_xxx_getSndName_40AF80(int(i)))
+		v4[i].sndName_21 = m.nox_xxx_getSndName_40AF80(int(i))
 	}
 	*m.Externs.Dword_5d4594_1045420 = uint32(int32(uintptr(a3p)))
 	*m.Externs.Dword_5d4594_1045428 = a2p
 	if int32(uintptr(a3p)) != 0 {
-		*m.Externs.Dword_5d4594_1045424 = uint32(uintptr(unsafe.Pointer(m.sub_4BD340(int(int32(uintptr(a3p))), 0x100000, 200, 0x2000))))
-		*m.Externs.Dword_5d4594_1045436 = uint32(uintptr(unsafe.Pointer(m.sub_4BD280(200, 576))))
+		*m.Externs.Dword_5d4594_1045424 = uint32(uintptr(m.sub_4BD340(int(int32(uintptr(a3p))), 0x100000, 200, 0x2000)))
+		*m.Externs.Dword_5d4594_1045436 = uint32(uintptr(m.sub_4BD280(200, 576)))
 	}
 	if *m.Externs.Dword_5d4594_1045424 == 0 || *m.Externs.Dword_5d4594_1045420 == 0 || *m.Externs.Dword_5d4594_1045428 == nil || *m.Externs.Dword_5d4594_1045436 == 0 {
 		return 0
@@ -153,7 +153,7 @@ func (m *AudioModule) sub_452010() int32 {
 }
 
 func (m *AudioModule) sub_452190(a1_ *Struct200) {
-	m.nox_common_list_remove_425920(unsafe.Pointer((**uint32)(unsafe.Pointer(&a1_.field_28))))
+	m.nox_common_list_remove_425920(unsafe.Pointer(&a1_.field_28))
 }
 
 func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
@@ -298,35 +298,29 @@ func (m *AudioModule) sub_451FE0(a1_ *Struct576) int32 {
 	return int32(m.sub_4BD300(unsafe.Pointer(*(**uint32)(unsafe.Pointer(m.Externs.Dword_5d4594_1045436))), int(uintptr(unsafe.Pointer(a1_)))))
 }
 
-func (m *AudioModule) sub_452120(a1p *Struct576) *int32 {
-	var v1 int32
-	var result *int32
-	var v3 *int32
-	var v4 *uint8
-	var v5 *uint8
-	v1 = 0
-	result = (*int32)(unsafe.Pointer(m.sub_4521A0(int32(a1p.field_75 + a1p.field_9.field_12))))
-	v3 = result
-	if result != nil {
-		m.sub_452190((*Struct200)(unsafe.Pointer(result)))
-		v4 = *(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))
-		if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
-			for {
-				v5 = *(**uint8)(unsafe.Pointer(v4))
-				if *((**int32)(unsafe.Add(unsafe.Pointer((**int32)(unsafe.Pointer(v4))), unsafe.Sizeof((*int32)(nil))*9))) == v3 {
-					m.Sub_4523D0((*Struct576)(unsafe.Pointer(v4)))
-					m.sub_451FE0((*Struct576)(unsafe.Pointer(v4)))
-					v1 = 1
-				}
-				v4 = v5
-				if unsafe.Pointer(v5) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
-					break
-				}
+func (m *AudioModule) sub_452120(a1p *Struct576) bool {
+	var ret bool = false
+	v3 := m.sub_4521A0(int32(a1p.field_75 + a1p.field_9.field_12))
+	if v3 == nil {
+		return false
+	}
+	m.sub_452190((*Struct200)(unsafe.Pointer(v3)))
+	v4 := m.Externs.ListHead_5d4594_840612.next.PromoteUnsafe()
+	if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+		for {
+			v5 := v4.next
+			if v4.field_9 == v3 {
+				m.Sub_4523D0((*Struct576)(unsafe.Pointer(v4)))
+				m.sub_451FE0((*Struct576)(unsafe.Pointer(v4)))
+				ret = true
+			}
+			v4 = v5.PromoteUnsafe()
+			if unsafe.Pointer(v5) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+				break
 			}
 		}
-		result = (*int32)(unsafe.Pointer(uintptr(v1)))
 	}
-	return result
+	return ret
 }
 
 func (m *AudioModule) Sub_4523D0(a1 *Struct576) int32 {
@@ -605,7 +599,7 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 	res = (*Struct312)(unsafe.Pointer(m.sub_452810(int(int32(*(*uint32)(unsafe.Pointer(&v1p.field_12))+uint32(v3))), 0)))
 	a1.field_44 = res
 	if res != nil {
-		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_19))), int(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v1p.field_20))))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))
+		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_19))), int(*(*uint32)(unsafe.Pointer(&v1p.field_20))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))
 		a1.field_44.timerGroup_4.Timers[1].SetRaw(uint32(v4 + 100))
 		m.sub_4BDB20(a1.field_44)
 		a1.field_44.field_38 = a1
@@ -615,7 +609,7 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 		a1.field_7 = 1
 		a1.field_44.field_28 = &a1.timerGroup_46
 		if int32(*(*uint8)(unsafe.Pointer(&v1p.field_1)))&8 != 0 {
-			v5 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_17))), int(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v1p.field_18))))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1497))
+			v5 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_17))), int(*(*uint32)(unsafe.Pointer(&v1p.field_18))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1497))
 			if v5 > 33 {
 				m.sub_452690(a1, int64(v5), 1)
 			}
@@ -745,16 +739,16 @@ func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	if v4 != &v2p.field_22 {
 		for {
 			v4p := v4.PromoteUnsafe().GetStruct576()
-			v5 = int32((*(*uint32)(unsafe.Pointer(&v4p.timerGroup_46.Timers[0].Current)) >> 16) - v3)
+			v5 = int32((v4p.timerGroup_46.Timers[0].Current >> 16) - v3)
 			if v5 < 0 {
-				v5 = int32(v3 - (*(*uint32)(unsafe.Pointer(&v4p.timerGroup_46.Timers[0].Current)) >> 16))
+				v5 = int32(v3 - (v4p.timerGroup_46.Timers[0].Current >> 16))
 			}
 			if uint32(v5) >= (v2p.field_4.Current>>16)/10 {
-				if *(*uint32)(unsafe.Pointer(&v4p.timerGroup_46.Timers[0].Current))>>16 < v3 {
+				if v4p.timerGroup_46.Timers[0].Current>>16 < v3 {
 					break
 				}
 			} else {
-				v6 = int32(*(*uint32)(unsafe.Pointer(&v4p.field_7)))
+				v6 = int32(*(*uint32)(&v4p.field_7))
 				if int32(v2p.field_1)&0x10 != 0 {
 					if v6 != 0 {
 						break
@@ -885,24 +879,24 @@ func (m *AudioModule) Sub_4519C0() {
 	}
 	m.Externs.TimerGroup_5d4594_1045228.Update()
 
-	v6 := m.Externs.ListHead_5d4594_840612.next
-	v66 := v6.PromoteUnsafe()
-	if v6 != m.Externs.ListHead_5d4594_840612 {
+	v6x := m.Externs.ListHead_5d4594_840612.next
+	v6 := v6x.PromoteUnsafe()
+	if v6x != m.Externs.ListHead_5d4594_840612 {
 		for {
 			v7 := v6.next
 			result = int32(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*7))))
 			if result == 1 {
-				m.sub_451DC0(v66)
-				v8 = m.sub_451CA0(v66)
+				m.sub_451DC0(v6)
+				v8 = m.sub_451CA0(v6)
 				*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*74))) = uint32(v8)
 				if v8 == 0 {
 					for {
-						if m.sub_452120((*Struct576)(unsafe.Pointer(v6))) == nil {
+						if m.sub_452120((*Struct576)(unsafe.Pointer(v6))) == false {
 							break
 						}
 						v7 = v6.next
-						m.sub_451DC0(v66)
-						v9 = m.sub_451CA0(v66)
+						m.sub_451DC0(v6)
+						v9 = m.sub_451CA0(v6)
 						*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*74))) = uint32(v9)
 						if v9 != 0 {
 							break
@@ -919,8 +913,8 @@ func (m *AudioModule) Sub_4519C0() {
 					result = m.sub_451FE0((*Struct576)(unsafe.Pointer(v6)))
 				}
 			}
-			v6 = v7
-			if unsafe.Pointer(v7) == unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
+			v6 = v7.PromoteUnsafe()
+			if v7 == m.Externs.ListHead_5d4594_840612 {
 				break
 			}
 		}
