@@ -3,6 +3,7 @@ echo '#include <stdio.h>"' > phase7.c
 echo '' >> phase7.c
 echo '#include "defs.h"' >> phase7.c
 echo '#include "operators.h"' >> phase7.c
+echo '#include "common/fs/nox_fs.h"' >> phase7.c
 
 python -m tools.move_func sub_486E00 phase7.c
 python -m tools.move_func sub_4866D0 phase7.c
