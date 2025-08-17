@@ -1,7 +1,7 @@
 package audio
 
 import (
-	"unsafe"
+	unsafe "unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
@@ -884,33 +884,33 @@ func (m *AudioModule) Sub_4519C0() {
 	if v6x != m.Externs.ListHead_5d4594_840612 {
 		for {
 			v7 := v6.next
-			result = int32(*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*7))))
+			result = int32(*((*uint32)(unsafe.Pointer(&v6.field_7))))
 			if result == 1 {
 				m.sub_451DC0(v6)
 				v8 = m.sub_451CA0(v6)
-				*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*74))) = uint32(v8)
+				*((*uint32)(unsafe.Pointer(&v6.field_74))) = uint32(v8)
 				if v8 == 0 {
 					for {
-						if m.sub_452120((*Struct576)(unsafe.Pointer(v6))) == false {
+						if m.sub_452120(v6) == false {
 							break
 						}
 						v7 = v6.next
 						m.sub_451DC0(v6)
 						v9 = m.sub_451CA0(v6)
-						*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*74))) = uint32(v9)
+						*((*uint32)(unsafe.Pointer(&v6.field_74))) = uint32(v9)
 						if v9 != 0 {
 							break
 						}
 					}
 				}
-				v10 = m.sub_451CA0((*Struct576)(unsafe.Pointer(v6)))
-				*((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer(v6))), 4*74))) = uint32(v10)
+				v10 = m.sub_451CA0(v6)
+				*((*uint32)(unsafe.Pointer(&v6.field_74))) = uint32(v10)
 				if v10 == 0 || (func() int32 {
-					result = m.sub_452490((*Struct576)(unsafe.Pointer(v6)))
+					result = m.sub_452490(v6)
 					return result
 				}()) == 0 {
-					m.Sub_4523D0((*Struct576)(unsafe.Pointer(v6)))
-					result = m.sub_451FE0((*Struct576)(unsafe.Pointer(v6)))
+					m.Sub_4523D0(v6)
+					result = m.sub_451FE0(v6)
 				}
 			}
 			v6 = v7.PromoteUnsafe()
