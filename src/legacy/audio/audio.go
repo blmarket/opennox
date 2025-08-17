@@ -75,6 +75,7 @@ func NewAudioModule(
 	sub_452810 func(int, byte) unsafe.Pointer,
 	sub_4BD2D0 func(unsafe.Pointer),
 	sub_4BDA80 func(*Struct312),
+	nox_common_list_clear_425760 func(unsafe.Pointer),
 	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer,
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
 	nox_common_list_remove_425920 func(unsafe.Pointer),
