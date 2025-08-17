@@ -738,7 +738,6 @@ func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	var v6 int32
 	var result int32
 	var v9 int32
-	var v10 *uint32
 	v1 = a1
 	v2p := a1.field_9
 	v3 = a1.timerGroup_46.Timers[0].Current >> 16
@@ -749,13 +748,13 @@ func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 			if v5 < 0 {
 				v5 = int32(v3 - (*(*uint32)(unsafe.Add(unsafe.Add(unsafe.Pointer(v4.PromoteUnsafe().GetStruct576()), 3*4), 4*44)) >> 16))
 			}
-			if uint32(v5) >= (*&v2p.field_4.Current>>16)/10 {
+			if uint32(v5) >= (v2p.field_4.Current>>16)/10 {
 				if *(*uint32)(unsafe.Add(unsafe.Add(unsafe.Pointer(v4.PromoteUnsafe().GetStruct576()), 3*4), 4*44))>>16 < v3 {
 					break
 				}
 			} else {
 				v6 = int32(*(*uint32)(unsafe.Add(unsafe.Add(unsafe.Pointer(v4.PromoteUnsafe().GetStruct576()), 3*4), 4*4)))
-				if int32(*&v2p.field_1)&0x10 != 0 {
+				if int32(v2p.field_1)&0x10 != 0 {
 					if v6 != 0 {
 						break
 					}
@@ -773,14 +772,14 @@ func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	v7 := &v1.field_3.ListElement
 	v1.field_3.Init_425770()
 	v4.Append_4258E0(v7)
-	result = int32(*&v2p.field_14)
-	v9 = int32(*&v2p.field_13 + 1)
-	*&v2p.field_13 = uint32(v9)
+	result = int32(v2p.field_14)
+	v9 = int32(v2p.field_13 + 1)
+	v2p.field_13 = uint32(v9)
 	if result != 0 {
 		if v9 > result {
-			v10 = (*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&v2p.field_22.prev)) - 12)))
-			m.nox_common_list_remove_425920(unsafe.Pointer(*(***uint32)(unsafe.Pointer(&v2p.field_22.prev))))
-			m.Sub_4523D0((*Struct576)(unsafe.Pointer(v10)))
+			v10 := v2p.field_22.prev.PromoteUnsafe().GetStruct576()
+			v2p.field_22.prev.Remove_425920()
+			m.Sub_4523D0(v10)
 			result = int32(v2p.field_13 - 1)
 			v2p.field_13 = uint32(result)
 		}
