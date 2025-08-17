@@ -8,7 +8,6 @@ echo '#include "common/fs/nox_fs.h"' >> phase7.c
 python -m tools.move_func sub_486E00 phase7.c
 python -m tools.move_func sub_4866D0 phase7.c
 python -m tools.move_func sub_487C30 phase7.c
-python -m tools.move_func sub_486DB0 phase7.c
 python -m tools.move_func sub_486E00 phase7.c
 python -m tools.move_func sub_487D00 phase7.c
 python -m tools.move_func sub_4BD340 phase7.c
