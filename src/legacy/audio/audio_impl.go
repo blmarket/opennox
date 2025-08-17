@@ -653,13 +653,13 @@ func (m *AudioModule) sub_451E80(a1p *Struct576) int32 {
 	v7 = int32(*(*uint32)(unsafe.Pointer(&a1p.field_142)) - 1)
 	*(*uint32)(unsafe.Pointer(&a1p.field_142)) = uint32(v7)
 	if (v2 & 2) == 0 {
-		return int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v7*4 + 440))))
+		return int32(*(*uint32)(unsafe.Pointer(&a1p.field_110[v7])))
 	}
 	v8 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(v7), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 431))
-	v9 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v8*4 + 440))))
+	v9 = int32(*(*uint32)(unsafe.Pointer(&a1p.field_110[v8])))
 	v10 = v8
 	if v8 < *(*int32)(unsafe.Pointer(&a1p.field_142)) {
-		v11 = (*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v8*4 + 440)))
+		v11 = (*uint32)(unsafe.Pointer(&a1p.field_110[v8]))
 		for {
 			v10++
 			*v11 = *(*uint32)(unsafe.Add(unsafe.Pointer(v11), 4*1))
@@ -731,7 +731,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	}
 }
 
-func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
+func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	var v1 *Struct576
 	var v3 uint32
 	var v5 int32
@@ -739,22 +739,23 @@ func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
 	var result int32
 	var v9 int32
 	var v10 *uint32
-	v1 = a1_
-	v2p := a1_.field_9
-	v3 = a1_.timerGroup_46.Timers[0].Current >> 16
+	v1 = a1
+	v2p := a1.field_9
+	v3 = a1.timerGroup_46.Timers[0].Current >> 16
 	v4 := v2p.field_22.next
 	if v4 != &v2p.field_22 {
+		v4p := unsafe.Add(unsafe.Pointer(v4.PromoteUnsafe().GetStruct576()), 3*4)
 		for {
-			v5 = int32((*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*44)) >> 16) - v3)
+			v5 = int32((*(*uint32)(unsafe.Add(unsafe.Pointer(v4p), 4*44)) >> 16) - v3)
 			if v5 < 0 {
-				v5 = int32(v3 - (*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*44)) >> 16))
+				v5 = int32(v3 - (*(*uint32)(unsafe.Add(unsafe.Pointer(v4p), 4*44)) >> 16))
 			}
 			if uint32(v5) >= (*(*uint32)(unsafe.Pointer(&v2p.field_4.Current))>>16)/10 {
-				if *(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*44))>>16 < v3 {
+				if *(*uint32)(unsafe.Add(unsafe.Pointer(v4p), 4*44))>>16 < v3 {
 					break
 				}
 			} else {
-				v6 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*4)))
+				v6 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v4p), 4*4)))
 				if int32(*(*uint8)(unsafe.Pointer(&v2p.field_1)))&0x10 != 0 {
 					if v6 != 0 {
 						break
@@ -768,7 +769,7 @@ func (m *AudioModule) sub_451BE0(a1_ *Struct576) int32 {
 				break
 			}
 		}
-		v1 = a1_
+		v1 = a1
 	}
 	v7 := &v1.field_3.ListElement
 	v1.field_3.Init_425770()
