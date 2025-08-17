@@ -640,10 +640,10 @@ func (m *AudioModule) sub_451E80(a1p *Struct576) int32 {
 	)
 	v1p := a1p.field_9
 	v2 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v1p))) + 4))))
-	if *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) <= 0 {
+	if *(*int32)(unsafe.Pointer(&a1p.field_142)) <= 0 {
 		v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v1p))) + 192))))
 		v4 = 0
-		*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) = uint32(v3)
+		*(*uint32)(unsafe.Pointer(&a1p.field_142)) = uint32(v3)
 		if v3 > 0 {
 			v5 = int32(uintptr(unsafe.Pointer(a1p))) + 440
 			for {
@@ -655,28 +655,28 @@ func (m *AudioModule) sub_451E80(a1p *Struct576) int32 {
 					return x
 				}() - 1
 				*(*uint32)(unsafe.Pointer(uintptr(v5 - 4))) = uint32(v6)
-				v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))))
+				v3 = int32(*(*uint32)(unsafe.Pointer(&a1p.field_142)))
 				if v4 >= v3 {
 					break
 				}
 			}
 		}
 	}
-	v7 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) = uint32(v7)
+	v7 = int32(*(*uint32)(unsafe.Pointer(&a1p.field_142)) - 1)
+	*(*uint32)(unsafe.Pointer(&a1p.field_142)) = uint32(v7)
 	if (v2 & 2) == 0 {
 		return int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v7*4 + 440))))
 	}
 	v8 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(v7), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 431))
 	v9 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v8*4 + 440))))
 	v10 = v8
-	if v8 < *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) {
+	if v8 < *(*int32)(unsafe.Pointer(&a1p.field_142)) {
 		v11 = (*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + v8*4 + 440)))
 		for {
 			v10++
 			*v11 = *(*uint32)(unsafe.Add(unsafe.Pointer(v11), 4*1))
 			v11 = (*uint32)(unsafe.Add(unsafe.Pointer(v11), 4*1))
-			if v10 >= *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_142)))) {
+			if v10 >= *(*int32)(unsafe.Pointer(&a1p.field_142)) {
 				break
 			}
 		}
