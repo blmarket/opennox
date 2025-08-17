@@ -1,7 +1,7 @@
 package audio
 
 import (
-	"unsafe"
+	unsafe "unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
@@ -548,38 +548,38 @@ func (m *AudioModule) sub_451CF0(a1 *Struct576) int32 {
 
 func (m *AudioModule) sub_451DC0(a1p *Struct576) int32 {
 	var (
-		v1     *uint32
+		v1     *Struct200
 		result int32
 		v3     int32
 		i      int32
 		v5     int32
 		v6     int32
 	)
-	v1 = *(**uint32)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(&a1p.field_9)))))
-	result = int32(*(*uint32)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(&a1p.field_42))))))
-	v3 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*1)))
+	v1 = a1p.field_9
+	result = int32(a1p.field_42)
+	v3 = int32(*(*uint32)(unsafe.Pointer(&v1.field_1)))
 	if result != 0 {
-		if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*17)) < 0x21 {
+		if *&v1.field_17 < 0x21 {
 			return result
 		}
-		m.sub_451F90((*Struct576)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p))))))
+		m.sub_451F90(a1p)
 	}
 	if v3&4 != 0 {
-		if *(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*17)) >= 0x21 {
+		if *&v1.field_17 >= 0x21 {
 			v5 = m.sub_451E80(a1p)
-			result = m.sub_451F30((*Struct576)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p))))), v5)
+			result = m.sub_451F30(a1p, v5)
 		} else {
-			result = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*48)))
+			result = int32(*&v1.field_48)
 			for i = 0; i < result; i++ {
-				m.sub_451F30((*Struct576)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p))))), i)
-				result = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*48)))
+				m.sub_451F30(a1p, i)
+				result = int32(*&v1.field_48)
 			}
 		}
 	} else if v3&2 != 0 {
-		v6 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(*(*uint32)(unsafe.Add(unsafe.Pointer(v1), 4*48))-1), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 536))
-		result = m.sub_451F30((*Struct576)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p))))), v6)
+		v6 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(*&v1.field_48-1), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 536))
+		result = m.sub_451F30(a1p, v6)
 	} else {
-		result = m.sub_451F30((*Struct576)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p))))), 0)
+		result = m.sub_451F30(a1p, 0)
 	}
 	return result
 }
@@ -591,15 +591,15 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 	var v5 int32
 	var ret int32 = 0
 	v1p := a1.field_9
-	if *(*uint32)(unsafe.Pointer(&v1p.field_48)) == 0 {
+	if v1p.field_48 == 0 {
 		return 0
 	}
 	v3 = int32(a1.field_75)
 	a1.field_109 = 0
-	res = (*Struct312)(unsafe.Pointer(m.sub_452810(int(int32(*(*uint32)(unsafe.Pointer(&v1p.field_12))+uint32(v3))), 0)))
+	res = (*Struct312)(m.sub_452810(int(int32(*&v1p.field_12+uint32(v3))), 0))
 	a1.field_44 = res
 	if res != nil {
-		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_19))), int(*(*uint32)(unsafe.Pointer(&v1p.field_20))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))
+		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(v1p.field_19), int(*&v1p.field_20), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))
 		a1.field_44.timerGroup_4.Timers[1].SetRaw(uint32(v4 + 100))
 		m.sub_4BDB20(a1.field_44)
 		a1.field_44.field_38 = a1
@@ -608,8 +608,8 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 		a1.field_44.field_37 = m.Externs.Sub_4526D0_ptr
 		a1.field_7 = 1
 		a1.field_44.field_28 = &a1.timerGroup_46
-		if int32(*(*uint8)(unsafe.Pointer(&v1p.field_1)))&8 != 0 {
-			v5 = int32(m.nox_common_randomIntMinMax_415FF0(int(*(*uint32)(unsafe.Pointer(&v1p.field_17))), int(*(*uint32)(unsafe.Pointer(&v1p.field_18))), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1497))
+		if int32(v1p.field_1)&8 != 0 {
+			v5 = int32(m.nox_common_randomIntMinMax_415FF0(int(*&v1p.field_17), int(*&v1p.field_18), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1497))
 			if v5 > 33 {
 				m.sub_452690(a1, int64(v5), 1)
 			}
