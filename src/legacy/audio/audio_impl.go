@@ -1079,7 +1079,7 @@ func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 		}
 	} else {
 		if a1p.field_73 != 0 {
-			v3 = int32(uintptr(m.nox_common_list_getNext_425940(unsafe.Pointer(*(**int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_73))))))))
+			v3 = int32(uintptr(m.nox_common_list_getNext_425940(unsafe.Pointer(*(**int32)(unsafe.Pointer(&a1p.field_73))))))
 			a1p.field_73 = uint32(v3)
 			if v3 != 0 {
 				a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(v3 + 12)))
