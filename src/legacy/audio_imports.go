@@ -118,9 +118,6 @@ func initAudio(externs *audio.AudioExterns) {
 		"audio",
 		PlatformTicks,
 		sub_4BD300,
-		func(a2 *audio.Struct312) int {
-			return int(Phase6Module.Sub_4BDB40(a2))
-		},
 		sub_486520,
 		sub_4BD280,
 		sub_4BD340,
@@ -130,9 +127,6 @@ func initAudio(externs *audio.AudioExterns) {
 			return unsafe.Pointer(C.sub_452810(C.int(a1), C.char(a2)))
 		},
 		sub_4BD2D0,
-		func(a1 *audio.Struct312) {
-			Phase6Module.Sub_4BDA80(a1)
-		},
 		func(id int) unsafe.Pointer {
 			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
 		},
@@ -286,4 +280,19 @@ func sub_4BD940(a1 *C.struct312) int32 {
 //export sub_4BD9B0
 func sub_4BD9B0(a2 *C.struct312) int32 {
 	return AudioModule.Sub_4BD9B0((*audio.Struct312)(unsafe.Pointer(a2)))
+}
+
+//export sub_4873C0
+func sub_4873C0(a3 *C.struct264) int32 {
+	return AudioModule.Sub_4873C0((*audio.Struct264)(unsafe.Pointer(a3)))
+}
+
+//export sub_4BDA60
+func sub_4BDA60(lpMem_ *C.struct312) {
+	AudioModule.Sub_4BDA60((*audio.Struct312)(unsafe.Pointer(lpMem_)))
+}
+
+//export sub_4BDA80
+func sub_4BDA80(a1_ *C.struct312) int32 {
+	return AudioModule.Sub_4BDA80((*audio.Struct312)(unsafe.Pointer(a1_)))
 }

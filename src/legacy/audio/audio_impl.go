@@ -344,7 +344,7 @@ func (m *AudioModule) sub_452410(a1p *Struct576) {
 	result = a1p.field_44
 	if result != nil && a1p == result.field_38 {
 		if int32(a1p.field_6)&2 != 0 {
-			m.sub_4BDA80(a1p.field_44)
+			m.Sub_4BDA80(a1p.field_44)
 		}
 		m.Sub_4BDB30(a1p.field_44)
 		a1p.field_44.field_38 = nil
@@ -371,7 +371,7 @@ func (m *AudioModule) sub_452490(a1p *Struct576) int32 {
 	*((*uint8)(unsafe.Pointer(&v4))) = uint8(int8(v4 | 2))
 	a1p.field_6 = uint8(int8(v4))
 	a1p.field_74 = nil
-	if m.sub_4BDB40(a1p.field_44) == 0 {
+	if m.Sub_4BDB40(a1p.field_44) == 0 {
 		return 1
 	}
 	a1p.field_7 = 1
@@ -1192,4 +1192,141 @@ func (m *AudioModule) Sub_486EF0() {
 			}
 		}
 	}
+}
+
+func (m *AudioModule) Sub_4BDA80(a1 *Struct312) int32 {
+	var (
+		result int32 = 0
+	)
+	if int32(*(*uint8)(unsafe.Pointer(&a1.field_31)))&5 != 0 {
+		ccall.CallVoidInt(a1.field_43.field_4, int(int32(uintptr(unsafe.Pointer(a1)))))
+	}
+	result2 := *(*uint32)(unsafe.Pointer(&a1.field_37))
+	if result2 != 0 {
+		result = int32(ccall.CallIntInt(unsafe.Pointer(uintptr(result2)), int(int32(uintptr(unsafe.Pointer(a1))))))
+	}
+	*(*uint32)(unsafe.Pointer(&a1.field_72)) = 0
+	return result
+}
+
+func (m *AudioModule) sub_486E90(a1 *Struct312) int32 {
+	var (
+		result int32
+	)
+	v1p := a1.field_33
+	a1.Remove_425920()
+	v1p.field_48--
+	v1p.field_53++
+	a1.Remove_425920()
+	result = v1p.field_53 - 1
+	v1p.field_53 = result
+	if result < 0 {
+		v1p.field_53 = 0
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_4BDA60(a1 *Struct312) {
+	m.Sub_4BDA80(a1)
+	m.sub_486E90(a1)
+	m.Sub_4BD7A0(a1)
+}
+
+func (m *AudioModule) Sub_4873C0(a3p *Struct264) int32 {
+	var (
+		v3  int64
+		v11 *timer.TimerGroup
+		v15 *timer.TimerGroup
+		v17 bool
+	)
+	if a3p.field_53 != 0 {
+		return -2146304000
+	}
+	v3 = int64(m.nox_platform_get_ticks())
+
+	diff1 := v3 - a3p.field_62
+	if diff1 >= a3p.field_56 {
+		a3p.field_58 = diff1
+		if a3p.field_60 > a3p.field_56*10 {
+			a3p.field_60 = 0
+		}
+		if diff1 > a3p.field_60 {
+			a3p.field_60 = diff1
+		}
+
+		v11 = &a3p.TimerGroup_22
+		v15 = &a3p.TimerGroup_22
+		a3p.TimerGroup_22.Update()
+
+		if a3p.field_46 != nil {
+			a3p.field_46.Update()
+			v17 = a3p.field_46.IsUpdated()
+		}
+		if a3p.field_46 == nil || v17 == false {
+			v17 = a3p.TimerGroup_22.IsUpdated()
+		}
+		a3p.field_62 = v3
+
+		v12 := a3p.field_50.next
+		if v12 != &a3p.field_50 {
+			for {
+				v13 := v12.next
+				v12p := v12.PromoteUnsafe()
+				if (v12p.field_31&1) != 0 && v12p.field_72 != nil {
+					v12p.timerGroup_4.Update()
+					if v17 || v12p.timerGroup_4.IsUpdated() || (v12p.field_29 != nil && v12p.field_29.IsUpdated()) || (v12p.field_28 != nil && v12p.field_28.IsUpdated()) {
+						m.sub_4BD840(v12p)
+						ccall.CallVoidPtr(v12p.field_43.field_8, unsafe.Pointer(v12p))
+					}
+				}
+				v12 = v13
+				if v13 == &a3p.field_50 {
+					break
+				}
+			}
+			v11 = v15
+		}
+		v14 := a3p.field_46
+		if v14 != nil {
+			v14.ClearUpdated()
+		}
+		v11.ClearUpdated()
+	}
+	return 0
+}
+
+func (m *AudioModule) sub_4BD840(a3p *Struct312) {
+	var v1p *Struct264 = a3p.field_33
+
+	a3p.timerGroup_44.Init()
+	a3p.timerGroup_44.Mix(&a3p.timerGroup_4)
+	a3p.timerGroup_4.ClearUpdated()
+	if a3p.field_28 != nil {
+		a3p.timerGroup_44.Mix(a3p.field_28)
+		a3p.field_28.ClearUpdated()
+	}
+	if a3p.field_29 != nil {
+		a3p.timerGroup_44.Mix(a3p.field_29)
+	}
+	a3p.timerGroup_44.Mix(&v1p.TimerGroup_22)
+	if v1p.field_46 != nil {
+		a3p.timerGroup_44.Mix(v1p.field_46)
+	}
+}
+
+func (m *AudioModule) Sub_4BDB40(a2p *Struct312) int32 {
+	var result int32
+	if int32(*(*uint8)(unsafe.Pointer(&a2p.field_31)))&5 != 0 {
+		return -2146500608
+	}
+	if a2p.field_72 == nil {
+		return -2147024896
+	}
+	a2p.timerGroup_4.Update()
+	m.sub_4BD840(a2p)
+	result = int32(ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a2p.field_43)) + 12))), unsafe.Pointer(a2p)))
+	if result == 0 {
+		a2p.field_31 |= 1
+	}
+	return result
 }

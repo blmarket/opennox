@@ -47,7 +47,7 @@ func initStruct264(externs *audio.AudioExterns) {
 		nox_common_list_clear_425760,
 		nox_common_list_getNextSafe_4258A0,
 		func(a1 *audio.Struct312) int32 {
-			return Phase6Module.Sub_4BDA80(a1)
+			return AudioModule.Sub_4BDA80(a1)
 		},
 		sub_486320,
 		sub_425770,

@@ -13,8 +13,6 @@ void nox_common_list_remove_425920(void* a1);
 */
 import "C"
 import (
-	"unsafe"
-
 	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
@@ -24,19 +22,4 @@ var (
 
 func initPhase6(externs *audio.AudioExterns) {
 	Phase6Module = audio.NewPhase6Module(externs, "phase6", PlatformTicks, sub_486620, sub_486550, sub_486570, sub_4BD7A0, sub_486520, nox_common_list_remove_425920)
-}
-
-//export sub_4873C0
-func sub_4873C0(a3 *C.struct264) int32 {
-	return Phase6Module.Sub_4873C0((*audio.Struct264)(unsafe.Pointer(a3)))
-}
-
-//export sub_4BDA60
-func sub_4BDA60(lpMem_ *C.struct312) {
-	Phase6Module.Sub_4BDA60((*audio.Struct312)(unsafe.Pointer(lpMem_)))
-}
-
-//export sub_4BDA80
-func sub_4BDA80(a1_ *C.struct312) int32 {
-	return Phase6Module.Sub_4BDA80((*audio.Struct312)(unsafe.Pointer(a1_)))
 }

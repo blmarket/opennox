@@ -42,7 +42,6 @@ type AudioModule struct {
 
 	// External functions
 	sub_4BD300                        func(unsafe.Pointer, int) int
-	sub_4BDB40                        func(*Struct312) int
 	sub_486520                        func(unsafe.Pointer) int
 	sub_4BD280                        func(int, int) unsafe.Pointer
 	sub_4BD340                        func(int, int, int, int) unsafe.Pointer
@@ -50,7 +49,6 @@ type AudioModule struct {
 	sub_4BD470                        func(unsafe.Pointer, int) unsafe.Pointer
 	sub_452810                        func(int, byte) unsafe.Pointer
 	sub_4BD2D0                        func(unsafe.Pointer)
-	sub_4BDA80                        func(*Struct312)
 	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
 	sub_4862E0                        func(unsafe.Pointer, int) int
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
@@ -63,7 +61,6 @@ func NewAudioModule(
 	moduleName string,
 	nox_platform_get_ticks func() uint64,
 	sub_4BD300 func(unsafe.Pointer, int) int,
-	sub_4BDB40 func(*Struct312) int,
 	sub_486520 func(unsafe.Pointer) int,
 	sub_4BD280 func(int, int) unsafe.Pointer,
 	sub_4BD340 func(int, int, int, int) unsafe.Pointer,
@@ -71,7 +68,6 @@ func NewAudioModule(
 	sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer,
 	sub_452810 func(int, byte) unsafe.Pointer,
 	sub_4BD2D0 func(unsafe.Pointer),
-	sub_4BDA80 func(*Struct312),
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
 	sub_4862E0 func(unsafe.Pointer, int) int,
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int,
@@ -83,7 +79,6 @@ func NewAudioModule(
 		Externs:                           externs,
 		nox_platform_get_ticks:            nox_platform_get_ticks,
 		sub_4BD300:                        sub_4BD300,
-		sub_4BDB40:                        sub_4BDB40,
 		sub_486520:                        sub_486520,
 		sub_4BD280:                        sub_4BD280,
 		sub_4BD340:                        sub_4BD340,
@@ -91,7 +86,6 @@ func NewAudioModule(
 		sub_4BD470:                        sub_4BD470,
 		sub_452810:                        sub_452810,
 		sub_4BD2D0:                        sub_4BD2D0,
-		sub_4BDA80:                        sub_4BDA80,
 		nox_xxx_getSndName_40AF80:         nox_xxx_getSndName_40AF80,
 		sub_4862E0:                        sub_4862E0,
 		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
