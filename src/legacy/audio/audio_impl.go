@@ -455,13 +455,13 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *Struct576 {
 	return v1p
 }
 
-func (m *AudioModule) Sub_452E90(a1 *uint32, a2_ *Struct576) int32 {
+func (m *AudioModule) Sub_452E90(a1 *uint32, a2 *Struct576) int32 {
 	var result int32
-	result = int32(uintptr(unsafe.Pointer(a2_)))
-	*a1 = uint32(uintptr(unsafe.Pointer(a2_)))
-	if a2_ != nil {
-		*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*1)) = a2_.field_70
-		result = int32(*(*uint32)(unsafe.Pointer(&a2_.field_9)))
+	result = int32(uintptr(unsafe.Pointer(a2)))
+	*a1 = uint32(uintptr(unsafe.Pointer(a2)))
+	if a2 != nil {
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*1)) = a2.field_70
+		result = int32(*(*uint32)(unsafe.Pointer(&a2.field_9)))
 		*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*2)) = uint32(result)
 	}
 	return result
@@ -472,7 +472,7 @@ func (m *AudioModule) Sub_452EE0(a1p *Struct576, a2 int32) int32 {
 	return bool2int32(a1p.timerGroup_46.Timers[0].Update())
 }
 
-func (m *AudioModule) sub_452F10(a1_ *Struct576, a2 int32) uint32 {
+func (m *AudioModule) sub_452F10(a1 *Struct576, a2 int32) uint32 {
 	var v2 int32
 	v2 = a2
 	if a2 <= 100 {
@@ -482,7 +482,8 @@ func (m *AudioModule) sub_452F10(a1_ *Struct576, a2 int32) uint32 {
 	} else {
 		v2 = 100
 	}
-	return (uint32(v2*163) * (*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1_.field_9)) + 20))) >> 16)) >> 14
+	v1 := a1.field_9
+	return (uint32(v2*163) * (v1.field_4.Current >> 16)) >> 14
 }
 
 func (m *AudioModule) Sub_452F50(a1p *Struct576, a2 int32) int32 {
@@ -1061,35 +1062,34 @@ func (m *AudioModule) sub_4BD7C0(a1p *Struct312) {
 	a1p.field_72 = nil
 }
 
-func (m *AudioModule) Sub_4BD8C0(a1 int32) int32 {
+func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 	var (
-		v1     func(int32) int32
 		result int32
 		v3     int32
 		v4     int32
 	)
-	v1 = *(*func(int32) int32)(unsafe.Pointer(uintptr(a1 + 136)))
+	v1 := *(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 136)))
 	if v1 != nil {
-		result = v1(a1)
+		result = int32(ccall.CallIntPtr(v1, unsafe.Pointer(a1p)))
 		if result != 0 {
-			*(*uint32)(unsafe.Pointer(uintptr(a1 + 300))) = 0
-			*(*uint32)(unsafe.Pointer(uintptr(a1 + 304))) = 0
-			*(*uint32)(unsafe.Pointer(uintptr(a1 + 296))) = 0
+			*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 300))) = 0
+			*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 304))) = 0
+			*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 296))) = 0
 			return result
 		}
 	} else {
-		if *(*uint32)(unsafe.Pointer(uintptr(a1 + 292))) != 0 {
-			v3 = int32(uintptr(unsafe.Pointer(m.nox_common_list_getNext_425940(unsafe.Pointer(*(**int32)(unsafe.Pointer(uintptr(a1 + 292))))))))
-			*(*uint32)(unsafe.Pointer(uintptr(a1 + 292))) = uint32(v3)
+		if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 292))) != 0 {
+			v3 = int32(uintptr(m.nox_common_list_getNext_425940(unsafe.Pointer(*(**int32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 292)))))))
+			*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 292))) = uint32(v3)
 			if v3 != 0 {
-				*(*uint32)(unsafe.Pointer(uintptr(a1 + 296))) = *(*uint32)(unsafe.Pointer(uintptr(v3 + 12)))
+				*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 296))) = *(*uint32)(unsafe.Pointer(uintptr(v3 + 12)))
 				v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(v3 + 16))))
-				*(*uint32)(unsafe.Pointer(uintptr(a1 + 300))) = uint32(v4)
-				*(*uint32)(unsafe.Pointer(uintptr(a1 + 304))) = uint32(v4)
+				*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 300))) = uint32(v4)
+				*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 304))) = uint32(v4)
 				return 0
 			}
 		}
-		*(*uint32)(unsafe.Pointer(uintptr(a1 + 300))) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 300))) = 0
 	}
 	return 0
 }
