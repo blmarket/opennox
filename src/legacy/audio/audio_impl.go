@@ -1068,7 +1068,7 @@ func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 		v3     int32
 		v4     int32
 	)
-	v1 := *(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 136)))
+	v1 := *(*unsafe.Pointer)(unsafe.Pointer(uintptr(uintptr(unsafe.Pointer(a1p)) + 136)))
 	if v1 != nil {
 		result = int32(ccall.CallIntPtr(v1, unsafe.Pointer(a1p)))
 		if result != 0 {

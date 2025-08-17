@@ -119,7 +119,7 @@ func (m *Struct264Module) sub_487970(a1_ *Struct264, a2 int32) *Struct312 {
 		for {
 			result = m.sub_4877F0(&a1x)
 			v5 := result
-			if v4 == -1 || *(*int32)(unsafe.Add(unsafe.Pointer(v3), 4*3)) == v4 {
+			if v4 == -1 || *(*int32)(unsafe.Pointer(&v3.field_3)) == v4 {
 				result = (*Struct312)(unsafe.Pointer(uintptr(m.sub_4BDA80(v3))))
 			}
 			v3 = v5
@@ -245,28 +245,28 @@ func (m *Struct264Module) sub_487810(a1p *Struct264, a2 int32) *Struct312 {
 	v8 = 127
 	v9 = nil
 	for result = m.sub_4877D0(a1p, &a1x); result != nil; result = m.sub_4877F0(&a1x) {
-		if *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*3)) == a2 {
-			if (*(*int32)(unsafe.Add(unsafe.Pointer(result), 4*31)) & 0x15) == 0 {
+		if *(*int32)(unsafe.Pointer(&result.field_3)) == a2 {
+			if (*(*int32)(unsafe.Pointer(&result.field_31)) & 0x15) == 0 {
 				return result
 			}
-			v6 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*30))
-			if *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*31))&1 != 0 {
+			v6 = *(*int32)(unsafe.Pointer(&result.field_30))
+			if *(*int32)(unsafe.Pointer(&result.field_31))&1 != 0 {
 				if v6 >= v3 {
 					if v6 == v3 {
-						v7 = uint32(*(*int32)(unsafe.Add(unsafe.Pointer(result), 4*45)))
+						v7 = uint32(*(*int32)(unsafe.Pointer(&result.timerGroup_44.Timers[0].Current)))
 						if v7 < v2 && v2-v7 >= 0x666 {
-							v3 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*30))
+							v3 = *(*int32)(unsafe.Pointer(&result.field_30))
 							v4 = result
-							v2 = uint32(*(*int32)(unsafe.Add(unsafe.Pointer(result), 4*45)))
+							v2 = uint32(*(*int32)(unsafe.Pointer(&result.timerGroup_44.Timers[0].Current)))
 						}
 					}
 				} else {
-					v2 = uint32(*(*int32)(unsafe.Add(unsafe.Pointer(result), 4*45)))
-					v3 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*30))
+					v2 = uint32(*(*int32)(unsafe.Pointer(&result.timerGroup_44.Timers[0].Current)))
+					v3 = *(*int32)(unsafe.Pointer(&result.field_30))
 					v4 = result
 				}
 			} else if v6 < v8 {
-				v8 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*30))
+				v8 = *(*int32)(unsafe.Pointer(&result.field_30))
 				v9 = result
 			}
 		}
