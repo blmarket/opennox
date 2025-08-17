@@ -1,0 +1,23 @@
+#!/bin/bash
+echo '#include "defs.h"' > phase7.c
+echo '#include "operators.h"' >> phase7.c
+
+python -m tools.move_func sub_487D00 phase7.c
+python -m tools.move_func sub_4BD340 phase7.c
+python -m tools.move_func sub_4BD3C0 phase7.c
+python -m tools.move_func sub_4866D0 phase7.c
+python -m tools.move_func sub_486AA0 phase7.c
+python -m tools.move_func sub_4BD420 phase7.c
+python -m tools.move_func sub_4BD470 phase7.c
+
+python -m tools.fix_compile phase7.c
+
+python -m tools.create_imports phase7.c
+
+python -m tools.translate_c_to_go phase7.c
+
+# Replace module inside calls to prefix `m.`
+# go run ./gotools struct312/struct312_impl.go
+
+# Find all function pointer invocations. They should use ccall instead.
+go run ./tools/funcptr_analyzer audio/phase7_impl.go
