@@ -108,7 +108,7 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	if *m.Externs.Dword_5d4594_1045424 == 0 || *m.Externs.Dword_5d4594_1045420 == 0 || *m.Externs.Dword_5d4594_1045428 == nil || *m.Externs.Dword_5d4594_1045436 == 0 {
 		return 0
 	}
-	m.nox_common_list_clear_425760(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))
+	m.Externs.ListHead_5d4594_840612.Clear_425760()
 	m.Externs.TimerGroup_5d4594_1045228.Init()
 	result = 1
 	(*m.Externs.Dword_5d4594_1045428).field_46 = m.Externs.TimerGroup_5d4594_1045228
@@ -152,8 +152,8 @@ func (m *AudioModule) sub_452010() int32 {
 	return int32(*m.Externs.Ptr_uint32_5d4594_1045444)
 }
 
-func (m *AudioModule) sub_452190(a1_ *Struct200) {
-	m.nox_common_list_remove_425920(unsafe.Pointer(&a1_.field_28))
+func (m *AudioModule) sub_452190(a1 *Struct200) {
+	a1.field_28.Remove_425920()
 }
 
 func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
@@ -292,10 +292,10 @@ func (m *AudioModule) sub_451F90(a1p *Struct576) int32 {
 	return result
 }
 
-func (m *AudioModule) sub_451FE0(a1_ *Struct576) int32 {
-	m.nox_common_list_remove_425920(unsafe.Pointer(a1_))
-	a1_.field_70 = 0
-	return int32(m.sub_4BD300(unsafe.Pointer(*(**uint32)(unsafe.Pointer(m.Externs.Dword_5d4594_1045436))), int(uintptr(unsafe.Pointer(a1_)))))
+func (m *AudioModule) sub_451FE0(a1 *Struct576) int32 {
+	a1.Remove_425920()
+	a1.field_70 = 0
+	return int32(m.sub_4BD300(unsafe.Pointer(*(**uint32)(unsafe.Pointer(m.Externs.Dword_5d4594_1045436))), int(uintptr(unsafe.Pointer(a1)))))
 }
 
 func (m *AudioModule) sub_452120(a1p *Struct576) bool {
@@ -705,14 +705,14 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 			if v2 == result && v3 > v1.field_31 {
 				v1.field_31 = v3
 				v7 := &v1.field_28
-				m.nox_common_list_remove_425920(unsafe.Pointer(v7))
+				v7.Remove_425920()
 				heads[v2][v3].Append_4258E0(&v7.ListElement)
 			}
 		} else {
 			v1.field_27 = v2
 			v1.field_31 = v3
 			v6 := &v1.field_28
-			m.nox_common_list_remove_425920(unsafe.Pointer(v6))
+			v6.Remove_425920()
 			heads[v2][v3].Append_4258E0(&v6.ListElement)
 		}
 	} else {
@@ -888,7 +888,7 @@ func (m *AudioModule) Sub_4519C0() {
 			if result == 1 {
 				m.sub_451DC0(v6)
 				v8 = m.sub_451CA0(v6)
-				v6.field_74 = uint32(v8)
+				v6.field_74 = unsafe.Pointer(uintptr(v8))
 				if v8 == 0 {
 					for {
 						if m.sub_452120(v6) == false {
@@ -897,14 +897,14 @@ func (m *AudioModule) Sub_4519C0() {
 						v7 = v6.next
 						m.sub_451DC0(v6)
 						v9 = m.sub_451CA0(v6)
-						v6.field_74 = uint32(v9)
+						v6.field_74 = unsafe.Pointer(uintptr(v9))
 						if v9 != 0 {
 							break
 						}
 					}
 				}
 				v10 = m.sub_451CA0(v6)
-				v6.field_74 = uint32(v10)
+				v6.field_74 = unsafe.Pointer(uintptr(v10))
 				if v10 == 0 || (func() int32 {
 					result = m.sub_452490(v6)
 					return result

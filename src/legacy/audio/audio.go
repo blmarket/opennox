@@ -41,24 +41,21 @@ type AudioModule struct {
 	nox_platform_get_ticks func() uint64
 
 	// External functions
-	sub_4BD300                          func(unsafe.Pointer, int) int
-	sub_4BDB40                          func(*Struct312) int
-	sub_486520                          func(unsafe.Pointer) int
-	sub_4BD280                          func(int, int) unsafe.Pointer
-	nox_common_list_getFirstSafe_425890 func(unsafe.Pointer) unsafe.Pointer
-	sub_4BD340                          func(int, int, int, int) unsafe.Pointer
-	sub_4BD2E0                          func(unsafe.Pointer) unsafe.Pointer
-	sub_4BD470                          func(unsafe.Pointer, int) unsafe.Pointer
-	sub_452810                          func(int, byte) unsafe.Pointer
-	sub_4BD2D0                          func(unsafe.Pointer)
-	sub_4BDA80                          func(*Struct312)
-	nox_common_list_clear_425760        func(unsafe.Pointer)
-	nox_xxx_getSndName_40AF80           func(int) unsafe.Pointer
-	nox_common_list_remove_425920       func(unsafe.Pointer)
-	sub_4862E0                          func(unsafe.Pointer, int) int
-	nox_common_randomIntMinMax_415FF0   func(int, int, unsafe.Pointer, int) int
-	sub_4BD3C0                          func(unsafe.Pointer)
-	nox_common_list_getNext_425940      func(unsafe.Pointer) unsafe.Pointer
+	sub_4BD300                        func(unsafe.Pointer, int) int
+	sub_4BDB40                        func(*Struct312) int
+	sub_486520                        func(unsafe.Pointer) int
+	sub_4BD280                        func(int, int) unsafe.Pointer
+	sub_4BD340                        func(int, int, int, int) unsafe.Pointer
+	sub_4BD2E0                        func(unsafe.Pointer) unsafe.Pointer
+	sub_4BD470                        func(unsafe.Pointer, int) unsafe.Pointer
+	sub_452810                        func(int, byte) unsafe.Pointer
+	sub_4BD2D0                        func(unsafe.Pointer)
+	sub_4BDA80                        func(*Struct312)
+	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
+	sub_4862E0                        func(unsafe.Pointer, int) int
+	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
+	sub_4BD3C0                        func(unsafe.Pointer)
+	nox_common_list_getNext_425940    func(unsafe.Pointer) unsafe.Pointer
 }
 
 func NewAudioModule(
@@ -78,7 +75,6 @@ func NewAudioModule(
 	sub_452810 func(int, byte) unsafe.Pointer,
 	sub_4BD2D0 func(unsafe.Pointer),
 	sub_4BDA80 func(*Struct312),
-	nox_common_list_clear_425760 func(unsafe.Pointer),
 	sub_486320 func(unsafe.Pointer, int) unsafe.Pointer,
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
 	nox_common_list_remove_425920 func(unsafe.Pointer),
@@ -88,26 +84,23 @@ func NewAudioModule(
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
 ) *AudioModule {
 	return &AudioModule{
-		moduleName:                          moduleName,
-		Externs:                             externs,
-		nox_platform_get_ticks:              nox_platform_get_ticks,
-		sub_4BD300:                          sub_4BD300,
-		sub_4BDB40:                          sub_4BDB40,
-		sub_486520:                          sub_486520,
-		sub_4BD280:                          sub_4BD280,
-		nox_common_list_getFirstSafe_425890: nox_common_list_getFirstSafe_425890,
-		sub_4BD340:                          sub_4BD340,
-		sub_4BD2E0:                          sub_4BD2E0,
-		sub_4BD470:                          sub_4BD470,
-		sub_452810:                          sub_452810,
-		sub_4BD2D0:                          sub_4BD2D0,
-		sub_4BDA80:                          sub_4BDA80,
-		nox_common_list_clear_425760:        nox_common_list_clear_425760,
-		nox_xxx_getSndName_40AF80:           nox_xxx_getSndName_40AF80,
-		nox_common_list_remove_425920:       nox_common_list_remove_425920,
-		sub_4862E0:                          sub_4862E0,
-		nox_common_randomIntMinMax_415FF0:   nox_common_randomIntMinMax_415FF0,
-		sub_4BD3C0:                          sub_4BD3C0,
-		nox_common_list_getNext_425940:      nox_common_list_getNext_425940,
+		moduleName:                        moduleName,
+		Externs:                           externs,
+		nox_platform_get_ticks:            nox_platform_get_ticks,
+		sub_4BD300:                        sub_4BD300,
+		sub_4BDB40:                        sub_4BDB40,
+		sub_486520:                        sub_486520,
+		sub_4BD280:                        sub_4BD280,
+		sub_4BD340:                        sub_4BD340,
+		sub_4BD2E0:                        sub_4BD2E0,
+		sub_4BD470:                        sub_4BD470,
+		sub_452810:                        sub_452810,
+		sub_4BD2D0:                        sub_4BD2D0,
+		sub_4BDA80:                        sub_4BDA80,
+		nox_xxx_getSndName_40AF80:         nox_xxx_getSndName_40AF80,
+		sub_4862E0:                        sub_4862E0,
+		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
+		sub_4BD3C0:                        sub_4BD3C0,
+		nox_common_list_getNext_425940:    nox_common_list_getNext_425940,
 	}
 }
