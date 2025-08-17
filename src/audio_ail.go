@@ -258,9 +258,9 @@ func sub_4311F0() int {
 	v2[4] = 2
 	v2[0] = 4
 	legacy.Sub_487D00(unsafe.Pointer(&v2[0]))
-	v0 := legacy.Struct264Module.Sub_487150(int32(-1), &v2)
+	v0 := legacy.AudioModule.Sub_487150(int32(-1), &v2)
 	legacy.Set_dword_5d4594_805984(v0)
-	return bool2int(v0 != nil && legacy.Struct264Module.Sub_487790(v0, 16) == 16)
+	return bool2int(v0 != nil && legacy.AudioModule.Sub_487790(v0, 16) == 16)
 }
 
 var _ = [1]struct{}{}[288-unsafe.Sizeof(audioStructXxx{})]

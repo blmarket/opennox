@@ -22,20 +22,20 @@ import (
 //
 //export sub_4870A0
 func sub_4870A0() {
-	Struct264Module.Sub_4870A0()
+	AudioModule.Sub_4870A0()
 }
 
 //export sub_4875F0
 func sub_4875F0() int32 {
-	return Struct264Module.Sub_4875F0()
+	return AudioModule.Sub_4875F0()
 }
 
 //export sub_486FE0
 func sub_486FE0(a1 int) *C.struct88 {
-	return (*C.struct88)(unsafe.Pointer(Struct264Module.Sub_486FE0((*audio.Struct587000_94032)(unsafe.Pointer(uintptr(a1))))))
+	return (*C.struct88)(unsafe.Pointer(AudioModule.Sub_486FE0((*audio.Struct587000_94032)(unsafe.Pointer(uintptr(a1))))))
 }
 
 //export sub_487050
 func sub_487050(a1 *C.struct88) {
-	Struct264Module.Sub_487050((*audio.Struct88)(unsafe.Pointer(a1)))
+	AudioModule.Sub_487050((*audio.Struct88)(unsafe.Pointer(a1)))
 }

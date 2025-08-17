@@ -79,20 +79,20 @@ func nox_common_list_getNextSafe_4258A0(list unsafe.Pointer) unsafe.Pointer {
 
 //export sub_452810
 func sub_452810(a1 int32, a2 C.char) *int32 {
-	return (*int32)(unsafe.Pointer(Struct264Module.Sub_452810(a1, int8(a2))))
+	return (*int32)(unsafe.Pointer(AudioModule.Sub_452810(a1, int8(a2))))
 }
 
 //export sub_431270
 func sub_431270() {
-	Struct264Module.Sub_431270()
+	AudioModule.Sub_431270()
 }
 
 //export sub_487680
 func sub_487680(lpMem_ *C.struct264) {
-	Struct264Module.Sub_487680((*audio.Struct264)(unsafe.Pointer(lpMem_)))
+	AudioModule.Sub_487680((*audio.Struct264)(unsafe.Pointer(lpMem_)))
 }
 
 //export sub_431290
 func sub_431290() {
-	Struct264Module.Sub_431290()
+	AudioModule.Sub_431290()
 }
