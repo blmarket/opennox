@@ -7,46 +7,42 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
-func (m *Phase6Module) Sub_4BDA80(a1p *Struct312) int32 {
+func (m *Phase6Module) Sub_4BDA80(a1 *Struct312) int32 {
 	var (
-		a1     int32 = int32(uintptr(unsafe.Pointer(a1p)))
 		result int32 = 0
 	)
-	if int32(*(*uint8)(unsafe.Pointer(uintptr(a1 + 124))))&5 != 0 {
-		ccall.CallVoidInt(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 172))) + 16))), int(a1))
+	if int32(*(*uint8)(unsafe.Pointer(&a1.field_31)))&5 != 0 {
+		ccall.CallVoidInt(a1.field_43.field_4, int(int32(uintptr(unsafe.Pointer(a1)))))
 	}
-	result2 := *(*uint32)(unsafe.Pointer(uintptr(a1 + 148)))
+	result2 := *(*uint32)(unsafe.Pointer(&a1.field_37))
 	if result2 != 0 {
-		result = int32(ccall.CallIntInt(unsafe.Pointer(uintptr(result2)), int(a1)))
+		result = int32(ccall.CallIntInt(unsafe.Pointer(uintptr(result2)), int(int32(uintptr(unsafe.Pointer(a1))))))
 	}
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 288))) = 0
+	*(*uint32)(unsafe.Pointer(&a1.field_72)) = 0
 	return result
 }
 
-func (m *Phase6Module) sub_486E90(a1_ *Struct312) int32 {
+func (m *Phase6Module) sub_486E90(a1 *Struct312) int32 {
 	var (
-		a1     int32 = int32(uintptr(unsafe.Pointer(a1_)))
-		v1     int32
 		result int32
 	)
-	v1 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 132))))
-	m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(a1)))
-	*(*uint32)(unsafe.Pointer(uintptr(v1 + 192)))--
-	*(*uint32)(unsafe.Pointer(uintptr(v1 + 212)))++
-	m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(a1)))
-	result = int32(*(*uint32)(unsafe.Pointer(uintptr(v1 + 212))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(v1 + 212))) = uint32(result)
+	v1p := a1.field_33
+	a1.Remove_425920()
+	v1p.field_48--
+	v1p.field_53++
+	a1.Remove_425920()
+	result = v1p.field_53 - 1
+	v1p.field_53 = result
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(v1 + 212))) = 0
+		v1p.field_53 = 0
 	}
 	return result
 }
 
-func (m *Phase6Module) Sub_4BDA60(lpMem_ *Struct312) {
-	var lpMem unsafe.Pointer = unsafe.Pointer(lpMem_)
-	m.Sub_4BDA80((*Struct312)(unsafe.Pointer(uintptr(int32(uintptr(lpMem))))))
-	m.sub_486E90((*Struct312)(unsafe.Pointer(uintptr(int32(uintptr(lpMem))))))
-	m.sub_4BD7A0(lpMem)
+func (m *Phase6Module) Sub_4BDA60(a1 *Struct312) {
+	m.Sub_4BDA80(a1)
+	m.sub_486E90(a1)
+	m.sub_4BD7A0(unsafe.Pointer(a1))
 }
 
 func (m *Phase6Module) Sub_4873C0(a3p *Struct264) int32 {
