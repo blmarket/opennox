@@ -117,7 +117,7 @@ func initAudio(externs *audio.AudioExterns) {
 		externs,
 		"audio",
 		PlatformTicks,
-		sub_4BD300,
+		sub_4BD300, // Free list
 		sub_486520,
 		sub_4BD280,
 		sub_4BD340,
@@ -141,8 +141,6 @@ func initAudio(externs *audio.AudioExterns) {
 			return unsafe.Pointer(C.nox_common_list_getNext_425940((*C.nox_list_item_t)(list)))
 		},
 	)
-
-	initStruct264(externs)
 }
 
 func sub_425770(a1 unsafe.Pointer) unsafe.Pointer {

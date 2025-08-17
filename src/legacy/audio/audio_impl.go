@@ -597,7 +597,7 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 	}
 	v3 = int32(a1.field_75)
 	a1.field_109 = 0
-	res = (*Struct312)(m.sub_452810(int(int32(*&v1p.field_12+uint32(v3))), 0))
+	res = (*Struct312)(m.Sub_452810(int32(*&v1p.field_12+uint32(v3)), 0))
 	a1.field_44 = res
 	if res != nil {
 		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(v1p.field_19), int(*&v1p.field_20), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))
@@ -1065,7 +1065,6 @@ func (m *AudioModule) sub_4BD7C0(a1p *Struct312) {
 func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 	var (
 		result int32
-		v3     int32
 		v4     int32
 	)
 	v1 := *(*unsafe.Pointer)(unsafe.Pointer(&a1p.field_34))
@@ -1078,12 +1077,12 @@ func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 			return result
 		}
 	} else {
-		if a1p.field_73 != 0 {
-			v3 = int32(uintptr(m.nox_common_list_getNext_425940(unsafe.Pointer(*(**int32)(unsafe.Pointer(&a1p.field_73))))))
-			a1p.field_73 = uint32(v3)
-			if v3 != 0 {
-				a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(v3 + 12)))
-				v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(v3 + 16))))
+		if a1p.field_73 != nil {
+			v3 := a1p.field_73.NextSafe_425940()
+			a1p.field_73 = v3
+			if v3 != nil {
+				a1p.field_74 = *(*uint32)(unsafe.Pointer(unsafe.Add(unsafe.Pointer(v3), 12)))
+				v4 = int32(*(*uint32)(unsafe.Pointer(unsafe.Add(unsafe.Pointer(v3), 16))))
 				a1p.field_75 = uint32(v4)
 				a1p.field_76 = uint32(v4)
 				return 0
@@ -1141,18 +1140,17 @@ func (m *AudioModule) sub_4BDC00(a1 int32) int32 {
 func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p unsafe.Pointer) {
 	var a2 = (*uint32)(a2p)
 	var (
-		v2 int32
 		v3 int32
 		v4 *uint32
 		v5 int32
 	)
 	a1p.field_72 = unsafe.Pointer(a2)
 	if a2 != nil {
-		v2 = m.sub_487C80(int32(uintptr(unsafe.Pointer(a2))))
-		a1p.field_73 = uint32(v2)
-		if v2 != 0 {
-			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(v2 + 12)))
-			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(v2 + 16))))
+		v2 := m.sub_487C80(int32(uintptr(unsafe.Pointer(a2))))
+		a1p.field_73 = v2
+		if v2 != nil {
+			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(v2)) + 12))
+			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(v2)) + 16)))
 			a1p.field_75 = uint32(v3)
 			a1p.field_76 = uint32(v3)
 			*a2 = 0
@@ -1166,8 +1164,9 @@ func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p unsafe.Pointer) {
 	}
 }
 
-func (m *AudioModule) sub_487C80(a1 int32) int32 {
-	return int32(uintptr(unsafe.Pointer(m.nox_common_list_getNext_425940(unsafe.Pointer(uintptr(a1 + 8))))))
+func (m *AudioModule) sub_487C80(a1 int32) *UnknownListElement {
+	v1 := (*ListElement[UnknownListElement, *UnknownListElement])(unsafe.Pointer(uintptr(a1 + 8)))
+	return v1.NextSafe_425940()
 }
 
 func (m *AudioModule) Sub_486F30() int {

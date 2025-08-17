@@ -29,34 +29,6 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
-var (
-	Struct264Module *audio.Struct264Module
-)
-
-func initStruct264(externs *audio.AudioExterns) {
-	Struct264Module = audio.NewStruct264Module(
-		externs,
-		"struct264",
-		nox_common_list_getFirstSafe_425890,
-		nox_common_list_remove_425920,
-		nox_common_list_append_4258E0,
-		nullsub_10,
-		func(a1 unsafe.Pointer) {
-			sub_4BDA60((*C.struct312)(a1))
-		},
-		nox_common_list_clear_425760,
-		nox_common_list_getNextSafe_4258A0,
-		func(a1 *audio.Struct312) int32 {
-			return AudioModule.Sub_4BDA80(a1)
-		},
-		sub_486320,
-		sub_425770,
-		func(a1 *audio.Struct264) *audio.Struct312 {
-			return AudioModule.Sub_4BD720(a1)
-		},
-	)
-}
-
 func nox_common_list_getFirstSafe_425890(list unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C.nox_common_list_getFirstSafe_425890((*C.nox_list_item_t)(list)))
 }
