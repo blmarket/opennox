@@ -36,7 +36,7 @@ type Struct200 struct {
 	field_28   Struct200Field28
 	field_31   uint32
 	field_32   [32]uint16
-	field_48   uint32
+	field_48   int32
 	field_49   uint32
 }
 
@@ -78,7 +78,7 @@ type Struct576 struct {
 	field_70      uint32
 	field_71      uint32
 	field_72      uint64
-	field_74      uint32
+	field_74      unsafe.Pointer
 	field_75      uint32
 	field_76      [32]int32
 	field_108     uint32
@@ -229,7 +229,7 @@ func (m *AudioModule) Sub_4526F0(a1p *Struct312) int32 {
 	v1p.field_6 &= 0xFD
 	v2 = 4
 	if v1p.field_7 != 4 {
-		if v1p.field_74 != 0 || v1p.field_142 != 0 {
+		if v1p.field_74 != nil || v1p.field_142 != 0 {
 			v2 = 1
 		} else {
 			v1p.field_71 = 0
@@ -304,14 +304,14 @@ func (m *AudioModule) sub_452120(a1p *Struct576) bool {
 	if v3 == nil {
 		return false
 	}
-	m.sub_452190((*Struct200)(unsafe.Pointer(v3)))
+	m.sub_452190(v3)
 	v4 := m.Externs.ListHead_5d4594_840612.next.PromoteUnsafe()
 	if unsafe.Pointer(*(**uint8)(unsafe.Pointer(m.Externs.ListHead_5d4594_840612))) != unsafe.Pointer(m.Externs.ListHead_5d4594_840612) {
 		for {
 			v5 := v4.next
 			if v4.field_9 == v3 {
-				m.Sub_4523D0((*Struct576)(unsafe.Pointer(v4)))
-				m.sub_451FE0((*Struct576)(unsafe.Pointer(v4)))
+				m.Sub_4523D0(v4)
+				m.sub_451FE0(v4)
 				ret = true
 			}
 			v4 = v5.PromoteUnsafe()
@@ -328,10 +328,10 @@ func (m *AudioModule) Sub_4523D0(a1 *Struct576) int32 {
 		result int32 = 0
 	)
 	if (*(*uint32)(unsafe.Pointer(&a1.field_6)) & 1) == 0 {
-		m.sub_452410((*Struct576)(unsafe.Pointer(a1)))
-		m.sub_451F90((*Struct576)(unsafe.Pointer(a1)))
-		*(*uint32)(unsafe.Pointer(&a1.field_7)) = 4
-		*(*uint32)(unsafe.Pointer(&a1.field_70)) = 0
+		m.sub_452410(a1)
+		m.sub_451F90(a1)
+		a1.field_7 = 4
+		a1.field_70 = 0
 		result = int32(*(*uint32)(unsafe.Pointer(&a1.field_6)))
 		*((*uint8)(unsafe.Pointer(&result))) = uint8(int8(result | 1))
 		*(*uint32)(unsafe.Pointer(&a1.field_6)) = uint32(result)
@@ -358,24 +358,24 @@ func (m *AudioModule) sub_452410(a1p *Struct576) {
 
 func (m *AudioModule) sub_452490(a1p *Struct576) int32 {
 	// var v1 int32
-	var v3 int32
+	var v3 unsafe.Pointer
 	var v4 int32
 	v1 := a1p.field_44
 	if a1p != v1.field_38 {
 		return 0
 	}
-	v3 = int32(a1p.field_74)
-	m.Sub_4BDB90(v1, unsafe.Pointer((*uint32)(unsafe.Pointer(uintptr(a1p.field_74)))))
+	v3 = a1p.field_74
+	m.Sub_4BDB90(v1, a1p.field_74)
 	a1p.field_7 = 3
 	v4 = int32(a1p.field_6)
 	*((*uint8)(unsafe.Pointer(&v4))) = uint8(int8(v4 | 2))
 	a1p.field_6 = uint8(int8(v4))
-	a1p.field_74 = 0
+	a1p.field_74 = nil
 	if m.sub_4BDB40(a1p.field_44) == 0 {
 		return 1
 	}
 	a1p.field_7 = 1
-	a1p.field_74 = uint32(v3)
+	a1p.field_74 = v3
 	a1p.field_6 &= uint8(0xFD)
 	return 0
 }
@@ -521,7 +521,7 @@ func (m *AudioModule) sub_451CF0(a1 *Struct576) int32 {
 					v7++
 					*v8 = *(*uint32)(unsafe.Add(unsafe.Pointer(v8), 4*1))
 					v8 = (*uint32)(unsafe.Add(unsafe.Pointer(v8), 4*1))
-					if uint32(v7) >= *(*uint32)(unsafe.Pointer(&a1.field_108))-1 {
+					if uint32(v7) >= a1.field_108-1 {
 						break
 					}
 				}
@@ -530,7 +530,7 @@ func (m *AudioModule) sub_451CF0(a1 *Struct576) int32 {
 			*(*uint32)(unsafe.Pointer(&a1.field_43))++
 		}
 		v9 = int32(*(*uint32)(unsafe.Pointer(&a1.field_43)))
-		*(*uint32)(unsafe.Pointer(&a1.field_108))--
+		a1.field_108--
 		result = m.sub_4BD710(int32(*(*uint32)(unsafe.Pointer(&a1.field_10[v9]))))
 	} else if v3&1 != 0 {
 		if v1.field_15 != 0 && (func() bool {
@@ -540,7 +540,7 @@ func (m *AudioModule) sub_451CF0(a1 *Struct576) int32 {
 		}()) {
 			result = 0
 		} else {
-			result = m.sub_451CA0((*Struct576)(unsafe.Pointer(a1)))
+			result = m.sub_451CA0(a1)
 		}
 	}
 	return result
@@ -559,24 +559,24 @@ func (m *AudioModule) sub_451DC0(a1p *Struct576) int32 {
 	result = int32(a1p.field_42)
 	v3 = int32(*(*uint32)(unsafe.Pointer(&v1.field_1)))
 	if result != 0 {
-		if *&v1.field_17 < 0x21 {
+		if v1.field_17 < 0x21 {
 			return result
 		}
 		m.sub_451F90(a1p)
 	}
 	if v3&4 != 0 {
-		if *&v1.field_17 >= 0x21 {
+		if v1.field_17 >= 0x21 {
 			v5 = m.sub_451E80(a1p)
 			result = m.sub_451F30(a1p, v5)
 		} else {
-			result = int32(*&v1.field_48)
+			result = int32(v1.field_48)
 			for i = 0; i < result; i++ {
 				m.sub_451F30(a1p, i)
-				result = int32(*&v1.field_48)
+				result = int32(v1.field_48)
 			}
 		}
 	} else if v3&2 != 0 {
-		v6 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(*&v1.field_48-1), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 536))
+		v6 = int32(m.nox_common_randomIntMinMax_415FF0(0, int(v1.field_48-1), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 536))
 		result = m.sub_451F30(a1p, v6)
 	} else {
 		result = m.sub_451F30(a1p, 0)
