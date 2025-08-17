@@ -1,7 +1,12 @@
 #!/bin/bash
-echo '#include "defs.h"' > phase7.c
+echo '#include <stdio.h>"' > phase7.c
+echo '' >> phase7.c
+echo '#include "defs.h"' >> phase7.c
 echo '#include "operators.h"' >> phase7.c
 
+python -m tools.move_func sub_486E00 phase7.c
+python -m tools.move_func sub_4866D0 phase7.c
+python -m tools.move_func sub_487C30 phase7.c
 python -m tools.move_func sub_486DB0 phase7.c
 python -m tools.move_func sub_486B60 phase7.c
 python -m tools.move_func sub_486E00 phase7.c
