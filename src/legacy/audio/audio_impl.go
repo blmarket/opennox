@@ -1813,3 +1813,7 @@ func (m *AudioModule) Sub_4BD300(a1 *uint32, a2 int32) int32 {
 	*a1 = uint32(a2 - 4)
 	return result
 }
+
+func (m *AudioModule) Sub_4BD680(a1 int32) int32 {
+	return int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 12))))
+}
