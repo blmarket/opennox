@@ -33,6 +33,7 @@ TYPE_MAPPINGS = {
     'int**': '**C.int',
     'int*': '*C.int',
     'char*': '*C.char',
+    'FILE*': '*C.FILE',
 }
 
 
