@@ -19,6 +19,7 @@ TYPE_MAPPINGS = {
     'char': 'byte',
     'int': 'int',
     'unsigned int': 'uint',
+    'signed int': 'int32',
     'short': 'int16',
     'unsigned short': 'uint16',
     'long': 'int32',
