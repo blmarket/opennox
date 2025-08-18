@@ -5,7 +5,10 @@ echo '#include "defs.h"' >> phase7.c
 echo '#include "operators.h"' >> phase7.c
 echo '#include "common/fs/nox_fs.h"' >> phase7.c
 
+python -m tools.add_cgo_decl sub_4BD300 &
+
 python -m tools.move_func sub_4BD300 phase7.c
+
 # python -m tools.move_func sub_4BD680 phase7.c
 # python -m tools.move_func sub_487C50 phase7.c
 # python -m tools.move_func sub_4BD600 phase7.c
