@@ -90,7 +90,7 @@ def make_function_public(go_content: str) -> str:
         if func_name and func_name[0].islower():
             func_name = func_name[0].upper() + func_name[1:]
         
-        return f'func {receiver}{func_name}({params}'
+        return f'func {receiver}{func_name}({params})'
     
     # Pattern to match function definitions with receivers
     func_pattern = r'func\s+(\(m \*\w+\)\s+)(\w+)\s*\(([^)]*)\)'
