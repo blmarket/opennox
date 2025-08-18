@@ -65,6 +65,8 @@ void* sub_425770(void* a1);
 int sub_4BD8C0(struct312* a1);
 int sub_4BD940(struct312* a1);
 int sub_4BD9B0(struct312* a2);
+
+int sub_425960(int a1);
 */
 import "C"
 
@@ -260,4 +262,9 @@ func sub_4BDA60(lpMem_ *C.struct312) {
 //export sub_4BDA80
 func sub_4BDA80(a1_ *C.struct312) int32 {
 	return AudioModule.Sub_4BDA80((*audio.Struct312)(unsafe.Pointer(a1_)))
+}
+
+//export sub_425960
+func sub_425960(a1 C.int) C.int {
+	return C.int(AudioModule.Sub_425960(int32(a1)))
 }

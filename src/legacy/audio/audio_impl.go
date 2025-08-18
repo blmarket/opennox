@@ -1791,3 +1791,10 @@ func (m *AudioModule) Sub_4875F0() int32 {
 	}
 	return result
 }
+
+func (m *AudioModule) Sub_425960(a1 int32) int32 {
+	if *(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) + 8))) != *(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) {
+		return int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 4))))
+	}
+	return 0
+}
