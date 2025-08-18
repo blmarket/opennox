@@ -52,7 +52,8 @@ type AudioModule struct {
 	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
 	// Better inline? just free?
-	sub_4BD2D0 func(unsafe.Pointer)
+	sub_4BD2D0                    func(unsafe.Pointer)
+	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer)
 }
 
 func NewAudioModule(
@@ -68,6 +69,7 @@ func NewAudioModule(
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int,
 	sub_4BD3C0 func(unsafe.Pointer),
+	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                        moduleName,
@@ -82,5 +84,6 @@ func NewAudioModule(
 		nox_xxx_getSndName_40AF80:         nox_xxx_getSndName_40AF80,
 		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
 		sub_4BD3C0:                        sub_4BD3C0,
+		nox_common_list_append_4258E0:     nox_common_list_append_4258E0,
 	}
 }
