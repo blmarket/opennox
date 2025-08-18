@@ -1805,3 +1805,11 @@ func (m *AudioModule) Sub_487D60(a1 int32) int32 {
 	*(*uint32)(unsafe.Pointer(uintptr(a1 + 20))) = 0
 	return result
 }
+
+func (m *AudioModule) Sub_4BD300(a1 *uint32, a2 int32) int32 {
+	var result int32
+	result = a2 - 4
+	*(*uint32)(unsafe.Pointer(uintptr(a2 - 4))) = *a1
+	*a1 = uint32(a2 - 4)
+	return result
+}

@@ -274,3 +274,8 @@ func sub_425960(a1 C.int) C.int {
 func sub_487D60(a1 C.int) C.int {
 	return C.int(AudioModule.Sub_487D60(int32(a1)))
 }
+
+//export sub_4BD300
+func sub_4BD300(a1 *C.uint32_t, a2 C.int) C.int {
+	return C.int(AudioModule.Sub_4BD300((*uint32)(unsafe.Pointer(a1)), int32(a2)))
+}
