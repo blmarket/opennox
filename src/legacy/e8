@@ -5,16 +5,16 @@ echo '#include "defs.h"' >> phase7.c
 echo '#include "operators.h"' >> phase7.c
 echo '#include "common/fs/nox_fs.h"' >> phase7.c
 
-FUNC_NAME=sub_487C50
+FUNC_NAME=sub_4BD690
 
 python -m tools.add_cgo_decl $FUNC_NAME &
 
 # python -m tools.move_func sub_4BD680 phase7.c
 # python -m tools.move_func sub_487C50 phase7.c
+# python -m tools.move_func sub_4BD690 phase7.c
 python -m tools.move_func $FUNC_NAME phase7.c
 
 # python -m tools.move_func sub_4BD600 phase7.c
-# python -m tools.move_func sub_4BD690 phase7.c
 # python -m tools.move_func sub_425900 phase7.c
 # python -m tools.move_func sub_487D30 phase7.c
 # python -m tools.move_func sub_4BD280 phase7.c
