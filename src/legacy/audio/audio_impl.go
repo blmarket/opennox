@@ -1798,3 +1798,10 @@ func (m *AudioModule) Sub_425960(a1 int32) int32 {
 	}
 	return 0
 }
+
+func (m *AudioModule) Sub_487D60(a1 int32) int32 {
+	var result int32
+	result = a1
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 20))) = 0
+	return result
+}

@@ -4485,13 +4485,6 @@ uint32_t* sub_487D30(uint32_t* a1, int a2, int a3) {
 }
 
 //----- (00487D60) --------------------------------------------------------
-int sub_487D60(int a1) {
-	int result; // eax
-
-	result = a1;
-	*(uint32_t*)(a1 + 20) = 0;
-	return result;
-}
 
 //----- (00487D70) --------------------------------------------------------
 int nox_xxx_wndEditProc_487D70_key(uint32_t* a1, int v4, int a3, int a4) {

@@ -67,6 +67,7 @@ int sub_4BD940(struct312* a1);
 int sub_4BD9B0(struct312* a2);
 
 int sub_425960(int a1);
+int sub_487D60(int a1);
 */
 import "C"
 
@@ -267,4 +268,9 @@ func sub_4BDA80(a1_ *C.struct312) int32 {
 //export sub_425960
 func sub_425960(a1 C.int) C.int {
 	return C.int(AudioModule.Sub_425960(int32(a1)))
+}
+
+//export sub_487D60
+func sub_487D60(a1 C.int) C.int {
+	return C.int(AudioModule.Sub_487D60(int32(a1)))
 }
