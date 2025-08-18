@@ -60,18 +60,14 @@ func NewAudioModule(
 	moduleName string,
 	nox_platform_get_ticks func() uint64,
 	sub_4BD300 func(unsafe.Pointer, int) int,
-	sub_486520 func(unsafe.Pointer) int,
 	sub_4BD280 func(int, int) unsafe.Pointer,
 	sub_4BD340 func(int, int, int, int) unsafe.Pointer,
 	sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer,
 	sub_4BD470 func(unsafe.Pointer, int) unsafe.Pointer,
-	sub_452810 func(int, byte) unsafe.Pointer,
 	sub_4BD2D0 func(unsafe.Pointer),
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
-	sub_4862E0 func(unsafe.Pointer, int) int,
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int,
 	sub_4BD3C0 func(unsafe.Pointer),
-	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                        moduleName,
