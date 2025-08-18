@@ -146,7 +146,7 @@ def create_audio_impl_go(c_file_path: str, module_name: str = "AudioModule") -> 
     for line in lines:
         if line.startswith('package '):
             # package_section.append(f'package {c_file_path.replace(".c", "")}')
-            package_section.append(f'package {c_file_path.replace(".c", "")}')
+            package_section.append(f'package audio')
         elif line.startswith('import '):
             in_imports = True
             package_section.append(line)
