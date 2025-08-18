@@ -613,21 +613,6 @@ int sub_4BD600(int a1) {
 //----- (004BD680) --------------------------------------------------------
 
 //----- (004BD690) --------------------------------------------------------
-int sub_4BD690(int a1) {
-	uint32_t** i; // esi
-
-	if (*(uint32_t*)(a1 + 4) != a1) {
-		nox_common_list_remove_425920((uint32_t**)a1);
-	}
-	for (i = (uint32_t**)nox_common_list_getNext_425940((int*)(a1 + 32)); i;
-		 i = (uint32_t**)nox_common_list_getNext_425940((int*)(a1 + 32))) {
-		nox_common_list_remove_425920(i);
-		sub_487D60((int)i);
-		sub_4BD300(*(uint32_t**)(*(uint32_t*)(a1 + 52) + 4), (int)i);
-	}
-	nullsub_9(a1 + 24);
-	return sub_4BD300(*(uint32_t**)(*(uint32_t*)(a1 + 52) + 8), a1);
-}
 // 487CA0: using guessed type void  nullsub_9(uint32_t);
 
 //----- (004BD710) --------------------------------------------------------

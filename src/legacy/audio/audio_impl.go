@@ -1826,3 +1826,16 @@ func (m *AudioModule) Sub_487C50(a1 int32, a2 *uint32) int32 {
 	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*5)) = uint32(a1)
 	return result
 }
+
+func (m *AudioModule) Sub_4BD690(a1 int32) int32 {
+	var i **uint32
+	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) != uint32(a1) {
+		m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(a1)))
+	}
+	for i = (**uint32)(unsafe.Pointer(m.nox_common_list_getNext_425940((unsafe.Pointer(uintptr(a1 + 32)))))); i != nil; i = (**uint32)(unsafe.Pointer(m.nox_common_list_getNext_425940((unsafe.Pointer(uintptr(a1 + 32)))))) {
+		m.nox_common_list_remove_425920(unsafe.Pointer(i))
+		m.Sub_487D60(int32(uintptr(unsafe.Pointer(i))))
+		m.sub_4BD300(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 52))) + 4))), int(uintptr(unsafe.Pointer(i))))
+	}
+	return m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 52))) + 8))), a1)
+}
