@@ -130,10 +130,6 @@ def extract_functions_only(go_content: str) -> str:
                             break
             continue
         
-        # Skip variable declarations and constants
-        if stripped.startswith('var ') or stripped.startswith('const '):
-            continue
-        
         # Check if this line starts a function
         if stripped.startswith('func '):
             in_function = True
@@ -214,9 +210,13 @@ def main():
         print("Prefixing external variables...")
         go_content = prefix_external_variables(go_content, external_vars)
 
+        print(go_content)
+
         # Step 5: Make functions public
         print("Making functions public...")
         go_content = make_function_public(go_content)
+
+        print(go_content)
 
         # Step 6: Extract only functions
         print("Extracting functions...")
