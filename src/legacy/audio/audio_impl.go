@@ -1,6 +1,7 @@
 package audio
 
 import (
+	"log"
 	unsafe "unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
@@ -2015,4 +2016,86 @@ func (m *AudioModule) Sub_4BD420(a1 int32, a2 int32) *uint32 {
 		}
 	}
 	return result
+}
+
+func (m *AudioModule) Sub_4BD470(a1 **uint32, a2 int32) *uint32 {
+	v2 := m.Sub_4BD420(int32(uintptr(unsafe.Pointer(a1))), a2)
+	v3 := v2
+	if v2 != nil {
+		m.nox_common_list_remove_425920(unsafe.Pointer(v2))
+		m.Sub_425900((*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1))+4*3)), v3)
+		return v3
+	}
+
+	if m.sub_486B60(int(uintptr(unsafe.Pointer(*a1))), int(a2)) == 0 {
+		return nil
+	}
+	v5 := m.sub_4BD2E0(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(unsafe.Pointer(a1)) + 4*2)))
+	if v5 == nil {
+		m.Sub_4BD600(int32(uintptr(unsafe.Pointer(a1))))
+		v5 = m.sub_4BD2E0(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(unsafe.Pointer(a1)) + 4*2)))
+		if v5 == nil {
+			m.sub_486E00(*(*int)(unsafe.Pointer(a1)))
+			return nil
+		}
+	}
+	*(*uint32)(unsafe.Add(v5, 4*4)) = uint32(a2)
+	*(*uint32)(unsafe.Add(v5, 4*13)) = uint32(uintptr(unsafe.Pointer(a1)))
+	((*UnknownListElement)(v5)).Init_425770()
+	*(*uint32)(unsafe.Add(v5, 4*3)) = 0
+	m.Sub_487C30((*uint32)(unsafe.Add(v5, 4*6)))
+	*(*uint32)(unsafe.Add(v5, 4*11)) = uint32(uintptr(unsafe.Add(v5, 4*14)))
+
+	v6 := *(*int32)(unsafe.Add(unsafe.Pointer(*a1), 4*71))
+	v10 := *(*int32)(unsafe.Add(unsafe.Pointer(*a1), 4*71))
+	log.Printf("v6 v10 = %d %d\n", v6, v10)
+	if v6 == 0 {
+		m.Sub_486AA0(*a1, *(*int32)(unsafe.Add(v5, 4*4)), (*uint32)(unsafe.Add(v5, 4*14)))
+		m.Sub_425900((*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1))+4*3)), (*uint32)(v5))
+		*(*uint32)(unsafe.Add(v5, 4*5)) = 1
+		m.sub_486E00(int(uintptr(unsafe.Pointer(*a1))))
+		return (*uint32)(v5)
+	}
+	for {
+		v7 := (*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1)) + 4*6)))
+		if v7 > v6 {
+			v7 = v6
+		}
+		v8 := m.sub_4BD2E0(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(unsafe.Pointer(a1)) + 4*1)))
+		if v8 == nil {
+			found := false
+			for {
+				if m.Sub_4BD600(int32(uintptr(unsafe.Pointer(a1)))) == 0 {
+					break
+				}
+				v8 = m.sub_4BD2E0(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(unsafe.Pointer(a1)) + 4*1)))
+				if v8 != nil {
+					found = true
+					break
+				}
+			}
+			if !found {
+				m.Sub_4BD690(int32(uintptr(v5)))
+				return nil
+			}
+		}
+		// LABEL_17
+		m.Sub_487D30((*uint32)(v8), int32(uintptr(unsafe.Add(v8, 24))), v7)
+		m.Sub_487C50(int32(uintptr(unsafe.Add(v5, 4*6))), (*uint32)(v8))
+		v9 := int32(m.sub_486DB0(int(uintptr(unsafe.Pointer(*a1))), unsafe.Add(v8, 24), int(v7)))
+		if v9 != v7 {
+			m.Sub_4BD690(int32(uintptr(v5)))
+			return nil
+		}
+		log.Printf("v9 v10= %d %d\n", v9, v10)
+		v10 = v10 - v9
+		if v10 == 0 {
+			m.Sub_486AA0(*a1, *(*int32)(unsafe.Add(v5, 4*4)), (*uint32)(unsafe.Add(v5, 4*14)))
+			m.Sub_425900((*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1))+4*3)), (*uint32)(v5))
+			*(*uint32)(unsafe.Add(v5, 4*5)) = 1
+			m.sub_486E00(int(uintptr(unsafe.Pointer(*a1))))
+			return (*uint32)(v5)
+		}
+		v6 = v10
+	}
 }

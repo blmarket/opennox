@@ -56,6 +56,10 @@ type AudioModule struct {
 	nox_common_list_append_4258E0  func(unsafe.Pointer, unsafe.Pointer)
 	nox_common_list_remove_425920  func(unsafe.Pointer)
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
+
+	sub_486B60 func(int, int) int
+	sub_486E00 func(int) unsafe.Pointer
+	sub_486DB0 func(int, unsafe.Pointer, int) int
 }
 
 func NewAudioModule(
@@ -74,6 +78,9 @@ func NewAudioModule(
 	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
 	nox_common_list_remove_425920 func(unsafe.Pointer),
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
+	sub_486B60 func(int, int) int,
+	sub_486E00 func(int) unsafe.Pointer,
+	sub_486DB0 func(int, unsafe.Pointer, int) int,
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                        moduleName,
@@ -91,5 +98,8 @@ func NewAudioModule(
 		nox_common_list_append_4258E0:     nox_common_list_append_4258E0,
 		nox_common_list_remove_425920:     nox_common_list_remove_425920,
 		nox_common_list_getNext_425940:    nox_common_list_getNext_425940,
+		sub_486B60:                        sub_486B60,
+		sub_486E00:                        sub_486E00,
+		sub_486DB0:                        sub_486DB0,
 	}
 }

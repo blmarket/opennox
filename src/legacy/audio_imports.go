@@ -79,6 +79,9 @@ void sub_487C30(uint32_t* a1);
 int sub_487D00(uint32_t* a1);
 int sub_486AA0(uint32_t* a1, int a2, uint32_t* a3);
 uint32_t* sub_4BD420(int a1, int a2);
+int sub_486B60(int a1, int a2);
+FILE* sub_486E00(int a1);
+signed int sub_486DB0(int a1, char* a2, signed int a3);
 */
 import "C"
 
@@ -166,6 +169,13 @@ func initAudio(externs *audio.AudioExterns) {
 		},
 		func(a1 unsafe.Pointer) unsafe.Pointer {
 			return unsafe.Pointer(C.nox_common_list_getNext_425940((*C.nox_list_item_t)(a1)))
+		},
+		func(a1 int, a2 int) int {
+			return int(C.sub_486B60(C.int(a1), C.int(a2)))
+		}, func(a1 int) unsafe.Pointer {
+			return unsafe.Pointer(C.sub_486E00(C.int(a1)))
+		}, func(a1 int, a2 unsafe.Pointer, a3 int) int {
+			return int(C.sub_486DB0(C.int(a1), (*C.char)(a2), C.int(a3)))
 		},
 	)
 }
@@ -378,4 +388,9 @@ func sub_4BD340(a1 C.int, a2 C.int, a3 C.int, a4 C.int) *C.uint32_t {
 //export sub_4BD3C0
 func sub_4BD3C0(lpMem unsafe.Pointer) {
 	AudioModule.Sub_4BD3C0(lpMem)
+}
+
+//export sub_4BD470
+func sub_4BD470(a1 **C.uint32_t, a2 C.int) *C.uint32_t {
+	return (*C.uint32_t)(AudioModule.Sub_4BD470((**uint32)(unsafe.Pointer(a1)), int32(a2)))
 }
