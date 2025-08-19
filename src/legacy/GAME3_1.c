@@ -589,22 +589,6 @@ uint32_t* sub_4BD470(uint32_t** a1, int a2) {
 // 487CF0: using guessed type void  nullsub_10(uint32_t);
 
 //----- (004BD600) --------------------------------------------------------
-int sub_4BD600(int a1) {
-	int v1; // esi
-
-	v1 = sub_425960(a1 + 12);
-	if (!v1) {
-		return 0;
-	}
-	while (sub_4BD680(v1)) {
-		v1 = sub_425960(v1);
-		if (!v1) {
-			return 0;
-		}
-	}
-	sub_4BD690(v1);
-	return 1;
-}
 
 //----- (004BD650) --------------------------------------------------------
 

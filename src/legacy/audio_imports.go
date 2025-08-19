@@ -71,6 +71,7 @@ int sub_487D60(int a1);
 int sub_4BD680(int a1);
 int sub_487C50(int a1, uint32_t* a2);
 int sub_4BD690(int a1);
+int sub_4BD600(int a1);
 */
 import "C"
 
@@ -305,4 +306,9 @@ func sub_487C50(a1 C.int, a2 *C.uint32_t) C.int {
 //export sub_4BD690
 func sub_4BD690(a1 C.int) C.int {
 	return C.int(AudioModule.Sub_4BD690(int32(a1)))
+}
+
+//export sub_4BD600
+func sub_4BD600(a1 C.int) C.int {
+	return C.int(AudioModule.Sub_4BD600(int32(a1)))
 }

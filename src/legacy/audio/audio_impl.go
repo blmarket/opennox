@@ -1839,3 +1839,19 @@ func (m *AudioModule) Sub_4BD690(a1 int32) int32 {
 	}
 	return m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 52))) + 8))), a1)
 }
+
+func (m *AudioModule) Sub_4BD600(a1 int32) int32 {
+	var v1 int32
+	v1 = m.Sub_425960(a1 + 12)
+	if v1 == 0 {
+		return 0
+	}
+	for m.Sub_4BD680(v1) != 0 {
+		v1 = m.Sub_425960(v1)
+		if v1 == 0 {
+			return 0
+		}
+	}
+	m.Sub_4BD690(v1)
+	return 1
+}
