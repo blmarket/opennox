@@ -5153,16 +5153,6 @@ void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur) 
 }
 
 //----- (00425900) --------------------------------------------------------
-uint32_t* sub_425900(uint32_t* a1, uint32_t* a2) {
-	uint32_t* result; // eax
-
-	result = a2;
-	a2[1] = a1;
-	*a2 = *a1;
-	*a1 = a2;
-	*(uint32_t*)(*a2 + 4) = a2;
-	return result;
-}
 
 //----- (00425920) --------------------------------------------------------
 void nox_common_list_remove_425920(void* a1p) {

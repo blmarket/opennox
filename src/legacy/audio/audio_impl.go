@@ -1855,3 +1855,164 @@ func (m *AudioModule) Sub_4BD600(a1 int32) int32 {
 	m.Sub_4BD690(v1)
 	return 1
 }
+
+func (m *AudioModule) Sub_425900(a1 *uint32, a2 *uint32) *uint32 {
+	var result *uint32
+	result = a2
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*1)) = uint32(uintptr(unsafe.Pointer(a1)))
+	*a2 = *a1
+	*a1 = uint32(uintptr(unsafe.Pointer(a2)))
+	*(*uint32)(unsafe.Pointer(uintptr(*a2 + 4))) = uint32(uintptr(unsafe.Pointer(a2)))
+	return result
+}
+
+func (m *AudioModule) Sub_487D30(a1 *uint32, a2 int32, a3 int32) *uint32 {
+	var result *uint32
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*4)) = uint32(a3)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*3)) = uint32(a2)
+	((*UnknownListElement)(unsafe.Pointer(a1))).Init_425770()
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = 0
+	return result
+}
+
+func (m *AudioModule) Sub_4BD280(a1 int32, a2 int32) *uint32 {
+	var (
+		v2     int32
+		result *uint32
+		v4     *uint32
+		v5     int32
+	)
+	v2 = a2 + 4
+	res, _ := alloc.Calloc(1, uintptr(a1*(a2+4)+4))
+	result = (*uint32)(res)
+	if result != nil {
+		v4 = (*uint32)(unsafe.Add(unsafe.Pointer(result), 4*1))
+		*result = uint32(uintptr(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(result), 4*1)))))
+		if a1 != 1 {
+			v5 = a1 - 1
+			for {
+				v5--
+				*v4 = uint32(uintptr(unsafe.Pointer((*byte)(unsafe.Add(unsafe.Pointer((*byte)(unsafe.Pointer(v4))), v2)))))
+				v4 = (*uint32)(unsafe.Pointer((*byte)(unsafe.Add(unsafe.Pointer((*byte)(unsafe.Pointer(v4))), v2))))
+				if v5 == 0 {
+					break
+				}
+			}
+		}
+		*v4 = 0
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_4BD2E0(a1 **uint32) *uint32 {
+	var (
+		result *uint32
+		v2     *uint32
+	)
+	result = *a1
+	if *a1 != nil {
+		v2 = (*uint32)(unsafe.Pointer(uintptr(*result)))
+		result = (*uint32)(unsafe.Add(unsafe.Pointer(result), 4*1))
+		*a1 = v2
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_4BD2D0(lpMem unsafe.Pointer) {
+	alloc.FreePtr(lpMem)
+}
+
+func (m *AudioModule) Sub_4866D0(a1 *uint32, a2 int32) int32 {
+	return int32(*a1 + uint32(a2*36))
+}
+
+func (m *AudioModule) Sub_487C30(a1 *uint32) {
+	*a1 = 0
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*1)) = 0
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = 0
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*6)) = 0
+	((*UnknownListElement)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*2))))).Clear_425760()
+}
+
+func (m *AudioModule) Sub_487D00(a1 *uint32) int32 {
+	var (
+		v1     int32
+		result int32
+	)
+	v1 = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*1)))
+	result = int32(*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*2)) * *(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*3)) * *(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*4)))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = uint32(result)
+	if v1 == 1 {
+		result >>= 2
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = uint32(result)
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_4BD340(a1 int32, a2 int32, a3 int32, a4 int32) *uint32 {
+	var v4 *uint32
+	res, _ := alloc.Calloc(1, 0x1C)
+	v4 = (*uint32)(res)
+	alloc.Memset(unsafe.Pointer(v4), 0, 0x1C)
+	*v4 = uint32(a1)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*6)) = uint32(a4)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*1)) = uint32(uintptr(unsafe.Pointer(m.Sub_4BD280(a2/(a4+24), a4+24))))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*2)) = uint32(uintptr(unsafe.Pointer(m.Sub_4BD280(a3, 84))))
+	((*UnknownListElement)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*3))))).Clear_425760()
+	if *(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*1)) != 0 && *(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*2)) != 0 {
+		return v4
+	}
+	m.Sub_4BD3C0(unsafe.Pointer(v4))
+	return nil
+}
+
+func (m *AudioModule) Sub_4BD3C0(lpMem unsafe.Pointer) {
+	var i int32
+	for i = int32(uintptr(unsafe.Pointer(m.nox_common_list_getNext_425940((unsafe.Pointer((*int32)(unsafe.Add(unsafe.Pointer((*int32)(lpMem)), 4*3)))))))); i != 0; i = int32(uintptr(unsafe.Pointer(m.nox_common_list_getNext_425940((unsafe.Pointer((*int32)(unsafe.Add(unsafe.Pointer((*int32)(lpMem)), 4*3)))))))) {
+		m.Sub_4BD690(i)
+	}
+	if *((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*1))) != 0 {
+		m.Sub_4BD2D0(*((*unsafe.Pointer)(unsafe.Add(unsafe.Pointer((*unsafe.Pointer)(lpMem)), unsafe.Sizeof(unsafe.Pointer(nil))*1))))
+	}
+	if *((*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(lpMem)), 4*2))) != 0 {
+		m.Sub_4BD2D0(*((*unsafe.Pointer)(unsafe.Add(unsafe.Pointer((*unsafe.Pointer)(lpMem)), unsafe.Sizeof(unsafe.Pointer(nil))*2))))
+	}
+	alloc.FreePtr(lpMem)
+}
+
+func (m *AudioModule) Sub_486AA0(a1 *uint32, a2 int32, a3 *uint32) int32 {
+	var (
+		v3     *uint32
+		result int32
+	)
+	v3 = (*uint32)(unsafe.Pointer(uintptr(m.Sub_4866D0(a1, a2))))
+	*a3 = 4
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*2)) = *(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*6))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*7))&1) != 0) + 1)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*6)) = *(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*8))
+	if *(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*7))&8 != 0 {
+		result = 2
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*1)) = 2
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*4)) = 2
+	} else {
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*1)) = 0
+		result = bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*7))&4) != 0) + 1
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*4)) = uint32(result)
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_4BD420(a1 int32, a2 int32) *uint32 {
+	var result *uint32
+	result = *(**uint32)(unsafe.Pointer(uintptr(a1 + 12)))
+	if result == (*uint32)(unsafe.Pointer(uintptr(a1+12))) {
+		return nil
+	}
+	for *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*4)) != uint32(a2) || *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*5)) == 0 {
+		result = (*uint32)(unsafe.Pointer(uintptr(*result)))
+		if result == (*uint32)(unsafe.Pointer(uintptr(a1+12))) {
+			return nil
+		}
+	}
+	return result
+}

@@ -411,99 +411,18 @@ int nox_xxx_updDrawMonsterGen_4BC920() { return 1; }
 // 4BCABD: variable 'v4' is possibly undefined
 
 //----- (004BD280) --------------------------------------------------------
-uint32_t* sub_4BD280(int a1, int a2) {
-	int v2;           // esi
-	uint32_t* result; // eax
-	uint32_t* v4;     // ecx
-	int v5;           // edi
-
-	v2 = a2 + 4;
-	result = calloc(1, a1 * (a2 + 4) + 4);
-	if (result) {
-		v4 = result + 1;
-		*result = result + 1;
-		if (a1 != 1) {
-			v5 = a1 - 1;
-			do {
-				--v5;
-				*v4 = (char*)v4 + v2;
-				v4 = (uint32_t*)((char*)v4 + v2);
-			} while (v5);
-		}
-		*v4 = 0;
-	}
-	return result;
-}
 
 //----- (004BD2D0) --------------------------------------------------------
-void sub_4BD2D0(void* lpMem) { free(lpMem); }
 
 //----- (004BD2E0) --------------------------------------------------------
-uint32_t* sub_4BD2E0(uint32_t** a1) {
-	uint32_t* result; // eax
-	uint32_t* v2;     // edx
-
-	result = *a1;
-	if (*a1) {
-		v2 = (uint32_t*)*result;
-		++result;
-		*a1 = v2;
-	}
-	return result;
-}
 
 //----- (004BD300) --------------------------------------------------------
 
 //----- (004BD340) --------------------------------------------------------
-uint32_t* sub_4BD340(int a1, int a2, int a3, int a4) {
-	uint32_t* v4; // esi
-
-	v4 = calloc(1, 0x1Cu);
-	memset(v4, 0, 0x1Cu);
-	*v4 = a1;
-	v4[6] = a4;
-	v4[1] = sub_4BD280(a2 / (a4 + 24), a4 + 24);
-	v4[2] = sub_4BD280(a3, 84);
-	nox_common_list_clear_425760(v4 + 3);
-	if (v4[1] && v4[2]) {
-		return v4;
-	}
-	sub_4BD3C0(v4);
-	return 0;
-}
 
 //----- (004BD3C0) --------------------------------------------------------
-void sub_4BD3C0(void* lpMem) {
-	int i; // eax
-
-	for (i = nox_common_list_getNext_425940((int*)lpMem + 3); i; i = nox_common_list_getNext_425940((int*)lpMem + 3)) {
-		sub_4BD690(i);
-	}
-	if (*((uint32_t*)lpMem + 1)) {
-		sub_4BD2D0(*((void**)lpMem + 1));
-	}
-	if (*((uint32_t*)lpMem + 2)) {
-		sub_4BD2D0(*((void**)lpMem + 2));
-	}
-	free(lpMem);
-}
 
 //----- (004BD420) --------------------------------------------------------
-uint32_t* sub_4BD420(int a1, int a2) {
-	uint32_t* result; // eax
-
-	result = *(uint32_t**)(a1 + 12);
-	if (result == (uint32_t*)(a1 + 12)) {
-		return 0;
-	}
-	while (result[4] != a2 || !result[5]) {
-		result = (uint32_t*)*result;
-		if (result == (uint32_t*)(a1 + 12)) {
-			return 0;
-		}
-	}
-	return result;
-}
 
 //----- (004BD470) --------------------------------------------------------
 uint32_t* sub_4BD470(uint32_t** a1, int a2) {
