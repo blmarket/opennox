@@ -1,7 +1,6 @@
 package audio
 
 import (
-	"log"
 	unsafe "unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
@@ -2048,7 +2047,6 @@ func (m *AudioModule) Sub_4BD470(a1 **uint32, a2 int32) *uint32 {
 
 	v6 := *(*int32)(unsafe.Add(unsafe.Pointer(*a1), 4*71))
 	v10 := *(*int32)(unsafe.Add(unsafe.Pointer(*a1), 4*71))
-	log.Printf("v6 v10 = %d %d\n", v6, v10)
 	if v6 == 0 {
 		m.Sub_486AA0(*a1, *(*int32)(unsafe.Add(v5, 4*4)), (*uint32)(unsafe.Add(v5, 4*14)))
 		m.Sub_425900((*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1))+4*3)), (*uint32)(v5))
@@ -2087,7 +2085,6 @@ func (m *AudioModule) Sub_4BD470(a1 **uint32, a2 int32) *uint32 {
 			m.Sub_4BD690(int32(uintptr(v5)))
 			return nil
 		}
-		log.Printf("v9 v10= %d %d\n", v9, v10)
 		v10 = v10 - v9
 		if v10 == 0 {
 			m.Sub_486AA0(*a1, *(*int32)(unsafe.Add(v5, 4*4)), (*uint32)(unsafe.Add(v5, 4*14)))
