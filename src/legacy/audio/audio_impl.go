@@ -9,6 +9,53 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
+type Struct24[T any] struct {
+	field_0 uint32
+	field_1 uint32
+	field_2 uint32
+	field_3 uint32
+	field_4 uint32
+	field_5 uint32
+	body_6  T
+}
+
+var _ = [1]struct{}{}[2024-unsafe.Sizeof(Struct24[[2000]byte]{})]
+
+type Struct84 struct {
+	field_0 [21]uint32
+}
+
+var _ = [1]struct{}{}[84-unsafe.Sizeof(Struct84{})]
+
+type Struct28[T any] struct {
+	field_0 uint32
+	field_1 *FreeList[Struct24[T]]
+	field_2 *FreeList[Struct84]
+	field_3 UnknownListElement
+	field_6 uint32
+}
+
+var _ = [1]struct{}{}[28-unsafe.Sizeof(Struct28[byte]{})]
+var _ = [1]struct{}{}[unsafe.Sizeof(Struct28[byte]{})-28]
+
+type FreeListItem[T any] struct {
+	next *FreeListItem[T]
+	item T
+}
+
+type FreeList[T any] struct {
+	first *FreeListItem[T]
+	item0 FreeListItem[T]
+	// There are more items, but cannot represent in Go...
+}
+
+func (l *FreeList[T]) Release_4BD300(a2 *T) *FreeListItem[T] {
+	result := (*FreeListItem[T])(unsafe.Add(unsafe.Pointer(a2), -4))
+	result.next = l.first
+	l.first = result
+	return result
+}
+
 // Extracted struct definitions from defs.h
 type Struct200 struct {
 	field_0    unsafe.Pointer
