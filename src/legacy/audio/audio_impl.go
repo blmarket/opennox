@@ -50,7 +50,7 @@ type Struct28[T any] struct {
 	field_0 unsafe.Pointer
 	field_1 *FreeList[Struct24[T]]
 	field_2 *FreeList[Struct84]
-	field_3 UnknownListElement
+	field_3 ListElement[Struct84, *Struct84]
 	field_6 uint32
 }
 
@@ -1921,14 +1921,11 @@ func (m *AudioModule) Sub_4BD600(a1 int32) int32 {
 	return 1
 }
 
-func (m *AudioModule) Sub_425900(a1 *uint32, a2 *uint32) *uint32 {
-	var result *uint32
-	result = a2
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a2), 4*1)) = uint32(uintptr(unsafe.Pointer(a1)))
-	*a2 = *a1
-	*a1 = uint32(uintptr(unsafe.Pointer(a2)))
-	*(*uint32)(unsafe.Pointer(uintptr(*a2 + 4))) = uint32(uintptr(unsafe.Pointer(a2)))
-	return result
+func Sub_425900[T any](a1p *ListElement[T, *T], a2p *ListElement[T, *T]) {
+	a2p.prev = a1p
+	a2p.next = a1p.next
+	a1p.next = a2p
+	a2p.next.prev = a2p
 }
 
 func (m *AudioModule) Sub_487D30(a1p *Struct24[[0x2000]byte], a2 int32, a3 int32) *uint32 {
@@ -2061,27 +2058,26 @@ func (m *AudioModule) Sub_486AA0(a1 *uint32, a2 int32, a3 *uint32) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *uint32 {
-	var result *uint32
-	result = *(**uint32)(unsafe.Pointer(&a1p.field_3))
-	if result == (*uint32)(unsafe.Pointer(&a1p.field_3)) {
+func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *ListElement[Struct84, *Struct84] {
+	result := a1p.field_3.next
+	if result == &a1p.field_3 {
 		return nil
 	}
 	for *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*4)) != uint32(a2) || *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*5)) == 0 {
-		result = (*uint32)(unsafe.Pointer(uintptr(*result)))
-		if result == (*uint32)(unsafe.Pointer(&a1p.field_3)) {
+		result = result.next
+		if result == &a1p.field_3 {
 			return nil
 		}
 	}
 	return result
 }
 
-func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
+func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *ListElement[Struct84, *Struct84] {
 	v2 := m.Sub_4BD420(a1, a2)
 	v3 := v2
 	if v2 != nil {
 		m.nox_common_list_remove_425920(unsafe.Pointer(v2))
-		m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), v3)
+		Sub_425900(&a1.field_3, v3)
 		return v3
 	}
 
@@ -2108,10 +2104,10 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 	v10 := *(*int32)(unsafe.Add(a1.field_0, 4*71))
 	if v6 == 0 {
 		m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
-		m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
+		Sub_425900(&a1.field_3, &v5p.ListElement)
 		*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 		m.Sub_486E00(int32(uintptr(a1.field_0)))
-		return (*uint32)(unsafe.Pointer(v5p))
+		return &v5p.ListElement
 	}
 	for {
 		v7 := *(*int32)(unsafe.Pointer(&a1.field_6))
@@ -2147,10 +2143,10 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		v10 = v10 - v9
 		if v10 == 0 {
 			m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
-			m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
+			Sub_425900(&a1.field_3, &v5p.ListElement)
 			*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 			m.Sub_486E00(int32(uintptr(a1.field_0)))
-			return (*uint32)(unsafe.Pointer(v5p))
+			return &v5p.ListElement
 		}
 		v6 = v10
 	}
