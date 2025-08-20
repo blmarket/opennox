@@ -40,19 +40,10 @@ type AudioModule struct {
 
 	nox_platform_get_ticks func() uint64
 
-	// External functions
-	sub_4BD300 func(unsafe.Pointer, int) int       // Release item back to free list
-	sub_4BD280 func(int, int) unsafe.Pointer       // Create free list
-	sub_4BD2E0 func(unsafe.Pointer) unsafe.Pointer // Get element from free list
-	// Maybe move again?
-	sub_4BD340 func(int, int, int, int) unsafe.Pointer
-	sub_4BD3C0 func(unsafe.Pointer)
 	// Better in separate module
-	sub_4BD470                        func(unsafe.Pointer, int) unsafe.Pointer
 	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
 	// Better inline? just free?
-	sub_4BD2D0                     func(unsafe.Pointer)
 	nox_common_list_append_4258E0  func(unsafe.Pointer, unsafe.Pointer)
 	nox_common_list_remove_425920  func(unsafe.Pointer)
 	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
@@ -86,15 +77,8 @@ func NewAudioModule(
 		moduleName:                        moduleName,
 		Externs:                           externs,
 		nox_platform_get_ticks:            nox_platform_get_ticks,
-		sub_4BD300:                        sub_4BD300,
-		sub_4BD280:                        sub_4BD280,
-		sub_4BD340:                        sub_4BD340,
-		sub_4BD2E0:                        sub_4BD2E0,
-		sub_4BD470:                        sub_4BD470,
-		sub_4BD2D0:                        sub_4BD2D0,
 		nox_xxx_getSndName_40AF80:         nox_xxx_getSndName_40AF80,
 		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
-		sub_4BD3C0:                        sub_4BD3C0,
 		nox_common_list_append_4258E0:     nox_common_list_append_4258E0,
 		nox_common_list_remove_425920:     nox_common_list_remove_425920,
 		nox_common_list_getNext_425940:    nox_common_list_getNext_425940,
