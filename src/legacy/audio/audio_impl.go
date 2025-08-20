@@ -27,15 +27,15 @@ type Struct84 struct {
 	field_3  uint32
 	field_4  uint32
 	field_5  uint32
-	field_6  uint32
+	field_6  unsafe.Pointer
 	field_7  uint32
 	field_8  uint32
 	field_9  uint32
 	field_10 uint32
-	field_11 uint32
+	field_11 unsafe.Pointer
 	field_12 uint32
 	field_13 *Struct28[[0x2000]byte]
-	field_14 uint32
+	field_14 unsafe.Pointer
 	field_15 uint32
 	field_16 uint32
 	field_17 uint32
@@ -2099,19 +2099,19 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 			return nil
 		}
 	}
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*4)) = uint32(a2)
+	*(*uint32)(unsafe.Pointer(&v5p.field_4)) = uint32(a2)
 	v5p.field_13 = a1
 	v5p.Init_425770()
 	*(*uint32)(unsafe.Pointer(&v5p.field_3)) = 0
-	m.Sub_487C30((*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*6)))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*11)) = uint32(uintptr(unsafe.Add(unsafe.Pointer(v5p), 4*14)))
+	m.Sub_487C30((*uint32)(unsafe.Pointer(&v5p.field_6)))
+	*(*uint32)(unsafe.Pointer(&v5p.field_11)) = uint32(uintptr(unsafe.Pointer(&v5p.field_14)))
 
 	v6 := *(*int32)(unsafe.Add(a1.field_0, 4*71))
 	v10 := *(*int32)(unsafe.Add(a1.field_0, 4*71))
 	if v6 == 0 {
-		m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Add(unsafe.Pointer(v5p), 4*4)), (*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*14)))
+		m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
 		m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
-		*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*5)) = 1
+		*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 		m.Sub_486E00(int32(uintptr(a1.field_0)))
 		return (*uint32)(unsafe.Pointer(v5p))
 	}
@@ -2140,7 +2140,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		}
 		// LABEL_17
 		m.Sub_487D30(v8, int32(uintptr(unsafe.Add(unsafe.Pointer(v8), 24))), v7)
-		m.Sub_487C50(int32(uintptr(unsafe.Add(unsafe.Pointer(v5p), 4*6))), v8)
+		m.Sub_487C50(int32(uintptr(unsafe.Pointer(&v5p.field_6))), v8)
 		v9 := int32(m.Sub_486DB0(int32(uintptr(a1.field_0)), (*byte)(unsafe.Add(unsafe.Pointer(v8), 24)), int32(v7)))
 		if v9 != v7 {
 			m.Sub_4BD690(int32(uintptr(unsafe.Pointer(v5p))))
@@ -2148,9 +2148,9 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		}
 		v10 = v10 - v9
 		if v10 == 0 {
-			m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Add(unsafe.Pointer(v5p), 4*4)), (*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*14)))
+			m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
 			m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
-			*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*5)) = 1
+			*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 			m.Sub_486E00(int32(uintptr(a1.field_0)))
 			return (*uint32)(unsafe.Pointer(v5p))
 		}
