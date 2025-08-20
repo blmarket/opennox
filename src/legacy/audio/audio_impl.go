@@ -28,7 +28,7 @@ type Struct84 struct {
 var _ = [1]struct{}{}[84-unsafe.Sizeof(Struct84{})]
 
 type Struct28[T any] struct {
-	field_0 uint32
+	field_0 *Struct264
 	field_1 *FreeList[Struct24[T]]
 	field_2 *FreeList[Struct84]
 	field_3 UnknownListElement
@@ -149,8 +149,8 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	*m.Externs.Dword_5d4594_1045420 = uint32(int32(uintptr(a3p)))
 	*m.Externs.Dword_5d4594_1045428 = a2p
 	if int32(uintptr(a3p)) != 0 {
-		*m.Externs.Dword_5d4594_1045424 = uint32(uintptr(unsafe.Pointer(m.Sub_4BD340(int32(uintptr(a3p)), 0x100000, 200, 0x2000))))
-		*m.Externs.Dword_5d4594_1045436 = uint32(uintptr(unsafe.Pointer(m.Sub_4BD280(200, 576))))
+		*m.Externs.Dword_5d4594_1045424 = uint32(uintptr(unsafe.Pointer(sub_4BD340_v2[[0x2000]byte](m, int32(uintptr(a3p)), 0x100000, 200))))
+		*m.Externs.Dword_5d4594_1045436 = uint32(uintptr(unsafe.Pointer(createFreeList_4BD280[Struct576](200))))
 	}
 	if *m.Externs.Dword_5d4594_1045424 == 0 || *m.Externs.Dword_5d4594_1045420 == 0 || *m.Externs.Dword_5d4594_1045428 == nil || *m.Externs.Dword_5d4594_1045436 == 0 {
 		return 0
@@ -1922,6 +1922,30 @@ func (m *AudioModule) Sub_487D30(a1 *uint32, a2 int32, a3 int32) *uint32 {
 	return result
 }
 
+func createFreeList_4BD280[T any](a1 int32) *FreeList[T] {
+	var (
+		v2     int32
+		result *FreeList[T]
+	)
+	var v T
+	var a2 = int32(unsafe.Sizeof(v))
+
+	v2 = a2 + 4
+	res, _ := alloc.Calloc(1, uintptr(a1*(a2+4)+4))
+	result = (*FreeList[T])(res)
+	if result != nil {
+		v4 := &result.item0
+		result.first = &result.item0
+		for i := int32(0); i+1 < a1; i++ {
+			v5 := (*FreeListItem[T])(unsafe.Add(unsafe.Pointer(v4), v2))
+			v4.next = v5
+			v4 = v5
+		}
+		v4.next = nil
+	}
+	return result
+}
+
 func (m *AudioModule) Sub_4BD280(a1 int32, a2 int32) *uint32 {
 	var (
 		v2     int32
@@ -1996,6 +2020,26 @@ func (m *AudioModule) Sub_487D00(a1 *uint32) int32 {
 	return result
 }
 
+func sub_4BD340_v2[T any](m *AudioModule, a1p *Struct264, a2 int32, a3 int32) *Struct28[T] {
+	var itemT T
+	a4 := int32(unsafe.Sizeof(itemT))
+	var v4 *Struct28[T]
+	res, _ := alloc.Calloc(1, 0x1C)
+	v4 = (*Struct28[T])(res)
+	alloc.Memset(unsafe.Pointer(v4), 0, 0x1C)
+	v4.field_0 = a1p
+	v4.field_6 = uint32(a4)
+	v4.field_1 = createFreeList_4BD280[Struct24[T]](a2 / (a4 + 24))
+	v4.field_2 = createFreeList_4BD280[Struct84](a3)
+	v4.field_3.Clear_425760()
+	if v4.field_1 != nil && v4.field_2 != nil {
+		return v4
+	}
+	m.Sub_4BD3C0(unsafe.Pointer(v4))
+	return nil
+}
+
+// deprecated
 func (m *AudioModule) Sub_4BD340(a1 int32, a2 int32, a3 int32, a4 int32) *uint32 {
 	var v4 *uint32
 	res, _ := alloc.Calloc(1, 0x1C)
@@ -2004,7 +2048,7 @@ func (m *AudioModule) Sub_4BD340(a1 int32, a2 int32, a3 int32, a4 int32) *uint32
 	*v4 = uint32(a1)
 	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*6)) = uint32(a4)
 	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*1)) = uint32(uintptr(unsafe.Pointer(m.Sub_4BD280(a2/(a4+24), a4+24))))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*2)) = uint32(uintptr(unsafe.Pointer(m.Sub_4BD280(a3, 84))))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*2)) = uint32(uintptr(unsafe.Pointer(createFreeList_4BD280[Struct84](a3))))
 	((*UnknownListElement)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*3))))).Clear_425760()
 	if *(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*1)) != 0 && *(*uint32)(unsafe.Add(unsafe.Pointer(v4), 4*2)) != 0 {
 		return v4
