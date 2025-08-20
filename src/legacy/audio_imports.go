@@ -132,32 +132,11 @@ func initAudio(externs *audio.AudioExterns) {
 		externs,
 		"audio",
 		PlatformTicks,
-		func(a1 unsafe.Pointer, a2 int) int {
-			return int(C.sub_4BD300((*C.uint32_t)(a1), C.int(a2)))
-		},
-		func(a1 int, a2 int) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_4BD280(C.int(a1), C.int(a2)))
-		},
-		func(a1 int, a2 int, a3 int, a4 int) unsafe.Pointer {
-			panic("should not be called")
-		},
-		func(a1 unsafe.Pointer) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_4BD2E0((**C.uint32_t)(a1)))
-		},
-		func(a1 unsafe.Pointer, a2 int) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_4BD470((**C.uint32_t)(a1), C.int(a2)))
-		},
-		func(lpMem unsafe.Pointer) {
-			C.sub_4BD2D0(lpMem)
-		},
 		func(id int) unsafe.Pointer {
 			return unsafe.Pointer(nox_xxx_getSndName_40AF80(id))
 		},
 		func(min, max int, file unsafe.Pointer, line int) int {
 			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
-		},
-		func(lpMem unsafe.Pointer) {
-			panic("should not be called")
 		},
 		func(a1 unsafe.Pointer, a2 unsafe.Pointer) {
 			C.nox_common_list_append_4258E0((*C.nox_list_item_t)(a1), (*C.nox_list_item_t)(a2))
@@ -170,9 +149,11 @@ func initAudio(externs *audio.AudioExterns) {
 		},
 		func(a1 int, a2 int) int {
 			return int(C.sub_486B60(C.int(a1), C.int(a2)))
-		}, func(a1 int) unsafe.Pointer {
+		},
+		func(a1 int) unsafe.Pointer {
 			return unsafe.Pointer(C.sub_486E00(C.int(a1)))
-		}, func(a1 int, a2 unsafe.Pointer, a3 int) int {
+		},
+		func(a1 int, a2 unsafe.Pointer, a3 int) int {
 			return int(C.sub_486DB0(C.int(a1), (*C.char)(a2), C.int(a3)))
 		},
 	)
