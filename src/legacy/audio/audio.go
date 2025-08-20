@@ -11,7 +11,7 @@ type AudioExterns struct {
 
 	Dword_587000_126996           *uint32
 	Dword_5d4594_1045420          *uint32
-	Dword_5d4594_1045424          *uint32
+	Dword_5d4594_1045424          **Struct28[[0x2000]byte]
 	Dword_5d4594_1045428          **Struct264
 	Dword_5d4594_1045432          *uint32
 	Dword_5d4594_1045436          *uint32

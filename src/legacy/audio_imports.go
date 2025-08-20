@@ -21,7 +21,6 @@ int sub_486350(void* a1, int a2);
 int sub_486520(void* a2);
 uint32_t* sub_4BD280(int a1, int a2);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
-uint32_t* sub_4BD340(int a1, int a2, int a3, int a4);
 uint32_t* sub_4BD2E0(uint32_t** a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int* sub_452810(int a1, char a2);
@@ -36,7 +35,6 @@ void nox_common_list_remove_425920(void* a1);
 int sub_4862E0(void* a3, int a4);
 int nox_common_randomIntMinMax_415FF0(int min, int max, char* file, int line);
 int sub_4863B0(void* a2);
-void sub_4BD3C0(void* lpMem);
 
 int sub_452770(struct312* a1);
 int sub_4526D0(int a1);
@@ -103,7 +101,7 @@ func initExterns() *audio.AudioExterns {
 
 		Dword_587000_126996:          (*uint32)(&C.dword_587000_126996),
 		Dword_5d4594_1045420:         (*uint32)(&C.dword_5d4594_1045420),
-		Dword_5d4594_1045424:         (*uint32)(&C.dword_5d4594_1045424),
+		Dword_5d4594_1045424:         (**audio.Struct28[[0x2000]byte])(unsafe.Pointer(&C.dword_5d4594_1045424)),
 		Dword_5d4594_1045428:         (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428)),
 		Dword_5d4594_1045432:         (*uint32)(&C.dword_5d4594_1045432),
 		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
@@ -141,7 +139,7 @@ func initAudio(externs *audio.AudioExterns) {
 			return unsafe.Pointer(C.sub_4BD280(C.int(a1), C.int(a2)))
 		},
 		func(a1 int, a2 int, a3 int, a4 int) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_4BD340(C.int(a1), C.int(a2), C.int(a3), C.int(a4)))
+			panic("should not be called")
 		},
 		func(a1 unsafe.Pointer) unsafe.Pointer {
 			return unsafe.Pointer(C.sub_4BD2E0((**C.uint32_t)(a1)))
@@ -159,7 +157,7 @@ func initAudio(externs *audio.AudioExterns) {
 			return nox_common_randomIntMinMax_415FF0(min, max, (*C.char)(file), line)
 		},
 		func(lpMem unsafe.Pointer) {
-			C.sub_4BD3C0(lpMem)
+			panic("should not be called")
 		},
 		func(a1 unsafe.Pointer, a2 unsafe.Pointer) {
 			C.nox_common_list_append_4258E0((*C.nox_list_item_t)(a1), (*C.nox_list_item_t)(a2))
@@ -378,16 +376,6 @@ func sub_4BD280(a1 C.int, a2 C.int) *C.uint32_t {
 //export sub_4BD2D0
 func sub_4BD2D0(lpMem unsafe.Pointer) {
 	AudioModule.Sub_4BD2D0(lpMem)
-}
-
-//export sub_4BD340
-func sub_4BD340(a1 C.int, a2 C.int, a3 C.int, a4 C.int) *C.uint32_t {
-	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_4BD340(int32(a1), int32(a2), int32(a3), int32(a4))))
-}
-
-//export sub_4BD3C0
-func sub_4BD3C0(lpMem unsafe.Pointer) {
-	AudioModule.Sub_4BD3C0(lpMem)
 }
 
 //export sub_4BD470
