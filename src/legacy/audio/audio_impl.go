@@ -54,8 +54,6 @@ type Struct28[T any] struct {
 	field_6 uint32
 }
 
-type Struct28A Struct28[[0x2000]byte]
-
 var _ = [1]struct{}{}[28-unsafe.Sizeof(Struct28[byte]{})]
 var _ = [1]struct{}{}[unsafe.Sizeof(Struct28[byte]{})-28]
 
@@ -170,7 +168,7 @@ func (m *AudioModule) Sub_451850(a2p *Struct264, a3p unsafe.Pointer) int32 {
 	*m.Externs.Dword_5d4594_1045420 = uint32(int32(uintptr(a3p)))
 	*m.Externs.Dword_5d4594_1045428 = a2p
 	if int32(uintptr(a3p)) != 0 {
-		*m.Externs.Dword_5d4594_1045424 = sub_4BD340_v2[[0x2000]byte](m, a3p, 0x100000, 200)
+		*m.Externs.Dword_5d4594_1045424 = sub_4BD340[[0x2000]byte](m, a3p, 0x100000, 200)
 		*m.Externs.Dword_5d4594_1045436 = createFreeList_4BD280[Struct576](200)
 	}
 	if *m.Externs.Dword_5d4594_1045424 == nil || *m.Externs.Dword_5d4594_1045420 == 0 || *m.Externs.Dword_5d4594_1045428 == nil || *m.Externs.Dword_5d4594_1045436 == nil {
@@ -2009,7 +2007,7 @@ func (m *AudioModule) Sub_487D00(a1 *uint32) int32 {
 	return result
 }
 
-func sub_4BD340_v2[T any](m *AudioModule, a1p unsafe.Pointer, a2 int32, a3 int32) *Struct28[T] {
+func sub_4BD340[T any](m *AudioModule, a1p unsafe.Pointer, a2 int32, a3 int32) *Struct28[T] {
 	var itemT T
 	a4 := int32(unsafe.Sizeof(itemT))
 	var v4 *Struct28[T]
