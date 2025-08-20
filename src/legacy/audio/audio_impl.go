@@ -2058,26 +2058,28 @@ func (m *AudioModule) Sub_486AA0(a1 *uint32, a2 int32, a3 *uint32) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *ListElement[Struct84, *Struct84] {
+func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *Struct84 {
 	result := a1p.field_3.next
 	if result == &a1p.field_3 {
 		return nil
 	}
-	for *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*4)) != uint32(a2) || *(*uint32)(unsafe.Add(unsafe.Pointer(result), 4*5)) == 0 {
-		result = result.next
+	res := result.PromoteUnsafe()
+	for *(*uint32)(unsafe.Add(unsafe.Pointer(res), 4*4)) != uint32(a2) || *(*uint32)(unsafe.Add(unsafe.Pointer(res), 4*5)) == 0 {
+		result = res.next
 		if result == &a1p.field_3 {
 			return nil
 		}
+		res = result.PromoteUnsafe()
 	}
-	return result
+	return res
 }
 
-func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *ListElement[Struct84, *Struct84] {
+func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84 {
 	v2 := m.Sub_4BD420(a1, a2)
 	v3 := v2
 	if v2 != nil {
 		m.nox_common_list_remove_425920(unsafe.Pointer(v2))
-		Sub_425900(&a1.field_3, v3)
+		Sub_425900(&a1.field_3, &v3.ListElement)
 		return v3
 	}
 
@@ -2107,7 +2109,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *ListElem
 		Sub_425900(&a1.field_3, &v5p.ListElement)
 		*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 		m.Sub_486E00(int32(uintptr(a1.field_0)))
-		return &v5p.ListElement
+		return v5p
 	}
 	for {
 		v7 := *(*int32)(unsafe.Pointer(&a1.field_6))
@@ -2146,7 +2148,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *ListElem
 			Sub_425900(&a1.field_3, &v5p.ListElement)
 			*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
 			m.Sub_486E00(int32(uintptr(a1.field_0)))
-			return &v5p.ListElement
+			return v5p
 		}
 		v6 = v10
 	}
