@@ -1,6 +1,7 @@
 package audio
 
 import (
+	"log"
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
@@ -2086,7 +2087,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		return v3
 	}
 
-	if m.sub_486B60(int(uintptr(a1.field_0)), int(a2)) == 0 {
+	if m.Sub_486B60(int32(uintptr(a1.field_0)), int32(a2)) == 0 {
 		return nil
 	}
 	v5p := sub_4BD2E0(a1.field_2)
@@ -2094,7 +2095,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		m.Sub_4BD600(int32(uintptr(unsafe.Pointer(a1))))
 		v5p = sub_4BD2E0(a1.field_2)
 		if v5p == nil {
-			m.sub_486E00(*(*int)(unsafe.Pointer(a1)))
+			m.Sub_486E00(*(*int32)(unsafe.Pointer(a1)))
 			return nil
 		}
 	}
@@ -2111,7 +2112,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Add(unsafe.Pointer(v5p), 4*4)), (*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*14)))
 		m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
 		*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*5)) = 1
-		m.sub_486E00(int(uintptr(a1.field_0)))
+		m.Sub_486E00(int32(uintptr(a1.field_0)))
 		return (*uint32)(unsafe.Pointer(v5p))
 	}
 	for {
@@ -2140,7 +2141,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 		// LABEL_17
 		m.Sub_487D30(v8, int32(uintptr(unsafe.Add(unsafe.Pointer(v8), 24))), v7)
 		m.Sub_487C50(int32(uintptr(unsafe.Add(unsafe.Pointer(v5p), 4*6))), v8)
-		v9 := int32(m.sub_486DB0(int(uintptr(a1.field_0)), unsafe.Add(unsafe.Pointer(v8), 24), int(v7)))
+		v9 := int32(m.Sub_486DB0(int32(uintptr(a1.field_0)), (*byte)(unsafe.Add(unsafe.Pointer(v8), 24)), int32(v7)))
 		if v9 != v7 {
 			m.Sub_4BD690(int32(uintptr(unsafe.Pointer(v5p))))
 			return nil
@@ -2150,9 +2151,126 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *uint32 {
 			m.Sub_486AA0((*uint32)(a1.field_0), *(*int32)(unsafe.Add(unsafe.Pointer(v5p), 4*4)), (*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*14)))
 			m.Sub_425900((*uint32)(unsafe.Pointer(&a1.field_3)), (*uint32)(unsafe.Pointer(v5p)))
 			*(*uint32)(unsafe.Add(unsafe.Pointer(v5p), 4*5)) = 1
-			m.sub_486E00(int(uintptr(a1.field_0)))
+			m.Sub_486E00(int32(uintptr(a1.field_0)))
 			return (*uint32)(unsafe.Pointer(v5p))
 		}
 		v6 = v10
 	}
+}
+
+func (m *AudioModule) Sub_486DB0(a1 int32, a2 *byte, a3 int32) int32 {
+	var (
+		result int32
+		v4     int32
+	)
+	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) == 0 {
+		return 0
+	}
+	v4 = a3
+	if a3 > *(*int32)(unsafe.Pointer(uintptr(a1 + 284))) {
+		v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))))
+	}
+	if v4 <= 0 || (func() bool {
+		result = m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(a2), 1, uint32(v4), *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 280))))
+		return result < 0
+	}()) {
+		result = 0
+	}
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) -= uint32(result)
+	return result
+}
+
+func (m *AudioModule) Sub_486E00(a1 int32) unsafe.Pointer {
+	var result unsafe.Pointer
+	result = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 272)))
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = 0
+	if result != nil {
+		m.nox_fs_close(result)
+		result = nil
+		*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = 0
+	}
+	return result
+}
+
+func (m *AudioModule) Sub_486B60(a1 int32, a2 int32) int32 {
+	var (
+		v2  int32
+		v3  unsafe.Pointer
+		v6  unsafe.Pointer
+		v7  unsafe.Pointer
+		v8  int32
+		v9  int32
+		v10 int32
+		v12 int32
+		v13 [8]byte
+		v14 [16]byte
+		v15 [12]int32
+	)
+	v12 = 1
+	v2 = m.Sub_4866D0((*uint32)(unsafe.Pointer(uintptr(a1))), a2)
+	m.Sub_486E00(a1)
+	v3 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 268)))
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = uint32(uintptr(unsafe.Pointer(v3)))
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) = *(*uint32)(unsafe.Pointer(uintptr(v2 + 20)))
+	if m.nox_fs_fseek(v3, int32(*(*uint32)(unsafe.Pointer(uintptr(v2 + 16)))), 0 /* stdio.SEEK_SET */) != 0 {
+		v12 = 0
+	}
+	if *(*uint32)(unsafe.Pointer(uintptr(v2 + 20))) == 0 {
+		v12 = 0
+	}
+	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 276))) == 0 {
+		return v12
+	}
+	alloc.Strcpy((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(a1 + 8))))
+	alloc.Strcat((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(v2))))
+	alloc.Strcat((unsafe.Pointer(&v15[3])), unsafe.Pointer(alloc.InternCString(".wav")))
+	v6 = m.nox_fs_open((unsafe.Pointer(&v15[3])))
+	v7 = v6
+	v8 = 0
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = uint32(uintptr(unsafe.Pointer(v6)))
+	if v6 == nil {
+		return v12
+	}
+	if m.nox_binfile_fread_raw_40ADD0((unsafe.Pointer(&v15[0])), 0xC, 1, v6) != 1 || uint32(v15[0]) != 1179011410 || uint32(v15[2]) != 1163280727 {
+		log.Printf("error: '%s' is bad - cannot read\n", &v15[3])
+		if *(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) != 0 {
+			m.nox_fs_close(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 272))))
+			*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = 0
+		}
+		return v12
+	}
+	if m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(&v13[0]), 8, 1, v7) != 1 {
+		goto LABEL_18
+	}
+	for {
+		if *(*uint32)(unsafe.Pointer(&v13[0])) == 544501094 {
+			m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(&v14[0]), 0x10, 1, v7)
+			m.nox_fs_fseek(v7, int32(*(*uint32)(unsafe.Pointer(&v13[4]))-16), 1 /* stdio.SEEK_CUR */)
+			goto LABEL_15
+		}
+		if *(*uint32)(unsafe.Pointer(&v13[0])) == 1635017060 {
+			break
+		}
+		m.nox_fs_fseek(v7, *(*int32)(unsafe.Pointer(&v13[4])), 1 /* stdio.SEEK_CUR */)
+	LABEL_15:
+		if m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(&v13[0]), 8, 1, v7) != 1 {
+			goto LABEL_18
+		}
+	}
+	v8 = int32(*(*uint32)(unsafe.Pointer(&v13[4])))
+LABEL_18:
+	*(*uint32)(unsafe.Pointer(uintptr(v2 + 28))) = 2
+	if int32(*(*uint16)(unsafe.Pointer(&v14[12])))/int32(*(*uint16)(unsafe.Pointer(&v14[2]))) == 2 {
+		*(*uint32)(unsafe.Pointer(uintptr(v2 + 28))) = 6
+	}
+	if int32(*(*uint16)(unsafe.Pointer(&v14[2]))) == 2 {
+		v9 = int32(*(*uint32)(unsafe.Pointer(uintptr(v2 + 28))))
+		*((*uint8)(unsafe.Pointer(&v9))) = uint8(int8(v9 | 1))
+		*(*uint32)(unsafe.Pointer(uintptr(v2 + 28))) = uint32(v9)
+	}
+	*(*uint32)(unsafe.Pointer(uintptr(v2 + 24))) = *(*uint32)(unsafe.Pointer(&v14[4]))
+	v10 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))))
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) = uint32(v8)
+	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = uint32(v10)
+	return 1
 }

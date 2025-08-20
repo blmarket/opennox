@@ -145,13 +145,25 @@ func initAudio(externs *audio.AudioExterns) {
 			return unsafe.Pointer(C.nox_common_list_getNext_425940((*C.nox_list_item_t)(a1)))
 		},
 		func(a1 int, a2 int) int {
-			return int(C.sub_486B60(C.int(a1), C.int(a2)))
+			panic("do not call me")
 		},
 		func(a1 int) unsafe.Pointer {
-			return unsafe.Pointer(C.sub_486E00(C.int(a1)))
+			panic("do not call me")
 		},
 		func(a1 int, a2 unsafe.Pointer, a3 int) int {
-			return int(C.sub_486DB0(C.int(a1), (*C.char)(a2), C.int(a3)))
+			panic("do not call me")
+		},
+		func(a1 unsafe.Pointer, a2 uint32, a3 uint32, a4 unsafe.Pointer) int32 {
+			return int32(nox_binfile_fread_raw_40ADD0((*C.char)(a1), (C.size_t)(a2), (C.size_t)(a3), (*C.FILE)(a4)))
+		},
+		func(a1 unsafe.Pointer) {
+			nox_fs_close((*C.FILE)(a1))
+		},
+		func(a1 unsafe.Pointer, a2 int32, a3 int32) int32 {
+			return int32(nox_fs_fseek((*C.FILE)(a1), (C.long)(a2), int(a3)))
+		},
+		func(a1 unsafe.Pointer) unsafe.Pointer {
+			return unsafe.Pointer(nox_fs_open((*C.char)(a1)))
 		},
 	)
 }

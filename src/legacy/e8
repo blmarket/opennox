@@ -7,7 +7,7 @@ echo '#include "common/fs/nox_fs.h"' >> phase7.c
 
 FUNC_NAME=sub_4BD470
 
-python -m tools.add_cgo_decl $FUNC_NAME &
+# python -m tools.add_cgo_decl $FUNC_NAME &
 
 # python -m tools.move_func sub_4BD680 phase7.c
 # python -m tools.move_func sub_487C50 phase7.c
@@ -27,8 +27,10 @@ python -m tools.add_cgo_decl $FUNC_NAME &
 # python -m tools.move_func sub_486AA0 phase7.c
 # python -m tools.move_func sub_4BD420 phase7.c
 
-python -m tools.move_func $FUNC_NAME phase7.c
-# python -m tools.move_func sub_4BD470 phase7.c
+# python -m tools.move_func $FUNC_NAME phase7.c
+python -m tools.move_func sub_486DB0 phase7.c
+python -m tools.move_func sub_486E00 phase7.c
+python -m tools.move_func sub_486B60 phase7.c
 
 python -m tools.fix_compile phase7.c
 
