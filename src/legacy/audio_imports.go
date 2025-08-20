@@ -76,7 +76,6 @@ int sub_4866D0(uint32_t* a1, int a2);
 void sub_487C30(uint32_t* a1);
 int sub_487D00(uint32_t* a1);
 int sub_486AA0(uint32_t* a1, int a2, uint32_t* a3);
-uint32_t* sub_4BD420(int a1, int a2);
 int sub_486B60(int a1, int a2);
 FILE* sub_486E00(int a1);
 signed int sub_486DB0(int a1, char* a2, signed int a3);
@@ -339,11 +338,6 @@ func sub_486AA0(a1 *C.uint32_t, a2 C.int, a3 *C.uint32_t) C.int {
 	return C.int(AudioModule.Sub_486AA0((*uint32)(unsafe.Pointer(a1)), int32(a2), (*uint32)(unsafe.Pointer(a3))))
 }
 
-//export sub_4BD420
-func sub_4BD420(a1 C.int, a2 C.int) *C.uint32_t {
-	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_4BD420(int32(a1), int32(a2))))
-}
-
 //export sub_4BD2E0
 func sub_4BD2E0(a1 **C.uint32_t) *C.uint32_t {
 	return (*C.uint32_t)(AudioModule.Sub_4BD2E0((**uint32)(unsafe.Pointer(a1))))
@@ -361,5 +355,5 @@ func sub_4BD2D0(lpMem unsafe.Pointer) {
 
 //export sub_4BD470
 func sub_4BD470(a1 **C.uint32_t, a2 C.int) *C.uint32_t {
-	return (*C.uint32_t)(AudioModule.Sub_4BD470((**uint32)(unsafe.Pointer(a1)), int32(a2)))
+	return (*C.uint32_t)(AudioModule.Sub_4BD470((*audio.Struct28[[0x2000]byte])(unsafe.Pointer(a1)), int32(a2)))
 }
