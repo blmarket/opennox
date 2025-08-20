@@ -19,9 +19,7 @@ int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BDB40(int a2);
 int sub_486350(void* a1, int a2);
 int sub_486520(void* a2);
-uint32_t* sub_4BD280(int a1, int a2);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
-uint32_t* sub_4BD2E0(uint32_t** a1);
 uint32_t* sub_4BD470(uint32_t** a1, int a2);
 int* sub_452810(int a1, char a2);
 int sub_4BD940(struct312* a1);
@@ -103,7 +101,7 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1045424:         (**audio.Struct28[[0x2000]byte])(unsafe.Pointer(&C.dword_5d4594_1045424)),
 		Dword_5d4594_1045428:         (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428)),
 		Dword_5d4594_1045432:         (*uint32)(&C.dword_5d4594_1045432),
-		Dword_5d4594_1045436:         (*uint32)(&C.dword_5d4594_1045436),
+		Dword_5d4594_1045436:         (**audio.FreeList[audio.Struct576])(unsafe.Pointer(&C.dword_5d4594_1045436)),
 		Ptr_TimerGroup_587000_127004: (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
 		Dword_587000_127004:          (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
@@ -295,7 +293,7 @@ func sub_4BD680(a1 C.int) C.int {
 
 //export sub_487C50
 func sub_487C50(a1 C.int, a2 *C.uint32_t) C.int {
-	return C.int(AudioModule.Sub_487C50(int32(a1), (*uint32)(unsafe.Pointer(a2))))
+	return C.int(AudioModule.Sub_487C50(int32(a1), (*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a2))))
 }
 
 //export sub_4BD690
@@ -315,7 +313,7 @@ func sub_425900(a1 *C.uint32_t, a2 *C.uint32_t) *C.uint32_t {
 
 //export sub_487D30
 func sub_487D30(a1 *C.uint32_t, a2 C.int, a3 C.int) *C.uint32_t {
-	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_487D30((*uint32)(unsafe.Pointer(a1)), int32(a2), int32(a3))))
+	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_487D30((*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a1)), int32(a2), int32(a3))))
 }
 
 //export sub_4866D0
@@ -336,16 +334,6 @@ func sub_487D00(a1 *C.uint32_t) C.int {
 //export sub_486AA0
 func sub_486AA0(a1 *C.uint32_t, a2 C.int, a3 *C.uint32_t) C.int {
 	return C.int(AudioModule.Sub_486AA0((*uint32)(unsafe.Pointer(a1)), int32(a2), (*uint32)(unsafe.Pointer(a3))))
-}
-
-//export sub_4BD2E0
-func sub_4BD2E0(a1 **C.uint32_t) *C.uint32_t {
-	return (*C.uint32_t)(AudioModule.Sub_4BD2E0((**uint32)(unsafe.Pointer(a1))))
-}
-
-//export sub_4BD280
-func sub_4BD280(a1 C.int, a2 C.int) *C.uint32_t {
-	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_4BD280(int32(a1), int32(a2))))
 }
 
 //export sub_4BD2D0
