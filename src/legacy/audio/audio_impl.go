@@ -2066,7 +2066,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 	v2 := m.Sub_4BD420(a1, a2)
 	v3 := v2
 	if v2 != nil {
-		m.nox_common_list_remove_425920(unsafe.Pointer(v2))
+		v2.Remove_425920()
 		Sub_425900(&a1.field_3, &v3.ListElement)
 		return v3
 	}

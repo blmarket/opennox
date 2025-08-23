@@ -44,14 +44,10 @@ type AudioModule struct {
 	// Better in separate module
 	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
-	// Better inline? just free?
-	nox_common_list_append_4258E0  func(unsafe.Pointer, unsafe.Pointer)
-	nox_common_list_remove_425920  func(unsafe.Pointer)
-	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer
-	nox_binfile_fread_raw_40ADD0   func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
-	nox_fs_close                   func(unsafe.Pointer)
-	nox_fs_fseek                   func(unsafe.Pointer, int32, int32) int32
-	nox_fs_open                    func(unsafe.Pointer) unsafe.Pointer
+	nox_binfile_fread_raw_40ADD0      func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+	nox_fs_close                      func(unsafe.Pointer)
+	nox_fs_fseek                      func(unsafe.Pointer, int32, int32) int32
+	nox_fs_open                       func(unsafe.Pointer) unsafe.Pointer
 }
 
 func NewAudioModule(
@@ -60,12 +56,6 @@ func NewAudioModule(
 	nox_platform_get_ticks func() uint64,
 	nox_xxx_getSndName_40AF80 func(int) unsafe.Pointer,
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int,
-	nox_common_list_append_4258E0 func(unsafe.Pointer, unsafe.Pointer),
-	nox_common_list_remove_425920 func(unsafe.Pointer),
-	nox_common_list_getNext_425940 func(unsafe.Pointer) unsafe.Pointer,
-	sub_486B60 func(int, int) int,
-	sub_486E00 func(int) unsafe.Pointer,
-	sub_486DB0 func(int, unsafe.Pointer, int) int,
 	nox_binfile_fread_raw_40ADD0 func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32,
 	nox_fs_close func(unsafe.Pointer),
 	nox_fs_fseek func(unsafe.Pointer, int32, int32) int32,
@@ -77,9 +67,6 @@ func NewAudioModule(
 		nox_platform_get_ticks:            nox_platform_get_ticks,
 		nox_xxx_getSndName_40AF80:         nox_xxx_getSndName_40AF80,
 		nox_common_randomIntMinMax_415FF0: nox_common_randomIntMinMax_415FF0,
-		nox_common_list_append_4258E0:     nox_common_list_append_4258E0,
-		nox_common_list_remove_425920:     nox_common_list_remove_425920,
-		nox_common_list_getNext_425940:    nox_common_list_getNext_425940,
 		nox_binfile_fread_raw_40ADD0:      nox_binfile_fread_raw_40ADD0,
 		nox_fs_close:                      nox_fs_close,
 		nox_fs_fseek:                      nox_fs_fseek,
