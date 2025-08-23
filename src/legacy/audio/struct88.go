@@ -19,7 +19,7 @@ var _ = [1]struct{}{}[88-unsafe.Sizeof(Struct88{})]
 type Struct587000_94032 struct {
 	field_0 unsafe.Pointer
 	field_1 unsafe.Pointer
-	field_2 unsafe.Pointer
+	field_2 uint32
 	field_3 uint32
 	field_4 unsafe.Pointer
 	field_5 unsafe.Pointer

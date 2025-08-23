@@ -2252,3 +2252,16 @@ LABEL_18:
 	*(*uint32)(unsafe.Pointer(&a1p.Field280)) = uint32(v10)
 	return 1
 }
+
+func (m *AudioModule) Sub_486FA0(a1p *Struct587000_94032) {
+	result := m.Sub_486FE0(a1p)
+	v2 := result
+	if result != nil {
+		a1p.field_3 |= 1
+		m.Sub_487050(v2)
+		if a1p.field_2&2 != 0 {
+			*m.Externs.Ptr_uint32_5d4594_1193332 = 1
+		}
+		result = v2
+	}
+}

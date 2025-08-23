@@ -239,7 +239,7 @@ func nox_audio_initall(a3 int) int {
 }
 
 func sub_4311F0() int {
-	legacy.Sub_486FA0(int(memmap.Int32(0x587000, 94032)))
+	legacy.AudioModule.Sub_486FA0(*memmap.PtrT[*audio.Struct587000_94032](0x587000, 94032))
 	v2a, free := alloc.Make([][7]uint32{}, 1)
 	defer free()
 	v2 := v2a[0]

@@ -355,10 +355,6 @@ func sub_4862E0(a1 unsafe.Pointer, a2 int32) int {
 	return bool2int((*timer.Timer)(a1).Init(a2))
 }
 
-func Sub_486FA0(a1 int) {
-	C.sub_486FA0(C.int(a1))
-}
-
 //export sub_44D8F0
 func sub_44D8F0() { Dialogs.Sub_44D8F0() }
 

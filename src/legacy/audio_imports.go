@@ -71,6 +71,7 @@ int sub_487D00(uint32_t* a1);
 int sub_486B60(int a1, int a2);
 FILE* sub_486E00(int a1);
 signed int sub_486DB0(int a1, char* a2, signed int a3);
+uint32_t* sub_486FA0(int a1);
 */
 import "C"
 
