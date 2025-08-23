@@ -15,7 +15,6 @@ void* sub_425770(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
 int sub_4BDB30(int a1);
-int sub_4BD300(uint32_t* a1, int a2);
 int sub_4BDB40(int a2);
 int sub_486350(void* a1, int a2);
 int sub_486520(void* a2);
