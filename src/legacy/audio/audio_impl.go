@@ -4,7 +4,6 @@ import (
 	"log"
 	"unsafe"
 
-	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
@@ -508,12 +507,8 @@ func (m *AudioModule) Nox_xxx_draw_452300(a1p *Struct200) *Struct576 {
 	v1p.field_42 = 0
 	v1p.timerGroup_46.Init()
 	m.Externs.ListHead_5d4594_840612.Append_4258E0(&v1p.ListElement)
-	v1p.field_70 = func() uint32 {
-		p_ := memmap.PtrUint32(0x587000, 127000)
-		x := *p_
-		*p_++
-		return x
-	}()
+	v1p.field_70 = *m.Externs.Ptr_uint32_587000_127000
+	*m.Externs.Ptr_uint32_587000_127000 += 1
 	return v1p
 }
 
@@ -872,23 +867,22 @@ func (m *AudioModule) Sub_4519C0() {
 	if *m.Externs.Dword_5d4594_1045432 == 0 {
 		return
 	}
-	result = int32(*memmap.PtrUint32(0x5D4594, 1045448))
-	if *memmap.PtrUint32(0x5D4594, 1045448) != 0 {
+	result = int32(*m.Externs.Ptr_uint32_5d4594_1045448)
+	if *m.Externs.Ptr_uint32_5d4594_1045448 != 0 {
 		return
 	}
-	*memmap.PtrUint32(0x5D4594, 1045448) = 1
+	*m.Externs.Ptr_uint32_5d4594_1045448 = 1
 	(*m.Externs.Ptr_TimerGroup_587000_127004).Update()
-	// v1 = int32(*memmap.PtrUint32(0x5D4594, 840612))
 	v1p := m.Externs.ListHead_5d4594_840612.next
-	*memmap.PtrUint32(0x5D4594, 1045440)++
+	*m.Externs.Ptr_uint32_5d4594_1045440++
 	if m.Externs.ListHead_5d4594_840612.next != m.Externs.ListHead_5d4594_840612 {
 		for {
 			v1pp := v1p.PromoteUnsafe()
 			v2p := v1pp.field_9
-			if v2p.field_25 != *memmap.PtrUint32(0x5D4594, 1045440) {
+			if v2p.field_25 != *m.Externs.Ptr_uint32_5d4594_1045440 {
 				v2p.field_22.Clear_425760()
 				v2p.field_13 = 0
-				v2p.field_25 = *memmap.PtrUint32(0x5D4594, 1045440)
+				v2p.field_25 = *m.Externs.Ptr_uint32_5d4594_1045440
 			}
 
 			v1pp.timerGroup_46.Update()
@@ -982,7 +976,7 @@ func (m *AudioModule) Sub_4519C0() {
 			}
 		}
 	}
-	*memmap.PtrUint32(0x5D4594, 1045448) = 0
+	*m.Externs.Ptr_uint32_5d4594_1045448 = 0
 }
 
 func (m *AudioModule) sub_4BDB20(a1p *Struct312) {
@@ -1799,7 +1793,7 @@ func (m *AudioModule) Sub_4870E0(a1 **Struct88) *Struct88 {
 func (m *AudioModule) sub_487070(a1 *Struct88) {
 	m.sub_487090(a1)
 	m.sub_487030(a1)
-	*memmap.PtrUint32(0x5D4594, 1193332) = 0
+	*m.Externs.Ptr_uint32_5d4594_1193332 = 0
 }
 
 func (m *AudioModule) sub_487090(a1 *Struct88) {

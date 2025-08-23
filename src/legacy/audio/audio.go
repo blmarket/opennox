@@ -32,7 +32,11 @@ type AudioExterns struct {
 	ListHeads_5d4594_839892       *[6][10]ListElement[Struct200Field28]
 	ListHead_5d4594_840612        *ListElement[Struct576]
 	Struct200Arr_5d4594_840628    *[1023]Struct200
+	Ptr_uint32_5d4594_1045440     *uint32
 	Ptr_uint32_5d4594_1045444     *uint32
+	Ptr_uint32_5d4594_1045448     *uint32
+	Ptr_uint32_587000_127000      *uint32
+	Ptr_uint32_5d4594_1193332     *uint32
 }
 
 type AudioModule struct {
