@@ -164,7 +164,6 @@ uint32_t* sub_4258C0(uint32_t** a1, int a2);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 void nox_common_list_remove_425920(void* a1);
 nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
-int sub_425960(int a1);
 void sub_4259C0();
 int* sub_4259F0();
 int* sub_425A50();

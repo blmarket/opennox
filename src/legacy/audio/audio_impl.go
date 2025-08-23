@@ -1858,13 +1858,6 @@ func (m *AudioModule) Sub_4875F0() int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_425960(a1 int32) int32 {
-	if *(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) + 8))) != *(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) {
-		return int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 4))))
-	}
-	return 0
-}
-
 func (m *AudioModule) Sub_487D60(a1 int32) int32 {
 	var result int32
 	result = a1
@@ -1880,7 +1873,8 @@ func (m *AudioModule) Sub_4BD300(a1 *uint32, a2 int32) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_4BD680(a1 int32) int32 {
+func (m *AudioModule) Sub_4BD680(a1p *Struct84) int32 {
+	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	return int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 12))))
 }
 
@@ -1893,7 +1887,8 @@ func (m *AudioModule) Sub_487C50(a1 int32, a2 *Struct24[[0x2000]byte]) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_4BD690(a1 int32) int32 {
+func (m *AudioModule) Sub_4BD690(a1p *Struct84) int32 {
+	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var i **uint32
 	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) != uint32(a1) {
 		m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(a1)))
@@ -1907,15 +1902,13 @@ func (m *AudioModule) Sub_4BD690(a1 int32) int32 {
 }
 
 func (m *AudioModule) Sub_4BD600(a1p *Struct28[[0x2000]byte]) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
-	var v1 int32
-	v1 = m.Sub_425960(a1 + 12)
-	if v1 == 0 {
+	v1 := a1p.field_3.PrevSafe_425960()
+	if v1 == nil {
 		return 0
 	}
 	for m.Sub_4BD680(v1) != 0 {
-		v1 = m.Sub_425960(v1)
-		if v1 == 0 {
+		v1 = v1.PrevSafe_425960()
+		if v1 == nil {
 			return 0
 		}
 	}
@@ -2027,7 +2020,7 @@ func sub_4BD340[T any](m *AudioModule, a1p *AudioStructXxx, a2 int32, a3 int32) 
 
 func Sub_4BD3C0[T any](m *AudioModule, a1 *Struct28[T]) {
 	for i := a1.field_3.NextSafe_425940(); i != nil; i = a1.field_3.NextSafe_425940() {
-		m.Sub_4BD690(int32(uintptr(unsafe.Pointer(i))))
+		m.Sub_4BD690(i)
 	}
 	if a1.field_1 != nil {
 		m.Sub_4BD2D0(unsafe.Pointer(a1.field_1))
@@ -2133,7 +2126,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 				}
 			}
 			if !found {
-				m.Sub_4BD690(int32(uintptr(unsafe.Pointer(v5p))))
+				m.Sub_4BD690(v5p)
 				return nil
 			}
 		}
@@ -2142,7 +2135,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 		m.Sub_487C50(int32(uintptr(unsafe.Pointer(&v5p.field_6))), v8)
 		v9 := int32(m.Sub_486DB0(a1.field_0, (*byte)(unsafe.Add(unsafe.Pointer(v8), 24)), int32(v7)))
 		if v9 != v7 {
-			m.Sub_4BD690(int32(uintptr(unsafe.Pointer(v5p))))
+			m.Sub_4BD690(v5p)
 			return nil
 		}
 		v10 = v10 - v9

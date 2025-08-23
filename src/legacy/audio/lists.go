@@ -67,6 +67,13 @@ func (l *ListElement[T]) FirstSafe_4258A0() *T {
 	return l.NextSafe_425940()
 }
 
+func (a1p *ListElement[T]) PrevSafe_425960() *T {
+	if a1p.prev.head != a1p.prev {
+		return a1p.prev.PromoteUnsafe()
+	}
+	return nil
+}
+
 func (list *ListElement[T]) Append_4258E0(cur *ListElement[T]) {
 	if list == nil || cur == nil {
 		panic("Append_4258E0 called will nil argument")
