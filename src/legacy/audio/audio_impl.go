@@ -220,11 +220,9 @@ func (m *AudioModule) sub_452190(a1 *Struct200) {
 func (m *AudioModule) sub_4521A0(a1 int32) *Struct200 {
 	heads := m.Externs.ListHeads_5d4594_839892
 	if a1 > 0 {
-		for v1 := int32(0); v1 < a1; v1++ {
-			v2 := heads[v1]
-			for v3 := 0; v3 < 10; v3++ {
-				v4 := v2[v3]
-				v5 := v4.FirstSafe_4258A0()
+		for i := int32(0); i < a1; i++ {
+			for j := 0; j < 10; j++ {
+				v5 := heads[i][j].FirstSafe_4258A0()
 				if v5 != nil {
 					return v5.PromoteUnsafe().GetStruct200()
 				}
@@ -654,7 +652,7 @@ func (m *AudioModule) sub_452580(a1 *Struct576) int32 {
 	}
 	v3 = int32(a1.field_75)
 	a1.field_109 = 0
-	res = (*Struct312)(m.Sub_452810(int32(*&v1p.field_12+uint32(v3)), 0))
+	res = (*Struct312)(m.Sub_452810(int32(v1p.field_12+uint32(v3)), 0))
 	a1.field_44 = res
 	if res != nil {
 		v4 = int32(m.nox_common_randomIntMinMax_415FF0(int(v1p.field_19), int(*&v1p.field_20), unsafe.Pointer(alloc.InternCString("C:\\NoxPost\\src\\client\\Audio\\AudEvent.c")), 1482))

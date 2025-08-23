@@ -20,7 +20,6 @@ int sub_4BDB40(int a2);
 int sub_486350(void* a1, int a2);
 int sub_486520(void* a2);
 nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
-int* sub_452810(int a1, char a2);
 int sub_4BD940(struct312* a1);
 int sub_4BD9B0(struct312* a2);
 int sub_4BDA80(struct312* a1);
@@ -102,6 +101,14 @@ func initExterns() *audio.AudioExterns {
 		Dword_587000_127004:          (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
 
+		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
+		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),
+		Sub_4BD940_ptr: unsafe.Pointer(C.sub_4BD940),
+		Sub_4BD9B0_ptr: unsafe.Pointer(C.sub_4BD9B0),
+		Sub_452770_ptr: unsafe.Pointer(C.sub_452770),
+		Sub_4526F0_ptr: unsafe.Pointer(C.sub_4526F0),
+		Sub_4526D0_ptr: unsafe.Pointer(C.sub_4526D0),
+
 		Ptr_TimerGroup_5d4594_1193340: memmap.PtrT[*timer.TimerGroup](0x5D4594, 1193340),
 		TimerGroup_5d4594_1045228:     memmap.PtrT[timer.TimerGroup](0x5D4594, 1045228),
 		ListHeads_5d4594_839892:       memmap.PtrT[[6][10]audio.ListElement[audio.Struct200Field28]](0x5D4594, 839892),
@@ -112,14 +119,6 @@ func initExterns() *audio.AudioExterns {
 		Ptr_uint32_5d4594_1045448:     memmap.PtrUint32(0x5D4594, 1045448),
 		Ptr_uint32_5d4594_1193332:     memmap.PtrUint32(0x5D4594, 1193332),
 		Ptr_uint32_587000_127000:      memmap.PtrUint32(0x587000, 127000),
-
-		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
-		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),
-		Sub_4BD940_ptr: unsafe.Pointer(C.sub_4BD940),
-		Sub_4BD9B0_ptr: unsafe.Pointer(C.sub_4BD9B0),
-		Sub_452770_ptr: unsafe.Pointer(C.sub_452770),
-		Sub_4526F0_ptr: unsafe.Pointer(C.sub_4526F0),
-		Sub_4526D0_ptr: unsafe.Pointer(C.sub_4526D0),
 	}
 }
 
