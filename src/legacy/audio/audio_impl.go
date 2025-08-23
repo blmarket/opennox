@@ -23,7 +23,17 @@ type Struct84Field6 struct {
 	field_0 uint32
 	field_1 uint32
 	field_2 ListElement[Struct24[[0x2000]byte]]
-	field_5 unsafe.Pointer
+	field_5 *Struct84Field14
+	field_6 uint32
+}
+
+type Struct84Field14 struct {
+	field_0 uint32
+	field_1 uint32
+	field_2 uint32
+	field_3 uint32
+	field_4 uint32
+	field_5 uint32
 	field_6 uint32
 }
 
@@ -34,13 +44,7 @@ type Struct84 struct {
 	field_5  uint32
 	field_6  Struct84Field6
 	field_13 *Struct28[[0x2000]byte]
-	field_14 unsafe.Pointer
-	field_15 uint32
-	field_16 uint32
-	field_17 uint32
-	field_18 uint32
-	field_19 uint32
-	field_20 uint32
+	field_14 Struct84Field14
 }
 
 var _ = [1]struct{}{}[84-unsafe.Sizeof(Struct84{})]
@@ -1996,7 +2000,8 @@ func Sub_4BD3C0[T any](m *AudioModule, a1 *Struct28[T]) {
 	alloc.Free(a1)
 }
 
-func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3 *uint32) int32 {
+func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3p *Struct84Field14) int32 {
+	var a3 = ((*uint32)(unsafe.Pointer(a3p)))
 	var (
 		v3     *uint32
 		result int32
@@ -2060,7 +2065,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 	v5p.Init_425770()
 	v5p.field_3 = 0
 	m.Sub_487C30(&v5p.field_6)
-	v5p.field_6.field_5 = unsafe.Pointer(&v5p.field_14)
+	v5p.field_6.field_5 = &v5p.field_14
 
 	v6 := *(*int32)(unsafe.Pointer(&a1.field_0.Field284))
 	v10 := *(*int32)(unsafe.Pointer(&a1.field_0.Field284))
