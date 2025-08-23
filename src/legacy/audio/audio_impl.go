@@ -2067,7 +2067,7 @@ func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *Struct8
 		return nil
 	}
 	res := result.PromoteUnsafe()
-	for *(*uint32)(unsafe.Add(unsafe.Pointer(res), 4*4)) != uint32(a2) || *(*uint32)(unsafe.Add(unsafe.Pointer(res), 4*5)) == 0 {
+	for *(*uint32)(unsafe.Pointer(&res.field_4)) != uint32(a2) || *(*uint32)(unsafe.Pointer(&res.field_5)) == 0 {
 		result = res.next
 		if result == &a1p.field_3 {
 			return nil
