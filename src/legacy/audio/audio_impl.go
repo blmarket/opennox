@@ -1874,8 +1874,7 @@ func (m *AudioModule) Sub_4BD300(a1 *uint32, a2 int32) int32 {
 }
 
 func (m *AudioModule) Sub_4BD680(a1p *Struct84) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
-	return int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 12))))
+	return int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 12))))
 }
 
 func (m *AudioModule) Sub_487C50(a1 int32, a2 *Struct24[[0x2000]byte]) int32 {
@@ -1888,17 +1887,16 @@ func (m *AudioModule) Sub_487C50(a1 int32, a2 *Struct24[[0x2000]byte]) int32 {
 }
 
 func (m *AudioModule) Sub_4BD690(a1p *Struct84) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var i **uint32
-	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 4))) != uint32(a1) {
-		m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(a1)))
+	if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 4))) != uint32(int32(uintptr(unsafe.Pointer(a1p)))) {
+		m.nox_common_list_remove_425920(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))))))
 	}
-	for i = (**uint32)(m.nox_common_list_getNext_425940(unsafe.Pointer(uintptr(a1 + 32)))); i != nil; i = (**uint32)(m.nox_common_list_getNext_425940(unsafe.Pointer(uintptr(a1 + 32)))) {
+	for i = (**uint32)(m.nox_common_list_getNext_425940(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 32)))); i != nil; i = (**uint32)(m.nox_common_list_getNext_425940(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 32)))) {
 		m.nox_common_list_remove_425920(unsafe.Pointer(i))
 		m.Sub_487D60(int32(uintptr(unsafe.Pointer(i))))
-		m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 52))) + 4))), int32(uintptr(unsafe.Pointer(i))))
+		m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 52))) + 4))), int32(uintptr(unsafe.Pointer(i))))
 	}
-	return m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 52))) + 8))), a1)
+	return m.Sub_4BD300(*(**uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 52))) + 8))), int32(uintptr(unsafe.Pointer(a1p))))
 }
 
 func (m *AudioModule) Sub_4BD600(a1p *Struct28[[0x2000]byte]) int32 {
@@ -1924,12 +1922,11 @@ func Sub_425900[T any](a1p *ListElement[T], a2p *ListElement[T]) {
 }
 
 func (m *AudioModule) Sub_487D30(a1p *Struct24[[0x2000]byte], a2 int32, a3 int32) *uint32 {
-	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1p))
 	var result *uint32
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*4)) = uint32(a3)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*3)) = uint32(a2)
-	((*UnknownListElement)(unsafe.Pointer(a1))).Init_425770()
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = 0
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1p), 4*4)) = uint32(a3)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1p), 4*3)) = uint32(a2)
+	((*UnknownListElement)(unsafe.Pointer(a1p))).Init_425770()
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a1p), 4*5)) = 0
 	return result
 }
 
@@ -2032,12 +2029,11 @@ func Sub_4BD3C0[T any](m *AudioModule, a1 *Struct28[T]) {
 }
 
 func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3 *uint32) int32 {
-	var a1 *uint32 = (*uint32)(unsafe.Pointer(a1p))
 	var (
 		v3     *uint32
 		result int32
 	)
-	v3 = (*uint32)(unsafe.Pointer(uintptr(m.Sub_4866D0(a1, a2))))
+	v3 = (*uint32)(unsafe.Pointer(uintptr(m.Sub_4866D0((*uint32)(unsafe.Pointer(a1p)), a2))))
 	*a3 = 4
 	*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*2)) = *(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*6))
 	*(*uint32)(unsafe.Add(unsafe.Pointer(a3), 4*3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer(v3), 4*7))&1) != 0) + 1)
@@ -2060,7 +2056,7 @@ func (m *AudioModule) Sub_4BD420(a1p *Struct28[[0x2000]byte], a2 int32) *Struct8
 		return nil
 	}
 	res := result.PromoteUnsafe()
-	for *(*uint32)(unsafe.Pointer(&res.field_4)) != uint32(a2) || *(*uint32)(unsafe.Pointer(&res.field_5)) == 0 {
+	for res.field_4 != uint32(a2) || res.field_5 == 0 {
 		result = res.next
 		if result == &a1p.field_3 {
 			return nil
@@ -2079,7 +2075,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 		return v3
 	}
 
-	if m.Sub_486B60(a1.field_0, int32(a2)) == 0 {
+	if m.Sub_486B60(a1.field_0, a2) == 0 {
 		return nil
 	}
 	v5p := sub_4BD2E0(a1.field_2)
@@ -2091,10 +2087,10 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 			return nil
 		}
 	}
-	*(*uint32)(unsafe.Pointer(&v5p.field_4)) = uint32(a2)
+	v5p.field_4 = uint32(a2)
 	v5p.field_13 = a1
 	v5p.Init_425770()
-	*(*uint32)(unsafe.Pointer(&v5p.field_3)) = 0
+	v5p.field_3 = 0
 	m.Sub_487C30((*uint32)(unsafe.Pointer(&v5p.field_6)))
 	*(*uint32)(unsafe.Pointer(&v5p.field_11)) = uint32(uintptr(unsafe.Pointer(&v5p.field_14)))
 
@@ -2103,7 +2099,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 	if v6 == 0 {
 		m.Sub_486AA0(a1.field_0, *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
 		Sub_425900(&a1.field_3, &v5p.ListElement)
-		*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
+		v5p.field_5 = 1
 		m.Sub_486E00(a1.field_0)
 		return v5p
 	}
@@ -2133,7 +2129,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 		// LABEL_17
 		m.Sub_487D30(v8, int32(uintptr(unsafe.Add(unsafe.Pointer(v8), 24))), v7)
 		m.Sub_487C50(int32(uintptr(unsafe.Pointer(&v5p.field_6))), v8)
-		v9 := int32(m.Sub_486DB0(a1.field_0, (*byte)(unsafe.Add(unsafe.Pointer(v8), 24)), int32(v7)))
+		v9 := m.Sub_486DB0(a1.field_0, (*byte)(unsafe.Add(unsafe.Pointer(v8), 24)), int32(v7))
 		if v9 != v7 {
 			m.Sub_4BD690(v5p)
 			return nil
@@ -2142,7 +2138,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 		if v10 == 0 {
 			m.Sub_486AA0((a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), (*uint32)(unsafe.Pointer(&v5p.field_14)))
 			Sub_425900(&a1.field_3, &v5p.ListElement)
-			*(*uint32)(unsafe.Pointer(&v5p.field_5)) = 1
+			v5p.field_5 = 1
 			m.Sub_486E00(a1.field_0)
 			return v5p
 		}
@@ -2151,43 +2147,40 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 }
 
 func (m *AudioModule) Sub_486DB0(a1p *AudioStructXxx, a2 *byte, a3 int32) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
 		result int32
 		v4     int32
 	)
-	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) == 0 {
+	if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 280))) == 0 {
 		return 0
 	}
 	v4 = a3
-	if a3 > *(*int32)(unsafe.Pointer(uintptr(a1 + 284))) {
-		v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))))
+	if a3 > *(*int32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 284))) {
+		v4 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 284))))
 	}
 	if v4 <= 0 || (func() bool {
-		result = m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(a2), 1, uint32(v4), *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 280))))
+		result = m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(a2), 1, uint32(v4), *(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 280))))
 		return result < 0
 	}()) {
 		result = 0
 	}
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) -= uint32(result)
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 284))) -= uint32(result)
 	return result
 }
 
 func (m *AudioModule) Sub_486E00(a1p *AudioStructXxx) unsafe.Pointer {
-	var a1 = int32(uintptr(unsafe.Pointer(a1p)))
 	var result unsafe.Pointer
-	result = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 272)))
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = 0
+	result = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272)))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 280))) = 0
 	if result != nil {
 		m.nox_fs_close(result)
 		result = nil
-		*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))) = 0
 	}
 	return result
 }
 
 func (m *AudioModule) Sub_486B60(a1p *AudioStructXxx, a2 int32) int32 {
-	var a1 int32 = int32(uintptr(unsafe.Pointer(a1p)))
 	var (
 		v2  int32
 		v3  unsafe.Pointer
@@ -2202,35 +2195,35 @@ func (m *AudioModule) Sub_486B60(a1p *AudioStructXxx, a2 int32) int32 {
 		v15 [12]int32
 	)
 	v12 = 1
-	v2 = m.Sub_4866D0((*uint32)(unsafe.Pointer(uintptr(a1))), a2)
+	v2 = m.Sub_4866D0((*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p)))))), a2)
 	m.Sub_486E00(a1p)
-	v3 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 268)))
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = uint32(uintptr(unsafe.Pointer(v3)))
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) = *(*uint32)(unsafe.Pointer(uintptr(v2 + 20)))
+	v3 = *(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 268)))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 280))) = uint32(uintptr(unsafe.Pointer(v3)))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 284))) = *(*uint32)(unsafe.Pointer(uintptr(v2 + 20)))
 	if m.nox_fs_fseek(v3, int32(*(*uint32)(unsafe.Pointer(uintptr(v2 + 16)))), 0 /* stdio.SEEK_SET */) != 0 {
 		v12 = 0
 	}
 	if *(*uint32)(unsafe.Pointer(uintptr(v2 + 20))) == 0 {
 		v12 = 0
 	}
-	if *(*uint32)(unsafe.Pointer(uintptr(a1 + 276))) == 0 {
+	if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 276))) == 0 {
 		return v12
 	}
-	alloc.Strcpy((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(a1 + 8))))
+	alloc.Strcpy((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 8))))
 	alloc.Strcat((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(v2))))
 	alloc.Strcat((unsafe.Pointer(&v15[3])), unsafe.Pointer(alloc.InternCString(".wav")))
 	v6 = m.nox_fs_open((unsafe.Pointer(&v15[3])))
 	v7 = v6
 	v8 = 0
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = uint32(uintptr(unsafe.Pointer(v6)))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))) = uint32(uintptr(unsafe.Pointer(v6)))
 	if v6 == nil {
 		return v12
 	}
 	if m.nox_binfile_fread_raw_40ADD0((unsafe.Pointer(&v15[0])), 0xC, 1, v6) != 1 || uint32(v15[0]) != 1179011410 || uint32(v15[2]) != 1163280727 {
 		log.Printf("error: '%s' is bad - cannot read\n", &v15[3])
-		if *(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) != 0 {
-			m.nox_fs_close(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(a1 + 272))))
-			*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))) = 0
+		if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))) != 0 {
+			m.nox_fs_close(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))))
+			*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))) = 0
 		}
 		return v12
 	}
@@ -2264,8 +2257,8 @@ LABEL_18:
 		*(*uint32)(unsafe.Pointer(uintptr(v2 + 28))) = uint32(v9)
 	}
 	*(*uint32)(unsafe.Pointer(uintptr(v2 + 24))) = *(*uint32)(unsafe.Pointer(&v14[4]))
-	v10 = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 272))))
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 284))) = uint32(v8)
-	*(*uint32)(unsafe.Pointer(uintptr(a1 + 280))) = uint32(v10)
+	v10 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 272))))
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 284))) = uint32(v8)
+	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 280))) = uint32(v10)
 	return 1
 }
