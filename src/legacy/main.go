@@ -104,7 +104,7 @@ func Nox_common_maplist_free_4D0970() {
 }
 
 func Sub_451970() {
-	C.sub_451970()
+	AudioModule.Sub_451970()
 }
 
 func Sub_431270() {

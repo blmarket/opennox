@@ -533,9 +533,9 @@ func sub_4311B0() {
 	sub_43D970()
 	legacy.Dialogs.Sub_44D8C0()
 	legacy.Sub_451970()
-	if dword_5d4594_805980 != nil {
-		dword_5d4594_805980.Free()
-		dword_5d4594_805980 = nil
+	if legacy.AudioModule.Externs.Dword_5d4594_805980 != nil {
+		legacy.AudioModule.Externs.Dword_5d4594_805980.Free(legacy.AudioModule)
+		legacy.AudioModule.Externs.Dword_5d4594_805980 = nil
 	}
 	legacy.Set_dword_587000_81128(nil)
 	legacy.Sub_431270()

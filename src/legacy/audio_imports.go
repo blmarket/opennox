@@ -23,7 +23,6 @@ nox_list_item_t* nox_common_list_getFirstSafe_425890(nox_list_item_t* list);
 int* sub_452810(int a1, char a2);
 int sub_4BD940(struct312* a1);
 int sub_4BD9B0(struct312* a2);
-void sub_4BD2D0(void* lpMem);
 int sub_4BDA80(struct312* a1);
 void nox_common_list_clear_425760(nox_list_item_t* list);
 void* sub_486320(void* a1, int a2);
@@ -34,7 +33,7 @@ int nox_common_randomIntMinMax_415FF0(int min, int max, char* file, int line);
 int sub_4863B0(void* a2);
 
 int sub_452770(struct312* a1);
-int sub_4526D0(int a1);
+int sub_4526D0(struct312* a1);
 int sub_4526F0(struct312* a1);
 int sub_4873C0(struct264* a3);
 extern uint32_t dword_5d4594_1045428;
@@ -62,16 +61,13 @@ int sub_4BD940(struct312* a1);
 int sub_4BD9B0(struct312* a2);
 
 int sub_425960(int a1);
-int sub_487D60(int a1);
 int sub_4BD680(int a1);
 int sub_487C50(int a1, uint32_t* a2);
 int sub_4BD690(int a1);
-int sub_4BD600(int a1);
 uint32_t* sub_487D30(uint32_t* a1, int a2, int a3);
 int sub_4866D0(uint32_t* a1, int a2);
 void sub_487C30(uint32_t* a1);
 int sub_487D00(uint32_t* a1);
-int sub_486AA0(uint32_t* a1, int a2, uint32_t* a3);
 int sub_486B60(int a1, int a2);
 FILE* sub_486E00(int a1);
 signed int sub_486DB0(int a1, char* a2, signed int a3);
@@ -95,7 +91,7 @@ func initExterns() *audio.AudioExterns {
 		Dword_5d4594_1193336: 0,
 
 		Dword_587000_126996:          (*uint32)(&C.dword_587000_126996),
-		Dword_5d4594_1045420:         (*uint32)(&C.dword_5d4594_1045420),
+		Dword_5d4594_1045420:         (**audio.AudioStructXxx)(unsafe.Pointer(&C.dword_5d4594_1045420)),
 		Dword_5d4594_1045424:         (**audio.Struct28[[0x2000]byte])(unsafe.Pointer(&C.dword_5d4594_1045424)),
 		Dword_5d4594_1045428:         (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_1045428)),
 		Dword_5d4594_1045432:         (*uint32)(&C.dword_5d4594_1045432),
@@ -177,8 +173,8 @@ func sub_4526F0(a1 *C.struct312) C.int {
 }
 
 //export sub_4526D0
-func sub_4526D0(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_4526D0(int32(a1)))
+func sub_4526D0(a1 *C.struct312) C.int {
+	return C.int(AudioModule.Sub_4526D0((*audio.Struct312)(unsafe.Pointer(a1))))
 }
 
 //export nox_xxx_clientPlaySoundSpecial_452D80
@@ -186,20 +182,20 @@ func nox_xxx_clientPlaySoundSpecial_452D80(a1, a2 C.int) {
 	AudioModule.Nox_xxx_clientPlaySoundSpecial_452D80(int32(a1), int32(a2))
 }
 
-//export sub_4519C0
-func sub_4519C0() {
-	AudioModule.Sub_4519C0()
-}
+// //export sub_4519C0
+// func sub_4519C0() {
+// 	AudioModule.Sub_4519C0()
+// }
 
 //export sub_4523D0
 func sub_4523D0(a1 *C.struct576) int32 {
 	return AudioModule.Sub_4523D0((*audio.Struct576)(unsafe.Pointer(a1)))
 }
 
-//export sub_451970
-func sub_451970() {
-	AudioModule.Sub_451970()
-}
+// //export sub_451970
+// func sub_451970() {
+// 	AudioModule.Sub_451970()
+// }
 
 //export sub_452FE0
 func sub_452FE0(a1 *C.struct576, a2 int32) int32 {
@@ -246,10 +242,10 @@ func sub_452E10(a1 int32, a2 int32, a3 int32) {
 	AudioModule.Sub_452E10(a1, a2, a3)
 }
 
-//export sub_4BD7A0
-func sub_4BD7A0(lpMem unsafe.Pointer) {
-	AudioModule.Sub_4BD7A0((*audio.Struct312)(lpMem))
-}
+// //export sub_4BD7A0
+// func sub_4BD7A0(lpMem unsafe.Pointer) {
+// 	AudioModule.Sub_4BD7A0((*audio.Struct312)(lpMem))
+// }
 
 //export sub_4BD8C0
 func sub_4BD8C0(a1 *C.struct312) int32 {
@@ -271,77 +267,52 @@ func sub_4873C0(a3 *C.struct264) int32 {
 	return AudioModule.Sub_4873C0((*audio.Struct264)(unsafe.Pointer(a3)))
 }
 
-//export sub_4BDA60
-func sub_4BDA60(lpMem_ *C.struct312) {
-	AudioModule.Sub_4BDA60((*audio.Struct312)(unsafe.Pointer(lpMem_)))
-}
+// //export sub_4BDA60
+// func sub_4BDA60(lpMem_ *C.struct312) {
+// 	AudioModule.Sub_4BDA60((*audio.Struct312)(unsafe.Pointer(lpMem_)))
+// }
 
-//export sub_4BDA80
-func sub_4BDA80(a1_ *C.struct312) int32 {
-	return AudioModule.Sub_4BDA80((*audio.Struct312)(unsafe.Pointer(a1_)))
-}
+// //export sub_4BDA80
+// func sub_4BDA80(a1_ *C.struct312) int32 {
+// 	return AudioModule.Sub_4BDA80((*audio.Struct312)(unsafe.Pointer(a1_)))
+// }
 
-//export sub_425960
-func sub_425960(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_425960(int32(a1)))
-}
+// //export sub_425960
+// func sub_425960(a1 C.int) C.int {
+// 	return C.int(AudioModule.Sub_425960(int32(a1)))
+// }
 
-//export sub_487D60
-func sub_487D60(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_487D60(int32(a1)))
-}
+// //export sub_4BD300
+// func sub_4BD300(a1 *C.uint32_t, a2 C.int) C.int {
+// 	return C.int(AudioModule.Sub_4BD300((*uint32)(unsafe.Pointer(a1)), int32(a2)))
+// }
 
-//export sub_4BD300
-func sub_4BD300(a1 *C.uint32_t, a2 C.int) C.int {
-	return C.int(AudioModule.Sub_4BD300((*uint32)(unsafe.Pointer(a1)), int32(a2)))
-}
+// //export sub_4BD680
+// func sub_4BD680(a1 C.int) C.int {
+// 	return C.int(AudioModule.Sub_4BD680(int32(a1)))
+// }
 
-//export sub_4BD680
-func sub_4BD680(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_4BD680(int32(a1)))
-}
+// //export sub_487C50
+// func sub_487C50(a1 C.int, a2 *C.uint32_t) C.int {
+// 	return C.int(AudioModule.Sub_487C50(int32(a1), (*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a2))))
+// }
 
-//export sub_487C50
-func sub_487C50(a1 C.int, a2 *C.uint32_t) C.int {
-	return C.int(AudioModule.Sub_487C50(int32(a1), (*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a2))))
-}
+// //export sub_4BD690
+// func sub_4BD690(a1 C.int) C.int {
+// 	return C.int(AudioModule.Sub_4BD690(int32(a1)))
+// }
 
-//export sub_4BD690
-func sub_4BD690(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_4BD690(int32(a1)))
-}
+// //export sub_487D30
+// func sub_487D30(a1 *C.uint32_t, a2 C.int, a3 C.int) *C.uint32_t {
+// 	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_487D30((*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a1)), int32(a2), int32(a3))))
+// }
 
-//export sub_4BD600
-func sub_4BD600(a1 C.int) C.int {
-	return C.int(AudioModule.Sub_4BD600(int32(a1)))
-}
+// //export sub_4866D0
+// func sub_4866D0(a1 *C.uint32_t, a2 C.int) C.int {
+// 	return C.int(AudioModule.Sub_4866D0((*uint32)(unsafe.Pointer(a1)), int32(a2)))
+// }
 
-//export sub_487D30
-func sub_487D30(a1 *C.uint32_t, a2 C.int, a3 C.int) *C.uint32_t {
-	return (*C.uint32_t)(unsafe.Pointer(AudioModule.Sub_487D30((*audio.Struct24[[0x2000]byte])(unsafe.Pointer(a1)), int32(a2), int32(a3))))
-}
-
-//export sub_4866D0
-func sub_4866D0(a1 *C.uint32_t, a2 C.int) C.int {
-	return C.int(AudioModule.Sub_4866D0((*uint32)(unsafe.Pointer(a1)), int32(a2)))
-}
-
-//export sub_487C30
-func sub_487C30(a1 *C.uint32_t) {
-	AudioModule.Sub_487C30((*uint32)(unsafe.Pointer(a1)))
-}
-
-//export sub_487D00
-func sub_487D00(a1 *C.uint32_t) C.int {
-	return C.int(AudioModule.Sub_487D00((*uint32)(unsafe.Pointer(a1))))
-}
-
-//export sub_486AA0
-func sub_486AA0(a1 *C.uint32_t, a2 C.int, a3 *C.uint32_t) C.int {
-	return C.int(AudioModule.Sub_486AA0((*uint32)(unsafe.Pointer(a1)), int32(a2), (*uint32)(unsafe.Pointer(a3))))
-}
-
-//export sub_4BD2D0
-func sub_4BD2D0(lpMem unsafe.Pointer) {
-	AudioModule.Sub_4BD2D0(lpMem)
-}
+// //export sub_487C30
+// func sub_487C30(a1 *C.uint32_t) {
+// 	AudioModule.Sub_487C30((*uint32)(unsafe.Pointer(a1)))
+// }

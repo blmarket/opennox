@@ -359,10 +359,6 @@ func Sub_486FA0(a1 int) {
 	C.sub_486FA0(C.int(a1))
 }
 
-func Sub_487D00(a1 unsafe.Pointer) {
-	C.sub_487D00((*C.uint)(a1))
-}
-
 //export sub_44D8F0
 func sub_44D8F0() { Dialogs.Sub_44D8F0() }
 

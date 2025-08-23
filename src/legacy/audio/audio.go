@@ -8,9 +8,10 @@ import (
 
 type AudioExterns struct {
 	Dword_5d4594_1193336 uint32
+	Dword_5d4594_805980  *AudioStructXxx
 
 	Dword_587000_126996           *uint32
-	Dword_5d4594_1045420          *uint32
+	Dword_5d4594_1045420          **AudioStructXxx
 	Dword_5d4594_1045424          **Struct28[[0x2000]byte]
 	Dword_5d4594_1045428          **Struct264
 	Dword_5d4594_1045432          *uint32

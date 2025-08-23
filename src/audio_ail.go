@@ -13,6 +13,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/common/memmap"
 	"github.com/noxworld-dev/opennox/v1/internal/binfile"
 	"github.com/noxworld-dev/opennox/v1/legacy"
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 	"github.com/noxworld-dev/opennox/v1/legacy/client/audio/ail"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
@@ -20,8 +21,7 @@ import (
 )
 
 var (
-	nox_enable_audio    = 1
-	dword_5d4594_805980 *audioStructXxx
+	nox_enable_audio = 1
 )
 
 var (
@@ -124,17 +124,8 @@ func sub_43EA20(a1 unsafe.Pointer) int {
 	return 0
 }
 
-type audioStruct1 struct {
-	Field0  uint16
-	Field2  uint16
-	Field4  uint32
-	Field8  uint32
-	Field12 uint16
-	Field14 uint16
-}
-
-func sub_43EA90(a2 unsafe.Pointer) *audioStruct1 {
-	return &audioStruct1{
+func sub_43EA90(a2 unsafe.Pointer) *audio.AudioStruct1 {
+	return &audio.AudioStruct1{
 		Field0:  1,
 		Field2:  *(*uint16)(unsafe.Add(a2, 12)),
 		Field4:  *(*uint32)(unsafe.Add(a2, 8)),
@@ -144,7 +135,7 @@ func sub_43EA90(a2 unsafe.Pointer) *audioStruct1 {
 	}
 }
 
-func sub_43EAD0(a1 *audioStruct1) ail.Driver {
+func sub_43EAD0(a1 *audio.AudioStruct1) ail.Driver {
 	if dr := ail.WaveOutOpen(); dr != 0 {
 		return dr
 	}
@@ -219,7 +210,7 @@ func nox_audio_initall(a3 int) int {
 		legacy.AudioModule.Sub_486F30()
 		if sub_4311F0() != 0 {
 			legacy.Set_dword_587000_81128(&legacy.Get_dword_5d4594_805984().TimerGroup_22)
-			dword_5d4594_805980 = sub_4866F0("audio", "audio")
+			legacy.AudioModule.Externs.Dword_5d4594_805980 = sub_4866F0("audio", "audio")
 		}
 	}
 	(*timer.TimerGroup)(memmap.PtrOff(0x5D4594, 805884)).Init()
@@ -228,7 +219,7 @@ func nox_audio_initall(a3 int) int {
 	(*timer.TimerGroup)(legacy.Get_dword_587000_127004()).Init()
 	legacy.Dialogs.Nox_xxx_WorkerHurt_44D810()
 	legacy.MusicModule.Init()
-	legacy.AudioModule.Sub_451850(legacy.Get_dword_5d4594_805984(), unsafe.Pointer(dword_5d4594_805980))
+	legacy.AudioModule.Sub_451850(legacy.Get_dword_5d4594_805984(), legacy.AudioModule.Externs.Dword_5d4594_805980)
 	v1 := configGetVolume(VolumeMusic)
 	if v1 == 0 {
 		legacy.Sub_43DC00()
@@ -257,60 +248,17 @@ func sub_4311F0() int {
 	v2[3] = 2
 	v2[4] = 2
 	v2[0] = 4
-	legacy.Sub_487D00(unsafe.Pointer(&v2[0]))
+	legacy.AudioModule.Sub_487D00(&v2)
 	v0 := legacy.AudioModule.Sub_487150(int32(-1), &v2)
 	legacy.Set_dword_5d4594_805984(v0)
 	return bool2int(v0 != nil && legacy.AudioModule.Sub_487790(v0, 16) == 16)
 }
 
-var _ = [1]struct{}{}[288-unsafe.Sizeof(audioStructXxx{})]
-
-type audioStructXxx struct {
-	arr0       *audioStructYyy
-	size4      uint
-	path2_8    [260]byte
-	bagfile268 *legacy.FILE // 67, 268
-	field272   *legacy.FILE // 68, 272
-	field276   uint32       // 69, 276
-	field280   uint32       // 70, 280
-	field284   uint32       // 71, 284
+func freeAudioStructXxx(p *audio.AudioStructXxx) {
+	p.Free(legacy.AudioModule)
 }
 
-func (p *audioStructXxx) C() unsafe.Pointer {
-	return unsafe.Pointer(p)
-}
-
-func (p *audioStructXxx) Free() {
-	if p == nil {
-		return
-	}
-	if p.bagfile268 != nil {
-		legacy.Nox_fs_close(p.bagfile268)
-		p.bagfile268 = nil
-	}
-	if p.field272 != nil {
-		legacy.Nox_fs_close(p.field272)
-		p.field272 = nil
-	}
-	if p.arr0 != nil {
-		alloc.Free(p.arr0)
-		p.arr0 = nil
-	}
-	alloc.Free(p)
-}
-
-var _ = [1]struct{}{}[36-unsafe.Sizeof(audioStructYyy{})]
-
-type audioStructYyy struct {
-	field0  [32]byte
-	field32 uint32
-}
-
-func (p *audioStructYyy) C() unsafe.Pointer {
-	return unsafe.Pointer(p)
-}
-
-func sub_4866F0(path1 string, path2 string) *audioStructXxx {
+func sub_4866F0(path1 string, path2 string) *audio.AudioStructXxx {
 	idxPath := path1
 	if i := strings.LastIndexByte(idxPath, '.'); i >= 0 {
 		idxPath = idxPath[:i]
@@ -334,65 +282,65 @@ func sub_4866F0(path1 string, path2 string) *audioStructXxx {
 		return nil
 	}
 
-	p, _ := alloc.New(audioStructXxx{})
-	p.bagfile268 = legacy.NewFileHandle(binfile.NewFile(fb))
-	if p.bagfile268 == nil {
-		p.Free()
+	p, _ := alloc.New(audio.AudioStructXxx{})
+	p.Bagfile268 = audio.FILE(legacy.NewFileHandle(binfile.NewFile(fb)))
+	if p.Bagfile268 == nil {
+		freeAudioStructXxx(p)
 		return nil
 	}
 	var hdr [12]byte
 	if _, err := bf1.Read(hdr[:12]); err != nil {
-		p.Free()
+		freeAudioStructXxx(p)
 		return nil
 	}
 	_ = binary.LittleEndian.Uint32(hdr[0:])
 	vers := binary.LittleEndian.Uint32(hdr[4:])
-	p.size4 = uint(binary.LittleEndian.Uint32(hdr[8:]))
-	var arr []audioStructYyy
-	if p.size4 > 0 {
-		arr, _ = alloc.Make([]audioStructYyy{}, p.size4)
-		p.arr0 = &arr[0]
+	p.Size4 = uint(binary.LittleEndian.Uint32(hdr[8:]))
+	var arr []audio.AudioStructYyy
+	if p.Size4 > 0 {
+		arr, _ = alloc.Make([]audio.AudioStructYyy{}, p.Size4)
+		p.Arr0 = &arr[0]
 		var buf [36]byte
 		if vers != 1 {
-			for i := uint(0); i < p.size4; i++ {
+			for i := uint(0); i < p.Size4; i++ {
 				if _, err := bf1.Read(buf[:36]); err != nil {
-					p.Free()
+					freeAudioStructXxx(p)
 					return nil
 				}
-				copy(arr[i].field0[:], buf[:32])
-				arr[i].field32 = binary.LittleEndian.Uint32(buf[32:])
+				copy(arr[i].Field0[:], buf[:32])
+				arr[i].Field32 = binary.LittleEndian.Uint32(buf[32:])
 			}
 		} else {
-			for i := uint(0); i < p.size4; i++ {
+			for i := uint(0); i < p.Size4; i++ {
 				if _, err := bf1.Read(buf[:32]); err != nil {
-					p.Free()
+					freeAudioStructXxx(p)
 					return nil
 				}
-				copy(arr[i].field0[:], buf[:32])
-				arr[i].field32 = 0
+				copy(arr[i].Field0[:], buf[:32])
+				arr[i].Field32 = 0
 			}
 		}
 	}
 	sort.Slice(arr, func(i, j int) bool {
-		s1, s2 := alloc.GoStringS(arr[i].field0[:]), alloc.GoStringS(arr[j].field0[:])
+		s1, s2 := alloc.GoStringS(arr[i].Field0[:]), alloc.GoStringS(arr[j].Field0[:])
 		s1, s2 = strings.ToLower(s1), strings.ToLower(s2)
 		return s1 < s2
 	})
-	p.field276 = 0
+	p.Field276 = 0
 	if path2 != "" {
-		alloc.StrCopyZero(p.path2_8[:], path2)
-		if i := alloc.StrLenS(p.path2_8[:]); p.path2_8[i] == '\\' {
-			p.path2_8[i] = 0
+		alloc.StrCopyZero(p.Path2_8[:], path2)
+		if i := alloc.StrLenS(p.Path2_8[:]); p.Path2_8[i] == '\\' {
+			p.Path2_8[i] = 0
 		}
 		var find legacy.WIN32_FIND_DATAA
 
-		if h := legacy.FindFirstFileA(&p.path2_8[0], &find); int(h) != -1 {
+		if h := legacy.FindFirstFileA(&p.Path2_8[0], &find); int(h) != -1 {
 			if find.FileAttributes&0x10 != 0 {
-				p.field276 = 1
+				p.Field276 = 1
 			} else {
 				for legacy.FindNextFileA(h, &find) != 0 {
 					if find.FileAttributes&0x10 != 0 {
-						p.field276 = 1
+						p.Field276 = 1
 						break
 					}
 				}
@@ -400,9 +348,9 @@ func sub_4866F0(path1 string, path2 string) *audioStructXxx {
 			legacy.FindClose(h)
 		}
 		// TODO: strlen()-1 ?
-		if i := alloc.StrLenS(p.path2_8[:]); p.path2_8[i] != '\\' {
-			p.path2_8[i] = '\\'
-			p.path2_8[i+1] = 0
+		if i := alloc.StrLenS(p.Path2_8[:]); p.Path2_8[i] != '\\' {
+			p.Path2_8[i] = '\\'
+			p.Path2_8[i+1] = 0
 		}
 	}
 	return p

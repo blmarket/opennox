@@ -69,7 +69,7 @@ int sub_452410(struct576* a1_);
 int sub_452490(struct576* a1_);
 void sub_452510(struct576* a3_);
 long long sub_452690(struct576* a3_, long long a4, int a5);
-int sub_4526D0(int a1);
+int sub_4526D0(struct312* a1);
 int* sub_452810(int a1, char a2);
 int nox_thing_read_AVNT_452890(nox_memfile* a1, void* a2);
 int nox_thing_skip_AVNT_452B00(nox_memfile* f);
