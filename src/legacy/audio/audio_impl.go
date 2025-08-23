@@ -23,7 +23,7 @@ type Struct24[T any] struct {
 var _ = [1]struct{}{}[2024-unsafe.Sizeof(Struct24[[2000]byte]{})]
 
 type Struct84 struct {
-	ListElement[Struct84, *Struct84]
+	ListElement[Struct84]
 	field_3  uint32
 	field_4  uint32
 	field_5  uint32
@@ -50,7 +50,7 @@ type Struct28[T any] struct {
 	field_0 *AudioStructXxx
 	field_1 *FreeList[Struct24[T]]
 	field_2 *FreeList[Struct84]
-	field_3 ListElement[Struct84, *Struct84]
+	field_3 ListElement[Struct84]
 	field_6 uint32
 }
 
@@ -95,7 +95,7 @@ type Struct200 struct {
 	field_19   uint32
 	field_20   uint32
 	sndName_21 unsafe.Pointer // pointer to string
-	field_22   ListElement[Struct576Field3, *Struct576Field3]
+	field_22   ListElement[Struct576Field3]
 	field_25   uint32
 	field_26   uint32
 	field_27   int32
@@ -107,7 +107,7 @@ type Struct200 struct {
 }
 
 type Struct200Field28 struct {
-	ListElement[Struct200Field28, *Struct200Field28]
+	ListElement[Struct200Field28]
 }
 
 func (s *Struct200Field28) GetStruct200() *Struct200 {
@@ -118,7 +118,7 @@ var _ = [1]struct{}{}[200-unsafe.Sizeof(Struct200{})]
 var _ = [1]struct{}{}[unsafe.Sizeof(Struct200{})-200]
 
 type Struct576Field3 struct {
-	ListElement[Struct576Field3, *Struct576Field3]
+	ListElement[Struct576Field3]
 }
 
 func (s *Struct576Field3) GetStruct576() *Struct576 {
@@ -126,7 +126,7 @@ func (s *Struct576Field3) GetStruct576() *Struct576 {
 }
 
 type Struct576 struct {
-	ListElement[Struct576, *Struct576]
+	ListElement[Struct576]
 	field_3       Struct576Field3
 	field_6       uint8
 	field_6_1     uint8
@@ -1232,7 +1232,7 @@ func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p unsafe.Pointer) {
 }
 
 func (m *AudioModule) sub_487C80(a1 int32) *UnknownListElement {
-	v1 := (*ListElement[UnknownListElement, *UnknownListElement])(unsafe.Pointer(uintptr(a1 + 8)))
+	v1 := (*ListElement[UnknownListElement])(unsafe.Pointer(uintptr(a1 + 8)))
 	return v1.NextSafe_425940()
 }
 
@@ -1923,7 +1923,7 @@ func (m *AudioModule) Sub_4BD600(a1p *Struct28[[0x2000]byte]) int32 {
 	return 1
 }
 
-func Sub_425900[T any](a1p *ListElement[T, *T], a2p *ListElement[T, *T]) {
+func Sub_425900[T any](a1p *ListElement[T], a2p *ListElement[T]) {
 	a2p.prev = a1p
 	a2p.next = a1p.next
 	a1p.next = a2p

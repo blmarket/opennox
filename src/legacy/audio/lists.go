@@ -8,28 +8,26 @@ type ListItem struct {
 	head *ListItem
 }
 
-type ListElement[T any, P interface {
-	*T
-}] struct {
-	next *ListElement[T, P]
-	prev *ListElement[T, P]
-	head *ListElement[T, P]
+type ListElement[T any] struct {
+	next *ListElement[T]
+	prev *ListElement[T]
+	head *ListElement[T]
 }
 
-func (l *ListElement[T, P]) PromoteUnsafe() *T {
+func (l *ListElement[T]) PromoteUnsafe() *T {
 	return (*T)(unsafe.Pointer(l))
 }
 
-func (l *ListElement[T, P]) IsHead() bool {
+func (l *ListElement[T]) IsHead() bool {
 	return l.head == l
 }
 
-func (l *ListElement[T, P]) Next() *ListElement[T, P] {
+func (l *ListElement[T]) Next() *ListElement[T] {
 	return l.next
 }
 
 // It's init for non-head element
-func (l *ListElement[T, P]) Init_425770() *ListElement[T, P] {
+func (l *ListElement[T]) Init_425770() *ListElement[T] {
 	l.next = l
 	l.prev = l
 	l.head = nil
@@ -37,13 +35,13 @@ func (l *ListElement[T, P]) Init_425770() *ListElement[T, P] {
 }
 
 // It's init for head element
-func (l *ListElement[T, P]) Clear_425760() {
+func (l *ListElement[T]) Clear_425760() {
 	l.next = l
 	l.prev = l
 	l.head = l
 }
 
-func (l *ListElement[T, P]) NextSafe_425940() *T {
+func (l *ListElement[T]) NextSafe_425940() *T {
 	it := l.next
 	if it != nil && it == it.head {
 		return nil
@@ -51,25 +49,25 @@ func (l *ListElement[T, P]) NextSafe_425940() *T {
 	return it.PromoteUnsafe()
 }
 
-func (l *ListElement[T, P]) NextSafe_4258A0() *T {
+func (l *ListElement[T]) NextSafe_4258A0() *T {
 	if l == nil {
 		return nil
 	}
 	return l.NextSafe_425940()
 }
 
-func (l *ListElement[T, P]) FirstSafe_425890() *T {
+func (l *ListElement[T]) FirstSafe_425890() *T {
 	return l.FirstSafe_4258A0()
 }
 
-func (l *ListElement[T, P]) FirstSafe_4258A0() *T {
+func (l *ListElement[T]) FirstSafe_4258A0() *T {
 	if l == nil {
 		return nil
 	}
 	return l.NextSafe_425940()
 }
 
-func (list *ListElement[T, P]) Append_4258E0(cur *ListElement[T, P]) {
+func (list *ListElement[T]) Append_4258E0(cur *ListElement[T]) {
 	if list == nil || cur == nil {
 		panic("Append_4258E0 called will nil argument")
 	}
@@ -91,7 +89,7 @@ func (list *ListElement[T, P]) Append_4258E0(cur *ListElement[T, P]) {
 	}
 }
 
-func (e *ListElement[T, P]) Remove_425920() {
+func (e *ListElement[T]) Remove_425920() {
 	e.prev.next = e.next
 	e.next.prev = e.prev
 	e.next = e

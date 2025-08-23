@@ -7,7 +7,7 @@ import (
 )
 
 type Struct88 struct {
-	field_0 ListElement[Struct88, *Struct88]
+	field_0 ListElement[Struct88]
 	field_3 *Struct587000_94032
 	field_4 uint32
 	field_5 uint32
@@ -30,12 +30,12 @@ type Struct587000_94032 struct {
 }
 
 type UnknownListElement struct {
-	ListElement[UnknownListElement, *UnknownListElement]
+	ListElement[UnknownListElement]
 }
 
 type Struct587000_155144 struct {
-	field_0      ListElement[Struct88, *Struct88]
-	field_3      ListElement[Struct264, *Struct264]
+	field_0      ListElement[Struct88]
+	field_3      ListElement[Struct264]
 	field_6      uint32
 	field_7      uint32 // unknown
 	timerGroup_8 timer.TimerGroup

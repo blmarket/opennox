@@ -7,7 +7,7 @@ import (
 )
 
 type Struct312 struct {
-	ListElement[Struct312, *Struct312]
+	ListElement[Struct312]
 	field_3       int32
 	timerGroup_4  timer.TimerGroup
 	field_28      *timer.TimerGroup

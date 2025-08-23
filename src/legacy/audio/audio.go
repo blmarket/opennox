@@ -29,8 +29,8 @@ type AudioExterns struct {
 	Sub_4526F0_ptr                unsafe.Pointer
 	Sub_4526D0_ptr                unsafe.Pointer
 	TimerGroup_5d4594_1045228     *timer.TimerGroup
-	ListHeads_5d4594_839892       *[6][10]ListElement[Struct200Field28, *Struct200Field28]
-	ListHead_5d4594_840612        *ListElement[Struct576, *Struct576]
+	ListHeads_5d4594_839892       *[6][10]ListElement[Struct200Field28]
+	ListHead_5d4594_840612        *ListElement[Struct576]
 	Struct200Arr_5d4594_840628    *[1023]Struct200
 	Ptr_uint32_5d4594_1045444     *uint32
 }

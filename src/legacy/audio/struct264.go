@@ -20,7 +20,7 @@ type Struct264Field64 struct {
 }
 
 type Struct264 struct {
-	field_0       ListElement[Struct264, *Struct264]
+	field_0       ListElement[Struct264]
 	field_3       uint32
 	field_4       uint32
 	field_5       *Struct88
@@ -39,7 +39,7 @@ type Struct264 struct {
 	field_47      uint32
 	field_48      int32
 	field_49      int32
-	field_50      ListElement[Struct312, *Struct312]
+	field_50      ListElement[Struct312]
 	field_53      int32
 	field_54      unsafe.Pointer // sub_4873C0_ptr, takes *Struct264
 	field_55      uint32
