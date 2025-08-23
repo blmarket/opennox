@@ -228,3 +228,8 @@ func sub_4BD9B0(a2 *C.struct312) int32 {
 func sub_4873C0(a3 *C.struct264) int32 {
 	return AudioModule.Sub_4873C0((*audio.Struct264)(unsafe.Pointer(a3)))
 }
+
+//export sub_431290
+func sub_431290() {
+	AudioModule.Sub_431290()
+}

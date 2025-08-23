@@ -108,7 +108,7 @@ func Sub_451970() {
 }
 
 func Sub_431270() {
-	C.sub_431270()
+	AudioModule.Sub_431270()
 }
 
 func Sub_4875F0() {
