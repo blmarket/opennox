@@ -19,16 +19,20 @@ type Struct24[T any] struct {
 
 var _ = [1]struct{}{}[2024-unsafe.Sizeof(Struct24[[2000]byte]{})]
 
+type Struct84Field6 struct {
+	field_0 uint32
+	field_1 uint32
+	field_2 ListElement[Struct24[[0x2000]byte]]
+	field_5 unsafe.Pointer
+	field_6 uint32
+}
+
 type Struct84 struct {
 	ListElement[Struct84]
 	field_3  uint32
 	field_4  uint32
 	field_5  uint32
-	field_6  unsafe.Pointer
-	field_7  uint32
-	field_8  ListElement[Struct24[[0x2000]byte]]
-	field_11 unsafe.Pointer
-	field_12 uint32
+	field_6  Struct84Field6
 	field_13 *Struct28[[0x2000]byte]
 	field_14 unsafe.Pointer
 	field_15 uint32
@@ -1852,11 +1856,10 @@ func (m *AudioModule) Sub_487C50(a1 int32, a2 *Struct24[[0x2000]byte]) int32 {
 }
 
 func (m *AudioModule) Sub_4BD690(a1p *Struct84) {
-	// var i **uint32
 	if *(*uint32)(unsafe.Pointer(&a1p.prev)) != uint32(int32(uintptr(unsafe.Pointer(a1p)))) {
 		a1p.Remove_425920()
 	}
-	for it := a1p.field_8.NextSafe_425940(); it != nil; it = a1p.field_8.NextSafe_425940() {
+	for it := a1p.field_6.field_2.NextSafe_425940(); it != nil; it = a1p.field_6.field_2.NextSafe_425940() {
 		it.Remove_425920()
 		m.Sub_487D60(it)
 		a1p.field_13.field_1.Release_4BD300(it)
@@ -1938,12 +1941,12 @@ func (m *AudioModule) Sub_4866D0(a1p *AudioStructXxx, a2 int32) int32 {
 	return int32(uintptr(unsafe.Add(unsafe.Pointer(a1p.Arr0), a2*36)))
 }
 
-func (m *AudioModule) Sub_487C30(a1 *uint32) {
-	*a1 = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*1)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*5)) = 0
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*6)) = 0
-	((*UnknownListElement)(unsafe.Pointer((*uint32)(unsafe.Add(unsafe.Pointer(a1), 4*2))))).Clear_425760()
+func (m *AudioModule) Sub_487C30(a1p *Struct84Field6) {
+	a1p.field_0 = 0
+	a1p.field_1 = 0
+	a1p.field_5 = nil
+	a1p.field_6 = 0
+	a1p.field_2.Clear_425760()
 }
 
 func (m *AudioModule) Sub_487D00(a1p *[7]uint32) int32 {
@@ -2056,8 +2059,8 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 	v5p.field_13 = a1
 	v5p.Init_425770()
 	v5p.field_3 = 0
-	m.Sub_487C30((*uint32)(unsafe.Pointer(&v5p.field_6)))
-	*(*uint32)(unsafe.Pointer(&v5p.field_11)) = uint32(uintptr(unsafe.Pointer(&v5p.field_14)))
+	m.Sub_487C30(&v5p.field_6)
+	v5p.field_6.field_5 = unsafe.Pointer(&v5p.field_14)
 
 	v6 := *(*int32)(unsafe.Pointer(&a1.field_0.Field284))
 	v10 := *(*int32)(unsafe.Pointer(&a1.field_0.Field284))
