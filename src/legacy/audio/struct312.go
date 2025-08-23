@@ -31,8 +31,8 @@ type Struct312 struct {
 	field_69      unsafe.Pointer // sub_4BD8C0_ptr
 	field_70      unsafe.Pointer // sub_4BD940_ptr
 	field_71      unsafe.Pointer // sub_4BD9B0_ptr
-	field_72      unsafe.Pointer
-	field_73      *UnknownListElement
+	field_72      *Struct84Field6
+	field_73      *Struct24[[0x2000]byte]
 	field_74      uint32
 	field_75      uint32
 	field_76      uint32
