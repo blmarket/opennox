@@ -786,6 +786,7 @@ func (m *AudioModule) sub_452050(a1p *Struct576) {
 	}
 }
 
+//goland:noinspection ALL
 func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	var v1 *Struct576
 	var v3 uint32
@@ -796,38 +797,31 @@ func (m *AudioModule) sub_451BE0(a1 *Struct576) int32 {
 	v1 = a1
 	v2p := a1.field_9
 	v3 = a1.timerGroup_46.Timers[0].Current >> 16
-	v4 := v2p.field_22.next
-	if v4 != &v2p.field_22 {
-		for {
-			v4p := v4.PromoteUnsafe().GetStruct576()
-			v5 = int32((v4p.timerGroup_46.Timers[0].Current >> 16) - v3)
-			if v5 < 0 {
-				v5 = int32(v3 - (v4p.timerGroup_46.Timers[0].Current >> 16))
+	for v4 := v2p.field_22.next; v4 != &v2p.field_22; v4 = v4.next {
+		v4p := v4.PromoteUnsafe().GetStruct576()
+		v5 = int32((v4p.timerGroup_46.Timers[0].Current >> 16) - v3)
+		if v5 < 0 {
+			v5 = int32(v3 - (v4p.timerGroup_46.Timers[0].Current >> 16))
+		}
+		if uint32(v5) >= (v2p.field_4.Current>>16)/10 {
+			if v4p.timerGroup_46.Timers[0].Current>>16 < v3 {
+				break
 			}
-			if uint32(v5) >= (v2p.field_4.Current>>16)/10 {
-				if v4p.timerGroup_46.Timers[0].Current>>16 < v3 {
+		} else {
+			v6 = int32(v4p.field_7)
+			if int32(v2p.field_1)&0x10 != 0 {
+				if v6 != 0 {
 					break
 				}
-			} else {
-				v6 = int32(*(*uint32)(&v4p.field_7))
-				if int32(v2p.field_1)&0x10 != 0 {
-					if v6 != 0 {
-						break
-					}
-				} else if v6 == 0 {
-					break
-				}
-			}
-			v4 = v4.next
-			if v4 == &v2p.field_22 {
+			} else if v6 == 0 {
 				break
 			}
 		}
-		v1 = a1
 	}
+
 	v7 := &v1.field_3.ListElement
 	v1.field_3.Init_425770()
-	v4.Append_4258E0(v7)
+	v2p.field_22.Append_4258E0(v7)
 	result = int32(v2p.field_14)
 	v9 = int32(v2p.field_13 + 1)
 	v2p.field_13 = uint32(v9)
@@ -980,8 +974,7 @@ func (m *AudioModule) sub_4BD710(a1 *Struct84) *Struct84Field6 {
 }
 
 func (m *AudioModule) Sub_4526D0(a1p *Struct312) int32 {
-	var a1 uintptr = uintptr(unsafe.Pointer(a1p))
-	*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(a1 + 152))) + 28))) = 4
+	*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1p)) + 152)) + 28))) = 4
 	return 0
 }
 
@@ -1010,10 +1003,10 @@ func (m *AudioModule) sub_4BD650(a1 int32) int32 {
 }
 
 func (m *AudioModule) sub_4BD660(a1p *Struct84) int32 {
-	var result = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) = uint32(result)
+	var result = int32(*(*uint32)(unsafe.Pointer(&a1p.field_3)) - 1)
+	*(*uint32)(unsafe.Pointer(&a1p.field_3)) = uint32(result)
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) = 0
+		*(*uint32)(unsafe.Pointer(&a1p.field_3)) = 0
 	}
 	return result
 }
@@ -1055,14 +1048,13 @@ func (m *AudioModule) Sub_452E10(a1 int32, a2 int32, a3 int32) {
 		return
 	}
 	res2 := m.Nox_xxx_draw_452300(res1)
-	v4 := res2
 	if res2 == nil {
 		return
 	}
 	m.Sub_452EE0(res2, a2)
-	m.Sub_452F80(v4, a3)
-	v4.field_75 = 2
-	m.sub_452510(v4)
+	m.Sub_452F80(res2, a3)
+	res2.field_75 = 2
+	m.sub_452510(res2)
 }
 
 func (m *AudioModule) Sub_4BDB30(a1 *Struct312) {
@@ -1070,7 +1062,6 @@ func (m *AudioModule) Sub_4BDB30(a1 *Struct312) {
 }
 
 func (m *AudioModule) Sub_4BD720(a1p *Struct264) *Struct312 {
-	var v1 *uint32
 	v1pp, _ := alloc.Calloc(1, 0x138)
 	v1p := (*Struct312)(v1pp)
 	alloc.Memset(unsafe.Pointer(v1p), 0, 0x138)
@@ -1083,9 +1074,7 @@ func (m *AudioModule) Sub_4BD720(a1p *Struct264) *Struct312 {
 	if ccall.CallIntPtr(a1p.field_64.field_1, unsafe.Pointer(v1p)) == 0 {
 		return v1p
 	}
-	if v1 != nil {
-		m.Sub_4BD7A0(v1p)
-	}
+	m.Sub_4BD7A0(v1p)
 	return nil
 }
 
@@ -1197,8 +1186,8 @@ func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p *Struct84Field6) {
 		v2 := m.sub_487C80(a2p)
 		a1p.field_73 = v2
 		if v2 != nil {
-			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v2.field_3))))
-			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v2.field_4)))))
+			a1p.field_74 = v2.field_3
+			v3 = int32(v2.field_4)
 			a1p.field_75 = uint32(v3)
 			a1p.field_76 = uint32(v3)
 			a2p.field_0 = 0
@@ -1282,7 +1271,6 @@ func (m *AudioModule) Sub_4873C0(a3p *Struct264) int32 {
 	var (
 		v3  int64
 		v11 *timer.TimerGroup
-		v15 *timer.TimerGroup
 		v17 bool
 	)
 	if a3p.field_53 != 0 {
@@ -1301,7 +1289,6 @@ func (m *AudioModule) Sub_4873C0(a3p *Struct264) int32 {
 		}
 
 		v11 = &a3p.TimerGroup_22
-		v15 = &a3p.TimerGroup_22
 		a3p.TimerGroup_22.Update()
 
 		if a3p.field_46 != nil {
@@ -1313,24 +1300,15 @@ func (m *AudioModule) Sub_4873C0(a3p *Struct264) int32 {
 		}
 		a3p.field_62 = v3
 
-		v12 := a3p.field_50.next
-		if v12 != &a3p.field_50 {
-			for {
-				v13 := v12.next
-				v12p := v12.PromoteUnsafe()
-				if (v12p.field_31&1) != 0 && v12p.field_72 != nil {
-					v12p.timerGroup_4.Update()
-					if v17 || v12p.timerGroup_4.IsUpdated() || (v12p.field_29 != nil && v12p.field_29.IsUpdated()) || (v12p.field_28 != nil && v12p.field_28.IsUpdated()) {
-						m.sub_4BD840(v12p)
-						ccall.CallVoidPtr(v12p.field_43.field_8, unsafe.Pointer(v12p))
-					}
-				}
-				v12 = v13
-				if v13 == &a3p.field_50 {
-					break
+		for v12 := a3p.field_50.next; v12 != &a3p.field_50; v12 = v12.next {
+			v12p := v12.PromoteUnsafe()
+			if (v12p.field_31&1) != 0 && v12p.field_72 != nil {
+				v12p.timerGroup_4.Update()
+				if v17 || v12p.timerGroup_4.IsUpdated() || (v12p.field_29 != nil && v12p.field_29.IsUpdated()) || (v12p.field_28 != nil && v12p.field_28.IsUpdated()) {
+					m.sub_4BD840(v12p)
+					ccall.CallVoidPtr(v12p.field_43.field_8, unsafe.Pointer(v12p))
 				}
 			}
-			v11 = v15
 		}
 		v14 := a3p.field_46
 		if v14 != nil {
