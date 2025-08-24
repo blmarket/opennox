@@ -9,7 +9,9 @@ import (
 var _ = [1]struct{}{}[36-unsafe.Sizeof(AudioStructYyy{})]
 
 type AudioStructYyy struct {
-	Field0  [32]byte
+	Field0  [24]byte
+	Field24 uint32
+	Field28 uint32
 	Field32 uint32
 }
 
