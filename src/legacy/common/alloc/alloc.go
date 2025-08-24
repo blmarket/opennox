@@ -231,5 +231,6 @@ func Strcmp(str1, str2 unsafe.Pointer) int {
 }
 
 func Strnicmp(str1, str2 unsafe.Pointer, size int) int {
+	// FIXME: Maybe not compatible with windows? Should use _strnicmp instead
 	return int(C.strncasecmp((*C.char)(str1), (*C.char)(str2), (C.size_t)(size)))
 }
