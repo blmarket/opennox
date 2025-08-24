@@ -1420,10 +1420,9 @@ func (m *AudioModule) Sub_431270() {
 	}
 }
 
-func (m *AudioModule) Sub_487680(lpMem_ *Struct264) {
-	var lpMem = unsafe.Pointer(lpMem_)
-	m.sub_4876A0((*Struct264)(unsafe.Pointer((**uint32)(lpMem))))
-	m.sub_4872C0((*Struct264)(lpMem))
+func (m *AudioModule) Sub_487680(a1 *Struct264) {
+	m.sub_4876A0(a1)
+	m.sub_4872C0(a1)
 }
 
 func (m *AudioModule) Sub_431290() {
