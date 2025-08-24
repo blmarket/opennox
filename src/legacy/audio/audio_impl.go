@@ -1010,10 +1010,10 @@ func (m *AudioModule) sub_4BD650(a1 int32) int32 {
 }
 
 func (m *AudioModule) sub_4BD660(a1p *Struct84) int32 {
-	var result = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 12))) - 1)
-	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 12))) = uint32(result)
+	var result = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) - 1)
+	*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) = uint32(result)
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))) + 12))) = 0
+		*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&a1p.field_3)))) = 0
 	}
 	return result
 }
@@ -1130,8 +1130,8 @@ func (m *AudioModule) Sub_4BD8C0(a1p *Struct312) int32 {
 			v3 := a1p.field_73.NextSafe_425940()
 			a1p.field_73 = v3
 			if v3 != nil {
-				a1p.field_74 = *(*uint32)(unsafe.Pointer(unsafe.Add(unsafe.Pointer(v3), 12)))
-				v4 = int32(*(*uint32)(unsafe.Pointer(unsafe.Add(unsafe.Pointer(v3), 16))))
+				a1p.field_74 = *(*uint32)(unsafe.Pointer(unsafe.Pointer(&v3.field_3)))
+				v4 = int32(*(*uint32)(unsafe.Pointer(unsafe.Pointer(&v3.field_4))))
 				a1p.field_75 = uint32(v4)
 				a1p.field_76 = uint32(v4)
 				return 0
@@ -1197,8 +1197,8 @@ func (m *AudioModule) Sub_4BDB90(a1p *Struct312, a2p *Struct84Field6) {
 		v2 := m.sub_487C80(a2p)
 		a1p.field_73 = v2
 		if v2 != nil {
-			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(v2)) + 12))
-			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(v2)) + 16)))
+			a1p.field_74 = *(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v2.field_3))))
+			v3 = int32(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&v2.field_4)))))
 			a1p.field_75 = uint32(v3)
 			a1p.field_76 = uint32(v3)
 			a2p.field_0 = 0
@@ -2003,8 +2003,8 @@ func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3p *Struct84Fie
 	var v3p *AudioStructYyy = m.Sub_4866D0(a1p, a2)
 
 	a3p.field_0 = 4
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*2)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*6))
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&1) != 0) + 1)
+	*(*uint32)(unsafe.Pointer(&a3p.field_2)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*6))
+	*(*uint32)(unsafe.Pointer(&a3p.field_3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&1) != 0) + 1)
 	*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*6)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*8))
 	if *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&8 != 0 {
 		result = 2
