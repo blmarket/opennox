@@ -974,8 +974,7 @@ func (m *AudioModule) sub_4BD710(a1 *Struct84) *Struct84Field6 {
 }
 
 func (m *AudioModule) Sub_4526D0(a1p *Struct312) int32 {
-	u := *(*uintptr)(unsafe.Pointer(&a1p.field_38))
-	*(*uint32)(unsafe.Pointer(u + 28)) = 4
+	a1p.field_38.field_7 = 4
 	return 0
 }
 
@@ -1004,10 +1003,10 @@ func (m *AudioModule) sub_4BD650(a1 int32) int32 {
 }
 
 func (m *AudioModule) sub_4BD660(a1p *Struct84) int32 {
-	var result = int32(*(*uint32)(unsafe.Pointer(&a1p.field_3)) - 1)
-	*(*uint32)(unsafe.Pointer(&a1p.field_3)) = uint32(result)
+	var result = int32(a1p.field_3) - 1
+	a1p.field_3 = uint32(result)
 	if result < 0 {
-		*(*uint32)(unsafe.Pointer(&a1p.field_3)) = 0
+		a1p.field_3 = 0
 	}
 	return result
 }
