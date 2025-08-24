@@ -1305,68 +1305,9 @@ typedef struct timerGroup {
 
 _Static_assert(sizeof(timerGroup) == 96, "wrong size of timerGroup structure!");
 
-typedef struct struct200 {
-	uint32_t field_0; // 0
-	uint32_t field_1; // 1
-	uint32_t field_2; // 2
-	uint32_t field_3; // 3
-	timer field_4;
-	uint32_t field_12; // 12
-	uint32_t field_13; // 13
-	uint32_t field_14; // 14
-	uint32_t field_15; // 15
-	uint32_t field_16; // 16
-	uint32_t field_17; // 17
-	uint32_t field_18; // 18
-	uint32_t field_19; // 19
-	uint32_t field_20; // 20
-	uint32_t snd_name; // 21 - sound name field accessed in sub_451850
-	nox_list_item_t field_22;
-	uint32_t field_25; // 25
-	uint32_t field_26; // 26
-	uint32_t field_27; // 26
-	nox_list_item_t field_28;
-	uint32_t field_31;     // 26
-	uint16_t field_32[32]; // 32-48
-	uint32_t field_48;     // 48
-	uint32_t field_49;     // 49
-} struct200;
+typedef struct struct200 struct200;
 
-_Static_assert(sizeof(struct200) == 200, "wrong size of struct200 structure!");
-
-typedef struct struct576 {
-	struct struct576* next; // 0
-	struct struct576* prev; // 1
-	nox_list_item_t* head;  // 2
-	uint32_t field_3;       // 3
-	uint32_t field_4;       // 4
-	uint32_t field_5;       // 5
-	uint8_t field_6;        // 6
-	uint8_t field_6_1;      // 6 - stores a1 parameter
-	uint8_t field_6_2;      // 6 - stores a2 parameter
-	uint8_t field_6_3;      // 6 - stores a3 parameter
-	uint32_t field_7;       // 7
-	uint32_t field_8;       // 8
-	struct200* field_9;     // 9 - stores a1 parameter
-	void* field_10[32];     // 10-41
-	uint32_t field_42;      // 42 - contains length of field_10 array
-	uint32_t field_43;      // 43
-	uint32_t field_44;      // 44 - looks like a pointer to some struct
-	uint32_t field_45;      // 45
-	timerGroup timerGroup_46;
-	uint32_t field_70;      // 70 - stores incrementing counter
-	uint32_t field_71;      // 71
-	uint64_t field_72;      // 72 - 64 bit
-	uint32_t field_74;      // 74 - looks like a pointer to some struct
-	uint32_t field_75;      // 75
-	uint32_t field_76[32];  // 76-107
-	uint32_t field_108;     // 108
-	uint32_t field_109;     // 109
-	uint32_t field_110[32]; // 110-141
-	uint32_t field_142;     // 142
-	uint32_t field_143;     // 143
-} struct576;
-_Static_assert(sizeof(struct576) == 576, "wrong size of struct576 structure!");
+typedef struct struct576 struct576;
 
 typedef struct struct264 struct264;
 
