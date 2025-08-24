@@ -3,7 +3,7 @@ package audio
 import (
 	"log"
 	"math"
-	"unsafe"
+	unsafe "unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
@@ -334,7 +334,7 @@ func (m *AudioModule) sub_451F30(a1p *Struct576, a2 int32) int32 {
 	v2 = int32(a1p.field_42)
 	result = int32(*(*uint32)(unsafe.Pointer(&a1p.field_10[v2])))
 	if result != 0 {
-		m.sub_4BD650((*(**Struct84)(unsafe.Pointer(&a1p.field_10[v2]))))
+		m.sub_4BD650(*(**Struct84)(unsafe.Pointer(&a1p.field_10[v2])))
 		result = int32(a1p.field_42 + 1)
 		a1p.field_42 = uint32(result)
 	}
@@ -994,7 +994,7 @@ func (m *AudioModule) sub_452FA0(a1 int32) int32 {
 }
 
 func (m *AudioModule) sub_4BD650(a1p *Struct84) {
-	*(*uint32)(unsafe.Pointer((&a1p.field_3)))++
+	*(*uint32)(unsafe.Pointer(&a1p.field_3))++
 }
 
 func (m *AudioModule) sub_4BD660(a1p *Struct84) int32 {
@@ -1217,19 +1217,15 @@ func (m *AudioModule) Sub_486EF0() {
 	}
 }
 
-func (m *AudioModule) Sub_4BDA80(a1 *Struct312) int32 {
-	var (
-		result int32 = 0
-	)
+func (m *AudioModule) Sub_4BDA80(a1 *Struct312) {
 	if int32(a1.field_30.field_1)&5 != 0 {
 		ccall.CallVoidPtr(a1.field_43.field_4, unsafe.Pointer(a1))
 	}
 	result2 := a1.field_37
 	if result2 != nil {
-		result = int32(ccall.CallIntPtr(result2, unsafe.Pointer(a1)))
+		ccall.CallIntPtr(result2, unsafe.Pointer(a1))
 	}
 	*(*uint32)(unsafe.Pointer(&a1.field_72)) = 0
-	return result
 }
 
 func (m *AudioModule) sub_486E90(a1 *Struct312) int32 {
@@ -1336,7 +1332,7 @@ func (m *AudioModule) Sub_4BDB40(a2p *Struct312) int32 {
 	}
 	a2p.timerGroup_4.Update()
 	m.sub_4BD840(a2p)
-	result = int32(ccall.CallIntPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a2p.field_43)) + 12))), unsafe.Pointer(a2p)))
+	result = int32(ccall.CallIntPtr(a2p.field_43.field_3, unsafe.Pointer(a2p)))
 	if result == 0 {
 		a2p.field_30.field_1 |= 1
 	}
@@ -1352,8 +1348,8 @@ func (m *AudioModule) sub_4871C0(a1p *Struct88, a2 int32, a3 *[7]uint32) *Struct
 	v4m.field_6 = uint32(a2)
 	v4m.field_5 = a1p
 	v4m.field_4 = 0
-	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_4))))))++
-	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(&a1p.field_6[a2])))))) = uint32(uintptr(unsafe.Pointer(v4m)))
+	a1p.field_4++
+	a1p.field_6[a2] = v4m
 	v4m.field_64 = v3.field_9
 	v4m.field_50.Clear_425760()
 	v4m.TimerGroup_22.Init()
@@ -1436,23 +1432,19 @@ func (m *AudioModule) Sub_431290() {
 	}
 }
 
-func (m *AudioModule) sub_487970(a1_ *Struct264, a2 int32) *Struct312 {
+func (m *AudioModule) sub_487970(a1p *Struct264, a2 int32) {
 	var (
-		a1     = int32(uintptr(unsafe.Pointer(a1_)))
-		a1x    *Struct312
-		result *Struct312
-		v3     *Struct312
-		v4     int32
+		a1x *Struct312
+		v3  *Struct312
+		v4  int32
 	)
-	result = m.sub_4877D0((*Struct264)(unsafe.Pointer(uintptr(a1))), &a1x)
-	v3 = result
-	if result != nil {
+	v3 = m.sub_4877D0(a1p, &a1x)
+	if v3 != nil {
 		v4 = a2
 		for {
-			result = m.sub_4877F0(&a1x)
-			v5 := result
+			v5 := m.sub_4877F0(&a1x)
 			if v4 == -1 || v3.field_3 == v4 {
-				result = (*Struct312)(unsafe.Pointer(uintptr(m.Sub_4BDA80(v3))))
+				m.Sub_4BDA80(v3)
 			}
 			v3 = v5
 			if v5 == nil {
@@ -1460,7 +1452,6 @@ func (m *AudioModule) sub_487970(a1_ *Struct264, a2 int32) *Struct312 {
 			}
 		}
 	}
-	return result
 }
 
 func (m *AudioModule) sub_487590(a1_ *Struct264, a2 *[7]uint32) int32 {
@@ -1917,7 +1908,7 @@ func (m *AudioModule) Sub_487D00(a1p *[7]uint32) int32 {
 		v1     int32
 		result int32
 	)
-	v1 = int32((a1p[1]))
+	v1 = int32(a1p[1])
 	result = int32(a1p[2] * a1p[3] * a1p[4])
 	a1p[5] = uint32(result)
 	if v1 == 1 {
@@ -1968,15 +1959,15 @@ func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3p *Struct84Fie
 	a3p.field_0 = 4
 	a3p.field_2 = *(*uint32)(unsafe.Pointer(&v3p.Field24))
 	a3p.field_3 = uint32(bool2int32((*(*uint32)(unsafe.Pointer(&v3p.Field28))&1) != 0) + 1)
-	*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*6)) = *(*uint32)(unsafe.Pointer(&v3p.Field32))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*6)) = *(*uint32)(unsafe.Pointer(&v3p.Field32))
 	if *(*uint32)(unsafe.Pointer(&v3p.Field28))&8 != 0 {
 		result = 2
-		*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*1)) = 2
-		*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*4)) = 2
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*1)) = 2
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*4)) = 2
 	} else {
-		*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*1)) = 0
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*1)) = 0
 		result = bool2int32((*(*uint32)(unsafe.Pointer(&v3p.Field28))&4) != 0) + 1
-		*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*4)) = uint32(result)
+		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*4)) = uint32(result)
 	}
 	return result
 }
@@ -2065,7 +2056,7 @@ func (m *AudioModule) Sub_4BD470(a1 *Struct28[[0x2000]byte], a2 int32) *Struct84
 		}
 		v10 = v10 - v9
 		if v10 == 0 {
-			m.Sub_486AA0((a1.field_0), *(*int32)(unsafe.Pointer(&v5p.field_4)), &v5p.field_14)
+			m.Sub_486AA0(a1.field_0, *(*int32)(unsafe.Pointer(&v5p.field_4)), &v5p.field_14)
 			Sub_425900(&a1.field_3, &v5p.ListElement)
 			v5p.field_5 = 1
 			m.Sub_486E00(a1.field_0)
@@ -2138,17 +2129,17 @@ func (m *AudioModule) Sub_486B60(a1p *AudioStructXxx, a2 int32) int32 {
 	if a1p.Field276 == 0 {
 		return v12
 	}
-	alloc.Strcpy((unsafe.Pointer(&v15[3])), (unsafe.Pointer(&a1p.Path2_8)))
-	alloc.Strcat((unsafe.Pointer(&v15[3])), (unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p)))))))
-	alloc.Strcat((unsafe.Pointer(&v15[3])), unsafe.Pointer(alloc.InternCString(".wav")))
-	v6 = m.nox_fs_open((unsafe.Pointer(&v15[3])))
+	alloc.Strcpy(unsafe.Pointer(&v15[3]), unsafe.Pointer(&a1p.Path2_8))
+	alloc.Strcat(unsafe.Pointer(&v15[3]), unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))))))
+	alloc.Strcat(unsafe.Pointer(&v15[3]), unsafe.Pointer(alloc.InternCString(".wav")))
+	v6 = m.nox_fs_open(unsafe.Pointer(&v15[3]))
 	v7 = v6
 	v8 = 0
 	*(*uint32)(unsafe.Pointer(&a1p.Field272)) = uint32(uintptr(v6))
 	if v6 == nil {
 		return v12
 	}
-	if m.nox_binfile_fread_raw_40ADD0((unsafe.Pointer(&v15[0])), 0xC, 1, v6) != 1 || uint32(v15[0]) != 1179011410 || uint32(v15[2]) != 1163280727 {
+	if m.nox_binfile_fread_raw_40ADD0(unsafe.Pointer(&v15[0]), 0xC, 1, v6) != 1 || uint32(v15[0]) != 1179011410 || uint32(v15[2]) != 1163280727 {
 		log.Printf("error: '%s' is bad - cannot read\n", &v15[3])
 		if *(*uint32)(unsafe.Pointer(&a1p.Field272)) != 0 {
 			m.nox_fs_close(*(*unsafe.Pointer)(&a1p.Field272))
