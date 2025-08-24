@@ -10,7 +10,7 @@ type Struct88 struct {
 	field_0 ListElement[Struct88]
 	field_3 *Struct587000_94032
 	field_4 uint32
-	field_5 uint32
+	field_5 int32
 	field_6 [16]*Struct264
 }
 

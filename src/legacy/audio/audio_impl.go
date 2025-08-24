@@ -974,7 +974,8 @@ func (m *AudioModule) sub_4BD710(a1 *Struct84) *Struct84Field6 {
 }
 
 func (m *AudioModule) Sub_4526D0(a1p *Struct312) int32 {
-	*(*uint32)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(a1p)) + 152)) + 28))) = 4
+	u := *(*uintptr)(unsafe.Pointer(&a1p.field_38))
+	*(*uint32)(unsafe.Pointer(u + 28)) = 4
 	return 0
 }
 
@@ -1646,7 +1647,7 @@ func (m *AudioModule) sub_487360(a1 int32, a2 **Struct88, a3 *int32) {
 	)
 	result = m.Sub_4870E0(&v6)
 	for i = a1; result != nil; result = m.Sub_487100(&v6) {
-		v5 = *(*int32)(unsafe.Add(unsafe.Pointer(result), 4*5))
+		v5 = *(*int32)(unsafe.Pointer(&result.field_5))
 		if i < v5 {
 			break
 		}
@@ -1891,7 +1892,7 @@ func createFreeList_4BD280[T any](a1 int32) *FreeList[T] {
 		v4 := &result.item0
 		result.first = &result.item0
 		for i := int32(0); i+1 < a1; i++ {
-			v5 := (*FreeListItem[T])(unsafe.Add(unsafe.Pointer(v4), v2))
+			v5 := (*FreeListItem[T])(unsafe.Add(unsafe.Pointer(v4), v2)) //nolint: unsafeadd
 			v4.next = v5
 			v4 = v5
 		}
