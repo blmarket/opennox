@@ -2145,11 +2145,11 @@ func (m *AudioModule) Sub_486B60(a1p *AudioStructXxx, a2 int32) int32 {
 	m.Sub_486E00(a1p)
 	v3 = *(*unsafe.Pointer)(unsafe.Pointer(&a1p.Bagfile268))
 	*(*uint32)(unsafe.Pointer(&a1p.Field280)) = uint32(uintptr(unsafe.Pointer(v3)))
-	*(*uint32)(unsafe.Pointer(&a1p.Field284)) = *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 20)))
-	if m.nox_fs_fseek(v3, int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 16)))), 0 /* stdio.SEEK_SET */) != 0 {
+	*(*uint32)(unsafe.Pointer(&a1p.Field284)) = *(*uint32)(unsafe.Pointer(&v2p.Field20))
+	if m.nox_fs_fseek(v3, int32(*(*uint32)(unsafe.Pointer(&v2p.Field16))), 0 /* stdio.SEEK_SET */) != 0 {
 		v12 = 0
 	}
-	if *(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 20))) == 0 {
+	if *(*uint32)(unsafe.Pointer(&v2p.Field20)) == 0 {
 		v12 = 0
 	}
 	if *(*uint32)(unsafe.Pointer(&a1p.Field276)) == 0 {
@@ -2193,16 +2193,16 @@ func (m *AudioModule) Sub_486B60(a1p *AudioStructXxx, a2 int32) int32 {
 	}
 	v8 = int32(*(*uint32)(unsafe.Pointer(&v13[4])))
 LABEL_18:
-	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 28))) = 2
+	*(*uint32)(unsafe.Pointer(&v2p.Field28)) = 2
 	if int32(*(*uint16)(unsafe.Pointer(&v14[12])))/int32(*(*uint16)(unsafe.Pointer(&v14[2]))) == 2 {
-		*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 28))) = 6
+		*(*uint32)(unsafe.Pointer(&v2p.Field28)) = 6
 	}
 	if int32(*(*uint16)(unsafe.Pointer(&v14[2]))) == 2 {
-		v9 = int32(*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 28))))
+		v9 = int32(*(*uint32)(unsafe.Pointer(&v2p.Field28)))
 		*((*uint8)(unsafe.Pointer(&v9))) = uint8(int8(v9 | 1))
-		*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 28))) = uint32(v9)
+		*(*uint32)(unsafe.Pointer(&v2p.Field28)) = uint32(v9)
 	}
-	*(*uint32)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v2p))) + 24))) = *(*uint32)(unsafe.Pointer(&v14[4]))
+	*(*uint32)(unsafe.Pointer(&v2p.Field24)) = *(*uint32)(unsafe.Pointer(&v14[4]))
 	v10 = int32(*(*uint32)(unsafe.Pointer(&a1p.Field272)))
 	*(*uint32)(unsafe.Pointer(&a1p.Field284)) = uint32(v8)
 	*(*uint32)(unsafe.Pointer(&a1p.Field280)) = uint32(v10)
