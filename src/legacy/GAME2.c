@@ -756,16 +756,6 @@ int nox_gui_getQuestStage_450B10() { return *getMemU32Ptr(0x5D4594, 832468); }
 //----- (00452270) --------------------------------------------------------
 
 //----- (004522A0) --------------------------------------------------------
-int sub_4522A0(int a1) {
-	int result; // eax
-
-	if (dword_5d4594_1045432) {
-		result = *(uint32_t*)(a1 + 64);
-	} else {
-		result = 0;
-	}
-	return result;
-}
 
 //----- (00452300) --------------------------------------------------------
 
@@ -1109,16 +1099,6 @@ int sub_452BD0(int a1, char* a2) {
 //----- (00452E90) --------------------------------------------------------
 
 //----- (00452EB0) --------------------------------------------------------
-int sub_452EB0(int* a1) {
-	int result; // eax
-
-	result = *a1;
-	if (*a1 && (a1[2] != *(uint32_t*)(result + 36) || a1[1] != *(uint32_t*)(result + 280))) {
-		result = 0;
-		*a1 = 0;
-	}
-	return result;
-}
 
 //----- (00452EE0) --------------------------------------------------------
 
@@ -3487,79 +3467,6 @@ int nox_xxx_spriteSetActiveMB_45A990_drawable(int a1) {
 }
 
 //----- (0045A9B0) --------------------------------------------------------
-void sub_45A9B0(nox_drawable* a1p, nox_drawable* a2p) {
-	int a1 = a1p;
-	int a2 = a2p;
-	int v2;          // esi
-	int v3;          // ebp
-	char* v4;        // eax
-	char* v5;        // edi
-	int* result = 0; // eax
-	int v7;          // edi
-	int v8;          // ebx
-	int v9;          // eax
-	int v10;         // esi
-	long long v11;   // rax
-	int v12;         // eax
-	int* v13;        // esi
-	int* v14;        // edi
-	int* v15;        // edi
-	int v16;         // [esp+Ch] [ebp-Ch]
-	char* v17;       // [esp+10h] [ebp-8h]
-	int* v18;        // [esp+14h] [ebp-4h]
-
-	v2 = a1;
-	v3 = 0;
-	v16 = 0;
-	v4 = nox_xxx_draw_452270(*(uint32_t*)(a1 + 492));
-	v5 = v4;
-	v17 = v4;
-	result = (int*)nox_draw_getViewport_437250();
-	v18 = result;
-	if (v5 && result) {
-		if (*(uint32_t*)(a1 + 120) & 0x1000000 && !(*(uint8_t*)(a1 + 280) & 0xC)) {
-			v7 = *(uint32_t*)(a2 + 12) - *(uint32_t*)(a1 + 12);
-			v8 = *(uint32_t*)(a2 + 16) - *(uint32_t*)(a1 + 16);
-			v9 = sub_4522A0((int)v17);
-			v10 = v9;
-			if (v7 < v9 && v8 < v9 && v9 > 0) {
-				v11 = (long long)sqrt((double)(v8 * v8 + v7 * v7 + 1));
-				if ((int)v11 < v10) {
-					v12 = 100 * (v10 - (int)v11) / v10;
-					v3 = v12;
-					if (v12 <= 100) {
-						if (v12 < 0) {
-							v3 = 0;
-						}
-					} else {
-						v3 = 100;
-					}
-					v16 = 50 * (*(int*)(a1 + 12) - v18[6] - *v18) / (nox_win_width / 2);
-				}
-			}
-			v2 = a1;
-		}
-		v13 = (int*)(v2 + 496);
-		result = (int*)sub_452EB0(v13);
-		v14 = result;
-		if (v3) {
-			if (result) {
-				sub_452FE0((int)result, v16);
-				result = (int*)sub_452F50((int)v14, v3);
-			} else {
-				result = nox_xxx_draw_452300(v17);
-				v15 = result;
-				if (result) {
-					sub_452EE0((int)result, v3);
-					sub_452F80((int)v15, v16);
-					result = (int*)sub_452E90(v13, (int)v15);
-				}
-			}
-		} else if (result) {
-			result = (int*)sub_4523D0(result);
-		}
-	}
-}
 
 //----- (0045AB80) --------------------------------------------------------
 int nox_xxx_spriteSetFrameMB_45AB80(int a1, int a2) {

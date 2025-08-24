@@ -37,6 +37,7 @@ type AudioExterns struct {
 	Ptr_uint32_5d4594_1045448     *uint32
 	Ptr_uint32_587000_127000      *uint32
 	Ptr_uint32_5d4594_1193332     *uint32
+	Nox_win_width                 *int32
 }
 
 type AudioModule struct {
@@ -45,13 +46,13 @@ type AudioModule struct {
 
 	nox_platform_get_ticks func() uint64
 
-	// Better in separate module
 	nox_xxx_getSndName_40AF80         func(int) unsafe.Pointer
 	nox_common_randomIntMinMax_415FF0 func(int, int, unsafe.Pointer, int) int
 	nox_binfile_fread_raw_40ADD0      func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
 	nox_fs_close                      func(unsafe.Pointer)
 	nox_fs_fseek                      func(unsafe.Pointer, int32, int32) int32
 	nox_fs_open                       func(unsafe.Pointer) unsafe.Pointer
+	nox_draw_getViewport_437250       func() unsafe.Pointer
 }
 
 func NewAudioModule(
@@ -64,6 +65,7 @@ func NewAudioModule(
 	nox_fs_close func(unsafe.Pointer),
 	nox_fs_fseek func(unsafe.Pointer, int32, int32) int32,
 	nox_fs_open func(unsafe.Pointer) unsafe.Pointer,
+	nox_draw_getViewport_437250 func() unsafe.Pointer,
 ) *AudioModule {
 	return &AudioModule{
 		moduleName:                        moduleName,
@@ -75,5 +77,6 @@ func NewAudioModule(
 		nox_fs_close:                      nox_fs_close,
 		nox_fs_fseek:                      nox_fs_fseek,
 		nox_fs_open:                       nox_fs_open,
+		nox_draw_getViewport_437250:       nox_draw_getViewport_437250,
 	}
 }

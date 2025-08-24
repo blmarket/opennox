@@ -11,6 +11,8 @@ extern uint32_t dword_5d4594_1045432;
 extern uint32_t dword_5d4594_1045436;
 extern void* dword_587000_127004;
 extern void* dword_587000_155144;
+extern int nox_win_width;
+
 void* sub_425770(void* a1);
 void nox_common_list_append_4258E0(nox_list_item_t* list, nox_list_item_t* cur);
 nox_list_item_t* nox_common_list_getNext_425940(nox_list_item_t* list);
@@ -99,6 +101,7 @@ func initExterns() *audio.AudioExterns {
 		Dword_587000_155144:          (**audio.Struct587000_155144)(unsafe.Pointer(&C.dword_587000_155144)),
 		Dword_587000_127004:          (**timer.TimerGroup)(unsafe.Pointer(&C.dword_587000_127004)),
 		Dword_5d4594_805984:          (**audio.Struct264)(unsafe.Pointer(&C.dword_5d4594_805984)),
+		Nox_win_width:                (*int32)(&C.nox_win_width),
 
 		Sub_4873C0_ptr: unsafe.Pointer(C.sub_4873C0),
 		Sub_4BD8C0_ptr: unsafe.Pointer(C.sub_4BD8C0),
@@ -134,6 +137,8 @@ func initAudio(externs *audio.AudioExterns) {
 		return int32(nox_fs_fseek((*C.FILE)(a1), (C.long)(a2), int(a3)))
 	}, func(a1 unsafe.Pointer) unsafe.Pointer {
 		return unsafe.Pointer(nox_fs_open((*C.char)(a1)))
+	}, func() unsafe.Pointer {
+		return unsafe.Pointer(nox_draw_getViewport_437250())
 	})
 }
 

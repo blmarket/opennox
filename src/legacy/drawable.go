@@ -232,7 +232,7 @@ func Sub_49C520(dr *client.Drawable) int {
 	return int(C.sub_49C520((*nox_drawable)(dr.C())))
 }
 func Sub_45A9B0(a1, a2 *client.Drawable) {
-	C.sub_45A9B0((*nox_drawable)(a1.C()), (*nox_drawable)(a2.C()))
+	AudioModule.Sub_45A9B0(unsafe.Pointer(a1), unsafe.Pointer(a2))
 }
 func Nox_xxx_unitSpriteCheckAlly_4951F0(id int) bool {
 	return C.nox_xxx_unitSpriteCheckAlly_4951F0(C.int(id)) != 0
