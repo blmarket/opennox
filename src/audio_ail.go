@@ -307,7 +307,7 @@ func sub_4866F0(path1 string, path2 string) *audio.AudioStructXxx {
 					freeAudioStructXxx(p)
 					return nil
 				}
-				copy(arr[i].Field0[:], buf[:32])
+				alloc.Memcpy(unsafe.Pointer(&arr[i]), unsafe.Pointer(&buf), 32)
 				arr[i].Field32 = binary.LittleEndian.Uint32(buf[32:])
 			}
 		} else {
@@ -316,15 +316,13 @@ func sub_4866F0(path1 string, path2 string) *audio.AudioStructXxx {
 					freeAudioStructXxx(p)
 					return nil
 				}
-				copy(arr[i].Field0[:], buf[:32])
+				alloc.Memcpy(unsafe.Pointer(&arr[i]), unsafe.Pointer(&buf), 32)
 				arr[i].Field32 = 0
 			}
 		}
 	}
 	sort.Slice(arr, func(i, j int) bool {
-		s1, s2 := alloc.GoStringS(arr[i].Field0[:]), alloc.GoStringS(arr[j].Field0[:])
-		s1, s2 = strings.ToLower(s1), strings.ToLower(s2)
-		return s1 < s2
+		return alloc.Strnicmp(unsafe.Pointer(&arr[i]), unsafe.Pointer(&arr[j]), 32) < 0
 	})
 	p.Field276 = 0
 	if path2 != "" {

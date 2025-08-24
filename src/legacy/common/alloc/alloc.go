@@ -229,3 +229,7 @@ func Strcmp(str1, str2 unsafe.Pointer) int {
 	logMemReadString(str2, n2+1)
 	return int(C.strcmp((*C.char)(str1), (*C.char)(str2)))
 }
+
+func Strnicmp(str1, str2 unsafe.Pointer, size int) int {
+	return int(C.strncasecmp((*C.char)(str1), (*C.char)(str2), (C.size_t)(size)))
+}
