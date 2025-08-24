@@ -2229,10 +2229,10 @@ func (m *AudioModule) Sub_452EB0(a1 *int32) int32 {
 	return result
 }
 
-func (m *AudioModule) Sub_4522A0(a1 int32) int32 {
+func (m *AudioModule) Sub_4522A0(a1p *Struct200) int32 {
 	var result int32
 	if *m.Externs.Dword_5d4594_1045432 != 0 {
-		result = int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 64))))
+		result = int32(a1p.field_16)
 	} else {
 		result = 0
 	}
@@ -2245,8 +2245,6 @@ func (m *AudioModule) Sub_45A9B0(a1p, a2p unsafe.Pointer /* *nox_drawable */) {
 		a2     int32 = int32(uintptr(unsafe.Pointer(a2p)))
 		v2     int32
 		v3     int32
-		v4     *byte
-		v5     *byte
 		result *int32 = nil
 		v7     int32
 		v8     int32
@@ -2258,21 +2256,18 @@ func (m *AudioModule) Sub_45A9B0(a1p, a2p unsafe.Pointer /* *nox_drawable */) {
 		v14    *int32
 		v15    *int32
 		v16    int32
-		v17    *byte
 		v18    *int32
 	)
 	v2 = a1
 	v3 = 0
 	v16 = 0
-	v4 = (*byte)(unsafe.Pointer(m.Nox_xxx_draw_452270(int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 492)))))))
-	v5 = v4
-	v17 = v4
+	v4p := m.Nox_xxx_draw_452270(int32(*(*uint32)(unsafe.Pointer(uintptr(a1 + 492)))))
 	v18 = (*int32)(unsafe.Pointer(m.nox_draw_getViewport_437250()))
-	if v5 != nil && v18 != nil {
+	if v4p != nil && v18 != nil {
 		if *(*uint32)(unsafe.Pointer(uintptr(a1 + 120)))&0x1000000 != 0 && (int32(*(*uint8)(unsafe.Pointer(uintptr(a1 + 280))))&0xC) == 0 {
 			v7 = int32(*(*uint32)(unsafe.Pointer(uintptr(a2 + 12))) - *(*uint32)(unsafe.Pointer(uintptr(a1 + 12))))
 			v8 = int32(*(*uint32)(unsafe.Pointer(uintptr(a2 + 16))) - *(*uint32)(unsafe.Pointer(uintptr(a1 + 16))))
-			v9 = m.Sub_4522A0(int32(uintptr(unsafe.Pointer(v17))))
+			v9 = m.Sub_4522A0(v4p)
 			v10 = v9
 			if v7 < v9 && v8 < v9 && v9 > 0 {
 				v11 = int64(math.Sqrt(float64(v8*v8 + v7*v7 + 1)))
@@ -2299,7 +2294,7 @@ func (m *AudioModule) Sub_45A9B0(a1p, a2p unsafe.Pointer /* *nox_drawable */) {
 				m.Sub_452FE0((*Struct576)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(result)))))), v16)
 				result = (*int32)(unsafe.Pointer(uintptr(m.Sub_452F50((*Struct576)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(v14)))))), v3))))
 			} else {
-				result = (*int32)(unsafe.Pointer(m.Nox_xxx_draw_452300((*Struct200)(unsafe.Pointer(v17)))))
+				result = (*int32)(unsafe.Pointer(m.Nox_xxx_draw_452300(v4p)))
 				v15 = result
 				if result != nil {
 					m.Sub_452EE0((*Struct576)(unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(result)))))), v3)
