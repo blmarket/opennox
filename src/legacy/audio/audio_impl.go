@@ -3,7 +3,7 @@ package audio
 import (
 	"log"
 	"math"
-	unsafe "unsafe"
+	"unsafe"
 
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/ccall"
