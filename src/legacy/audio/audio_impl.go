@@ -1134,10 +1134,10 @@ func (m *AudioModule) Sub_4BD940(a1p *Struct312) int32 {
 	}
 	v1 := a1p.field_35
 	if v1 != nil {
-		ccall.CallVoidPtr(v1, unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))))))
+		ccall.CallVoidPtr(v1, unsafe.Pointer(a1p))
 	}
 	if *(*uint32)(unsafe.Pointer(&a1p.field_72)) != 0 {
-		ccall.CallVoidPtr(*(*unsafe.Pointer)(unsafe.Pointer(uintptr(*(*uint32)(unsafe.Pointer(&a1p.field_43)) + 36))), unsafe.Pointer(uintptr(int32(uintptr(unsafe.Pointer(a1p))))))
+		ccall.CallVoidPtr(a1p.field_43.field_9, unsafe.Pointer(a1p))
 	}
 	return 0
 }
@@ -1959,15 +1959,15 @@ func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3p *Struct84Fie
 	a3p.field_0 = 4
 	a3p.field_2 = *(*uint32)(unsafe.Pointer(&v3p.Field24))
 	a3p.field_3 = uint32(bool2int32((*(*uint32)(unsafe.Pointer(&v3p.Field28))&1) != 0) + 1)
-	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*6)) = *(*uint32)(unsafe.Pointer(&v3p.Field32))
+	*(*uint32)(unsafe.Pointer(&a3p.field_6)) = *(*uint32)(unsafe.Pointer(&v3p.Field32))
 	if *(*uint32)(unsafe.Pointer(&v3p.Field28))&8 != 0 {
 		result = 2
-		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*1)) = 2
-		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*4)) = 2
+		*(*uint32)(unsafe.Pointer(&a3p.field_1)) = 2
+		*(*uint32)(unsafe.Pointer(&a3p.field_4)) = 2
 	} else {
-		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*1)) = 0
+		*(*uint32)(unsafe.Pointer(&a3p.field_1)) = 0
 		result = bool2int32((*(*uint32)(unsafe.Pointer(&v3p.Field28))&4) != 0) + 1
-		*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*4)) = uint32(result)
+		*(*uint32)(unsafe.Pointer(&a3p.field_4)) = uint32(result)
 	}
 	return result
 }

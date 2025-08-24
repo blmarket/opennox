@@ -17,6 +17,7 @@ type Struct264Field64 struct {
 	field_6 unsafe.Pointer
 	field_7 unsafe.Pointer
 	field_8 unsafe.Pointer // function pointer takes *Struct312 as an argument
+	field_9 unsafe.Pointer // func(*Struct312)
 }
 
 type Struct264 struct {
