@@ -162,44 +162,9 @@ func nox_xxx_clientPlaySoundSpecial_452D80(a1, a2 C.int) {
 	AudioModule.Nox_xxx_clientPlaySoundSpecial_452D80(int32(a1), int32(a2))
 }
 
-//export sub_4523D0
-func sub_4523D0(a1 *C.struct576) int32 {
-	return AudioModule.Sub_4523D0((*audio.Struct576)(unsafe.Pointer(a1)))
-}
-
-//export sub_452FE0
-func sub_452FE0(a1 *C.struct576, a2 int32) int32 {
-	return AudioModule.Sub_452FE0((*audio.Struct576)(unsafe.Pointer(a1)), a2)
-}
-
-//export sub_452F50
-func sub_452F50(a1 *C.struct576, a2 int32) int32 {
-	return AudioModule.Sub_452F50((*audio.Struct576)(unsafe.Pointer(a1)), a2)
-}
-
-//export nox_xxx_draw_452300
-func nox_xxx_draw_452300(a1 *C.struct200) *C.struct576 {
-	return (*C.struct576)(unsafe.Pointer(AudioModule.Nox_xxx_draw_452300((*audio.Struct200)(unsafe.Pointer(a1)))))
-}
-
 //export nox_xxx_draw_452270
 func nox_xxx_draw_452270(a1 int32) *C.char {
 	return (*C.char)(unsafe.Pointer(AudioModule.Nox_xxx_draw_452270(a1)))
-}
-
-//export sub_452EE0
-func sub_452EE0(a1 *C.struct576, a2 int32) int32 {
-	return AudioModule.Sub_452EE0((*audio.Struct576)(unsafe.Pointer(a1)), a2)
-}
-
-//export sub_452F80
-func sub_452F80(a1 *C.struct576, a2 int32) {
-	AudioModule.Sub_452F80((*audio.Struct576)(unsafe.Pointer(a1)), a2)
-}
-
-//export sub_452E90
-func sub_452E90(a1 *uint32, a2 *C.struct576) int32 {
-	return AudioModule.Sub_452E90(a1, (*audio.Struct576)(unsafe.Pointer(a2)))
 }
 
 //export sub_452DC0

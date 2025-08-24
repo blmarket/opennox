@@ -6,7 +6,6 @@ extern int nox_drawable_count;
 extern void* dword_5d4594_1096640;
 extern void* nox_client_spriteUnderCursorXxx_1096644;
 void sub_495B50(void* a1);
-int sub_4523D0(struct576* a1);
 void sub_495FC0(void* a1, nox_drawable* a2);
 int sub_49C520(nox_drawable* a1);
 void sub_45A9B0(nox_drawable* a1, nox_drawable* a2);
@@ -27,6 +26,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/client"
 	"github.com/noxworld-dev/opennox/v1/client/noxrender"
 	"github.com/noxworld-dev/opennox/v1/common/ntype"
+	"github.com/noxworld-dev/opennox/v1/legacy/audio"
 )
 
 func asDrawable(p *nox_drawable) *client.Drawable {
@@ -223,7 +223,7 @@ func Sub_495B50(fx *client.DrawableFX) {
 	C.sub_495B50(fx.C())
 }
 func Sub_4523D0(p unsafe.Pointer) {
-	C.sub_4523D0((*C.struct576)(p))
+	AudioModule.Sub_4523D0((*audio.Struct576)(p))
 }
 func Sub_495FC0(p *client.DrawableFX, dr *client.Drawable) {
 	C.sub_495FC0(p.C(), (*nox_drawable)(dr.C()))

@@ -6,15 +6,19 @@ import (
 	"github.com/noxworld-dev/opennox/v1/legacy/timer"
 )
 
+type Struct312Field30 struct {
+	field_0 int32
+	field_1 uint32
+	field_2 int32
+}
+
 type Struct312 struct {
 	ListElement[Struct312]
 	field_3       int32
 	timerGroup_4  timer.TimerGroup
 	field_28      *timer.TimerGroup
 	field_29      *timer.TimerGroup
-	field_30      int32
-	field_31      uint32
-	field_32      int32
+	field_30      Struct312Field30
 	field_33      *Struct264
 	field_34      uint32
 	field_35      unsafe.Pointer // sub_452770_ptr
@@ -33,7 +37,7 @@ type Struct312 struct {
 	field_71      unsafe.Pointer // sub_4BD9B0_ptr
 	field_72      *Struct84Field6
 	field_73      *Struct24[[0x2000]byte]
-	field_74      uint32
+	field_74      *[0x2000]byte
 	field_75      uint32
 	field_76      uint32
 	field_77      uint32
