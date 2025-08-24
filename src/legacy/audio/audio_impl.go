@@ -2003,8 +2003,8 @@ func (m *AudioModule) Sub_486AA0(a1p *AudioStructXxx, a2 int32, a3p *Struct84Fie
 	var v3p *AudioStructYyy = m.Sub_4866D0(a1p, a2)
 
 	a3p.field_0 = 4
-	*(*uint32)(unsafe.Add(unsafe.Pointer((a3p)), 4*2)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*6))
-	*(*uint32)(unsafe.Add(unsafe.Pointer((a3p)), 4*3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&1) != 0) + 1)
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*2)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*6))
+	*(*uint32)(unsafe.Add(unsafe.Pointer(a3p), 4*3)) = uint32(bool2int32((*(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&1) != 0) + 1)
 	*(*uint32)(unsafe.Add((unsafe.Pointer(a3p)), 4*6)) = *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*8))
 	if *(*uint32)(unsafe.Add(unsafe.Pointer((*uint32)(unsafe.Pointer((v3p)))), 4*7))&8 != 0 {
 		result = 2
