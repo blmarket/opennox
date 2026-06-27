@@ -87,6 +87,7 @@ func writeLogsToDir(dir string) error {
 }
 
 func RunArgs(args []string) (gerr error) {
+	defer flushCoverage()
 	defer func() {
 		switch r := recover().(type) {
 		case ErrExit:
@@ -154,7 +155,7 @@ func RunArgs(args []string) (gerr error) {
 
 	handles.Init()
 	defer handles.Release()
-	if !isDedicatedServer {
+	if !isDedicatedServer && !env.IsE2E() {
 		go version.Latest() // prefetch
 	}
 	if env.IsDevMode() || version.IsDev() || env.IsE2E() || *fPProf != "" {

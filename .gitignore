@@ -17,6 +17,7 @@ src/**/*.png
 src/*.dat
 src/*.dat.gz
 cmake-*
+legacy-c-coverage.json
 
 # For JetBrains IDEs
 .idea

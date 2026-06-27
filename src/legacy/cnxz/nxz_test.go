@@ -1,6 +1,7 @@
 package cnxz
 
 import (
+	"bytes"
 	"crypto/sha1"
 	"encoding/hex"
 	"io"
@@ -12,6 +13,49 @@ import (
 	"github.com/noxworld-dev/opennox-lib/noxtest"
 	"github.com/stretchr/testify/require"
 )
+
+func TestSyntheticRoundTrip(t *testing.T) {
+	pseudorandom := make([]byte, 64*1024)
+	state := uint32(0x6d2b79f5)
+	for i := range pseudorandom {
+		state ^= state << 13
+		state ^= state >> 17
+		state ^= state << 5
+		pseudorandom[i] = byte(state)
+	}
+
+	chunkBoundary := make([]byte, 500001)
+	for i := range chunkBoundary {
+		chunkBoundary[i] = byte(i*31 + i/251)
+	}
+
+	tests := []struct {
+		name string
+		data []byte
+	}{
+		{name: "single byte", data: []byte{0xa5}},
+		{name: "short literal", data: []byte("OpenNox NXZ characterization")},
+		{name: "repeated byte", data: bytes.Repeat([]byte{0x7f}, 64*1024)},
+		{name: "repeated sequence", data: bytes.Repeat([]byte("ABRACADABRA"), 8192)},
+		{name: "pseudorandom", data: pseudorandom},
+		{name: "compressor chunk boundary", data: chunkBoundary},
+	}
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			dir := t.TempDir()
+			src := filepath.Join(dir, "source.bin")
+			compressed := filepath.Join(dir, "source.nxz")
+			decoded := filepath.Join(dir, "decoded.bin")
+
+			require.NoError(t, os.WriteFile(src, tc.data, 0o600))
+			require.NoError(t, CompressFile(src, compressed))
+			require.NoError(t, DecompressFile(compressed, decoded))
+			got, err := os.ReadFile(decoded)
+			require.NoError(t, err)
+			require.Equal(t, tc.data, got)
+		})
+	}
+}
 
 func TestDecompress(t *testing.T) {
 	maps := noxtest.DataPath(t, "maps")

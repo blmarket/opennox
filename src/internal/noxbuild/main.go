@@ -34,6 +34,7 @@ var (
 	fOS      = flag.String("os", runtime.GOOS, "target OS to build for")
 	fSafe    = flag.Bool("safe", false, "build a safe version (will run significantly slower)")
 	fGo      = flag.String("go", "go", "go command to use")
+	fCC      = flag.String("cc", "", "C compiler to use for cgo (for example, zig)")
 	fVerbose = flag.Bool("v", false, "verbose mode")
 )
 
@@ -166,7 +167,16 @@ func goBuild(cmd string, bin string, opts *buildOpts) error {
 			"CGO_ENABLED=1",
 			`CGO_CFLAGS_ALLOW=(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-overflow)`,
 		)
-		if isCross {
+		if *fCC != "" {
+			cc, cxx, err := cgoCompiler(*fCC, goos)
+			if err != nil {
+				return err
+			}
+			envs = append(envs, "CC_FOR_TARGET="+cc, "CC="+cc)
+			if cxx != "" {
+				envs = append(envs, "CXX_FOR_TARGET="+cxx, "CXX="+cxx)
+			}
+		} else if isCross {
 			switch goos {
 			case "windows":
 				envs = append(envs,
@@ -191,6 +201,40 @@ func goBuild(cmd string, bin string, opts *buildOpts) error {
 		src,
 	)
 	return doEnvs(wd, envs, args...)
+}
+
+func cgoCompiler(name, goos string) (cc, cxx string, _ error) {
+	if name != "zig" {
+		return name, "", nil
+	}
+	targets := map[string]string{
+		"linux": "x86-linux-gnu",
+	}
+	target, ok := targets[goos]
+	if !ok {
+		return "", "", fmt.Errorf("zig C compiler does not support target OS %q", goos)
+	}
+	args := []string{"-target", target, "-Wno-unknown-warning-option"}
+	if isDir("/usr/include") {
+		args = append(args, "-idirafter", "/usr/include")
+	}
+	for _, path := range []string{
+		"/usr/lib32",
+		"/usr/lib/i386-linux-gnu",
+		"/lib32",
+		"/lib/i386-linux-gnu",
+	} {
+		if isDir(path) {
+			args = append(args, "-L"+path)
+		}
+	}
+	flags := strings.Join(args, " ")
+	return "zig cc " + flags, "zig c++ " + flags, nil
+}
+
+func isDir(path string) bool {
+	fi, err := os.Stat(path)
+	return err == nil && fi.IsDir()
 }
 
 func do(cmd ...string) error {

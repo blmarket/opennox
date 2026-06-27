@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Go coverage with ccover tag (covers Go side of cgo instrumentation, not C itself)
+# For full C coverage use scripts/coverage-legacy-c.sh which requires NOX_DATA
+cd "$(dirname "$0")"
+export ALSOFT_DRIVERS=null GOARCH=386 CGO_ENABLED=1
+export CGO_CFLAGS_ALLOW='(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-overflow)'
+export CGO_CFLAGS='-O0 -g --coverage -fprofile-abs-path'
+export CGO_LDFLAGS='--coverage'
+go test -tags=ccover ./... -cover -coverprofile=/tmp/opennox-ccover.out
+go tool cover -func=/tmp/opennox-ccover.out | tail -n 40
+echo "---"
+echo "For C (GCC) coverage of legacy C code, run:"
+echo "  NOX_DATA=/path/to/nox/data bash ../scripts/coverage-legacy-c.sh /tmp/legacy-c.json"
+echo "Then view with: go run ./internal/ccoverreport -help"

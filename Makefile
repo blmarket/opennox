@@ -3,15 +3,18 @@ format:
 
 build-server:
 	cd ./src; \
-	go run ./internal/noxbuild server
+	go run ./internal/noxbuild -cc=zig server
 
 build-client:
 	cd ./src; \
-	go run ./internal/noxbuild client client-hd
+	go run ./internal/noxbuild -cc=zig client client-hd
 
 build-client-win:
 	cd ./src; \
 	go run ./internal/noxbuild --os=windows client client-hd
+
+coverage-legacy-c:
+	./scripts/coverage-legacy-c.sh
 
 build-server-docker:
 	GIT_SHA=$$(git rev-parse --short HEAD); \

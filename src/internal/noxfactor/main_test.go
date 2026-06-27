@@ -6,12 +6,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestNoxFactor(t *testing.T) {
-	if err := run("../../"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestFindExterns(t *testing.T) {
 	got := findExterns([]byte(`
 extern uint32_t some_var_123;

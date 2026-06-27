@@ -1,0 +1,18 @@
+steps:
+  - action: wait
+    time: 120
+    name: startup
+  - action: esc
+    time: 40
+    name: startup escape
+  - action: wait
+    time: 180
+    name: server map load
+  - action: esc
+    time: 120
+    name: modal escape
+  - action: wait
+    time: 180
+    name: client map load
+  - action: quit
+    time: 1
