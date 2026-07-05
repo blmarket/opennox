@@ -91,6 +91,17 @@ func nox_client_wndGetPosition_46AA60(win *nox_window, px, py *C.uint32_t) C.int
 	return 0
 }
 
+//export nox_xxx_wndPointInWnd_46AAB0
+func nox_xxx_wndPointInWnd_46AAB0(p *C.uint32_t, x, y C.int32_t) C.bool {
+	win := AsWindowP(unsafe.Pointer(p))
+	pos := win.GlobalPos()
+	sz := win.Size()
+	px, py := int32(x), int32(y)
+	left, top := int32(pos.X), int32(pos.Y)
+	right, bottom := left+int32(sz.X), top+int32(sz.Y)
+	return C.bool(px >= left && px <= right && py >= top && py <= bottom)
+}
+
 //export nox_window_get_size
 func nox_window_get_size(win *nox_window, outW, outH *C.int32_t) C.int32_t {
 	if win == nil {

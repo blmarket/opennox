@@ -71,7 +71,7 @@ int nox_window_setPos_46A9B0(nox_window* win, int a2, int a3);
 int nox_xxx_windowDestroyMB_46C4E0(nox_window* win);
 int32_t nox_gui_getWindowOffs_46AA20(nox_window* win, uint32_t* px, uint32_t* py);
 int32_t nox_client_wndGetPosition_46AA60(nox_window* win, uint32_t* px, uint32_t* py);
-bool nox_xxx_wndPointInWnd_46AAB0(unsigned int* a1, int a2, int a3);
+bool nox_xxx_wndPointInWnd_46AAB0(uint32_t* win, int32_t x, int32_t y);
 int sub_46AB20(unsigned int* a1, int a2, int a3);
 int32_t nox_window_get_size(nox_window* win, int32_t* outW, int32_t* outH);
 int nox_xxx_wnd_46ABB0(nox_window* win, int a2);

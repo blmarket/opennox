@@ -51,6 +51,12 @@ func TestCGuiWindowGeometryAndFlags(t *testing.T) {
 	if !cNoxWndPointInWnd(child, 16, 20) {
 		t.Fatal("point inside child window was reported outside")
 	}
+	if !cNoxWndPointInWnd(child, 36, 30) {
+		t.Fatal("point on child window's bottom-right edge was reported outside")
+	}
+	if cNoxWndPointInWnd(child, 15, 19) {
+		t.Fatal("point outside child's global bounds was reported inside")
+	}
 	if cNoxWndPointInWnd(child, 40, 20) {
 		t.Fatal("point outside child window was reported inside")
 	}

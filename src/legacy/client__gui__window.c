@@ -33,19 +33,6 @@ void sub_46AD20(unsigned int* a1, int a2, int a3, int a4) {
 	}
 }
 
-//----- (0046AAB0) --------------------------------------------------------
-bool nox_xxx_wndPointInWnd_46AAB0(unsigned int* a1, int a2, int a3) {
-	unsigned int* v3; // esi
-	int v5;           // [esp+4h] [ebp-Ch]
-	int v6 = 0;       // [esp+8h] [ebp-8h]
-	int v7 = 0;       // [esp+Ch] [ebp-4h]
-
-	v3 = a1;
-	nox_client_wndGetPosition_46AA60(a1, &a1, &v6);
-	nox_window_get_size((int)v3, &v5, &v7);
-	return a2 >= (int)a1 && a2 <= (int)a1 + v5 && a3 >= v6 && a3 <= v6 + v7;
-}
-
 //----- (0046AB20) --------------------------------------------------------
 int sub_46AB20(unsigned int* a1, int a2, int a3) {
 	int v4; // esi

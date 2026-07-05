@@ -65,7 +65,7 @@ func cNoxWindowGetSize(p unsafe.Pointer) (int32, int32, int32) {
 }
 
 func cNoxWndPointInWnd(p unsafe.Pointer, x, y int) bool {
-	return bool(C.nox_xxx_wndPointInWnd_46AAB0((*C.uint)(p), C.int(x), C.int(y)))
+	return bool(C.nox_xxx_wndPointInWnd_46AAB0((*C.uint32_t)(p), C.int32_t(x), C.int32_t(y)))
 }
 
 func cSub46ACE0EmptyRange(p unsafe.Pointer) {
