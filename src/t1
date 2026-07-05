@@ -1,30 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-log_file=$(mktemp)
-gocache=$(mktemp -d)
-report_file=${CCOVER_OUT:-/tmp/opennox-ccover.json}
-
-cleanup() {
-	rm -f "$log_file"
-	rm -rf "$gocache"
-}
-trap cleanup EXIT
-
 export GOARCH=386
 export CGO_ENABLED=1
 export CGO_CFLAGS_ALLOW='(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-overflow)'
 export CGO_CFLAGS="-fprofile-arcs -ftest-coverage ${CGO_CFLAGS:-}"
 export CGO_LDFLAGS="--coverage ${CGO_LDFLAGS:-}"
-export GOCACHE="$gocache"
 
-go test -count=1 -work -tags ccover ./... 2>&1 | tee "$log_file"
-
-work_dir=$(sed -n 's/^WORK=//p' "$log_file" | head -n 1)
-if [[ -z "$work_dir" ]]; then
-	echo "t1: cannot find Go WORK directory in test output" >&2
-	exit 1
-fi
-
-go run ./internal/ccoverreport -work "$work_dir" -root legacy -out "$report_file"
-echo "detailed C coverage report: $report_file"
+go test -count=1 -tags ccover ./...
