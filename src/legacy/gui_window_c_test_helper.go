@@ -58,10 +58,10 @@ func cNoxClientWndGetPosition(p unsafe.Pointer) (int32, uint32, uint32) {
 	return int32(r), uint32(x), uint32(y)
 }
 
-func cNoxWindowGetSize(p unsafe.Pointer) (int, int, int) {
-	var w, h C.int
+func cNoxWindowGetSize(p unsafe.Pointer) (int32, int32, int32) {
+	var w, h C.int32_t
 	r := C.nox_window_get_size((*C.nox_window)(p), &w, &h)
-	return int(r), int(w), int(h)
+	return int32(r), int32(w), int32(h)
 }
 
 func cNoxWndPointInWnd(p unsafe.Pointer, x, y int) bool {

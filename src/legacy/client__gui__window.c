@@ -62,18 +62,6 @@ int sub_46AB20(unsigned int* a1, int a2, int a3) {
 	return 0;
 }
 
-//----- (0046AB70) --------------------------------------------------------
-int nox_window_get_size(nox_window* win, int* outW, int* outH) {
-	if (!win) {
-		*outW = 0;
-		*outH = 0;
-		return -2;
-	}
-	*outW = win->width;
-	*outH = win->height;
-	return 0;
-}
-
 //----- (0046ABB0) --------------------------------------------------------
 int nox_xxx_wnd_46ABB0(nox_window* win, int a2) {
 	int a1 = win;
