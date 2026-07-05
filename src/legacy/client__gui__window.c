@@ -33,18 +33,6 @@ void sub_46AD20(unsigned int* a1, int a2, int a3, int a4) {
 	}
 }
 
-//----- (0046AA20) --------------------------------------------------------
-int nox_gui_getWindowOffs_46AA20(nox_window* win, unsigned int* px, unsigned int* py) {
-	if (!win) {
-		*px = 0;
-		*py = 0;
-		return -2;
-	}
-	*px = win->off_x;
-	*py = win->off_y;
-	return 0;
-}
-
 //----- (0046AA60) --------------------------------------------------------
 int nox_client_wndGetPosition_46AA60(nox_window* win, unsigned int* px, unsigned int* py) {
 	if (!win) {

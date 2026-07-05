@@ -47,7 +47,7 @@ func cTestWindowDrawDataWin(p unsafe.Pointer) unsafe.Pointer {
 }
 
 func cNoxGUIGetWindowOffs(p unsafe.Pointer) (int, int, int) {
-	var x, y C.uint
+	x, y := C.uint32_t(0xdeadbeef), C.uint32_t(0xdeadbeef)
 	r := C.nox_gui_getWindowOffs_46AA20((*C.nox_window)(p), &x, &y)
 	return int(r), int(x), int(y)
 }

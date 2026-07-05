@@ -67,6 +67,19 @@ func nox_xxx_wndGetID_46B0A0(win *nox_window) int {
 	return int(asWindow(win).ID())
 }
 
+//export nox_gui_getWindowOffs_46AA20
+func nox_gui_getWindowOffs_46AA20(win *nox_window, px, py *C.uint32_t) C.int32_t {
+	if win == nil {
+		*px = 0
+		*py = 0
+		return -2
+	}
+	pos := asWindow(win).Offs()
+	*px = C.uint32_t(pos.X)
+	*py = C.uint32_t(pos.Y)
+	return 0
+}
+
 //export nox_xxx_wndSetID_46B080
 func nox_xxx_wndSetID_46B080(win *nox_window, id int) int {
 	if win == nil {
