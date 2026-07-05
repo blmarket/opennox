@@ -70,7 +70,7 @@ void sub_46AD20(unsigned int* a1, int a2, int a3, int a4);
 int nox_window_setPos_46A9B0(nox_window* win, int a2, int a3);
 int nox_xxx_windowDestroyMB_46C4E0(nox_window* win);
 int32_t nox_gui_getWindowOffs_46AA20(nox_window* win, uint32_t* px, uint32_t* py);
-int nox_client_wndGetPosition_46AA60(nox_window* a1, unsigned int* a2, unsigned int* a3);
+int32_t nox_client_wndGetPosition_46AA60(nox_window* win, uint32_t* px, uint32_t* py);
 bool nox_xxx_wndPointInWnd_46AAB0(unsigned int* a1, int a2, int a3);
 int sub_46AB20(unsigned int* a1, int a2, int a3);
 int nox_window_get_size(nox_window* win, int* outW, int* outH);

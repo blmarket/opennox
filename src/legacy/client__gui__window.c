@@ -33,21 +33,6 @@ void sub_46AD20(unsigned int* a1, int a2, int a3, int a4) {
 	}
 }
 
-//----- (0046AA60) --------------------------------------------------------
-int nox_client_wndGetPosition_46AA60(nox_window* win, unsigned int* px, unsigned int* py) {
-	if (!win) {
-		return -2;
-	}
-
-	*px = win->off_x;
-	*py = win->off_y;
-	for (nox_window* i = win->parent; i; i = i->parent) {
-		*px += i->off_x;
-		*py += i->off_y;
-	}
-	return 0;
-}
-
 //----- (0046AAB0) --------------------------------------------------------
 bool nox_xxx_wndPointInWnd_46AAB0(unsigned int* a1, int a2, int a3) {
 	unsigned int* v3; // esi

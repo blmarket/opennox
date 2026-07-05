@@ -30,11 +30,15 @@ func TestCGuiWindowGeometryAndFlags(t *testing.T) {
 		t.Fatalf("child offsets = (%d, %d, %d), want (0, 11, 13)", r, x, y)
 	}
 
-	if r, x, y := cNoxClientWndGetPosition(nil); r != -2 {
-		t.Fatalf("nil position result = %d, want -2 with outputs %d,%d", r, x, y)
+	if r, x, y := cNoxClientWndGetPosition(nil); r != -2 || x != 0xdeadbeef || y != 0xdeadbeef {
+		t.Fatalf("nil position = (%d, %#x, %#x), want (-2, 0xdeadbeef, 0xdeadbeef)", r, x, y)
 	}
 	if r, x, y := cNoxClientWndGetPosition(grandchild); r != 0 || x != 18 || y != 23 {
 		t.Fatalf("grandchild position = (%d, %d, %d), want (0, 18, 23)", r, x, y)
+	}
+	cTestWindowSetRect(grandchild, -20, -30, 4, 5)
+	if r, x, y := cNoxClientWndGetPosition(grandchild); r != 0 || x != 0xfffffffc || y != 0xfffffff6 {
+		t.Fatalf("negative position = (%d, %#x, %#x), want (0, 0xfffffffc, 0xfffffff6)", r, x, y)
 	}
 
 	if r, w, h := cNoxWindowGetSize(nil); r != -2 || w != 0 || h != 0 {
