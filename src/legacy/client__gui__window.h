@@ -91,7 +91,7 @@ int nox_window_call_field_94_fnc(nox_window* win, int a2, int a3, int a4, char* 
 int nox_window_call_field_93(nox_window* win, int a2, int a3, int a4);
 nox_window* nox_xxx_wndGetFocus_46B4F0();
 int nox_xxx_windowFocus_46B500(nox_window* win);
-int nox_xxx_wndClearFlag_46AD80(int a1, int a2);
+int32_t nox_xxx_wndClearFlag_46AD80(nox_window* win, uint32_t flags);
 int nox_xxx_wndGetFlags_46ADA0(int a1);
 int nox_xxx_wndSetCaptureMain_46ADC0(nox_window* a1);
 int nox_xxx_wndClearCaptureMain_46ADE0(nox_window* a1);
