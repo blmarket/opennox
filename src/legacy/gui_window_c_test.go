@@ -96,6 +96,9 @@ func TestCGuiWindowGeometryAndFlags(t *testing.T) {
 	if got := cNoxWndClearFlag46AD80(child, 0x20); got != 0x20 || cTestWindowFlags(child)&0x20 != 0 {
 		t.Fatalf("clear flag result=%#x flags=%#x, want old flag and cleared value", got, cTestWindowFlags(child))
 	}
+	if got := cNoxWnd46AD60(child, 0x80000000); got != 0 || cTestWindowFlags(child) != 0x80000000 {
+		t.Fatalf("set high flag result=%#x flags=%#x, want 0 and 0x80000000", got, cTestWindowFlags(child))
+	}
 	if got := cNoxWndGetFlags46ADA0(nil); got != -2 {
 		t.Fatalf("nox_xxx_wndGetFlags_46ADA0(nil) = %d, want -2", got)
 	}

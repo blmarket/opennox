@@ -115,6 +115,17 @@ func nox_window_get_size(win *nox_window, outW, outH *C.int32_t) C.int32_t {
 	return 0
 }
 
+//export nox_xxx_wnd_46AD60
+func nox_xxx_wnd_46AD60(win *nox_window, flags C.uint32_t) C.int32_t {
+	if win == nil {
+		return -2
+	}
+	w := asWindow(win)
+	prev := w.Flags
+	w.Flags.Set(gui.StatusFlags(flags))
+	return C.int32_t(prev)
+}
+
 //export nox_xxx_wndSetID_46B080
 func nox_xxx_wndSetID_46B080(win *nox_window, id int) int {
 	if win == nil {

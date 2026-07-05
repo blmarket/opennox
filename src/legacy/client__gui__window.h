@@ -107,6 +107,6 @@ int nox_client_getRenderGUI();
 void nox_client_setRenderGUI(int v);
 void set_dword_5d4594_3799468(int v);
 
-int nox_xxx_wnd_46AD60(int a1, int a2);
+int32_t nox_xxx_wnd_46AD60(nox_window* win, uint32_t flags);
 
 #endif // NOX_CLIENT_GUI_WINDOW_H

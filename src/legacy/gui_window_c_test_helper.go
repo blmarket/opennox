@@ -84,8 +84,8 @@ func cNoxWnd46ABB0(p unsafe.Pointer, hidden int) int {
 	return int(C.nox_xxx_wnd_46ABB0((*C.nox_window)(p), C.int(hidden)))
 }
 
-func cNoxWnd46AD60(p unsafe.Pointer, flags int) int {
-	return int(C.nox_xxx_wnd_46AD60(C.int(uintptr(p)), C.int(flags)))
+func cNoxWnd46AD60(p unsafe.Pointer, flags uint32) int32 {
+	return int32(C.nox_xxx_wnd_46AD60((*C.nox_window)(p), C.uint32_t(flags)))
 }
 
 func cNoxWndClearFlag46AD80(p unsafe.Pointer, flags int) int {
