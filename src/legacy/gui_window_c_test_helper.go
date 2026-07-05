@@ -92,8 +92,8 @@ func cNoxWndClearFlag46AD80(p unsafe.Pointer, flags uint32) int32 {
 	return int32(C.nox_xxx_wndClearFlag_46AD80((*C.nox_window)(p), C.uint32_t(flags)))
 }
 
-func cNoxWndGetFlags46ADA0(p unsafe.Pointer) int {
-	return int(C.nox_xxx_wndGetFlags_46ADA0(C.int(uintptr(p))))
+func cNoxWndGetFlags46ADA0(p unsafe.Pointer) int32 {
+	return int32(C.nox_xxx_wndGetFlags_46ADA0((*C.nox_window)(p)))
 }
 
 func cNoxWindowIsChild(parent, child unsafe.Pointer) int {

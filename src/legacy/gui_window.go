@@ -137,6 +137,15 @@ func nox_xxx_wndClearFlag_46AD80(win *nox_window, flags C.uint32_t) C.int32_t {
 	return C.int32_t(prev)
 }
 
+//export nox_xxx_wndGetFlags_46ADA0
+func nox_xxx_wndGetFlags_46ADA0(win *nox_window) C.int32_t {
+	if win == nil {
+		return -2
+	}
+	flags := C.uint32_t(asWindow(win).Flags)
+	return C.int32_t(flags)
+}
+
 //export nox_xxx_wndSetID_46B080
 func nox_xxx_wndSetID_46B080(win *nox_window, id int) int {
 	if win == nil {

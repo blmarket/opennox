@@ -102,7 +102,7 @@ func TestCGuiWindowGeometryAndFlags(t *testing.T) {
 	if got := cNoxWndGetFlags46ADA0(nil); got != -2 {
 		t.Fatalf("nox_xxx_wndGetFlags_46ADA0(nil) = %d, want -2", got)
 	}
-	if got := cNoxWndGetFlags46ADA0(child); got != int(cTestWindowFlags(child)) {
+	if got := cNoxWndGetFlags46ADA0(child); got != int32(cTestWindowFlags(child)) {
 		t.Fatalf("nox_xxx_wndGetFlags_46ADA0(child) = %#x, want %#x", got, cTestWindowFlags(child))
 	}
 	if got := cNoxWndClearFlag46AD80(child, 0x80000000); got != -0x80000000 || cTestWindowFlags(child) != 0 {

@@ -72,18 +72,6 @@ int nox_xxx_wnd_46ABB0(nox_window* win, int a2) {
 	return 0;
 }
 
-//----- (0046ADA0) --------------------------------------------------------
-int nox_xxx_wndGetFlags_46ADA0(int a1) {
-	int result; // eax
-
-	if (a1) {
-		result = *(unsigned int*)(a1 + 4);
-	} else {
-		result = -2;
-	}
-	return result;
-}
-
 //----- (0046B280) --------------------------------------------------------
 int nox_xxx_wnd_46B280(int a1, int a2) {
 	if (!a1) {
