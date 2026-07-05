@@ -60,6 +60,9 @@ func TestCGuiWindowGeometryAndFlags(t *testing.T) {
 	if got := cNoxWindowIsChild(nil, child); got != 0 {
 		t.Fatalf("nil parent child check got %d, want 0", got)
 	}
+	if got := cNoxWindowIsChild(parent, nil); got != 0 {
+		t.Fatalf("nil child check got %d, want 0", got)
+	}
 
 	if got := cNoxWnd46ABB0(nil, 1); got != -2 {
 		t.Fatalf("nox_xxx_wnd_46ABB0(nil) = %d, want -2", got)

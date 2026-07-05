@@ -162,6 +162,11 @@ func nox_xxx_wndGetChildByID_46B0C0(root *nox_window, id int) *nox_window {
 	return (*nox_window)(asWindow(root).ChildByID(uint(id)).C())
 }
 
+//export nox_window_is_child
+func nox_window_is_child(parent, child *nox_window) int {
+	return bool2int(asWindow(parent).IsChild(asWindow(child)))
+}
+
 //export nox_xxx_windowDestroyMB_46C4E0
 func nox_xxx_windowDestroyMB_46C4E0(a1 *nox_window) int {
 	win := asWindow(a1)

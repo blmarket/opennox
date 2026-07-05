@@ -160,28 +160,6 @@ int nox_xxx_wndGetFlags_46ADA0(int a1) {
 	return result;
 }
 
-//----- (0046B250) --------------------------------------------------------
-int nox_window_is_child(nox_window* a1, nox_window* a2) {
-	if (!a1) {
-		return 0;
-	}
-	if (!a2) {
-		return 0;
-	}
-
-	nox_window* cur = a2;
-	while (1) {
-		cur = cur->parent;
-		if (a1 == cur) {
-			break;
-		}
-		if (!cur) {
-			return 0;
-		}
-	}
-	return 1;
-}
-
 //----- (0046B280) --------------------------------------------------------
 int nox_xxx_wnd_46B280(int a1, int a2) {
 	if (!a1) {
