@@ -22,6 +22,11 @@ func asMemfileP(p unsafe.Pointer) *binfile.MemFile {
 	return (*binfile.MemFile)(p)
 }
 
+//export nox_memfile_read_u32
+func nox_memfile_read_u32(f *nox_memfile) C.uint32_t {
+	return C.uint32_t(asMemfile(f).ReadU32())
+}
+
 //export nox_memfile_read
 func nox_memfile_read(dst unsafe.Pointer, sz C.uint32_t, cnt C.int32_t, f *nox_memfile) C.uint32_t {
 	n := uint32(sz) * uint32(cnt)

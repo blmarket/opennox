@@ -43,14 +43,6 @@ int32_t nox_memfile_read_i32(nox_memfile* f) {
 	return v;
 }
 
-uint32_t nox_memfile_read_u32(nox_memfile* f) {
-	if (!f->data)
-		return 0;
-	uint32_t v = *(uint32_t*)f->cur;
-	f->cur += 4;
-	return v;
-}
-
 void nox_memfile_skip(nox_memfile* f, int n) {
 	if (!f->data)
 		return;
