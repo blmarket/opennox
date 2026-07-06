@@ -42,3 +42,19 @@ func TestMouseStateCode(t *testing.T) {
 		})
 	}
 }
+
+func TestMouseButtonString(t *testing.T) {
+	require.Equal(t, "None", MouseButton(-1).String())
+	require.Equal(t, "Left", NOX_MOUSE_LEFT.String())
+	require.Equal(t, "Right", NOX_MOUSE_RIGHT.String())
+	require.Equal(t, "Middle", NOX_MOUSE_MIDDLE.String())
+	require.Equal(t, "MouseButton(99)", MouseButton(99).String())
+}
+
+func TestMouseStateString(t *testing.T) {
+	require.Equal(t, "Down", NOX_MOUSE_DOWN.String())
+	require.Equal(t, "DragEnd", NOX_MOUSE_DRAG_END.String())
+	require.Equal(t, "Up", NOX_MOUSE_UP.String())
+	require.Equal(t, "Pressed", NOX_MOUSE_PRESSED.String())
+	require.Equal(t, "MouseState(99)", MouseState(99).String())
+}
