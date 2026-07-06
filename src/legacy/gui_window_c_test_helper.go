@@ -100,8 +100,8 @@ func cNoxWindowIsChild(parent, child unsafe.Pointer) int {
 	return int(C.nox_window_is_child((*C.nox_window)(parent), (*C.nox_window)(child)))
 }
 
-func cNoxWnd46B280(p, parent unsafe.Pointer) int {
-	return int(C.nox_xxx_wnd_46B280(C.int(uintptr(p)), C.int(uintptr(parent))))
+func cNoxWnd46B280(p, parent unsafe.Pointer) int32 {
+	return int32(C.nox_xxx_wnd_46B280((*C.nox_window)(p), (*C.nox_window)(parent)))
 }
 
 func cNoxPrintCenteredNil() {

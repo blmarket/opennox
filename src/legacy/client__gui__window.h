@@ -99,7 +99,7 @@ nox_window* nox_xxx_wndGetCaptureMain_46AE00();
 int sub_46C690(nox_window* a1);
 int nox_xxx_wnd_46C6E0(nox_window* a1);
 int nox_window_is_child(nox_window* a1, nox_window* a2);
-int nox_xxx_wnd_46B280(int a1, int a2);
+int32_t nox_xxx_wnd_46B280(nox_window* win, nox_window* parent);
 int nox_xxx_wndSetProc_46B2C0(int a1, int (*a2)(int, int, int, int));
 int nox_xxx_wndSetWindowProc_46B300(int a1, int (*a2)(int, int, int, int));
 int nox_xxx_wndSetDrawFn_46B340(int a1, int (*a2)(int, int));
