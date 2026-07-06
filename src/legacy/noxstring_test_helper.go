@@ -267,8 +267,8 @@ func NoxMemfileReadU32(f unsafe.Pointer) uint32 {
 func NoxMemfileSkip(f unsafe.Pointer, n int) {
 	C.nox_memfile_skip((*C.nox_memfile)(f), C.int(n))
 }
-func NoxMemfileRead(dst unsafe.Pointer, sz uint, cnt int, f unsafe.Pointer) uint {
-	return uint(C.nox_memfile_read(dst, C.uint(sz), C.int(cnt), (*C.nox_memfile)(f)))
+func NoxMemfileRead(dst unsafe.Pointer, sz uint32, cnt int32, f unsafe.Pointer) uint32 {
+	return uint32(C.nox_memfile_read(dst, C.uint32_t(sz), C.int32_t(cnt), (*C.nox_memfile)(f)))
 }
 func NoxMemfileRead64Align(dest unsafe.Pointer, sz int, cnt int, f unsafe.Pointer) uint {
 	return uint(C.nox_memfile_read64align_40AD60((*C.char)(dest), C.int(sz), C.int(cnt), (*C.nox_memfile)(f)))

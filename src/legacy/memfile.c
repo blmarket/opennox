@@ -57,16 +57,6 @@ void nox_memfile_skip(nox_memfile* f, int n) {
 	f->cur += n;
 }
 
-//----- (0040ACC0) --------------------------------------------------------
-unsigned int nox_memfile_read(void* dst, const unsigned int sz, const int cnt, nox_memfile* f) {
-	unsigned int n = cnt * sz;
-	if (f->cur + n > f->end)
-		n = f->end - f->cur;
-	memcpy(dst, f->cur, n);
-	f->cur += n;
-	return n / sz;
-}
-
 //----- (0040AD60) --------------------------------------------------------
 unsigned int nox_memfile_read64align_40AD60(char* dest, int sz, int cnt, nox_memfile* f) {
 	const size_t cur_offset = f->cur - f->data;
