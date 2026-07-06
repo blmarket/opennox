@@ -23,6 +23,11 @@ func asMemfileP(p unsafe.Pointer) *binfile.MemFile {
 	return (*binfile.MemFile)(p)
 }
 
+//export nox_memfile_read_u8
+func nox_memfile_read_u8(f *nox_memfile) C.uint8_t {
+	return C.uint8_t(asMemfile(f).ReadU8())
+}
+
 //export nox_memfile_read_u16
 func nox_memfile_read_u16(f *nox_memfile) C.uint16_t {
 	return C.uint16_t(asMemfile(f).ReadU16())

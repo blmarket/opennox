@@ -8,14 +8,6 @@ int8_t nox_memfile_read_i8(nox_memfile* f) {
 	return v;
 }
 
-uint8_t nox_memfile_read_u8(nox_memfile* f) {
-	if (!f->data)
-		return 0;
-	uint8_t v = *(uint8_t*)f->cur;
-	f->cur++;
-	return v;
-}
-
 int16_t nox_memfile_read_i16(nox_memfile* f) {
 	if (!f->data)
 		return 0;
