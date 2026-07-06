@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestLatestGithub(t *testing.T) {
+func TestLatestGithubCancelled(t *testing.T) {
 	// Test latestGithub with cancelled context (should not panic)
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
@@ -24,7 +24,7 @@ func TestLatestGithub(t *testing.T) {
 	// This is internal, just ensure it doesn't panic
 }
 
-func TestSemverFunctions(t *testing.T) {
+func TestSemverFunctions3(t *testing.T) {
 	// Test semverIsValid
 	require.True(t, semverIsValid("v1.2.3"))
 	require.False(t, semverIsValid("invalid"))
