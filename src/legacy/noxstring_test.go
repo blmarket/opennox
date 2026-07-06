@@ -410,7 +410,7 @@ func TestNoxMemfile(t *testing.T) {
 
 	// 7. Read block
 	var buf [4]byte
-	n := uint(NoxMemfileRead(unsafe.Pointer(&buf[0]), 1, 4, cFile))
+	n := NoxMemfileRead(unsafe.Pointer(&buf[0]), 1, 4, cFile)
 	if n != 4 {
 		t.Errorf("expected read 4, got %d", n)
 	}
