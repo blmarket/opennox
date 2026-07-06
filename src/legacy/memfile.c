@@ -24,14 +24,6 @@ int16_t nox_memfile_read_i16(nox_memfile* f) {
 	return v;
 }
 
-uint16_t nox_memfile_read_u16(nox_memfile* f) {
-	if (!f->data)
-		return 0;
-	uint16_t v = *(uint16_t*)f->cur;
-	f->cur += 2;
-	return v;
-}
-
 void nox_memfile_skip(nox_memfile* f, int n) {
 	if (!f->data)
 		return;
