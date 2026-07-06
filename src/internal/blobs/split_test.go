@@ -27,3 +27,19 @@ func TestSplitBlob(t *testing.T) {
 	err = SplitBlob(uintptr(blob), uintptr(off), uintptr(size))
 	require.NoError(t, err)
 }
+
+func TestSplitBlob_ErrorCases(t *testing.T) {
+	// Test with non-existent blob (should return error from ReadBlobs or "old blob not found")
+	err := SplitBlob(0x12345678, 0, 0)
+	if err == nil {
+		t.Error("SplitBlob with non-existent blob should return error")
+	}
+}
+
+func TestSplitBlob_InvalidArgs(t *testing.T) {
+	// Test with invalid blob address
+	err := SplitBlob(0, 0, 0)
+	if err == nil {
+		t.Error("SplitBlob with blob 0 should return error")
+	}
+}

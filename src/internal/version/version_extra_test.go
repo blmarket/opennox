@@ -5,6 +5,20 @@ import (
 	"testing"
 )
 
+func TestVersionExtra(t *testing.T) {
+	v := Version()
+	if v == "" {
+		t.Error("Version should not be empty")
+	}
+}
+
+func TestCommitExtra(t *testing.T) {
+	c := Commit()
+	if c == "" {
+		t.Error("Commit should not be empty")
+	}
+}
+
 func TestLatestEmpty(t *testing.T) {
 	// Test Latest (should not panic)
 	_ = Latest()

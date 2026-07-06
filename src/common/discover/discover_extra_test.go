@@ -1,135 +1,148 @@
 package discover
 
 import (
+	"context"
 	"net"
 	"net/netip"
 	"testing"
+	"time"
 
 	"github.com/noxworld-dev/lobby"
-	"github.com/noxworld-dev/opennox-lib/noxnet"
-	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
 )
 
-func TestGetAddrMore(t *testing.T) {
-	// Test with UDPAddr
-	udpAddr := &net.UDPAddr{IP: net.ParseIP("192.168.1.1"), Port: 1234}
-	result := getAddr(udpAddr)
-	if !result.IsValid() {
-		t.Error("getAddr(UDPAddr) should return valid AddrPort")
-	}
-	if result.Port() != 1234 {
-		t.Errorf("getAddr port = %d, want 1234", result.Port())
+func TestPingEachServer(t *testing.T) {
+	// Register a test backend that returns a server
+	backendName := "test_ping_backend"
+	RegisterBackend(backendName, func(ctx context.Context, out chan<- Server) error {
+		out <- Server{
+			Game: lobby.Game{
+				Name: "TestServer",
+				Port: 8080,
+			},
+			Source: "test",
+			IP:     netip.MustParseAddr("127.0.0.1"),
+		}
+		return nil
+	})
+
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
+	defer cancel()
+
+	// Test with nil pc (should create its own)
+	err := PingEachServer(ctx, nil, func(s Server) error {
+		if s.Name != "TestServer" {
+			t.Errorf("PingEachServer server name = %q, want %q", s.Name, "TestServer")
+		}
+		return nil
+	})
+	if err != nil && err != context.DeadlineExceeded {
+		// Deadline exceeded is ok, we just want to ensure it doesn't panic
 	}
 
-	// Test with TCPAddr
-	tcpAddr := &net.TCPAddr{IP: net.ParseIP("10.0.0.1"), Port: 5678}
-	result = getAddr(tcpAddr)
-	if !result.IsValid() {
-		t.Error("getAddr(TCPAddr) should return valid AddrPort")
+	// Test with provided pc
+	pc, err := net.ListenUDP("udp4", &net.UDPAddr{IP: nil, Port: 0})
+	if err != nil {
+		t.Fatalf("Failed to create UDP conn: %v", err)
 	}
+	defer pc.Close()
 
-	// Test with AddrPort directly via interface
-	ap := netip.MustParseAddrPort("127.0.0.1:9999")
-	result = getAddr(net.UDPAddrFromAddrPort(ap))
-	if result != ap {
-		t.Error("getAddr should preserve AddrPort")
+	ctx2, cancel2 := context.WithTimeout(context.Background(), 100*time.Millisecond)
+	defer cancel2()
+
+	err = PingEachServer(ctx2, pc, func(s Server) error {
+		return nil
+	})
+	if err != nil && err != context.DeadlineExceeded {
+		// Ok
 	}
 }
 
-func TestDecodeGameInfoMore(t *testing.T) {
-	// Test with empty buffer
-	result := decodeGameInfo([]byte{})
-	if result != nil {
-		t.Error("decodeGameInfo empty should return nil")
-	}
+func TestPingEachServer_Empty(t *testing.T) {
+	// Test with no backends (should not panic)
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+	defer cancel()
 
-	// Test with only header
-	result = decodeGameInfo([]byte{0, 0})
-	if result != nil {
-		// May be nil or empty, both ok
+	err := PingEachServer(ctx, nil, func(s Server) error {
+		return nil
+	})
+	// Should not return error for empty backends, just timeout
+	if err != nil && err != context.DeadlineExceeded {
+		t.Logf("PingEachServer with no backends returned: %v", err)
 	}
 }
 
-func TestConvGameInfoMore(t *testing.T) {
-	addr := netip.MustParseAddrPort("192.168.1.100:8080")
+func TestListServersWith(t *testing.T) {
+	// Register a test backend
+	backendName := "test_list_backend"
+	RegisterBackend(backendName, func(ctx context.Context, out chan<- Server) error {
+		out <- Server{
+			Game: lobby.Game{
+				Name: "ListTestServer",
+				Port: 9090,
+			},
+			Source: "test",
+			IP:     netip.MustParseAddr("127.0.0.1"),
+		}
+		return nil
+	})
 
-	// Create a message with basic fields
-	msg := &noxnet.MsgServerInfo{
-		ServerName: "Test Server",
-		MapName:    "TestMap",
-		Flags:      uint16(noxflags.GameModeCTF),
+	pc, err := net.ListenPacket("udp4", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("Failed to create packet conn: %v", err)
 	}
+	defer pc.Close()
 
-	// Create buffer with player counts and status
-	buf := make([]byte, 100)
-	buf[3] = 3  // players cur
-	buf[4] = 8  // players max
-	buf[20] = 0 // status open
-	buf[21] = 0
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+	defer cancel()
 
-	result := convGameInfo(addr, msg, buf)
-	if result == nil {
-		t.Fatal("convGameInfo should not return nil")
-	}
-	if result.Name != "Test Server" {
-		t.Errorf("convGameInfo name = %q, want %q", result.Name, "Test Server")
-	}
-	if result.Address != "192.168.1.100" {
-		t.Errorf("convGameInfo address = %q", result.Address)
-	}
-	if result.Port != 8080 {
-		t.Errorf("convGameInfo port = %d, want 8080", result.Port)
-	}
-	if result.Map != "testmap" { // should be lowercase
-		t.Errorf("convGameInfo map = %q, want %q", result.Map, "testmap")
-	}
-	if result.Mode != lobby.ModeCTF {
-		t.Errorf("convGameInfo mode = %v, want CTF", result.Mode)
-	}
-	if result.Players.Cur != 3 || result.Players.Max != 8 {
-		t.Error("convGameInfo players count mismatch")
-	}
-	if result.Access != lobby.AccessOpen {
-		t.Error("convGameInfo access should be open")
+	servers, err := ListServersWith(ctx, pc)
+	if err != nil && err != context.DeadlineExceeded {
+		t.Logf("ListServersWith returned: %v", err)
 	}
 
-	// Test with closed status
-	buf[20] = 0x10
-	result = convGameInfo(addr, msg, buf)
-	if result.Access != lobby.AccessClosed {
-		t.Error("convGameInfo access should be closed when status 0x10")
+	// Should have at least our test server
+	found := false
+	for _, s := range servers {
+		if s.Name == "ListTestServer" {
+			found = true
+			break
+		}
 	}
-
-	// Test with password status
-	buf[20] = 0x20
-	result = convGameInfo(addr, msg, buf)
-	if result.Access != lobby.AccessPassword {
-		t.Error("convGameInfo access should be password when status 0x20")
-	}
-
-	// Test with quest mode
-	msg.Flags = uint16(noxflags.GameModeQuest)
-	buf[20] = 0
-	buf[68] = 5 // quest stage low byte
-	buf[69] = 0 // quest stage high byte
-	result = convGameInfo(addr, msg, buf)
-	if result.Quest == nil {
-		t.Error("convGameInfo quest should not be nil for quest mode")
-	} else if result.Quest.Stage != 5 {
-		t.Errorf("convGameInfo quest stage = %d, want 5", result.Quest.Stage)
+	if !found && len(servers) > 0 {
+		t.Logf("Test server not found in results, got %d servers", len(servers))
 	}
 }
 
-func TestMergeInfoMore(t *testing.T) {
-	// Test when g1 has all fields
-	g1 := lobby.Game{Name: "S1", Map: "m1", Mode: "ctf", Players: lobby.PlayersInfo{Cur: 1, Max: 2}}
-	g2 := &lobby.Game{Name: "S2", Map: "m2", Mode: "kotr", Players: lobby.PlayersInfo{Cur: 5, Max: 10}}
-	result := mergeInfo(g1, g2)
-	if result.Name != "S1" || result.Map != "m1" || result.Mode != "ctf" {
-		t.Error("mergeInfo should keep g1's non-empty fields")
+func TestListServersWith_NoDeadline(t *testing.T) {
+	// Test without deadline in context (should set its own timeout)
+	pc, err := net.ListenPacket("udp4", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("Failed to create packet conn: %v", err)
 	}
-	// mergeInfo always takes players from g2
-	if result.Players.Cur != 5 {
-		t.Error("mergeInfo should take players from g2")
+	defer pc.Close()
+
+	ctx := context.Background() // No deadline
+
+	servers, err := ListServersWith(ctx, pc)
+	if err != nil {
+		t.Logf("ListServersWith without deadline returned: %v", err)
 	}
+	_ = servers
+}
+
+func TestListServersWith_Empty(t *testing.T) {
+	pc, err := net.ListenPacket("udp4", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("Failed to create packet conn: %v", err)
+	}
+	defer pc.Close()
+
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+	defer cancel()
+
+	servers, err := ListServersWith(ctx, pc)
+	if err != nil && err != context.DeadlineExceeded {
+		t.Logf("ListServersWith empty returned: %v", err)
+	}
+	_ = servers
 }

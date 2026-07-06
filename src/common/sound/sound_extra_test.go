@@ -2,28 +2,15 @@ package sound
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
-func TestSoundString(t *testing.T) {
-	// Test String with valid ID
-	s := ID(0).String()
-	if s == "" {
-		t.Error("String should not be empty")
-	}
-
-	// Test GoString with valid ID
-	gs := ID(0).GoString()
-	if gs == "" {
-		t.Error("GoString should not be empty")
-	}
-
-	// Test ByName with invalid name
-	id := ByName("nonexistent_sound_xyz")
-	if id != 0 {
-		t.Error("ByName with invalid name should return 0")
-	}
-
-	// Test ByName with valid name
-	id = ByName("Silent")
-	_ = id
+func TestSoundExtra(t *testing.T) {
+	s := ByName("NONEXISTENT")
+	require.Equal(t, SoundNone, s)
+	s2 := ByName("AnchorCast")
+	require.Equal(t, SoundAnchorCast, s2)
+	require.NotEmpty(t, s2.GoString())
+	require.NotEmpty(t, s2.String())
 }

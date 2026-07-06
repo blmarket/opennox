@@ -1,0 +1,70 @@
+package memmap
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
+func TestRegisterBlobDataAndPtr(t *testing.T) {
+	data := []byte("hello\x00world")
+	RegisterBlobData(0x5000, "testBlob2", data)
+	b := BlobByAddr(0x5005)
+	require.NotNil(t, b)
+	require.Equal(t, "testBlob2", b.Name)
+	blob, off := RelativeAddr(0x5002)
+	require.Equal(t, uintptr(0x5000), blob)
+	require.Equal(t, uintptr(2), off)
+	blob2, off2 := RelativeAddr(0x9999)
+	require.Equal(t, uintptr(0x9999), blob2)
+	require.Equal(t, uintptr(0), off2)
+	ptr := Ptr(0x5000)
+	require.NotNil(t, ptr)
+	sl := Slice(0x5000, 0)
+	require.Equal(t, byte('h'), sl[0])
+	s := String(0x5000, 0)
+	require.Equal(t, "hello", s)
+	ptr2 := PtrOff(0x5000, 1)
+	require.NotNil(t, ptr2)
+	_ = PtrSize(0x5000, 1)
+	_ = PtrSizeOff(0x5000, 0, 1)
+	_ = PtrPtr(0x5000, 0)
+	_ = PtrT[byte](0x5000, 0)
+	_ = PtrUint8(0x5000, 0)
+	_ = PtrInt8(0x5000, 0)
+	_ = PtrUint16(0x5000, 0)
+	_ = PtrInt16(0x5000, 0)
+	_ = PtrUint32(0x5000, 0)
+	_ = PtrInt32(0x5000, 0)
+	_ = PtrUint64(0x5000, 0)
+	_ = PtrInt64(0x5000, 0)
+	_ = PtrFloat32(0x5000, 0)
+	_ = PtrFloat64(0x5000, 0)
+	require.Equal(t, byte('h'), Uint8(0x5000, 0))
+	_ = Int8(0x5000, 0)
+	_ = Uint16(0x5000, 0)
+	_ = Int16(0x5000, 0)
+	_ = Uint32(0x5000, 0)
+	_ = Int32(0x5000, 0)
+	_ = Uint64(0x5000, 0)
+	_ = Int64(0x5000, 0)
+	_ = Float32(0x5000, 0)
+	_ = Float64(0x5000, 0)
+	b2, off3 := BlobByPtr(ptr)
+	require.NotNil(t, b2)
+	require.Equal(t, uintptr(0), off3)
+	RegisterVariableOff(0x5000, 10, 4, "testVarOff", nil)
+	v := VariableByAddr(0x500A)
+	require.NotNil(t, v)
+	require.NotNil(t, v.Blob())
+	SetRuntimeChecks(true)
+	SetRuntimeChecks(false)
+}
+
+func TestVariableContainsEdge(t *testing.T) {
+	v := Variable{Addr: 100, Size: 10}
+	require.False(t, v.Contains(99))
+	require.True(t, v.Contains(100))
+	require.True(t, v.Contains(109))
+	require.False(t, v.Contains(110))
+}

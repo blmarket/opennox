@@ -36,3 +36,25 @@ func TestExecIn(t *testing.T) {
 	// Test execIn with invalid command (should not panic)
 	_ = execIn("", "false")
 }
+
+func TestRun_InvalidRoot(t *testing.T) {
+	// Test with invalid root (no src directory)
+	err := run("/nonexistent/path")
+	if err == nil {
+		t.Error("run with invalid root should return error")
+	}
+
+	// Test with empty root
+	err = run("")
+	if err == nil {
+		t.Error("run with empty root should return error")
+	}
+}
+
+func TestRun_MissingSrc(t *testing.T) {
+	// Test with root that doesn't have src directory
+	err := run("/tmp")
+	if err == nil {
+		t.Error("run with root without src should return error")
+	}
+}
