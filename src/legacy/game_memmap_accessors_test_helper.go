@@ -41,8 +41,25 @@ void sub_4573B0();
 void nox_xxx____setargv_11_473920();
 void sub_4D15C0();
 void sub_4D1610();
+
+// Pointer memmap getters (return (char*)getMemAt(base, off))
+void* nox_xxx_mapGetWallSize_426A70();
+void* sub_453600();
+void* sub_453F90();
+void* nox_xxx_getAmbientColor_469BB0();
+void* sub_4A7EF0();
+void* sub_4D3C70();
+void* nox_xxx_getRandMapName_4D4310();
+void* sub_4D6940();
+void* sub_4D6950();
+void* sub_4E8310();
+void* sub_4E8E50();
+
+// Single-argument U32 memmap setters (*getMemU32Ptr(base, off) = a1)
+void nox_gui_setQuestStage_450B00(int a1);
 */
 import "C"
+import "unsafe"
 
 // --- U32 getters ---
 
@@ -85,3 +102,21 @@ func C_sub_4573B0()                               { C.sub_4573B0() }
 func C_nox_xxx____setargv_11_473920()             { C.nox_xxx____setargv_11_473920() }
 func C_sub_4D15C0()                               { C.sub_4D15C0() }
 func C_sub_4D1610()                               { C.sub_4D1610() }
+
+// --- Pointer getters ---
+
+func C_nox_xxx_mapGetWallSize_426A70() unsafe.Pointer  { return C.nox_xxx_mapGetWallSize_426A70() }
+func C_sub_453600() unsafe.Pointer                     { return C.sub_453600() }
+func C_sub_453F90() unsafe.Pointer                     { return C.sub_453F90() }
+func C_nox_xxx_getAmbientColor_469BB0() unsafe.Pointer { return C.nox_xxx_getAmbientColor_469BB0() }
+func C_sub_4A7EF0() unsafe.Pointer                     { return C.sub_4A7EF0() }
+func C_sub_4D3C70() unsafe.Pointer                     { return C.sub_4D3C70() }
+func C_nox_xxx_getRandMapName_4D4310() unsafe.Pointer  { return C.nox_xxx_getRandMapName_4D4310() }
+func C_sub_4D6940() unsafe.Pointer                     { return C.sub_4D6940() }
+func C_sub_4D6950() unsafe.Pointer                     { return C.sub_4D6950() }
+func C_sub_4E8310() unsafe.Pointer                     { return C.sub_4E8310() }
+func C_sub_4E8E50() unsafe.Pointer                     { return C.sub_4E8E50() }
+
+// --- Single-argument U32 setters ---
+
+func C_nox_gui_setQuestStage_450B00(v int) { C.nox_gui_setQuestStage_450B00(C.int(v)) }

@@ -2,6 +2,7 @@ package legacy
 
 import (
 	"testing"
+	"unsafe"
 
 	"github.com/stretchr/testify/require"
 )
@@ -114,6 +115,66 @@ func TestGameMemmapConstSetters(t *testing.T) {
 			*p = 0xCAFEF00D
 			tc.set()
 			require.Equal(t, tc.want, *p)
+		})
+	}
+}
+
+// Pointer getters return the address of a fixed location in the memory map.
+// We assert the returned pointer is exactly the address the memmap helper
+// computes for the same (base, off) — this verifies the decompiled function's
+// embedded base/offset constants without needing any live game state.
+func TestGameMemmapPtrGetters(t *testing.T) {
+	cases := []struct {
+		name string
+		base uintptr
+		off  uintptr
+		get  func() unsafe.Pointer
+	}{
+		{"mapGetWallSize_426A70", 0x5D4594, 739980, C_nox_xxx_mapGetWallSize_426A70},
+		{"sub_453600", 0x5D4594, 1045452, C_sub_453600},
+		{"sub_453F90", 0x5D4594, 1045488, C_sub_453F90},
+		{"getAmbientColor_469BB0", 0x587000, 142296, C_nox_xxx_getAmbientColor_469BB0},
+		{"sub_4A7EF0", 0x5D4594, 1308732, C_sub_4A7EF0},
+		{"sub_4D3C70", 0x973F18, 35912, C_sub_4D3C70},
+		{"getRandMapName_4D4310", 0x587000, 197860, C_nox_xxx_getRandMapName_4D4310},
+		{"sub_4D6940", 0x973F18, 3838, C_sub_4D6940},
+		{"sub_4D6950", 0x973F18, 3806, C_sub_4D6950},
+		{"sub_4E8310", 0x5D4594, 1567736, C_sub_4E8310},
+		{"sub_4E8E50", 0x5D4594, 1567844, C_sub_4E8E50},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			want := C_mem_getPtr(tc.base, tc.off)
+			require.NotNil(t, want)
+			require.Equal(t, want, tc.get())
+		})
+	}
+}
+
+// Single-argument U32 setters write their argument to a fixed memmap word.
+// We write a sentinel, confirm it lands, and restore the old value.
+func TestGameMemmapArgSetters(t *testing.T) {
+	const sentinel = 0x0BADF00D
+
+	cases := []struct {
+		name string
+		base uintptr
+		off  uintptr
+		set  func(int)
+	}{
+		{"setQuestStage_450B00", 0x5D4594, 832468, C_nox_gui_setQuestStage_450B00},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			p := (*uint32)(C_mem_getU32Ptr(tc.base, tc.off))
+			require.NotNil(t, p)
+			old := *p
+			t.Cleanup(func() { *p = old })
+
+			tc.set(sentinel)
+			require.Equal(t, uint32(sentinel), *p)
 		})
 	}
 }

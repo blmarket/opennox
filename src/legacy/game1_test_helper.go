@@ -18,6 +18,21 @@ int nox_xxx_checkGameFlagPause_413A50();
 char* sub_4165B0();
 char* sub_416640();
 char* sub_4169F0();
+int nox_xxx_getServerSubFlags_409E60();
+int sub_40A6B0();
+int nox_xxx_rateGet_40A6C0();
+int sub_4139B0();
+unsigned int sub_409B50(const char* a1);
+char* sub_409B80();
+int sub_40A6A0(int a1);
+int sub_409E40(int a1);
+int sub_409E70(int a1);
+int sub_42EBA0();
+int nox_xxx_cursor_430B00();
+int sub_431370();
+
+extern uint32_t dword_5d4594_3484;
+extern uint32_t dword_5d4594_251744;
 */
 import "C"
 import "unsafe"
@@ -116,4 +131,71 @@ func C_sub_4169F0_resultByte(v byte) byte {
 	out := *(*byte)(unsafe.Pointer(uintptr(unsafe.Pointer(ret)) + 100))
 	*bp = old
 	return out
+}
+
+func C_nox_xxx_getServerSubFlags_409E60() int {
+	return int(C.nox_xxx_getServerSubFlags_409E60())
+}
+
+func C_sub_40A6B0() int {
+	return int(C.sub_40A6B0())
+}
+
+func C_nox_xxx_rateGet_40A6C0() int {
+	return int(C.nox_xxx_rateGet_40A6C0())
+}
+
+func C_sub_4139B0() int {
+	return int(C.sub_4139B0())
+}
+
+func C_sub_409B50(s string) uint {
+	cs := C.CString(s)
+	defer C.free(unsafe.Pointer(cs))
+	return uint(C.sub_409B50(cs))
+}
+
+func C_sub_409B80() string {
+	return C.GoString(C.sub_409B80())
+}
+
+func C_sub_40A6A0(a1 int) int {
+	return int(C.sub_40A6A0(C.int(a1)))
+}
+
+func C_sub_409E40(a1 int) int {
+	return int(C.sub_409E40(C.int(a1)))
+}
+
+func C_sub_409E70(a1 int) int {
+	return int(C.sub_409E70(C.int(a1)))
+}
+
+func C_sub_42EBA0() int {
+	return int(C.sub_42EBA0())
+}
+
+func C_nox_xxx_cursor_430B00() int {
+	return int(C.nox_xxx_cursor_430B00())
+}
+
+func C_sub_431370() int {
+	return int(C.sub_431370())
+}
+
+type Game1Globals struct {
+	v3484   uint32
+	v251744 uint32
+}
+
+func C_game1Globals() Game1Globals {
+	return Game1Globals{
+		v3484:   uint32(C.dword_5d4594_3484),
+		v251744: uint32(C.dword_5d4594_251744),
+	}
+}
+
+func C_game1SetGlobals(v Game1Globals) {
+	C.dword_5d4594_3484 = C.uint32_t(v.v3484)
+	C.dword_5d4594_251744 = C.uint32_t(v.v251744)
 }

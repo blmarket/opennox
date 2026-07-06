@@ -15,6 +15,18 @@ int sub_45F500(int a1, int a2);
 int sub_4526D0(int a1);
 int sub_459DB0(struct nox_drawable* dr);
 int nox_xxx_spriteSetActiveMB_45A990_drawable(int a1);
+int sub_44D040(int i);
+int sub_44D060(int a1);
+int sub_44D090(int a1);
+void sub_44D960();
+int sub_44D970();
+int sub_44D990();
+double sub_44E8B0();
+int nox_xxx_wndProc_44E6E0(int a1, int a2, int a3, int a4);
+
+extern uint32_t dword_5d4594_831092;
+extern uint32_t dword_587000_122848;
+extern uint32_t dword_5d4594_831220;
 */
 import "C"
 import "unsafe"
@@ -116,4 +128,65 @@ func C_nox_xxx_spriteSetActiveMB_45A990_drawable() (ret int, flagsAfter uint32) 
 	ret = int(C.nox_xxx_spriteSetActiveMB_45A990_drawable(C.int(uintptr(buf))))
 	flagsAfter = *(*uint32)(unsafe.Pointer(uintptr(buf) + 120))
 	return
+}
+
+// C_sub_44D040 wraps sub_44D040 which checks thing pri_class.
+func C_sub_44D040(thingID int) int {
+	return int(C.sub_44D040(C.int(thingID)))
+}
+
+// C_sub_44D060 wraps sub_44D060 which checks thing flags.
+func C_sub_44D060(thingID int) int {
+	return int(C.sub_44D060(C.int(thingID)))
+}
+
+// C_sub_44D090 wraps sub_44D090 which checks thing flags.
+func C_sub_44D090(thingID int) int {
+	return int(C.sub_44D090(C.int(thingID)))
+}
+
+// C_sub_44D960 wraps sub_44D960 which sets dword_587000_122848 = 0.
+func C_sub_44D960() {
+	C.sub_44D960()
+}
+
+// C_sub_44D970 wraps sub_44D970 which returns dword_5d4594_831092 and sets dword_587000_122848 = 1 if non-zero.
+func C_sub_44D970() int {
+	return int(C.sub_44D970())
+}
+
+// C_sub_44D990 wraps sub_44D990 which returns dword_587000_122848.
+func C_sub_44D990() int {
+	return int(C.sub_44D990())
+}
+
+// C_sub_44E8B0 wraps sub_44E8B0 which returns 1.0 if dword_5d4594_831220 == 255 else 0.0.
+func C_sub_44E8B0() float64 {
+	return float64(C.sub_44E8B0())
+}
+
+// C_nox_xxx_wndProc_44E6E0 wraps nox_xxx_wndProc_44E6E0 which returns a2 == 23.
+func C_nox_xxx_wndProc_44E6E0(a1, a2, a3, a4 int) int {
+	return int(C.nox_xxx_wndProc_44E6E0(C.int(a1), C.int(a2), C.int(a3), C.int(a4)))
+}
+
+// Game2Globals holds the global variables for GAME2 functions.
+type Game2Globals struct {
+	v831092 uint32
+	v122848 uint32
+	v831220 uint32
+}
+
+func C_game2Globals() Game2Globals {
+	return Game2Globals{
+		v831092: uint32(C.dword_5d4594_831092),
+		v122848: uint32(C.dword_587000_122848),
+		v831220: uint32(C.dword_5d4594_831220),
+	}
+}
+
+func C_game2SetGlobals(v Game2Globals) {
+	C.dword_5d4594_831092 = C.uint32_t(v.v831092)
+	C.dword_587000_122848 = C.uint32_t(v.v122848)
+	C.dword_5d4594_831220 = C.uint32_t(v.v831220)
 }
