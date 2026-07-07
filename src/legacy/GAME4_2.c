@@ -17,8 +17,8 @@
 #include "common__crypt.h"
 #include "common__net_list.h"
 #include "common__random.h"
-#include "operators.h"
 #include "input.h"
+#include "operators.h"
 
 #include "client__video__draw_common.h"
 #include "common__magic__speltree.h"
@@ -287,11 +287,11 @@ int nox_xxx_mapCountWallsMB_51DEA0(int a1) {
 
 //----- (0051DED0) --------------------------------------------------------
 int sub_51DED0() {
-	int* v0;            // edi
-	char* v1;           // eax
-	float* v3;          // esi
-	int v4;             // ebx
-	int v5;             // eax
+	int* v0;   // edi
+	char* v1;  // eax
+	float* v3; // esi
+	int v4;    // ebx
+	int v5;    // eax
 
 	v0 = (int*)sub_45A060();
 	if (!v0) {
@@ -333,8 +333,8 @@ int nox_xxx_mapSaveMap_51E010(char* a1, int a2) {
 	v7 = -86050098;
 	strcpy(Mem, a1);
 	v8[0] = 0;
-	strncat(v8, a1, 1024-1);
-	v8[strlen(v8)-4] = 0;
+	strncat(v8, a1, 1024 - 1);
+	v8[strlen(v8) - 4] = 0;
 	v2 = &v8[strlen(v8) + 1];
 	v3 = getMemByte(0x587000, 253116);
 	*(uint32_t*)--v2 = *getMemU32Ptr(0x587000, 253112);
@@ -818,28 +818,31 @@ int nox_xxx_genReadAlgData_51EBB0(int a1, FILE* a2) {
 									if (nox_strcmpi("midRoomSize", (const char*)getMemAt(0x5D4594, 2487264))) {
 										if (nox_strcmpi("roomVariance", (const char*)getMemAt(0x5D4594, 2487264))) {
 											if (nox_strcmpi("irregularRoomRate",
-														 (const char*)getMemAt(0x5D4594, 2487264))) {
+															(const char*)getMemAt(0x5D4594, 2487264))) {
 												if (nox_strcmpi("mapSize", (const char*)getMemAt(0x5D4594, 2487264))) {
 													if (nox_strcmpi("recurs"
-																 "ionLim"
-																 "it",
-																 (const char*)getMemAt(0x5D4594, 2487264))) {
+																	"ionLim"
+																	"it",
+																	(const char*)getMemAt(0x5D4594, 2487264))) {
 														if (nox_strcmpi("seed",
-																	 (const char*)getMemAt(0x5D4594, 2487264))) {
+																		(const char*)getMemAt(0x5D4594, 2487264))) {
 															if (nox_strcmpi("emptyRoomRate",
-																		 (const char*)getMemAt(0x5D4594, 2487264))) {
+																			(const char*)getMemAt(0x5D4594, 2487264))) {
 																if (nox_strcmpi("mergeRate", (const char*)getMemAt(
-																							  0x5D4594, 2487264))) {
-																	if (nox_strcmpi("useDoors", (const char*)getMemAt(
 																								 0x5D4594, 2487264))) {
-																		if (nox_strcmpi("debug", (const char*)getMemAt(
-																								  0x5D4594, 2487264))) {
+																	if (nox_strcmpi(
+																			"useDoors",
+																			(const char*)getMemAt(0x5D4594, 2487264))) {
+																		if (nox_strcmpi("debug",
+																						(const char*)getMemAt(
+																							0x5D4594, 2487264))) {
 																			if (nox_strcmpi("adjacentPortalRate",
-																						 (const char*)getMemAt(
-																							 0x5D4594, 2487264))) {
-																				if (!nox_strcmpi("skeleton",
-																							  (const char*)getMemAt(
-																								  0x5D4594, 2487264))) {
+																							(const char*)getMemAt(
+																								0x5D4594, 2487264))) {
+																				if (!nox_strcmpi(
+																						"skeleton",
+																						(const char*)getMemAt(
+																							0x5D4594, 2487264))) {
 																					v2 = 0;
 																					if (*getMemU32Ptr(0x587000,
 																									  253244)) {
@@ -847,7 +850,8 @@ int nox_xxx_genReadAlgData_51EBB0(int a1, FILE* a2) {
 																							0x587000, 253244);
 																						v4 = getMemAt(0x587000, 253244);
 																						do {
-																							if (!nox_strcmpi(*v3, &v7)) {
+																							if (!nox_strcmpi(*v3,
+																											 &v7)) {
 																								break;
 																							}
 																							v5 = *((uint32_t*)v4 + 1);
@@ -1480,8 +1484,7 @@ int nox_xxx_genReadDecor_51F9F0(uint32_t* a1, FILE* a2) {
 												v7 = (const char**)getMemAt(0x587000, 253200);
 												v8 = getMemAt(0x587000, 253200);
 												do {
-													if (!nox_strcmpi(*v7, (const char*)getMemAt(
-																		   0x5D4594, 2487264))) {
+													if (!nox_strcmpi(*v7, (const char*)getMemAt(0x5D4594, 2487264))) {
 														if (!v15 || !sub_51FEC0((int)v15, v6, a2)) {
 															return 0;
 														}
@@ -1680,7 +1683,7 @@ int nox_xxx_genDecorReadDecorSet_51FFA0(int a1, FILE* a2) {
 		if (*getMemU32Ptr(0x587000, 253216)) {
 			do {
 				if (!nox_strcmpi(*(const char**)getMemAt(0x587000, 253216 + 4 * *(uint32_t*)v2),
-							  (const char*)getMemAt(0x5D4594, 2487264))) {
+								 (const char*)getMemAt(0x5D4594, 2487264))) {
 					break;
 				}
 				v8 = *(uint32_t*)v2 + 1;
@@ -2834,7 +2837,7 @@ int sub_521A70(int a1, int a2, int a3) {
 
 //----- (00521AA0) --------------------------------------------------------
 int sub_521AA0(uint32_t* a1, int a2) {
-	int v2;     // eax
+	int v2; // eax
 
 	if (*a1 == 1) {
 		return 0;
@@ -3978,12 +3981,7 @@ void nox_xxx_sendArrowTrapFX_5238A0(float* a1, char a2) {
 }
 
 //----- (005238F0) --------------------------------------------------------
-int nox_xxx_mapGenCheckRoomType_5238F0(int* a1) {
-	int v1; // eax
-
-	v1 = *a1;
-	return *a1 == 2 || v1 == 3 || v1 == 4 || v1 == 5;
-}
+// Migrated to Go: nox_xxx_mapGenCheckRoomType_5238F0 is now implemented in src/legacy/wall.go
 
 //----- (00523920) --------------------------------------------------------
 int sub_523920(int a1) {
@@ -7206,8 +7204,8 @@ short sub_528030(int a1) {
 		v5 = gameFrame();
 		v7 = gameFPS();
 	} else if (abs(*v3 - *(unsigned short*)(v2 + 10)) >= v3[2] / 10 ||
-		(v5 = gameFrame(), v6 = *(uint32_t*)(v4 + 2176), v7 = gameFPS(),
-		 (unsigned int)(gameFrame() - v6) > (int)gameFPS() >> 2)) {
+			   (v5 = gameFrame(), v6 = *(uint32_t*)(v4 + 2176), v7 = gameFPS(),
+				(unsigned int)(gameFrame() - v6) > (int)gameFPS() >> 2)) {
 		nox_xxx_netSendPlrHealthToTeam_4D86E0(v11);
 		v8 = *(uint32_t*)(v2 + 276);
 		*(uint16_t*)(v2 + 10) = **(uint16_t**)(v1 + 556);
@@ -7277,27 +7275,27 @@ int nox_xxx_frameCounterSetCopy_5281E0() {
 int nox_xxx_unitCanSee_536FB0(nox_object_t* a1, nox_object_t* a2, int a3);
 void nox_xxx_unitUpdateSightMB_5281F0(nox_object_t* a1p) {
 	uint32_t a1 = a1p;
-	uint32_t v1;   // edi
-	int v2;     // eax
-	int v3;     // ebp
-	double v4;  // st7
-	int v5;     // esi
-	int* v6;    // ebx
-	double v7;  // st7
-	double v8;  // st6
-	double v9;  // st7
-	double v10; // st6
-	int v11;    // eax
-	int v12;    // eax
-	int v13;    // esi
-	int v14;    // eax
-	int v15;    // eax
-	int v16;    // esi
-	int v17;    // [esp+10h] [ebp-10h]
-	float v18;  // [esp+10h] [ebp-10h]
-	int v19;    // [esp+14h] [ebp-Ch]
-	float v20;  // [esp+18h] [ebp-8h]
-	float v21;  // [esp+24h] [ebp+4h]
+	uint32_t v1; // edi
+	int v2;      // eax
+	int v3;      // ebp
+	double v4;   // st7
+	int v5;      // esi
+	int* v6;     // ebx
+	double v7;   // st7
+	double v8;   // st6
+	double v9;   // st7
+	double v10;  // st6
+	int v11;     // eax
+	int v12;     // eax
+	int v13;     // esi
+	int v14;     // eax
+	int v15;     // eax
+	int v16;     // esi
+	int v17;     // [esp+10h] [ebp-10h]
+	float v18;   // [esp+10h] [ebp-10h]
+	int v19;     // [esp+14h] [ebp-Ch]
+	float v20;   // [esp+18h] [ebp-8h]
+	float v21;   // [esp+24h] [ebp+4h]
 
 	v1 = a1;
 	v17 = 0;
@@ -7327,11 +7325,10 @@ void nox_xxx_unitUpdateSightMB_5281F0(nox_object_t* a1p) {
 		v6 = (int*)(v3 + 1132);
 		do {
 			if (*(uint32_t*)(*v6 + 16) & 0x8020 || !nox_xxx_unitCanSee_536FB0(v1, *v6, 0) ||
-				(v7 = *(float*)(v1 + 56) - *(float*)(*v6 + 56),
-				 v8 = *(float*)(v1 + 60) - *(float*)(*v6 + 60), v20 = (v21 + 30.0) * (v21 + 30.0),
-				 v8 * v8 + v7 * v7 > v20) ||
-				(v9 = *(float*)(v1 + 56) - *(float*)(v1 + 72),
-				 v10 = *(float*)(v1 + 60) - *(float*)(v1 + 76), v10 * v10 + v9 * v9 > 1000.0) ||
+				(v7 = *(float*)(v1 + 56) - *(float*)(*v6 + 56), v8 = *(float*)(v1 + 60) - *(float*)(*v6 + 60),
+				 v20 = (v21 + 30.0) * (v21 + 30.0), v8 * v8 + v7 * v7 > v20) ||
+				(v9 = *(float*)(v1 + 56) - *(float*)(v1 + 72), v10 = *(float*)(v1 + 60) - *(float*)(v1 + 76),
+				 v10 * v10 + v9 * v9 > 1000.0) ||
 				v19 && !nox_xxx_unitCanInteractWith_5370E0(v1, *v6, 0)) {
 				nox_xxx_aiLostSight_528560(v1, v5--);
 				v17 = 1;
@@ -7345,10 +7342,8 @@ void nox_xxx_unitUpdateSightMB_5281F0(nox_object_t* a1p) {
 	if (v11 && nox_xxx_testUnitBuffs_4FF350(v11, 28)) {
 		v17 = 1;
 	}
-	if ((!*(uint32_t*)(v3 + 1196) ||
-		 gameFrame() - *(uint32_t*)(v3 + 1204) > (unsigned int)(2 * gameFPS())) &&
-		(*(uint32_t*)(v3 + 1208) <= gameFrame() ||
-		 gameFrame() == *getMemU32Ptr(0x5D4594, 2487684))) {
+	if ((!*(uint32_t*)(v3 + 1196) || gameFrame() - *(uint32_t*)(v3 + 1204) > (unsigned int)(2 * gameFPS())) &&
+		(*(uint32_t*)(v3 + 1208) <= gameFrame() || gameFrame() == *getMemU32Ptr(0x5D4594, 2487684))) {
 		nox_xxx_unitsGetInCircle_517F90((float2*)(v1 + 56), v21, nox_xxx_monsterUpdateSeenEnemies_5286D0, v1);
 		*(uint32_t*)(v3 + 1204) = gameFrame();
 		*(uint32_t*)(v3 + 1212) = gameFrame();
@@ -7378,8 +7373,8 @@ void nox_xxx_unitUpdateSightMB_5281F0(nox_object_t* a1p) {
 			if (v18 < 0.0) {
 				*(uint32_t*)(v3 + 1208) = v16 + gameFrame();
 			} else if (v18 > (double)v21) {
-				*(uint32_t*)(v3 + 1208) = (unsigned long long)(long long)((v18 - v21) * (double)v16 / (1000.0 - v21)) +
-										  10 + gameFrame();
+				*(uint32_t*)(v3 + 1208) =
+					(unsigned long long)(long long)((v18 - v21) * (double)v16 / (1000.0 - v21)) + 10 + gameFrame();
 			} else {
 				*(uint32_t*)(v3 + 1208) = nox_common_randomInt_415FA0(5, 10) + gameFrame();
 			}
@@ -7556,8 +7551,7 @@ void nox_xxx_monsterVisionSeeEnemy_5287B0(int a1, int a2) {
 				if (v17) {
 					nox_xxx_aud_501960(*(uint32_t*)(v17 + 68), v2, 0, 0);
 				}
-				*(uint32_t*)(v4 + 536) =
-					gameFrame() + nox_common_randomInt_415FA0(2 * gameFPS(), 4 * gameFPS());
+				*(uint32_t*)(v4 + 536) = gameFrame() + nox_common_randomInt_415FA0(2 * gameFPS(), 4 * gameFPS());
 			}
 		}
 	}
@@ -8175,8 +8169,7 @@ LABEL_171:
 				if (v31 & 0x2000) {
 					v32 = 0;
 					v33 = 0;
-					for (j = nox_xxx_inventoryGetFirst_4E7980(a1); j;
-						 j = nox_xxx_inventoryGetNext_4E7990(j)) {
+					for (j = nox_xxx_inventoryGetFirst_4E7980(a1); j; j = nox_xxx_inventoryGetNext_4E7990(j)) {
 						if (*(unsigned short*)(j + 4) == *getMemU32Ptr(0x5D4594, 2487692)) {
 							v32 = 1;
 						}
@@ -10040,7 +10033,8 @@ int nox_xxx_castFist_52D3C0(int a1, int a2, int a3, int a4, int a5, int a6) {
 }
 
 //----- (0052D5C0) --------------------------------------------------------
-int nox_xxx_spellCastCleansingFlame_52D5C0(int a1, nox_object_t* a2p, nox_object_t* a3p, nox_object_t* a4p, void* a5p, int a6) {
+int nox_xxx_spellCastCleansingFlame_52D5C0(int a1, nox_object_t* a2p, nox_object_t* a3p, nox_object_t* a4p, void* a5p,
+										   int a6) {
 	int a2 = a2p;
 	int a3 = a3p;
 	int a4 = a4p;
@@ -10122,8 +10116,7 @@ int nox_xxx_spellCastCleansingFlame_52D5C0(int a1, nox_object_t* a2p, nox_object
 					*((uint16_t*)v9 + 63) = *((uint16_t*)v9 + 62);
 					v9[20] = v21 * 4.0;
 					v9[21] = v22 * 4.0;
-					*((uint32_t*)v9 + 34) =
-						gameFrame() + nox_common_randomInt_415FA0(3 * gameFPS(), 6 * gameFPS());
+					*((uint32_t*)v9 + 34) = gameFrame() + nox_common_randomInt_415FA0(3 * gameFPS(), 6 * gameFPS());
 					v9[39] = *(float*)(a4 + 56);
 					v9[40] = *(float*)(a4 + 60);
 					*((uint32_t*)v9 + 186) = nox_xxx_updateFlameCleanse_53D510;
@@ -10663,8 +10656,7 @@ int nox_xxx_spellDrainMana_52E210(float a1) {
 		nox_xxx_netStartDurationRaySpell_4FF130(v1);
 	}
 	v18 = nox_float2int(v22);
-	if (sub_52E450(*(uint32_t*)(v1 + 16), *(uint32_t*)(v1 + 48), v18) &&
-		!(gameFrame() % (gameFPS() >> 1))) {
+	if (sub_52E450(*(uint32_t*)(v1 + 16), *(uint32_t*)(v1 + 48), v18) && !(gameFrame() % (gameFPS() >> 1))) {
 		nox_xxx_aud_501960(230, *(uint32_t*)(v1 + 16), 0, 0);
 		nox_xxx_aud_501960(229, *(uint32_t*)(v1 + 48), 0, 0);
 	}

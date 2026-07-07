@@ -63,7 +63,7 @@ enum {
 #define FindNextFileA compatFindNextFileA
 #define FindClose compatFindClose
 
-HANDLE FindFirstFileA(const char* lpFileName, LPWIN32_FIND_DATAA lpFindFileData);
+HANDLE FindFirstFileA(char* lpFileName, LPWIN32_FIND_DATAA lpFindFileData);
 int FindNextFileA(HANDLE hFindFile, LPWIN32_FIND_DATAA lpFindFileData);
 int FindClose(HANDLE hFindFile);
 

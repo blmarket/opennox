@@ -9,6 +9,7 @@ extern uint32_t dword_5d4594_1599656;
 import "C"
 import (
 	"image"
+	"math"
 	"unsafe"
 
 	"github.com/noxworld-dev/opennox-lib/object"
@@ -169,6 +170,14 @@ func nox_xxx_wallBreackableListAdd_410840(a1 unsafe.Pointer) {
 	GetServer().S().Walls.AddBreakable(asWallP(a1))
 }
 
+//export nox_xxx_wallSecretNext_410790
+func nox_xxx_wallSecretNext_410790(a1 *C.int) C.int {
+	if a1 != nil {
+		return *a1
+	}
+	return 0
+}
+
 //export nox_xxx_wall_4DF1E0
 func nox_xxx_wall_4DF1E0(a1 int) {
 	GetServer().Nox_xxx_wall_4DF1E0(a1)
@@ -176,6 +185,21 @@ func nox_xxx_wall_4DF1E0(a1 int) {
 
 func Sub_5071C0() bool {
 	return C.dword_5d4594_1599656 != 0
+}
+
+//export nox_xxx_math_509ED0
+func nox_xxx_math_509ED0(a1 *C.float2) C.int {
+	x := float64(a1.field_0)
+	y := float64(a1.field_4)
+	v2 := (math.Atan2(y, x)+6.2831855)*40.743664 + 0.5
+	result := int(v2)
+	if result < 0 {
+		result += int((uint32(255-result) >> 8) << 8)
+	}
+	if result >= 256 {
+		result += -256 * int(uint32(result)>>8)
+	}
+	return C.int(result)
 }
 
 func Nox_xxx_math_509ED0(pos types.Pointf) int {
@@ -187,4 +211,30 @@ func Nox_xxx_math_509ED0(pos types.Pointf) int {
 
 func Nox_xxx_math_509EA0(a1 int) int {
 	return int(C.nox_xxx_math_509EA0(C.int(a1)))
+}
+
+//export nox_xxx_utilNormalizeVector_509F20
+func nox_xxx_utilNormalizeVector_509F20(a1 *C.float2) {
+	x := float64(a1.field_0)
+	y := float64(a1.field_4)
+	v1 := math.Sqrt(x*x + y*y)
+	a1.field_0 = C.float(x / v1)
+	a1.field_4 = C.float(y / v1)
+}
+
+//export nox_xxx_monsterActionIsCondition_50A010
+func nox_xxx_monsterActionIsCondition_50A010(a1 C.int) C.int {
+	if a1 > 39 {
+		return 1
+	}
+	return 0
+}
+
+//export nox_xxx_mapGenCheckRoomType_5238F0
+func nox_xxx_mapGenCheckRoomType_5238F0(a1 *C.int) C.int {
+	v := *a1
+	if v == 2 || v == 3 || v == 4 || v == 5 {
+		return 1
+	}
+	return 0
 }

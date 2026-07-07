@@ -29,7 +29,7 @@ func TestCompatFindFileA(t *testing.T) {
 		}
 		seen[next.FileName] = next
 	}
-	if !compatFindClose(h) {
+	if !closeCompatFind(h) {
 		t.Fatal("FindClose returned false")
 	}
 

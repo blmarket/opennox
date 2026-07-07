@@ -50,7 +50,6 @@ int nox_server_gameSettingsUpdated; // If you define it as 1-byte bool, the game
 extern obj_5D4594_2650668_t** ptr_5D4594_2650668;
 extern int ptr_5D4594_2650668_cap;
 
-
 uint32_t nox_tile_def_cnt = 0;
 nox_tileDef_t nox_tile_defs_arr[176] = {0};
 
@@ -778,16 +777,17 @@ uint32_t* nox_xxx_wallSecretBlock_410760(uint32_t* a1) {
 void* nox_xxx_wallSecretGetFirstWall_410780() { return dword_5d4594_251560; }
 
 //----- (00410790) --------------------------------------------------------
-int nox_xxx_wallSecretNext_410790(int* a1) {
-	int result; // eax
-
-	if (a1) {
-		result = *a1;
-	} else {
-		result = 0;
-	}
-	return result;
-}
+// Migrated to Go: nox_xxx_wallSecretNext_410790
+// int nox_xxx_wallSecretNext_410790(int* a1) {
+// 	int result; // eax
+//
+// 	if (a1) {
+// 		result = *a1;
+// 	} else {
+// 		result = 0;
+// 	}
+// 	return result;
+// }
 
 //----- (004107A0) --------------------------------------------------------
 int* sub_4107A0(void* lpMem) {
@@ -1075,7 +1075,7 @@ int nox_thing_read_FLOR_411540(nox_memfile* f, uint8_t* a2) {
 	char v7 = nox_memfile_read_i8(f);
 	char v8 = nox_memfile_read_i8(f);
 	char v9 = nox_memfile_read_i8(f);
-	uint8_t cbuf[6];    // [esp+0h] [ebp-28h]
+	uint8_t cbuf[6]; // [esp+0h] [ebp-28h]
 	cbuf[0] = v7;
 	cbuf[1] = v8;
 	cbuf[2] = v9;
@@ -1924,10 +1924,10 @@ int nox_thing_read_audio_415660(nox_memfile* a1p, char* a2) {
 
 //----- (00415960) --------------------------------------------------------
 int sub_415960(wchar2_t* a1) {
-	int v1;             // edi
+	int v1;              // edi
 	const wchar2_t** v2; // eax
-	unsigned char* v3;  // esi
-	int v4;             // ecx
+	unsigned char* v3;   // esi
+	int v4;              // ecx
 
 	v1 = 0;
 	if (!*getMemU32Ptr(0x587000, 33392)) {
@@ -2011,10 +2011,10 @@ double nox_xxx_itemApplyDefendEffect_415C00(int a1) {
 
 //----- (00415DA0) --------------------------------------------------------
 int sub_415DA0(wchar2_t* a1) {
-	int v1;             // edi
+	int v1;              // edi
 	const wchar2_t** v2; // eax
-	unsigned char* v3;  // esi
-	int v4;             // ecx
+	unsigned char* v3;   // esi
+	int v4;              // ecx
 
 	v1 = 0;
 	if (!*getMemU32Ptr(0x587000, 35496)) {
@@ -2125,7 +2125,7 @@ int sub_4161E0() {
 	v6 = 0;
 	v9 = 0;
 	do {
-		if (*getMemU32Ptr(0x5D4594, 371380 + 24 + 4*v9) != v15[v9]) {
+		if (*getMemU32Ptr(0x5D4594, 371380 + 24 + 4 * v9) != v15[v9]) {
 			break;
 		}
 		v9 = ++v6;
@@ -2166,7 +2166,7 @@ void sub_4164F0() { dword_5d4594_371692 = 0; }
 int sub_416580() { return *getMemU32Ptr(0x5D4594, 371688); }
 
 //----- (00416590) --------------------------------------------------------
-char* nox_xxx_cliGamedataGet_416590(int a1) { return (char*)getMemAt(0x5D4594, 371380 + 58*a1); }
+char* nox_xxx_cliGamedataGet_416590(int a1) { return (char*)getMemAt(0x5D4594, 371380 + 58 * a1); }
 
 //----- (004165B0) --------------------------------------------------------
 char* sub_4165B0() { return (char*)getMemAt(0x5D4594, 371380 + 58 * *getMemU32Ptr(0x5D4594, 371688)); }
@@ -2174,7 +2174,7 @@ char* sub_4165B0() { return (char*)getMemAt(0x5D4594, 371380 + 58 * *getMemU32Pt
 //----- (004165D0) --------------------------------------------------------
 char* sub_4165D0(int a1) {
 	*getMemU32Ptr(0x5D4594, 371688) = a1;
-	return (char*)getMemAt(0x5D4594, 371380 + 58*a1);
+	return (char*)getMemAt(0x5D4594, 371380 + 58 * a1);
 }
 
 //----- (004165F0) --------------------------------------------------------
@@ -2182,7 +2182,7 @@ int sub_4165F0(int a1, int a2) {
 	int result; // eax
 
 	result = a2;
-	memcpy(getMemAt(0x5D4594, 371380 + 58*a2), getMemAt(0x5D4594, 371380 + 58*a1), 0x3Au);
+	memcpy(getMemAt(0x5D4594, 371380 + 58 * a2), getMemAt(0x5D4594, 371380 + 58 * a1), 0x3Au);
 	return result;
 }
 
@@ -3245,11 +3245,11 @@ void sub_4184D0(nox_team_t* a1p) {
 
 //----- (004185B0) --------------------------------------------------------
 int nox_xxx_wndGuiTeamCreate_4185B0() {
-	int result;  // eax
-	int i;       // esi
-	char* v2;    // edi
-	int v3;      // eax
-	char v4;     // bl
+	int result;   // eax
+	int i;        // esi
+	char* v2;     // edi
+	int v3;       // eax
+	char v4;      // bl
 	wchar2_t* v5; // eax
 
 	nox_xxx_SetGameplayFlag_417D50(4);

@@ -16,8 +16,8 @@
 #include "common__crypt.h"
 #include "common__net_list.h"
 #include "common__random.h"
-#include "operators.h"
 #include "common__system__team.h"
+#include "operators.h"
 #include "server__gamemech__explevel.h"
 #include "server__magic__plyrspel.h"
 #include "server__system__trade.h"
@@ -327,7 +327,7 @@ int nox_xxx_xferIndexedDirection_509E20(int a1, int2* a2) {
 }
 
 //----- (00509E90) --------------------------------------------------------
-int nox_xxx_mathDirection4ToAngle_509E90(int a1) { return *getMemU32Ptr(0x587000, 230056 + 4 * (a1%9)); }
+int nox_xxx_mathDirection4ToAngle_509E90(int a1) { return *getMemU32Ptr(0x587000, 230056 + 4 * (a1 % 9)); }
 
 //----- (00509EA0) --------------------------------------------------------
 int nox_xxx_math_509EA0(int a1) {
@@ -338,29 +338,10 @@ int nox_xxx_math_509EA0(int a1) {
 }
 
 //----- (00509ED0) --------------------------------------------------------
-int nox_xxx_math_509ED0(float2* a1) {
-	int result; // eax
-	float v2;   // [esp+0h] [ebp-4h]
-
-	v2 = (atan2(a1->field_4, a1->field_0) + 6.2831855) * 40.743664 + 0.5;
-	result = nox_float2int(v2);
-	if (result < 0) {
-		result += (unsigned int)(255 - result) >> 8 << 8;
-	}
-	if (result >= 256) {
-		result += -256 * ((unsigned int)result >> 8);
-	}
-	return result;
-}
+// Migrated to Go: nox_xxx_math_509ED0 is now implemented in src/legacy/wall.go
 
 //----- (00509F20) --------------------------------------------------------
-void nox_xxx_utilNormalizeVector_509F20(float2* a1) {
-	double v1; // st7
-
-	v1 = nox_double2float(sqrt(a1->field_0 * a1->field_0 + a1->field_4 * a1->field_4));
-	a1->field_0 = a1->field_0 / v1;
-	a1->field_4 = a1->field_4 / v1;
-}
+// Migrated to Go: nox_xxx_utilNormalizeVector_509F20 is now implemented in src/legacy/wall.go
 
 //----- (00509FF0) --------------------------------------------------------
 int sub_509FF0(int a1) {
@@ -374,13 +355,7 @@ int sub_509FF0(int a1) {
 }
 
 //----- (0050A010) --------------------------------------------------------
-int nox_xxx_monsterActionIsCondition_50A010(int a1) {
-	int result; // eax
-
-	result = a1 < 39;
-	LOBYTE(result) = a1 > 39;
-	return result;
-}
+// Migrated to Go: nox_xxx_monsterActionIsCondition_50A010 is now implemented in src/legacy/wall.go
 
 //----- (0050A020) --------------------------------------------------------
 int nox_xxx_mobActionGet_50A020(int a1) {
@@ -3745,7 +3720,8 @@ int sub_516570() {
 	if (!v2) {
 		return 0;
 	}
-	return nox_xxx_netSendChapterEnd_4D9560((unsigned char)v2[2064], getMemByte(0x5D4594, 2386828), *getMemIntPtr(0x5D4594, 2386832));
+	return nox_xxx_netSendChapterEnd_4D9560((unsigned char)v2[2064], getMemByte(0x5D4594, 2386828),
+											*getMemIntPtr(0x5D4594, 2386832));
 }
 
 //----- (00516D00) --------------------------------------------------------
@@ -3994,8 +3970,7 @@ int nox_xxx_servParseMonsterDef_517170(FILE* a1, const char* a2) {
 		case 6:
 			v9 = 0;
 			nox_xxx_readStr_517090(a1, v10);
-			set_bitmask_flags_from_plus_separated_names_423930(
-				v10, &v9, (const char**)getMemAt(0x587000, 247536));
+			set_bitmask_flags_from_plus_separated_names_423930(v10, &v9, (const char**)getMemAt(0x587000, 247536));
 			*(uint16_t*)v6 = v9;
 			continue;
 		case 7:
@@ -4427,8 +4402,7 @@ int nox_xxx_netPlayerObjSend_518C30(nox_object_t* a1p, nox_object_t* a2p, int a3
 	if ((uint32_t*)v4 == v5) {
 		nox_xxx_playerReportAnything_4D9900(v4);
 	}
-	*(uint32_t*)(*(uint32_t*)(v23 + 276) + 4 * *(unsigned char*)(*(uint32_t*)(v6 + 276) + 2064) + 4452) =
-		gameFrame();
+	*(uint32_t*)(*(uint32_t*)(v23 + 276) + 4 * *(unsigned char*)(*(uint32_t*)(v6 + 276) + 2064) + 4452) = gameFrame();
 	v11 = *((uint16_t*)v5 + 2);
 	v22[0] = -61;
 	*(uint16_t*)&v22[3] = v11;

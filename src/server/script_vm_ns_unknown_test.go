@@ -1,24 +1,16 @@
 package server
 
-import (
-	"testing"
+import "testing"
 
-	"github.com/stretchr/testify/require"
-)
-
-func TestNoxScriptNSUnknown(t *testing.T) {
-	var ns NoxScriptNS
-
-	// Test all unused functions - they should not panic
-	require.NotPanics(t, func() {
-		ns.Unused1f(1)
-		ns.Unused20(2)
-		ns.Unused50()
-		ns.Unused58(1, 2)
-		ns.Unused59(3, 4)
-		ns.Unused5a(5, 6)
-		ns.Unused5b(7, 8)
-		ns.Unused5c(9, 10)
-		ns.Unused5d(11, 12)
-	})
+func TestNoxScriptNS_Unused(t *testing.T) {
+	var s NoxScriptNS
+	s.Unused1f(1)
+	s.Unused20(2)
+	s.Unused50()
+	s.Unused58(1, 2)
+	s.Unused59(3, 4)
+	s.Unused5a(5, 6)
+	s.Unused5b(7, 8)
+	s.Unused5c(9, 10)
+	s.Unused5d(11, 12)
 }

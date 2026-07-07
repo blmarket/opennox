@@ -49,7 +49,7 @@ func compatFindNext(h unsafe.Pointer) (compatFindData, bool) {
 	return compatFindDataFromC(&data), true
 }
 
-func compatFindClose(h unsafe.Pointer) bool {
+func closeCompatFind(h unsafe.Pointer) bool {
 	return C.FindClose((C.HANDLE)(h)) != 0
 }
 
