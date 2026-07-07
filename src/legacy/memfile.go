@@ -23,6 +23,11 @@ func asMemfileP(p unsafe.Pointer) *binfile.MemFile {
 	return (*binfile.MemFile)(p)
 }
 
+//export nox_memfile_read_i8
+func nox_memfile_read_i8(f *nox_memfile) C.int8_t {
+	return C.int8_t(asMemfile(f).ReadI8())
+}
+
 //export nox_memfile_read_u8
 func nox_memfile_read_u8(f *nox_memfile) C.uint8_t {
 	return C.uint8_t(asMemfile(f).ReadU8())
@@ -70,4 +75,9 @@ func nox_memfile_read64align_40AD60(dst *C.char, sz, cnt C.int32_t, f *nox_memfi
 	binary.LittleEndian.PutUint64(buf[:], v)
 	copy(unsafe.Slice((*byte)(unsafe.Pointer(dst)), int(sz)*int(cnt)), buf[:])
 	return 1
+}
+
+//export nox_memfile_skip
+func nox_memfile_skip(f *nox_memfile, n C.int) {
+	asMemfile(f).Skip(int(n))
 }

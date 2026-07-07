@@ -144,6 +144,11 @@ func nox_fs_fputs(f *FILE, str *C.char) int {
 	return n
 }
 
+//export go_nox_fs_fprintf_buf
+func go_nox_fs_fprintf_buf(f *FILE, buf *C.char) int {
+	return nox_fs_fputs(f, buf)
+}
+
 //export nox_fs_feof
 func nox_fs_feof(f *FILE) C.bool {
 	fp := fileByHandle(f)

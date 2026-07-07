@@ -465,18 +465,7 @@ int sub_48D4B0(int a1) {
 }
 
 //----- (0048D4F0) --------------------------------------------------------
-int sub_48D4F0(unsigned short a1, unsigned short a2) {
-	unsigned short v2; // cx
-
-	v2 = 10000;
-	if (a1 - 10000 < 0) {
-		if (a2 >= 0xFFFF - (unsigned short)(10000 - a1)) {
-			return 1;
-		}
-		v2 = a1;
-	}
-	return a2 < a1 && a2 >= a1 - v2;
-}
+// Migrated to Go: sub_48D4F0 in game2_3_go.go
 
 //----- (0048D560) --------------------------------------------------------
 int sub_48D560(unsigned short a1) {

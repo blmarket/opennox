@@ -9,12 +9,17 @@ import (
 )
 
 func main() {
-	if err := opennox.RunArgs(os.Args); err != nil && err != flag.ErrHelp {
+	os.Exit(run(os.Args))
+}
+
+func run(args []string) int {
+	if err := opennox.RunArgs(args); err != nil && err != flag.ErrHelp {
 		if code, ok := err.(opennox.ErrExit); ok {
-			os.Exit(int(code))
+			return int(code)
 		} else {
 			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
+			return 1
 		}
 	}
+	return 0
 }

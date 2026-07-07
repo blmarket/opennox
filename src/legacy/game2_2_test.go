@@ -36,4 +36,16 @@ func TestGame22(t *testing.T) {
 	t.Run("sub_487090 list remove", func(t *testing.T) {
 		require.Equal(t, 1, C_sub_487090())
 	})
+	t.Run("sub_481410 sets waypoint counter", func(t *testing.T) {
+		old := C_game2_2_getWaypointCounter()
+		t.Cleanup(func() { C_game2_2_setWaypointCounter(old) })
+
+		C_game2_2_setWaypointCounter(0)
+		C_sub_481410()
+		require.Equal(t, uint32(0xFFFFFFFF), C_game2_2_getWaypointCounter())
+
+		C_game2_2_setWaypointCounter(123)
+		C_sub_481410()
+		require.Equal(t, uint32(0xFFFFFFFF), C_game2_2_getWaypointCounter())
+	})
 }

@@ -351,12 +351,9 @@ wchar2_t* nox_wcscpy(wchar2_t* dest, const wchar2_t* src) {
 	return dest;
 }
 
-size_t nox_wcslen(const wchar2_t* nox_wcs) {
-	size_t result;
-	for (result = 0; nox_wcs[result]; result++)
-		;
-	return result;
-}
+size_t go_nox_wcslen(const wchar2_t* nox_wcs);
+
+size_t nox_wcslen(const wchar2_t* nox_wcs) { return go_nox_wcslen(nox_wcs); }
 
 wchar2_t* nox_wcsncpy(wchar2_t* dest, const wchar2_t* src, size_t n) {
 	size_t result;
@@ -422,24 +419,36 @@ int _nox_wcsicmp(const wchar2_t* string1, const wchar2_t* string2) {
 
 int nox_strcmpi(const char* _l, const char* _r) {
 	// MUSL implementation
-	const unsigned char *l=(void *)_l, *r=(void *)_r;
-	for (; *l && *r && (*l == *r || tolower(*l) == tolower(*r)); l++, r++);
+	const unsigned char *l = (void*)_l, *r = (void*)_r;
+	for (; *l && *r && (*l == *r || tolower(*l) == tolower(*r)); l++, r++)
+		;
 	int ret = tolower(*l) - tolower(*r);
 	// Old code may expect this
-	if (ret < -1) { ret = -1; }
-	if (ret > +1) { ret = +1; }
+	if (ret < -1) {
+		ret = -1;
+	}
+	if (ret > +1) {
+		ret = +1;
+	}
 	return ret;
 }
 
 int nox_strnicmp(const char* _l, const char* _r, int n) {
 	// MUSL implementation
-	const unsigned char *l=(void *)_l, *r=(void *)_r;
-	if (!n--) { return 0; }
-	for (; *l && *r && n && (*l == *r || tolower(*l) == tolower(*r)); l++, r++, n--);
+	const unsigned char *l = (void*)_l, *r = (void*)_r;
+	if (!n--) {
+		return 0;
+	}
+	for (; *l && *r && n && (*l == *r || tolower(*l) == tolower(*r)); l++, r++, n--)
+		;
 	int ret = tolower(*l) - tolower(*r);
 	// Old code may expect this
-	if (ret < -1) { ret = -1; }
-	if (ret > +1) { ret = +1; }
+	if (ret < -1) {
+		ret = -1;
+	}
+	if (ret > +1) {
+		ret = +1;
+	}
 	return ret;
 }
 

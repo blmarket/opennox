@@ -13,3 +13,15 @@ func TestNewPlayerError(t *testing.T) {
 	require.Error(t, err)
 	require.Nil(t, p)
 }
+
+func TestMoviePlayer_SetAudioGain(t *testing.T) {
+	p := &MoviePlayer{}
+	p.SetAudioGain(0.5)
+	require.Equal(t, float32(0.5), p.audioGain)
+
+	p.SetAudioGain(1.0)
+	require.Equal(t, float32(1.0), p.audioGain)
+
+	p.SetAudioGain(0.0)
+	require.Equal(t, float32(0.0), p.audioGain)
+}

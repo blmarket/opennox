@@ -3,6 +3,8 @@
 
 #include "common/fs/nox_fs.h"
 
+int go_nox_fs_fprintf_buf(FILE* f, const char* buf);
+
 int nox_fs_fprintf(FILE* f, const char* format, ...) {
 	char buf[2048] = {0};
 
@@ -11,5 +13,5 @@ int nox_fs_fprintf(FILE* f, const char* format, ...) {
 	vsnprintf(buf, sizeof(buf), format, args);
 	va_end(args);
 
-	return nox_fs_fputs(f, buf);
+	return go_nox_fs_fprintf_buf(f, buf);
 }

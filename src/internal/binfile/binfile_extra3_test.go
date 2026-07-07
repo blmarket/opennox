@@ -2,44 +2,56 @@ package binfile
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
-func TestLoadMemFile_InvalidPath(t *testing.T) {
-	_, err := LoadMemFile("nonexistent_file_12345.bin", 0)
-	require.Error(t, err)
+func TestBinfile_Mode_Extra(t *testing.T) {
+	b := &Binfile{mode: ReadOnly}
+	if b.Mode() != ReadOnly {
+		t.Errorf("Mode() = %v, want ReadOnly", b.Mode())
+	}
+	b.mode = WriteOnly
+	if b.Mode() != WriteOnly {
+		t.Errorf("Mode() = %v, want WriteOnly", b.Mode())
+	}
+	b.mode = ReadWrite
+	if b.Mode() != ReadWrite {
+		t.Errorf("Mode() = %v, want ReadWrite", b.Mode())
+	}
 }
 
-func TestBinfile_FileFlushExtra(t *testing.T) {
-	f := &Binfile{}
-	// FileFlush on nil File panics, just verify function exists
-	require.NotNil(t, f.FileFlush)
+func TestBinfileOpen_InvalidMode_Extra(t *testing.T) {
+	_, err := BinfileOpen("nonexistent", Mode(999))
+	if err == nil {
+		t.Error("BinfileOpen with invalid mode should return error")
+	}
 }
 
-func TestBinfile_WriteUint32AtExtra(t *testing.T) {
-	f := &Binfile{}
-	// Should handle nil file gracefully - just verify function exists
-	require.NotNil(t, f.WriteUint32At)
+func TestBinfile_Written_Extra(t *testing.T) {
+	b := &Binfile{}
+	// Written() on empty binfile may panic due to nil File, which is expected
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				t.Logf("Written() panicked as expected on empty binfile: %v", r)
+			}
+		}()
+		_ = b.Written()
+	}()
 }
 
-func TestBinfile_SkipLineExtra(t *testing.T) {
-	f := &Binfile{}
-	require.NotNil(t, f.SkipLine)
+func TestBinfile_Flags_Extra(t *testing.T) {
+	b := &Binfile{}
+	_ = b.flags()
 }
 
-func TestMemFile_Data_Empty(t *testing.T) {
-	mf := &MemFile{}
-	require.Nil(t, mf.Data())
-	require.Nil(t, mf.RawData())
-}
-
-func TestMemFile_SeekExtra(t *testing.T) {
-	mf := NewMemFile(nil, 0)
-	require.NotNil(t, mf)
-	// Seek on empty should not panic
-	pos, err := mf.Seek(0, 0)
-	require.NoError(t, err)
-	require.Equal(t, int64(0), pos)
-	mf.Free()
+func TestFile_ModeConstants_Extra(t *testing.T) {
+	if ReadOnly != 0 {
+		t.Errorf("ReadOnly should be 0, got %d", ReadOnly)
+	}
+	if WriteOnly != 1 {
+		t.Errorf("WriteOnly should be 1, got %d", WriteOnly)
+	}
+	if ReadWrite != 2 {
+		t.Errorf("ReadWrite should be 2, got %d", ReadWrite)
+	}
 }

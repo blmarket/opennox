@@ -224,3 +224,12 @@ func CWStrSlice(arr []string) ([]*wchar2_t, func()) {
 		freeList()
 	}
 }
+
+//export go_nox_wcslen
+func go_nox_wcslen(nox_wcs *C.wchar2_t) C.size_t {
+	if nox_wcs == nil {
+		return 0
+	}
+	n := alloc.StrLen((*wchar2_t)(nox_wcs))
+	return C.size_t(n)
+}

@@ -10,6 +10,8 @@ int sub_487C80(int a1);
 uint16_t* sub_480250(uint8_t* a1, uint16_t* a2);
 int sub_487590(int a1, const void* a2);
 void sub_487090(uint32_t** a1);
+void sub_481410();
+extern uint32_t nox_xxx_waypointCounterMB_587000_154948;
 */
 import "C"
 import "unsafe"
@@ -89,4 +91,16 @@ func C_sub_487090() int {
 	*(*uintptr)(unsafe.Pointer(uintptr(node) + 8)) = 0
 	C.sub_487090((**C.uint32_t)(unsafe.Pointer(node)))
 	return 1
+}
+
+func C_sub_481410() {
+	C.sub_481410()
+}
+
+func C_game2_2_getWaypointCounter() uint32 {
+	return uint32(C.nox_xxx_waypointCounterMB_587000_154948)
+}
+
+func C_game2_2_setWaypointCounter(v uint32) {
+	C.nox_xxx_waypointCounterMB_587000_154948 = C.uint32_t(v)
 }
