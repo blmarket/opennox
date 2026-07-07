@@ -194,6 +194,12 @@ func (c *c2goConv) tokens(exact bool, tokens ...interface{}) (int, []Token, bool
 			panic(res)
 		}
 	}
+	if j < len(conds) {
+		return 0, nil, false
+	}
+	if last == 0 {
+		last = len(c.toks)
+	}
 	return last, out, true
 }
 

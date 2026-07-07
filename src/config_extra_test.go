@@ -63,5 +63,7 @@ func TestWriteConfigLaterExtra(t *testing.T) {
 
 func TestMaybeWriteConfig(t *testing.T) {
 	// Just ensure it doesn't panic
+	isolateConfigPath(t)
+	configDirty = true
 	maybeWriteConfig()
 }

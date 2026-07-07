@@ -8,7 +8,9 @@ import (
 )
 
 func TestBlobSpans(t *testing.T) {
+	oldPath := blobPath
 	SetPath("../../")
+	t.Cleanup(func() { SetPath(oldPath) })
 	spans, err := BlobSpans(0x5D4594)
 	require.NoError(t, err)
 	t.Logf("spans: %d", len(spans))

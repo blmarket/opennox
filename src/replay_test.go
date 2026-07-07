@@ -4,9 +4,21 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/noxworld-dev/opennox-lib/prand"
+	"github.com/noxworld-dev/opennox-lib/strman"
 	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
 )
+
+func newReplayTestServer(t *testing.T) *Server {
+	t.Helper()
+	prev := noxServer
+	s := NewServer(nil, strman.New())
+	noxServer = s
+	t.Cleanup(func() {
+		s.Close()
+		noxServer = prev
+	})
+	return s
+}
 
 func TestReplayConstants(t *testing.T) {
 	if replayOpMsg != 1 {
@@ -25,9 +37,8 @@ func TestReplayConstants(t *testing.T) {
 
 func TestNoxXxxReplayWriteRndCounter(t *testing.T) {
 	// Setup minimal server with Rand
-	s := &Server{}
-	s.Rand.Logic = prand.New(12345)
-	noxServer = s
+	s := newReplayTestServer(t)
+	s.Rand.Logic.Reset(12345)
 
 	var buf bytes.Buffer
 	nox_xxx_replayWriteRndCounter_415F30(&buf)
@@ -44,9 +55,8 @@ func TestNoxXxxReplayWriteRndCounter(t *testing.T) {
 }
 
 func TestNoxXxxReplayReadeRndCounter(t *testing.T) {
-	s := &Server{}
-	s.Rand.Logic = prand.New(999)
-	noxServer = s
+	s := newReplayTestServer(t)
+	s.Rand.Logic.Reset(999)
 
 	// Write a known counter value
 	var buf bytes.Buffer
@@ -78,8 +88,7 @@ func TestNoxXxxReplaySaveConsole(t *testing.T) {
 
 	// valid cmd should write
 	replay.writer = &buf
-	s := &Server{}
-	noxServer = s
+	newReplayTestServer(t)
 	nox_xxx_replaySaveConsole("test command")
 	if buf.Len() == 0 {
 		t.Fatal("valid cmd should write data")
@@ -89,6 +98,8 @@ func TestNoxXxxReplaySaveConsole(t *testing.T) {
 }
 
 func TestNoxXxxReplayWriteFrame(t *testing.T) {
+	noxflags.UnsetEngine(noxflags.EngineReplayWrite)
+
 	// nil writer should not panic
 	replay.writer = nil
 	nox_xxx_replayWriteFrame_4D39B0()
@@ -96,17 +107,18 @@ func TestNoxXxxReplayWriteFrame(t *testing.T) {
 	// with writer
 	var buf bytes.Buffer
 	replay.writer = &buf
-	s := &Server{}
-	noxServer = s
+	newReplayTestServer(t)
+	noxflags.SetEngine(noxflags.EngineReplayWrite)
 	nox_xxx_replayWriteFrame_4D39B0()
 	if buf.Len() != 5 {
 		t.Fatalf("expected 5 bytes for frame op, got %d", buf.Len())
 	}
+	noxflags.UnsetEngine(noxflags.EngineReplayWrite)
 	replay.writer = nil
 }
 
 func TestNoxXxxReplayStopSave(t *testing.T) {
-	s := &Server{}
+	s := newReplayTestServer(t)
 	// nil closer should not panic
 	replay.wcloser = nil
 	replay.writer = &bytes.Buffer{}
@@ -120,7 +132,7 @@ func TestNoxXxxReplayStopSave(t *testing.T) {
 }
 
 func TestNoxXxxReplayStopRead(t *testing.T) {
-	s := &Server{}
+	s := newReplayTestServer(t)
 	replay.rcloser = nil
 	replay.reader = &bytes.Buffer{}
 	replay.readHeader = true

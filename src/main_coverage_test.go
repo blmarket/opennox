@@ -5,6 +5,7 @@ import (
 )
 
 func TestConfigCoverage(t *testing.T) {
+	isolateConfigPath(t)
 	call := func(f func()) {
 		defer func() { recover() }()
 		f()

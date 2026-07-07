@@ -243,13 +243,18 @@ func (f *Binfile) WriteUint32At(v uint32, off int64) error {
 
 func (f *Binfile) SkipLine() error {
 	var buf [1]byte
+	readAny := false
 	for {
 		_, err := f.Read(buf[:])
 		if err == io.EOF {
+			if !readAny {
+				return io.EOF
+			}
 			break
 		} else if err != nil {
 			return err
 		}
+		readAny = true
 		if buf[0] != '\n' {
 			break
 		}

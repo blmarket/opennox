@@ -8,6 +8,21 @@ import (
 	"github.com/spf13/viper"
 )
 
+func isolateConfigPath(t *testing.T) {
+	t.Helper()
+	oldPath := configPath
+	oldDirty := configDirty
+	oldReadOnly := configReadOnly
+	configPath = filepath.Join(t.TempDir(), "opennox.yml")
+	configDirty = false
+	configReadOnly = false
+	t.Cleanup(func() {
+		configPath = oldPath
+		configDirty = oldDirty
+		configReadOnly = oldReadOnly
+	})
+}
+
 func TestConfigStrPtr(t *testing.T) {
 	viper.Reset()
 	defer viper.Reset()
@@ -64,6 +79,7 @@ func TestConfigHiddenBoolPtr(t *testing.T) {
 }
 
 func TestReadConfig(t *testing.T) {
+	isolateConfigPath(t)
 	viper.Reset()
 	defer viper.Reset()
 	old := onConfigRead
@@ -84,6 +100,7 @@ func TestReadConfig(t *testing.T) {
 }
 
 func TestReadConfigNotFound(t *testing.T) {
+	isolateConfigPath(t)
 	viper.Reset()
 	defer viper.Reset()
 	old := onConfigRead

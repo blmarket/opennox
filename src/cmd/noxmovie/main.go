@@ -27,6 +27,15 @@ func main() {
 }
 
 func run(fname string) error {
+	if fname == "" {
+		return errors.New("empty movie file")
+	}
+	if st, err := os.Stat(fname); err != nil {
+		return err
+	} else if st.IsDir() {
+		return fmt.Errorf("%q is a directory", fname)
+	}
+
 	// Handles needed for communication with C (currently used by audio backend).
 	// TODO: move them to engine instead
 	handles.Init()
