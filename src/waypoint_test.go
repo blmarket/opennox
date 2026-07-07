@@ -3,8 +3,27 @@ package opennox
 import (
 	"testing"
 
+	"github.com/noxworld-dev/opennox-lib/types"
+	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
 	"github.com/noxworld-dev/opennox/v1/server"
 )
+
+func testServerWithMapGroups(t *testing.T) *Server {
+	t.Helper()
+
+	hadFlag22 := noxflags.HasGame(noxflags.GameFlag22)
+	noxflags.SetGame(noxflags.GameFlag22)
+	t.Cleanup(func() {
+		if !hadFlag22 {
+			noxflags.UnsetGame(noxflags.GameFlag22)
+		}
+	})
+
+	s := &Server{Server: &server.Server{}}
+	s.MapGroups.Init()
+	t.Cleanup(s.MapGroups.Free)
+	return s
+}
 
 func TestServerGetWaypointGroupByID(t *testing.T) {
 	// getWaypointGroupByID accesses s.MapGroups and s.WPs
@@ -26,8 +45,7 @@ func TestServerGetWaypointGroupByID(t *testing.T) {
 }
 
 func TestGetWaypointGroupByIDWithGroups(t *testing.T) {
-	s := &Server{}
-	s.MapGroups = server.NewMapGroups()
+	s := testServerWithMapGroups(t)
 
 	// Test with non-existent group
 	result := s.getWaypointGroupByID("nonexistent")
@@ -36,13 +54,14 @@ func TestGetWaypointGroupByIDWithGroups(t *testing.T) {
 	}
 
 	// Create a waypoint group
-	s.WPs = server.NewWaypoints()
-	wp := &server.Waypoint{}
-	wp.SetInd(1)
-	s.WPs.Add(wp)
+	wp := s.NewWaypoint(types.Pointf{})
 
-	g := s.MapGroups.NewGroup("test_group", server.MapGroupWaypoints)
-	g.Add(1, 0)
+	if ok := s.MapGroups.MapLoadAddGroup57C0C0("test_group", 1, byte(server.MapGroupWaypoints)); ok == 0 {
+		t.Fatal("Failed to create waypoint group")
+	}
+	if ok := s.MapGroups.Sub57C130([]uint32{uint32(wp.Ind())}, 1); ok == 0 {
+		t.Fatal("Failed to add waypoint to group")
+	}
 
 	result = s.getWaypointGroupByID("test_group")
 	if result == nil {
@@ -55,19 +74,18 @@ func TestGetWaypointGroupByIDWithGroups(t *testing.T) {
 }
 
 func TestGetWaypointGroupByIDEmptyGroup(t *testing.T) {
-	s := &Server{}
-	s.MapGroups = server.NewMapGroups()
-	s.WPs = server.NewWaypoints()
+	s := testServerWithMapGroups(t)
 
-	g := s.MapGroups.NewGroup("empty_group", server.MapGroupWaypoints)
-	_ = g
+	if ok := s.MapGroups.MapLoadAddGroup57C0C0("empty_group", 1, byte(server.MapGroupWaypoints)); ok == 0 {
+		t.Fatal("Failed to create waypoint group")
+	}
 
 	result := s.getWaypointGroupByID("empty_group")
 	if result == nil {
 		t.Fatal("Expected non-nil result for empty group")
 	}
 
-	if len(result.List()) != 0 {
-		t.Errorf("Empty group should have 0 waypoints, got %d", len(result.List()))
+	if len(result.Waypoints()) != 0 {
+		t.Errorf("Empty group should have 0 waypoints, got %d", len(result.Waypoints()))
 	}
 }

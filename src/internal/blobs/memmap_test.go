@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestReadMemmap(t *testing.T) {
+func TestReadMemmapFromNoxmap(t *testing.T) {
 	orig := blobPath
 	defer func() { blobPath = orig }()
 
@@ -43,8 +43,8 @@ func init() {
 		t.Fatalf("ReadMemmap failed: %v", err)
 	}
 
-	if len(m.Vars) != 2 {
-		t.Errorf("ReadMemmap vars count = %d, want 2", len(m.Vars))
+	if len(m.Vars) != 3 {
+		t.Errorf("ReadMemmap vars count = %d, want 3", len(m.Vars))
 	}
 
 	// Check first var
@@ -52,9 +52,13 @@ func init() {
 		t.Errorf("First var mismatch: %+v", m.Vars[0])
 	}
 
-	// Check second var (should be sorted by blob+off)
-	if m.Vars[1].Blob != 0x9ABC || m.Vars[1].Name != "another_var" {
+	// Check disabled var is preserved and sorted by blob+off.
+	if m.Vars[1].Blob != 0x5678 || m.Vars[1].Name != "disabled_var" || !m.Vars[1].Disabled {
 		t.Errorf("Second var mismatch: %+v", m.Vars[1])
+	}
+
+	if m.Vars[2].Blob != 0x9ABC || m.Vars[2].Name != "another_var" {
+		t.Errorf("Third var mismatch: %+v", m.Vars[2])
 	}
 }
 
@@ -72,7 +76,7 @@ func TestReadMemmapError(t *testing.T) {
 	}
 }
 
-func TestMappingWrite(t *testing.T) {
+func TestMappingWriteRoundTrip(t *testing.T) {
 	orig := blobPath
 	defer func() { blobPath = orig }()
 

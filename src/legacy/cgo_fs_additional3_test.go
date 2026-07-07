@@ -27,7 +27,7 @@ func TestCgoFsFprintfAdditional3(t *testing.T) {
 	C_nox_fs_fprintf_d(f, "HEX: %X\n", 0xABCD)
 	C_nox_fs_fprintf_d(f, "Octal: %o\n", 511)
 	C_nox_fs_fprintf_d(f, "Char: %c\n", 'X')
-	C_nox_fs_fprintf_s(f, "Multiple: %s %s %s\n", "a")
+	C_nox_fs_fprintf_sss(f, "Multiple: %s %s %s\n", "a", "b", "c")
 
 	C_nox_fs_close(f)
 
@@ -43,6 +43,7 @@ func TestCgoFsFprintfAdditional3(t *testing.T) {
 	require.Contains(t, content, "HEX: ABCD")
 	require.Contains(t, content, "Octal: 777")
 	require.Contains(t, content, "Char: X")
+	require.Contains(t, content, "Multiple: a b c")
 }
 
 func TestCgoFsFprintfEmpty(t *testing.T) {
