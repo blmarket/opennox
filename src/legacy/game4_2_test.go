@@ -96,3 +96,43 @@ func TestGame42Pure(t *testing.T) {
 		require.Equal(t, uintptr(640), C_sub_526AA0(10)-base)
 	})
 }
+
+func TestGame42RoomConnections(t *testing.T) {
+	ret, count, stored := C_sub_521900(0, 0, 0x12345678)
+	require.Equal(t, 1, ret)
+	require.Equal(t, uint8(1), count)
+	require.Equal(t, uint32(0x12345678), stored)
+
+	ret, count, stored = C_sub_521900(7, 3, 0x87654321)
+	require.Equal(t, 1, ret)
+	require.Equal(t, uint8(8), count)
+	require.Equal(t, uint32(0x87654321), stored)
+
+	ret, count, stored = C_sub_521900(8, 2, 0xffffffff)
+	require.Equal(t, 0, ret)
+	require.Equal(t, uint8(8), count)
+	require.Zero(t, stored)
+}
+
+func TestGame42DecorConstraints(t *testing.T) {
+	// A zero constraint accepts every room; otherwise at least one bit must overlap.
+	require.Equal(t, 1, C_nox_xxx_mapGenDecorChkConstaint_5241C0(0, 0))
+	require.Equal(t, 1, C_nox_xxx_mapGenDecorChkConstaint_5241C0(0, 0xff))
+	require.Equal(t, 1, C_nox_xxx_mapGenDecorChkConstaint_5241C0(0x04, 0x0c))
+	require.Equal(t, 0, C_nox_xxx_mapGenDecorChkConstaint_5241C0(0x04, 0x08))
+
+	// The larger room dimension must fit the inclusive decor range.
+	require.Equal(t, 1, C_nox_xxx_mapGenChkDecorFillsRoom_5241F0(5, 10, 5, 4))
+	require.Equal(t, 1, C_nox_xxx_mapGenChkDecorFillsRoom_5241F0(5, 10, 4, 10))
+	require.Equal(t, 0, C_nox_xxx_mapGenChkDecorFillsRoom_5241F0(5, 10, 4, 4))
+	require.Equal(t, 0, C_nox_xxx_mapGenChkDecorFillsRoom_5241F0(5, 10, 11, 3))
+}
+
+func TestGame42RandomFloatDeterminism(t *testing.T) {
+	C_nox_xxx_mapGenSetRngSeed_526AB0(0x42)
+	first := C_sub_526BC0(-2.5, 7.25)
+	C_nox_xxx_mapGenSetRngSeed_526AB0(0x42)
+	require.Equal(t, first, C_sub_526BC0(-2.5, 7.25))
+	// A degenerate interval is independent of the platform RNG width.
+	require.Equal(t, 3.5, C_sub_526BC0(3.5, 3.5))
+}

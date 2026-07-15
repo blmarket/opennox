@@ -86,3 +86,74 @@ func TestGame43MonsterCanAttack(t *testing.T) {
 	require.Equal(t, 1, C_nox_xxx_monsterCanAttackAtWill_534390(0.67))
 	require.Equal(t, 1, C_nox_xxx_monsterCanAttackAtWill_534390(1))
 }
+
+func TestGame43MonsterStatePredicates(t *testing.T) {
+	require.Equal(t, 0, C_nox_xxx_monsterCanCast_534300(0))
+	require.Equal(t, 1, C_nox_xxx_monsterCanCast_534300(1<<5))
+	require.Equal(t, 0, C_nox_xxx_monsterCanCast_534300(1<<4))
+
+	for _, action := range []int8{0, 1, 4, 23, 25, 26, 27} {
+		require.Equal(t, 1, C_sub_534340(action), "action %d", action)
+	}
+	require.Equal(t, 0, C_sub_534340(2))
+	require.Equal(t, 0, C_sub_534340(24))
+
+	require.Equal(t, 0, C_sub_5343C0(0.32))
+	require.Equal(t, 1, C_sub_5343C0(0.34))
+	require.Equal(t, 1, C_sub_5343C0(0.65))
+	require.Equal(t, 0, C_sub_5343C0(0.67))
+
+	require.Equal(t, 0, C_sub_534400(0.07))
+	require.Equal(t, 1, C_sub_534400(0.09))
+	require.Equal(t, 1, C_sub_534400(0.32))
+	require.Equal(t, 0, C_sub_534400(0.33))
+
+	for _, action := range []int8{18, 19, 20} {
+		require.Equal(t, 1, C_sub_5408A0(action), "action %d", action)
+	}
+	require.Equal(t, 0, C_sub_5408A0(17))
+	require.Equal(t, 0, C_sub_5408A0(21))
+}
+
+func TestGame43TextParsers(t *testing.T) {
+	ret, floats := C_sub_536550("1.25 -2.5")
+	require.Equal(t, 1, ret)
+	require.Equal(t, [3]float32{1.25, 1.25, -2.5}, floats)
+
+	ret, ints := C_sub_536580("17 -23 4096")
+	require.Equal(t, 1, ret)
+	require.Equal(t, [3]int32{17, -23, 4096}, ints)
+
+	ret, value := C_sub_536600("-99")
+	require.Equal(t, 1, ret)
+	require.Equal(t, -99, value)
+
+	ret, value = C_sub_536D80("12345")
+	require.Equal(t, 1, ret)
+	require.Equal(t, 12345, value)
+
+	ret, byteValue := C_sub_536DE0("300")
+	require.Equal(t, 1, ret)
+	require.Equal(t, uint8(44), byteValue)
+
+	ret, byteValue = C_sub_536E50("255 trailing")
+	require.Equal(t, 1, ret)
+	require.Equal(t, uint8(255), byteValue)
+}
+
+func TestGame43PointerAndActionAliases(t *testing.T) {
+	require.Equal(t, 0, C_sub_537750(123, true))
+	require.Equal(t, 123, C_sub_537750(123, false))
+
+	set, clear := C_monsterActionFlagAliases(0)
+	require.Equal(t, [2]uint32{0x4000, 0x4000}, set)
+	require.Equal(t, [3]uint32{}, clear)
+
+	set, clear = C_monsterActionFlagAliases(0x4000)
+	require.Equal(t, [2]uint32{0x4000, 0x4000}, set)
+	require.Equal(t, [3]uint32{}, clear)
+
+	set, clear = C_monsterActionFlagAliases(0xC000)
+	require.Equal(t, [2]uint32{0xC000, 0xC000}, set)
+	require.Equal(t, [3]uint32{0xC000, 0xC000, 0xC000}, clear)
+}

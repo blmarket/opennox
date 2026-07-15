@@ -10,6 +10,9 @@ extern uint32_t dword_5d4594_816368;
 extern uint32_t dword_5d4594_816372;
 extern uint32_t dword_5d4594_816376;
 extern uint32_t dword_587000_93156;
+extern uint32_t dword_5d4594_816412;
+extern uint32_t dword_5d4594_826028;
+extern void* dword_5d4594_826036;
 
 int sub_43B6D0();
 int nox_sprintAddrPort_43BC80(const char* addr, unsigned short port, char* dst);
@@ -20,12 +23,23 @@ int sub_43DA80();
 void sub_43DAD0();
 int sub_43DB20();
 int sub_43DB30(int a1);
+char* sub_43DB40(int a1);
 int sub_43DB60();
 void sub_43DBA0();
+void sub_43DC00();
 int sub_43DC10();
+int sub_43DC30();
+uint32_t* nox_xxx_gui_43E1A0(int a1);
 int sub_43E8C0(int a1);
 int sub_43F0E0(uint32_t* a1);
+void sub_4417E0(unsigned short* a1, const char* a2);
+int nox_xxx_doExecrul_4438A0(int a1);
 unsigned int nox_gui_xxx_check_446360();
+void* sub_446490(int a1);
+int sub_4466C0(int a1, int a2, int a3, int a4);
+char* sub_4466F0(char* a1, uint8_t* a2);
+uint8_t* nox_xxx_motdAddSomeTextMB_446730(uint8_t* a1);
+int sub_446950(void);
 */
 import "C"
 import "unsafe"
@@ -100,6 +114,10 @@ func C_sub_43DB30(v int) int {
 	return int(C.sub_43DB30(C.int(v)))
 }
 
+func C_sub_43DB40(index int) uintptr {
+	return uintptr(unsafe.Pointer(C.sub_43DB40(C.int(index))))
+}
+
 func C_sub_43DB60() int {
 	return int(C.sub_43DB60())
 }
@@ -110,6 +128,18 @@ func C_sub_43DBA0() {
 
 func C_sub_43DC10() int {
 	return int(C.sub_43DC10())
+}
+
+func C_game13MusicFlagReset() (before, after int) {
+	before = int(C.sub_43DC30())
+	C.sub_43DC00()
+	after = int(C.sub_43DC30())
+	return
+}
+
+func C_game13NilGUI() bool {
+	C.dword_5d4594_816412 = 0
+	return C.nox_xxx_gui_43E1A0(0) == nil
 }
 
 func C_sub_43E8C0(v int) int {
@@ -123,4 +153,36 @@ func C_sub_43F0E0(a1, a3, a4 uint32) int {
 
 func C_nox_gui_xxx_check_446360() int {
 	return int(C.nox_gui_xxx_check_446360())
+}
+
+func C_game13SafeEarlyReturns() (results [7]int) {
+	var wide [1]C.ushort
+	C.sub_4417E0(&wide[0], nil)
+	results[0] = int(C.nox_xxx_doExecrul_4438A0(0))
+	C.dword_5d4594_826036 = nil
+	results[1] = int(uintptr(C.sub_446490(0)))
+	results[2] = int(C.sub_4466C0(0, 0, 0, 0))
+	empty := [1]C.uint8_t{}
+	if C.nox_xxx_motdAddSomeTextMB_446730(&empty[0]) != nil {
+		results[3] = 1
+	}
+	C.dword_5d4594_826028 = 0
+	results[4] = int(C.sub_446950())
+	results[5] = int(wide[0])
+	results[6] = int(empty[0])
+	return
+}
+
+func C_sub_4466F0(input string) (line, remainder string, hasRemainder bool) {
+	in := C.CString(input)
+	defer C.free(unsafe.Pointer(in))
+	out := C.calloc(C.size_t(len(input)+1), 1)
+	defer C.free(out)
+	next := C.sub_4466F0(in, (*C.uint8_t)(out))
+	line = C.GoString((*C.char)(out))
+	if next != nil {
+		hasRemainder = true
+		remainder = C.GoString(next)
+	}
+	return
 }

@@ -5,11 +5,15 @@ package legacy
 #include <stdlib.h>
 
 int sub_521EB0(float* a1, float* a2);
+int sub_521900(int a1, int a2, int a3);
 int nox_xxx_mapGenCheckRoomType_5238F0(int* a1);
+int nox_xxx_mapGenDecorChkConstaint_5241C0(int a1, int a2);
+int nox_xxx_mapGenChkDecorFillsRoom_5241F0(int a1, int a2);
 
 void nox_xxx_mapGenSetRngSeed_526AB0(unsigned int a1);
 int nox_xxx_mapGenRandFunc_526AC0(int a1, int a2);
 int nox_xxx_mapGenRandFunc2_526B00(int a1, int a2);
+double sub_526BC0(float a1, float a2);
 unsigned int nox_xxx_isObjectMovable_52E020(int a1);
 char* sub_526AA0(int a1);
 */
@@ -68,4 +72,43 @@ func C_nox_xxx_mapGenCheckRoomType_5238F0(v int32) int {
 	defer C.free(buf)
 	*(*int32)(unsafe.Pointer(buf)) = v
 	return int(C.nox_xxx_mapGenCheckRoomType_5238F0((*C.int)(buf)))
+}
+
+func C_sub_521900(count uint8, direction int, neighbor uint32) (ret int, after uint8, stored uint32) {
+	buf := C.calloc(1, 512)
+	defer C.free(buf)
+	countPtr := (*uint8)(unsafe.Pointer(uintptr(buf) + uintptr(216+direction)))
+	*countPtr = count
+	ret = int(C.sub_521900(C.int(uintptr(buf)), C.int(neighbor), C.int(direction)))
+	after = *countPtr
+	if count < 8 {
+		stored = *(*uint32)(unsafe.Pointer(uintptr(buf) + uintptr(88+4*(int(count)+8*direction))))
+	}
+	return ret, after, stored
+}
+
+func C_nox_xxx_mapGenDecorChkConstaint_5241C0(mask, roomFlags uint8) int {
+	decor := C.calloc(1, 128)
+	room := C.calloc(1, 400)
+	defer C.free(decor)
+	defer C.free(room)
+	*(*uint8)(unsafe.Pointer(uintptr(decor) + 64)) = mask
+	*(*uint8)(unsafe.Pointer(uintptr(room) + 364)) = roomFlags
+	return int(C.nox_xxx_mapGenDecorChkConstaint_5241C0(C.int(uintptr(decor)), C.int(uintptr(room))))
+}
+
+func C_nox_xxx_mapGenChkDecorFillsRoom_5241F0(min, max, width, height int32) int {
+	decor := C.calloc(1, 128)
+	room := C.calloc(1, 32)
+	defer C.free(decor)
+	defer C.free(room)
+	*(*int32)(unsafe.Pointer(uintptr(decor) + 76)) = min
+	*(*int32)(unsafe.Pointer(uintptr(decor) + 80)) = max
+	*(*int32)(unsafe.Pointer(uintptr(room) + 12)) = width
+	*(*int32)(unsafe.Pointer(uintptr(room) + 16)) = height
+	return int(C.nox_xxx_mapGenChkDecorFillsRoom_5241F0(C.int(uintptr(decor)), C.int(uintptr(room))))
+}
+
+func C_sub_526BC0(min, max float32) float64 {
+	return float64(C.sub_526BC0(C.float(min), C.float(max)))
 }

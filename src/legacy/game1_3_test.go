@@ -79,3 +79,41 @@ func TestGame13AudioBranchClassifier(t *testing.T) {
 func TestGame13GuiCheckWithoutQuitMenu(t *testing.T) {
 	require.Equal(t, 0, C_nox_gui_xxx_check_446360())
 }
+
+func TestGame13RemainingPureHelpers(t *testing.T) {
+	h := newGameLogicHarness(t)
+	oldGlobals := C_game13Globals()
+	t.Cleanup(func() { C_game13SetGlobals(oldGlobals) })
+
+	C_game13SetGlobals(game13Globals{musicDepth: 2, musicFlag: 9})
+	require.Equal(t, uintptr(memmap.PtrOff(0x5D4594, 815772+16*(3+6*2))), C_sub_43DB40(3))
+	before, after := C_game13MusicFlagReset()
+	require.Equal(t, 9, before)
+	require.Zero(t, after)
+	require.True(t, C_game13NilGUI())
+
+	h.snapshotMem(0x5D4594, 826040, 4)
+	require.Equal(t, [7]int{0, 0, 0, 1, 0, 0, 0}, C_game13SafeEarlyReturns())
+}
+
+func TestGame13MOTDLineSplitting(t *testing.T) {
+	line, rest, ok := C_sub_4466F0("")
+	require.Empty(t, line)
+	require.Empty(t, rest)
+	require.False(t, ok)
+
+	line, rest, ok = C_sub_4466F0("alpha\nbeta")
+	require.Equal(t, "alpha", line)
+	require.Equal(t, "beta", rest)
+	require.True(t, ok)
+
+	line, rest, ok = C_sub_4466F0("alpha\r\nbeta")
+	require.Equal(t, "alpha", line)
+	require.Equal(t, "beta", rest)
+	require.True(t, ok)
+
+	line, rest, ok = C_sub_4466F0("last line")
+	require.Equal(t, "last line", line)
+	require.Empty(t, rest)
+	require.False(t, ok)
+}
