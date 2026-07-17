@@ -21,3 +21,11 @@ func TestGame12(t *testing.T) {
 		require.Equal(t, 42, C_sub_43AF40())
 	})
 }
+
+func TestGame12RuleSerializers(t *testing.T) {
+	lengths, headers := C_game12SerializeRules()
+	for i, n := range lengths {
+		require.Greater(t, n, uint32(4), "serializer %d", i)
+		require.NotZero(t, headers[i], "serializer %d", i)
+	}
+}

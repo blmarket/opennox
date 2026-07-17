@@ -45,12 +45,12 @@ func appendThingU32(dst []byte, value uint32) []byte {
 
 func resetThingDefinitions(t *testing.T) {
 	t.Helper()
-	Sub_485CF0()
-	Sub_485F30()
+	C_initializeThingDefinitionGlobals()
 	LoadAllBinFileSectionsResetCounters()
 	t.Cleanup(func() {
 		Sub_485CF0()
 		Sub_485F30()
+		C_initializeThingDefinitionGlobals()
 		LoadAllBinFileSectionsResetCounters()
 	})
 }

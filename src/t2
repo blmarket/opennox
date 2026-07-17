@@ -13,6 +13,10 @@ trap cleanup EXIT
 
 export GOARCH=386
 export CGO_ENABLED=1
+export ALSOFT_DRIVERS=null
+export SDL_VIDEODRIVER=dummy
+unset DISPLAY
+unset WAYLAND_DISPLAY
 export CGO_CFLAGS_ALLOW='(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-overflow)'
 export CGO_CFLAGS="-fprofile-arcs -ftest-coverage ${CGO_CFLAGS:-}"
 export CGO_LDFLAGS="--coverage ${CGO_LDFLAGS:-}"

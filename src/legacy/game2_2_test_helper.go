@@ -6,15 +6,123 @@ package legacy
 #include <string.h>
 
 int sub_486640(void* a1, int a2);
+int sub_4866D0(uint32_t* a1, int a2);
+unsigned int sub_486A10(int a1, void* a2);
+int sub_486AA0(uint32_t* a1, int a2, uint32_t* a3);
+signed int sub_486DB0(int a1, char* a2, signed int a3);
+void* sub_486E00(int a1);
+int* sub_487100(int** a1);
+int* sub_4877D0(int a1, int* a2);
+int* sub_4877F0(int** a1);
+int* sub_487810(int a1, int a2);
+int sub_487910(int a1, int a2);
+int* sub_487970(int a1, int a2);
+void sub_487C30(uint32_t* a1);
 int sub_487C80(int a1);
+int sub_487D00(uint32_t* a1);
+uint32_t* sub_487D30(uint32_t* a1, int a2, int a3);
+int sub_487D60(int a1);
 uint16_t* sub_480250(uint8_t* a1, uint16_t* a2);
 int sub_487590(int a1, const void* a2);
 void sub_487090(uint32_t** a1);
 void sub_481410();
+int sub_484450(int a1, int a2);
 extern uint32_t nox_xxx_waypointCounterMB_587000_154948;
+extern uint32_t dword_5d4594_3798804;
 */
 import "C"
 import "unsafe"
+
+type game22SafeStateResult struct {
+	emptySearch      uint32
+	recordStride     uintptr
+	normalFormat     int
+	normalChannels   uint32
+	normalMode       uint32
+	specialFormat    int
+	specialInput     uint32
+	specialMode      uint32
+	emptyRead        int
+	closeEmpty       uintptr
+	nextEmpty        uintptr
+	firstEmpty       uintptr
+	selectEmpty      uintptr
+	removeEmpty      int
+	releaseEmpty     uintptr
+	listInitialized  bool
+	bufferSize       int
+	quarterSize      int
+	configuredStride uint32
+	configuredWidth  uint32
+	clearedSize      uint32
+}
+
+func C_game22SafeStatePaths() (res game22SafeStateResult) {
+	search := C.calloc(1, 8)
+	key := C.CString("missing")
+	defer C.free(search)
+	defer C.free(unsafe.Pointer(key))
+	res.emptySearch = uint32(C.sub_486A10(C.int(uintptr(search)), unsafe.Pointer(key)))
+
+	table := C.calloc(1, 8)
+	record := C.calloc(1, 36)
+	output := C.calloc(7, 4)
+	defer C.free(table)
+	defer C.free(record)
+	defer C.free(output)
+	*(*unsafe.Pointer)(table) = record
+	res.recordStride = uintptr(uint32(C.sub_4866D0((*C.uint32_t)(table), 0)))
+	words := (*[9]uint32)(record)
+	out := (*[7]uint32)(output)
+	words[6], words[7], words[8] = 13, 5, 17
+	res.normalFormat = int(C.sub_486AA0((*C.uint32_t)(table), 0, (*C.uint32_t)(output)))
+	res.normalChannels, res.normalMode = out[3], out[4]
+	words[7] = 8
+	res.specialFormat = int(C.sub_486AA0((*C.uint32_t)(table), 0, (*C.uint32_t)(output)))
+	res.specialInput, res.specialMode = out[1], out[4]
+
+	reader := C.calloc(1, 288)
+	dst := C.calloc(1, 8)
+	defer C.free(reader)
+	defer C.free(dst)
+	res.emptyRead = int(C.sub_486DB0(C.int(uintptr(reader)), (*C.char)(dst), 8))
+	res.closeEmpty = uintptr(unsafe.Pointer(C.sub_486E00(C.int(uintptr(reader)))))
+
+	cursor := C.calloc(1, 4)
+	defer C.free(cursor)
+	res.nextEmpty = uintptr(unsafe.Pointer(C.sub_487100((**C.int)(cursor))))
+
+	parent := C.calloc(1, 300)
+	defer C.free(parent)
+	C.sub_487C30((*C.uint32_t)(unsafe.Pointer(uintptr(parent) + 192)))
+	res.firstEmpty = uintptr(unsafe.Pointer(C.sub_4877D0(C.int(uintptr(parent)), (*C.int)(cursor))))
+	res.selectEmpty = uintptr(unsafe.Pointer(C.sub_487810(C.int(uintptr(parent)), -1)))
+	res.removeEmpty = int(C.sub_487910(C.int(uintptr(parent)), -1))
+	res.releaseEmpty = uintptr(unsafe.Pointer(C.sub_487970(C.int(uintptr(parent)), -1)))
+
+	list := C.calloc(7, 4)
+	defer C.free(list)
+	listWords := (*[7]uint32)(list)
+	for i := range listWords {
+		listWords[i] = uint32(i + 1)
+	}
+	C.sub_487C30((*C.uint32_t)(list))
+	res.listInitialized = listWords[0] == 0 && listWords[1] == 0 &&
+		listWords[5] == 0 && listWords[6] == 0
+
+	size := C.calloc(6, 4)
+	defer C.free(size)
+	sizeWords := (*[6]uint32)(size)
+	sizeWords[2], sizeWords[3], sizeWords[4] = 2, 3, 4
+	res.bufferSize = int(C.sub_487D00((*C.uint32_t)(size)))
+	sizeWords[1] = 1
+	res.quarterSize = int(C.sub_487D00((*C.uint32_t)(size)))
+	C.sub_487D30((*C.uint32_t)(size), 7, 9)
+	res.configuredStride, res.configuredWidth = sizeWords[3], sizeWords[4]
+	C.sub_487D60(C.int(uintptr(size)))
+	res.clearedSize = sizeWords[5]
+	return res
+}
 
 // C_sub_486640 wraps sub_486640 returning a2 * (*(uint32_t*)(a1+36)>>16) / 100.
 func C_sub_486640(vAt36 uint32, a2 int) int {
@@ -103,4 +211,34 @@ func C_game2_2_getWaypointCounter() uint32 {
 
 func C_game2_2_setWaypointCounter(v uint32) {
 	C.nox_xxx_waypointCounterMB_587000_154948 = C.uint32_t(v)
+}
+
+type game22LightBufferResult struct {
+	ret          int
+	first        uint16
+	second       uint32
+	middle       uint32
+	penultimate  uint16
+	last         uint16
+	untouchedGap uint16
+}
+
+func C_game22InitializeLightBuffer(value uint16) (out game22LightBufferResult) {
+	const stride = 100
+	const rows = 46
+	oldStride := C.dword_5d4594_3798804
+	C.dword_5d4594_3798804 = stride
+	defer func() { C.dword_5d4594_3798804 = oldStride }()
+
+	buf := C.calloc(1, stride*rows+64)
+	defer C.free(buf)
+	base := uintptr(buf)
+	out.ret = int(C.sub_484450(C.int(value), C.int(base)))
+	out.first = *(*uint16)(unsafe.Pointer(base + 46))
+	out.second = *(*uint32)(unsafe.Pointer(base + stride + 44))
+	out.middle = *(*uint32)(unsafe.Pointer(base + 24*stride + 44))
+	out.penultimate = *(*uint16)(unsafe.Pointer(base + 43*stride + 48))
+	out.last = *(*uint16)(unsafe.Pointer(base + 45*stride + 46))
+	out.untouchedGap = *(*uint16)(unsafe.Pointer(base + 45*stride + 42))
+	return out
 }

@@ -649,6 +649,8 @@ func TestGameLogicRemoveChildren(t *testing.T) {
 
 func TestGameLogicShadowList(t *testing.T) {
 	h := newGameLogicHarness(t)
+	C_resetShadowList()
+	t.Cleanup(C_resetShadowList)
 	obj := h.point(0, 0)
 	t.Cleanup(func() { Nox_xxx_action_4DA9F0(obj) })
 
@@ -781,12 +783,10 @@ func TestGameLogicPlayerCounterReset(t *testing.T) {
 
 func TestGameLogicMouseConfiguration(t *testing.T) {
 	newGameLogicHarness(t)
-	oldPrimary := Nox_client_mousePriKey_430AF0()
-	oldCursor := Nox_xxx_cursor_430B00()
-	require.Contains(t, []int{0, 1, 2}, oldPrimary)
+	Sub_430AA0(0)
 	t.Cleanup(func() {
-		Sub_430AA0(oldPrimary)
-		require.Equal(t, oldCursor, Nox_xxx_cursor_430B00())
+		Sub_430AA0(0)
+		require.Equal(t, 5, Nox_xxx_cursor_430B00())
 	})
 
 	tests := []struct {

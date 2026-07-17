@@ -25,14 +25,38 @@ int sub_4139B0();
 unsigned int sub_409B50(const char* a1);
 char* sub_409B80();
 int sub_40A6A0(int a1);
+long long sub_40A310(int a1);
+int sub_40AA30(int a1);
+int sub_40AA60(int a1);
 int sub_409E40(int a1);
 int sub_409E70(int a1);
+int sub_410550(short a1);
+uint32_t* sub_410730();
+uint32_t* nox_xxx_wallSecretBlock_410760(uint32_t* a1);
+int* sub_4107A0(void* a1);
+void sub_4164F0();
+char* sub_416630();
+int sub_417DC0();
+char sub_417DE0();
 int sub_42EBA0();
 int nox_xxx_cursor_430B00();
 int sub_431370();
+char* sub_413890();
+int sub_415960(uint16_t* a1);
+double sub_415BD0(int a1);
+int sub_415DA0(uint16_t* a1);
+void sub_416820(int a1);
+void* sub_416860(int a1);
+char* nox_xxx_netUnmarkMinimapSpec_417470(int a1, int a2);
+int sub_418390();
+int nox_xxx_teamAssignFlags_418640();
+char* nox_xxx_toggleAllTeamFlags_418690(int a1);
 
 extern uint32_t dword_5d4594_3484;
 extern uint32_t dword_5d4594_251744;
+extern uint32_t dword_5d4594_371692;
+extern uint32_t dword_5d4594_526276;
+extern void* dword_5d4594_251560;
 */
 import "C"
 import "unsafe"
@@ -161,6 +185,107 @@ func C_sub_409B80() string {
 
 func C_sub_40A6A0(a1 int) int {
 	return int(C.sub_40A6A0(C.int(a1)))
+}
+
+func C_sub_40A310(v int) int64 {
+	return int64(C.sub_40A310(C.int(v)))
+}
+
+func C_sub_40AA30(v int) int {
+	return int(C.sub_40AA30(C.int(v)))
+}
+
+func C_sub_40AA60(v int) int {
+	return int(C.sub_40AA60(C.int(v)))
+}
+
+type game1WallSecretResult struct {
+	firstFound, secondFound uintptr
+	middleRemoved           bool
+	headRemoved             bool
+	missingReturnedNil      bool
+	emptyAfter              bool
+}
+
+func C_game1WallSecretLifecycle() game1WallSecretResult {
+	C.dword_5d4594_251560 = nil
+	defer func() {
+		C.sub_410730()
+		C.dword_5d4594_251560 = nil
+	}()
+
+	wall1 := C.calloc(1, 16)
+	wall2 := C.calloc(1, 16)
+	defer C.free(wall1)
+	defer C.free(wall2)
+	*(*uint16)(unsafe.Pointer(uintptr(wall1) + 10)) = 0x1234
+	*(*uint16)(unsafe.Pointer(uintptr(wall2) + 10)) = 0x5678
+
+	node1 := C.calloc(1, 16)
+	node2 := C.calloc(1, 16)
+	*(*uintptr)(unsafe.Pointer(uintptr(node1) + 12)) = uintptr(wall1)
+	*(*uintptr)(unsafe.Pointer(uintptr(node2) + 12)) = uintptr(wall2)
+	C.nox_xxx_wallSecretBlock_410760((*C.uint32_t)(node1))
+	C.nox_xxx_wallSecretBlock_410760((*C.uint32_t)(node2))
+
+	var out game1WallSecretResult
+	out.firstFound = uintptr(C.sub_410550(0x1234))
+	out.secondFound = uintptr(C.sub_410550(0x5678))
+	out.middleRemoved = C.sub_4107A0(node1) != nil
+	out.headRemoved = C.sub_4107A0(node2) != nil
+
+	missing := C.calloc(1, 16)
+	out.missingReturnedNil = C.sub_4107A0(missing) == nil
+	C.free(missing)
+	out.emptyAfter = C.sub_410550(0x1234) == 0 && C.sub_410550(0x5678) == 0
+	return out
+}
+
+func C_game1RemainingStateHelpers(marker uint32) (beforeReset, afterReset uint32, shared uintptr, teamCount int, mapInfo uint32) {
+	oldReset := C.dword_5d4594_371692
+	oldMapInfo := C.dword_5d4594_526276
+	defer func() {
+		C.dword_5d4594_371692 = oldReset
+		C.dword_5d4594_526276 = oldMapInfo
+	}()
+	C.dword_5d4594_371692 = C.uint32_t(marker)
+	beforeReset = uint32(C.dword_5d4594_371692)
+	C.sub_4164F0()
+	afterReset = uint32(C.dword_5d4594_371692)
+	shared = uintptr(unsafe.Pointer(C.sub_416630()))
+	C.dword_5d4594_526276 = C.uint32_t(marker)
+	mapInfo = uint32(C.sub_417DC0())
+	teamCount = int(C.sub_417DE0())
+	return
+}
+
+type game1SafeEmptyResult struct {
+	emptyGeneratedName uintptr
+	weaponName         int
+	armorDefense       float64
+	armorName          int
+	unmarkResult       uintptr
+	teamStart          int
+	assignResult       int
+	toggleOff          uintptr
+	toggleOn           uintptr
+}
+
+func C_game1SafeEmptyPaths() (out game1SafeEmptyResult) {
+	out.emptyGeneratedName = uintptr(unsafe.Pointer(C.sub_413890()))
+	out.weaponName = int(C.sub_415960(nil))
+	obj := C.calloc(1, 16)
+	defer C.free(obj)
+	out.armorDefense = float64(C.sub_415BD0(C.int(uintptr(obj))))
+	out.armorName = int(C.sub_415DA0(nil))
+	C.sub_416820(0)
+	C.sub_416860(0)
+	out.unmarkResult = uintptr(unsafe.Pointer(C.nox_xxx_netUnmarkMinimapSpec_417470(0, 0)))
+	out.teamStart = int(C.sub_418390())
+	out.assignResult = int(C.nox_xxx_teamAssignFlags_418640())
+	out.toggleOff = uintptr(unsafe.Pointer(C.nox_xxx_toggleAllTeamFlags_418690(0)))
+	out.toggleOn = uintptr(unsafe.Pointer(C.nox_xxx_toggleAllTeamFlags_418690(1)))
+	return out
 }
 
 func C_sub_409E40(a1 int) int {

@@ -2,6 +2,10 @@ package legacy
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/require"
+
+	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
 )
 
 func TestGameAdditionalGAME1(t *testing.T) {
@@ -49,7 +53,61 @@ func TestGameAdditionalGAME3(t *testing.T) {
 }
 
 func TestGameAdditionalGAME4(t *testing.T) {
-	// GAME4 tests - functions are tested via other test files
+	h := newGameLogicHarness(t)
+	h.loadBlobData()
+
+	got := C_game4SafePaths()
+	require.Zero(t, got.initResult)
+	require.Equal(t, -1, got.missingName)
+	require.Zero(t, got.negativeIndex)
+	require.NotZero(t, got.zeroIndex)
+	require.Zero(t, got.count)
+	require.Equal(t, 1, got.setPrimary)
+	require.Zero(t, got.clearPrimary)
+	require.Equal(t, 1, got.setSecondary)
+	require.Zero(t, got.clearSecondary)
+	require.Zero(t, got.invalidSave)
+	require.Zero(t, got.closeEmpty)
+	require.Zero(t, got.seekEmpty)
+	require.Equal(t, -1.0, got.invalidFirstCoord)
+	require.Equal(t, -1.0, got.invalidLastCoord)
+	require.Equal(t, 1, got.moveEmpty)
+	require.Equal(t, 1, got.placeEmpty)
+	require.Equal(t, 77, got.objectField)
+	require.Equal(t, 88, got.nodeField)
+	require.Zero(t, got.removeNil)
+	require.Zero(t, got.removeMissing)
+	require.Zero(t, got.voteGuard)
+	require.Equal(t, 1, got.voteThreshold)
+	require.False(t, got.votesActive)
+}
+
+func TestGame4SpellPhonemeForNonPlayerUnit(t *testing.T) {
+	h := newGameLogicHarness(t)
+	srv := h.setServer(0, 30)
+	h.setGameFlags(noxflags.GameHost)
+	obj := h.point(0, 0)
+	obj.NetCode = 0x1234
+	srv.Objs.SetObjects(obj)
+
+	tests := []struct {
+		phoneme int8
+		want    int
+	}{
+		{phoneme: 0, want: 193},
+		{phoneme: 1, want: 186},
+		{phoneme: 2, want: 187},
+		{phoneme: 3, want: 192},
+		{phoneme: 4, want: 0},
+		{phoneme: 5, want: 188},
+		{phoneme: 6, want: 191},
+		{phoneme: 7, want: 190},
+		{phoneme: 8, want: 189},
+		{phoneme: -1, want: 0},
+	}
+	for _, tc := range tests {
+		require.Equal(t, tc.want, C_game4SpellPhoneme(int(obj.NetCode), tc.phoneme))
+	}
 }
 
 func TestGameAdditionalGAME5(t *testing.T) {

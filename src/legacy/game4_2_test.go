@@ -7,8 +7,10 @@ import (
 	"testing"
 	"unsafe"
 
+	"github.com/noxworld-dev/opennox-lib/datapath"
 	"github.com/stretchr/testify/require"
 
+	"github.com/noxworld-dev/opennox/v1/internal/binfile"
 	"github.com/noxworld-dev/opennox/v1/legacy/common/alloc/handles"
 )
 
@@ -406,6 +408,50 @@ func TestGame42MapGeneratorThemeSectionParsers(t *testing.T) {
 	require.Equal(t, "PortalLink", got.linkData)
 }
 
+func TestGame42MapGeneratorFullThemeReader(t *testing.T) {
+	handles.Init()
+	oldwd, err := os.Getwd()
+	require.NoError(t, err)
+	root := t.TempDir()
+	require.NoError(t, os.Mkdir(filepath.Join(root, "mapgen"), 0o700))
+	oldData := datapath.Data()
+	datapath.SetData(root)
+	t.Cleanup(func() {
+		datapath.SetData(oldData)
+		require.NoError(t, os.Chdir(oldwd))
+	})
+	require.NoError(t, os.Chdir(root))
+
+	theme := `
+AMBIENT_LIGHT 11 22 33
+SPELL_SET END
+WEAPON_SET END
+ARMOR_SET END
+EXIT OBJECT NorthExit NORTH LINKDATA PortalLink END
+PREFAB END
+DECOR ROOM RoomDecor FREQUENCY COMMON END
+DECOR HALL HallDecor FREQUENCY COMMON END
+`
+	f, err := binfile.BinfileOpen(filepath.Join("mapgen", "Synthetic.thm"), binfile.WriteOnly)
+	require.NoError(t, err)
+	require.NoError(t, f.SetKey(1))
+	_, err = f.Write([]byte(theme))
+	require.NoError(t, err)
+	require.NoError(t, f.Close())
+
+	require.Zero(t, C_mapGenReadTheme("Missing").ret)
+	got := C_mapGenReadTheme("Synthetic")
+	require.Equal(t, 1, got.ret, "parsed theme: %+v", got)
+	require.Equal(t, uint32(1), got.roomCount)
+	require.Equal(t, uint32(1), got.hallCount)
+	require.Equal(t, [3]int32{11, 22, 33}, got.ambient)
+	require.Equal(t, uint32(1), got.exitCount)
+	require.Zero(t, got.prefabCount)
+	require.Zero(t, got.spellCount)
+	require.Zero(t, got.weaponCount)
+	require.Zero(t, got.armorCount)
+}
+
 func TestGame42MapGeneratorFullDecorParser(t *testing.T) {
 	handles.Init()
 	for kind, section := range []string{"ROOM", "HALL", "TEMPLATE", "BACKDROP"} {
@@ -452,11 +498,13 @@ func TestGame42MapGeneratorDecorParsers(t *testing.T) {
 
 func TestGame42MapGeneratorCompositeParsers(t *testing.T) {
 	handles.Init()
+	h := newGameLogicHarness(t)
+	h.setServer(0, 30)
 	wall := mapGenInput(t, "wall.txt", "Stone Marble\n")
 	appendFile := mapGenInput(t, "append.txt", "first second\n")
 	setFile := mapGenInput(t, "set.txt", "2 5 END\n")
-	containsFile := mapGenInput(t, "contains.txt", "* END\n")
-	prefabFile := mapGenInput(t, "prefab.txt", "MUST_OCCUR AREAMAP AreaOne END\n")
+	containsFile := mapGenInput(t, "contains.txt", "25 OR * END\n")
+	prefabFile := mapGenInput(t, "prefab.txt", "MUST_OCCUR AREAMAP AreaOne FOREACH CreatureGroup CONTAINS * END END\n")
 	got := C_mapGenCompositeParsers(wall, appendFile, setFile, containsFile, prefabFile)
 	require.Equal(t, 1, got.wallFloorRet)
 	require.Equal(t, "Stone", got.wallName)
@@ -469,8 +517,33 @@ func TestGame42MapGeneratorCompositeParsers(t *testing.T) {
 	require.Equal(t, int32(2), got.setMin)
 	require.Equal(t, int32(5), got.setMax)
 	require.Zero(t, got.setCount)
-	require.Equal(t, uint32(101), got.containsWeight)
+	require.Equal(t, uint32(25), got.containsWeight)
+	require.Equal(t, uint32(76), got.containsSecond)
+	require.Equal(t, 2, got.containsCount)
 	require.Equal(t, 1, got.prefabRet)
 	require.Equal(t, 1, got.areaRet)
 	require.Equal(t, "AreaOne", got.prefabName)
+	require.Equal(t, 1, got.prefabForeachCount)
+	require.Equal(t, uint32(101), got.prefabForeachWeight)
+}
+
+func TestGame42MapGeneratorRoomRanking(t *testing.T) {
+	got := C_mapGenRankConnectedRooms()
+	require.NotZero(t, got.ret)
+	require.Equal(t, [5]uint32{1, 2, 4, 8, 32}, got.flags)
+	require.Equal(t, [5]float32{0.2, 0.4, 0.6, 0.8, 1}, got.normalized)
+	require.Equal(t, [5]float32{1, 2, 3, 4, 5}, got.sorted)
+}
+
+func TestGame42MapGeneratorAssignsRoomDecor(t *testing.T) {
+	got := C_mapGenMakeRoomsSynthetic()
+	require.Equal(t, 1, got.success, "%+v", got)
+	for _, assigned := range got.assignments {
+		require.NotZero(t, assigned)
+	}
+	require.Equal(t, uint8(1), got.roomMandatoryUsed)
+	require.Equal(t, uint8(1), got.hallMandatoryUsed)
+	require.Equal(t, 1, got.emptySuccess)
+	require.Zero(t, got.missingRoomFailure)
+	require.Zero(t, got.missingHallFailure)
 }

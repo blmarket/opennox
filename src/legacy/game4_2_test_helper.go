@@ -53,6 +53,7 @@ int sub_523960(int a1);
 int sub_5239B0(int a1);
 int sub_524070(int a1, int a2);
 int sub_524090(int a1, int* a2);
+int nox_xxx_mapGenMakeRooms_524310(int a1);
 char nox_xxx_mapGenDecorChkLimit_524220(int* a1, int a2);
 int nox_xxx_mapgenAllocBuffer_5213E0(void);
 void nox_xxx_mapgenFreeBuffer_521400(void);
@@ -70,6 +71,9 @@ float* sub_525330(float* a1, int a2);
 float* sub_525370(float* a1, int a2);
 int sub_5253B0(float* a1);
 void sub_5259F0(int a1, int a2, float a3);
+float* sub_525AF0(int a1);
+void sub_525BF0(int a1);
+float* sub_525C90(void);
 int sub_5268F0(const char* a1);
 int sub_526C40(int a1);
 int sub_526C80(int a1);
@@ -77,6 +81,7 @@ int sub_526D50(int a1);
 int sub_526DD0(float* a1, int* a2);
 int sub_527380(float* a1);
 int nox_xxx_mapGenReadLine_51E540(FILE* a1, uint8_t* a2);
+int nox_xxx_mapGenReadTheme_51E260(int* a1, int a2);
 FILE* nox_binfile_open_408CC0(char* path, int mode);
 int nox_binfile_close_408D90(FILE* f);
 int nox_xxx_genReadAlgData_51EBB0(int a1, FILE* a2);
@@ -221,6 +226,7 @@ type cMapGenGridResult struct {
 // C_mapGenGridLifecycle exercises the map generator's private occupancy grid
 // as one transaction so no C allocation or global list state escapes the call.
 func C_mapGenGridLifecycle() cMapGenGridResult {
+	C.dword_5d4594_2487560 = 0
 	cfg := C.calloc(1, 80)
 	defer C.free(cfg)
 	*(*uint32)(unsafe.Pointer(uintptr(cfg) + 68)) = 1 // 3x3 grid, centered at zero
@@ -234,6 +240,7 @@ func C_mapGenGridLifecycle() cMapGenGridResult {
 		C.dword_5d4594_2487532 = 0
 		C.dword_5d4594_2487536 = 0
 		C.dword_5d4594_2487540 = 0
+		C.dword_5d4594_2487560 = 0
 	}()
 
 	room := C.nox_xxx_mapGenMakeRoomStruct_521940(1, 1)
@@ -449,6 +456,8 @@ type cMapGenMoreBasics struct {
 
 func C_mapGenMoreBasics() cMapGenMoreBasics {
 	var out cMapGenMoreBasics
+	C.dword_5d4594_2487672 = 0
+	C.dword_5d4594_2487676 = 0
 	oldTicks := PlatformTicks
 	PlatformTicks = func() uint64 { return 0 }
 	defer func() { PlatformTicks = oldTicks }()
@@ -613,6 +622,45 @@ func C_mapGenReadConditions(f unsafe.Pointer, n int) (rets, values []int) {
 		values = append(values, int(value))
 	}
 	return
+}
+
+type cMapGenThemeResult struct {
+	ret                     int
+	roomCount, hallCount    uint32
+	ambient                 [3]int32
+	exitCount, prefabCount  uint32
+	spellCount, weaponCount uint32
+	armorCount              uint32
+}
+
+func C_mapGenReadTheme(name string) (out cMapGenThemeResult) {
+	theme := C.calloc(1, 1116)
+	defer C.free(theme)
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+	out.ret = int(C.nox_xxx_mapGenReadTheme_51E260((*C.int)(theme), C.int(uintptr(unsafe.Pointer(cname)))))
+	out.roomCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 92))
+	out.hallCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 124))
+	out.prefabCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 212))
+	out.exitCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 472))
+	out.ambient = [3]int32{
+		*(*int32)(unsafe.Pointer(uintptr(theme) + 536)),
+		*(*int32)(unsafe.Pointer(uintptr(theme) + 540)),
+		*(*int32)(unsafe.Pointer(uintptr(theme) + 544)),
+	}
+	out.spellCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 1096))
+	out.weaponCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 1104))
+	out.armorCount = *(*uint32)(unsafe.Pointer(uintptr(theme) + 1112))
+
+	for _, off := range []uintptr{88, 120, 152, 184} {
+		for p := uintptr(*(*uint32)(unsafe.Pointer(uintptr(theme) + off))); p != 0; {
+			next := uintptr(*(*uint32)(unsafe.Pointer(p + 220)))
+			C.free(unsafe.Pointer(p))
+			p = next
+		}
+		*(*uint32)(unsafe.Pointer(uintptr(theme) + off)) = 0
+	}
+	return out
 }
 
 type cMapGenThemeSections struct {
@@ -855,6 +903,153 @@ func C_mapGenReadFrequencies(f unsafe.Pointer, n int) (rets, values []int) {
 	return
 }
 
+type cMapGenRoomRanking struct {
+	ret        uintptr
+	flags      [5]uint32
+	normalized [5]float32
+	sorted     [5]float32
+}
+
+func C_mapGenRankConnectedRooms() (out cMapGenRoomRanking) {
+	const roomSize = 400
+	oldTop := C.dword_5d4594_2487560
+	C.dword_5d4594_2487560 = 0
+	defer func() { C.dword_5d4594_2487560 = oldTop }()
+
+	var rooms [5]unsafe.Pointer
+	for i := range rooms {
+		rooms[i] = C.calloc(1, roomSize)
+		defer C.free(rooms[i])
+		base := uintptr(rooms[i])
+		*(*uint32)(rooms[i]) = 1
+		*(*float32)(unsafe.Pointer(base + 356)) = float32(i + 1)
+		if i+1 < len(rooms) {
+			// Filled after all allocations below.
+			*(*uint8)(unsafe.Pointer(base + 216)) = 1
+		}
+	}
+	for i := range rooms {
+		base := uintptr(rooms[i])
+		if i+1 < len(rooms) {
+			*(*uint32)(unsafe.Pointer(base + 88)) = uint32(uintptr(rooms[i+1]))
+			*(*uint32)(unsafe.Pointer(base + 56)) = uint32(uintptr(rooms[i+1]))
+		}
+	}
+	C.dword_5d4594_2487560 = C.uint32_t(uintptr(rooms[0]))
+	out.ret = uintptr(unsafe.Pointer(C.sub_525AF0(C.int(uintptr(rooms[0])))))
+	for i, room := range rooms {
+		base := uintptr(room)
+		out.flags[i] = *(*uint32)(unsafe.Pointer(base + 364))
+		out.normalized[i] = *(*float32)(unsafe.Pointer(base + 360))
+	}
+	for i, p := 0, uintptr(rooms[0]); i < len(out.sorted) && p != 0; i++ {
+		out.sorted[i] = *(*float32)(unsafe.Pointer(p + 356))
+		p = uintptr(*(*uint32)(unsafe.Pointer(p + 64)))
+	}
+	C.dword_5d4594_2487560 = 0
+	return out
+}
+
+type cMapGenMakeRoomsResult struct {
+	success, emptySuccess, missingRoomFailure, missingHallFailure int
+	assignments                                                  [4]uintptr
+	roomMandatoryUsed, hallMandatoryUsed                         uint8
+}
+
+func C_mapGenMakeRoomsSynthetic() (out cMapGenMakeRoomsResult) {
+	const (
+		roomSize  = 400
+		decorSize = 224
+		themeSize = 256
+	)
+	oldTop := C.dword_5d4594_2487560
+	defer func() { C.dword_5d4594_2487560 = oldTop }()
+
+	theme := C.calloc(1, themeSize)
+	roomMandatory := C.calloc(1, decorSize)
+	hallMandatory := C.calloc(1, decorSize)
+	roomOptional := C.calloc(1, decorSize)
+	hallOptional := C.calloc(1, decorSize)
+	defer C.free(theme)
+	defer C.free(roomMandatory)
+	defer C.free(hallMandatory)
+	defer C.free(roomOptional)
+	defer C.free(hallOptional)
+
+	initDecor := func(p unsafe.Pointer, constraint uint8, mandatory bool) {
+		base := uintptr(p)
+		*(*uint8)(unsafe.Pointer(base + 64)) = constraint
+		if mandatory {
+			*(*uint8)(unsafe.Pointer(base + 67)) = 1
+		}
+		*(*uint32)(unsafe.Pointer(base + 72)) = 10
+		*(*int32)(unsafe.Pointer(base + 76)) = 1
+		*(*int32)(unsafe.Pointer(base + 80)) = 10
+	}
+	initDecor(roomMandatory, 1, true)
+	initDecor(hallMandatory, 2, true)
+	initDecor(roomOptional, 1, false)
+	initDecor(hallOptional, 2, false)
+	*(*uint32)(unsafe.Pointer(uintptr(roomMandatory) + 220)) = uint32(uintptr(roomOptional))
+	*(*uint32)(unsafe.Pointer(uintptr(hallMandatory) + 220)) = uint32(uintptr(hallOptional))
+
+	// Room and hall decor settings begin at theme offsets 88 and 120.
+	*(*uint32)(unsafe.Pointer(uintptr(theme) + 88)) = uint32(uintptr(roomMandatory))
+	*(*int32)(unsafe.Pointer(uintptr(theme) + 96)) = 20
+	*(*uint32)(unsafe.Pointer(uintptr(theme) + 120)) = uint32(uintptr(hallMandatory))
+	*(*int32)(unsafe.Pointer(uintptr(theme) + 132)) = 20
+
+	var rooms [4]unsafe.Pointer
+	for i := range rooms {
+		rooms[i] = C.calloc(1, roomSize)
+		defer C.free(rooms[i])
+		base := uintptr(rooms[i])
+		if i < 2 {
+			*(*uint32)(rooms[i]) = 1
+			*(*uint8)(unsafe.Pointer(base + 364)) = 1
+		} else {
+			*(*uint32)(rooms[i]) = 2
+			*(*uint8)(unsafe.Pointer(base + 364)) = 2
+		}
+		*(*int32)(unsafe.Pointer(base + 12)) = 5
+		*(*int32)(unsafe.Pointer(base + 16)) = 4
+	}
+	for i := 0; i+1 < len(rooms); i++ {
+		*(*uint32)(unsafe.Pointer(uintptr(rooms[i]) + 56)) = uint32(uintptr(rooms[i+1]))
+	}
+	C.dword_5d4594_2487560 = C.uint32_t(uintptr(rooms[0]))
+	out.success = int(C.nox_xxx_mapGenMakeRooms_524310(C.int(uintptr(theme))))
+	for i, room := range rooms {
+		out.assignments[i] = uintptr(*(*uint32)(unsafe.Pointer(uintptr(room) + 372)))
+	}
+	out.roomMandatoryUsed = *(*uint8)(unsafe.Pointer(uintptr(roomMandatory) + 68))
+	out.hallMandatoryUsed = *(*uint8)(unsafe.Pointer(uintptr(hallMandatory) + 68))
+
+	C.dword_5d4594_2487560 = 0
+	emptyTheme := C.calloc(1, themeSize)
+	defer C.free(emptyTheme)
+	out.emptySuccess = int(C.nox_xxx_mapGenMakeRooms_524310(C.int(uintptr(emptyTheme))))
+
+	// A mandatory room decor cannot be assigned when the list contains only a hall.
+	*(*uint8)(unsafe.Pointer(uintptr(roomMandatory) + 68)) = 0
+	*(*uint32)(unsafe.Pointer(uintptr(theme) + 120)) = 0
+	*(*uint32)(unsafe.Pointer(uintptr(rooms[2]) + 56)) = 0
+	C.dword_5d4594_2487560 = C.uint32_t(uintptr(rooms[2]))
+	out.missingRoomFailure = int(C.nox_xxx_mapGenMakeRooms_524310(C.int(uintptr(theme))))
+
+	// Conversely, a mandatory hall decor cannot be assigned to a normal room.
+	*(*uint32)(unsafe.Pointer(uintptr(theme) + 88)) = 0
+	*(*uint32)(unsafe.Pointer(uintptr(theme) + 120)) = uint32(uintptr(hallMandatory))
+	*(*uint8)(unsafe.Pointer(uintptr(hallMandatory) + 68)) = 0
+	*(*uint32)(unsafe.Pointer(uintptr(rooms[0]) + 56)) = 0
+	*(*uint32)(unsafe.Pointer(uintptr(rooms[0]) + 372)) = 0
+	C.dword_5d4594_2487560 = C.uint32_t(uintptr(rooms[0]))
+	out.missingHallFailure = int(C.nox_xxx_mapGenMakeRooms_524310(C.int(uintptr(theme))))
+
+	C.dword_5d4594_2487560 = 0
+	return out
+}
+
 func C_mapGenCheckSyntheticSettings() (success int, sums [6]int32, failures []int) {
 	settings := C.calloc(1, 128)
 	defer C.free(settings)
@@ -894,9 +1089,20 @@ type cMapGenCompositeParsers struct {
 	appendType                      uint32
 	appendFirst, appendSecond       string
 	setMin, setMax, setCount        int32
-	containsWeight                  uint32
+	containsWeight, containsSecond  uint32
+	containsCount                   int
 	prefabRet, areaRet              int
 	prefabName                      string
+	prefabForeachCount              int
+	prefabForeachWeight             uint32
+}
+
+func freeMapGenContains(p uintptr) {
+	for p != 0 {
+		next := uintptr(*(*uint32)(unsafe.Pointer(p + 2056)))
+		C.free(unsafe.Pointer(p))
+		p = next
+	}
 }
 
 func C_mapGenCompositeParsers(wallFile, appendFile, setFile, containsFile, prefabFile unsafe.Pointer) cMapGenCompositeParsers {
@@ -929,7 +1135,13 @@ func C_mapGenCompositeParsers(wallFile, appendFile, setFile, containsFile, prefa
 	contains := C.nox_xxx_gen_520380((*C.FILE)(containsFile))
 	if contains != nil {
 		out.containsWeight = uint32(*contains)
-		C.nox_xxx_mapGenFreeStr_51F1F0(unsafe.Pointer(contains))
+		for p := uintptr(unsafe.Pointer(contains)); p != 0; p = uintptr(*(*uint32)(unsafe.Pointer(p + 2056))) {
+			if out.containsCount == 1 {
+				out.containsSecond = *(*uint32)(unsafe.Pointer(p))
+			}
+			out.containsCount++
+		}
+		freeMapGenContains(uintptr(unsafe.Pointer(contains)))
 	}
 	theme := C.calloc(1, 1116)
 	defer C.free(theme)
@@ -937,6 +1149,17 @@ func C_mapGenCompositeParsers(wallFile, appendFile, setFile, containsFile, prefa
 	if p := *(*uintptr)(unsafe.Pointer(uintptr(theme) + 80)); p != 0 {
 		out.prefabName = C.GoString((*C.char)(unsafe.Pointer(p)))
 		out.areaRet = 1
+		for each := uintptr(*(*uint32)(unsafe.Pointer(p + 152))); each != 0; {
+			next := uintptr(*(*uint32)(unsafe.Pointer(each + 8)))
+			out.prefabForeachCount++
+			if contains := uintptr(*(*uint32)(unsafe.Pointer(each + 4))); contains != 0 {
+				out.prefabForeachWeight = *(*uint32)(unsafe.Pointer(contains))
+				freeMapGenContains(contains)
+			}
+			C.free(unsafe.Pointer(each))
+			each = next
+		}
+		*(*uint32)(unsafe.Pointer(p + 152)) = 0
 	}
 	C.sub_520D50((*C.uint32_t)(theme))
 	return out

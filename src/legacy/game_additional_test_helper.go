@@ -21,6 +21,7 @@ int sub_413920();
 // GAME2.c functions
 int sub_452010();
 int sub_4521F0();
+extern uint32_t dword_5d4594_1045432;
 */
 import "C"
 
@@ -78,5 +79,6 @@ func C_sub_452010() int {
 }
 
 func C_sub_4521F0() int {
+	C.dword_5d4594_1045432 = 0
 	return int(C.sub_4521F0())
 }

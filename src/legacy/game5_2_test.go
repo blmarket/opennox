@@ -304,9 +304,12 @@ func TestGame52RemainingSafeFailures(t *testing.T) {
 	minimum, average := C_game52EmptyPlayerStats()
 	require.Zero(t, minimum)
 	require.Zero(t, average)
+	require.Zero(t, C_game52ServerInfoEarlyReturn())
 	require.Zero(t, C_sub_57A3F0Missing())
+	require.Equal(t, 1, C_sub_57A950Missing())
 	require.Zero(t, C_sub_57A9F0Missing())
 	require.Equal(t, int8(-128), C_sub_57AAA0Disabled())
+	require.True(t, C_sub_42CC50Empty())
 	require.Equal(t, 9, C_nox_xxx_playerCheckSpellClass_57AEA0(0, 0))
 
 	object, drawable := C_game52EmptyClientChecks()

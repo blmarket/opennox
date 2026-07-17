@@ -11,7 +11,9 @@ extern uint32_t dword_5d4594_2516344;
 extern uint32_t dword_5d4594_2516328;
 extern uint32_t dword_5d4594_2523804;
 extern uint32_t dword_8531A0_2576;
+extern uint32_t dword_5d4594_815052;
 
+unsigned int nox_server_makeServerInfoPacket_554040(const char* inBuf, int inSz, char* out);
 unsigned int nox_xxx_netGetUnitCodeCli_578B00(int a1);
 int nox_xxx_netClearHighBit_578B30(short a1);
 unsigned int nox_xxx_netTestHighBit_578B70(unsigned int a1);
@@ -69,8 +71,10 @@ char sub_57A1E0(int* a1, const char* a2, int* a3, char a4, short a5);
 unsigned int sub_554290(void);
 int sub_554300(void);
 int sub_57A3F0(char* a1, int a2, int a3, int a4);
+int sub_57A950(char* a1);
 int sub_57A9F0(const char* a1, const char* a2);
 char sub_57AAA0(const char* a1, char* a2, int* a3);
+int sub_42CC50(void** self);
 int nox_xxx_playerCheckSpellClass_57AEA0(int a1, int a2);
 int nox_xxx_client_57B400(int a1);
 typedef struct nox_drawable nox_drawable;
@@ -313,8 +317,7 @@ type protectionListResult struct {
 	CountAfterClear uint16
 }
 
-func resetProtectionList(key uint32) {
-	C.sub_56F3B0()
+func initializeProtectionList(key uint32) {
 	C.dword_5d4594_2516352 = 0
 	C.dword_5d4594_2516344 = 0
 	C.dword_5d4594_2516328 = 0
@@ -323,11 +326,16 @@ func resetProtectionList(key uint32) {
 	*memmap.PtrUint16(0x587000, 311204) = 0
 }
 
+func resetProtectionList(key uint32) {
+	C.sub_56F3B0()
+	initializeProtectionList(key)
+}
+
 func C_protectionListLifecycle() (out protectionListResult) {
 	const key = uint32(0x13579bdf)
 	const firstID = 657757279
 	const secondID = firstID + 1
-	resetProtectionList(key)
+	initializeProtectionList(key)
 	defer resetProtectionList(0)
 
 	out.EmptyFind = C.sub_56F590(firstID) == nil
@@ -371,7 +379,7 @@ type protectionUpdateResult struct {
 
 func C_protectionTypedUpdates() (out protectionUpdateResult) {
 	const id = 657757279
-	resetProtectionList(0x2468ace0)
+	initializeProtectionList(0x2468ace0)
 	defer resetProtectionList(0)
 	C.nox_xxx_protectionCreateStructForInt_56F280(id, 0)
 
@@ -448,7 +456,7 @@ func C_protectionTypedUpdates() (out protectionUpdateResult) {
 }
 
 func C_protectionInitialize() (handle int, count uint16) {
-	resetProtectionList(0)
+	initializeProtectionList(0)
 	handle = int(C.sub_56F1C0())
 	count = *memmap.PtrUint16(0x587000, 311204)
 	resetProtectionList(0)
@@ -553,6 +561,25 @@ func C_sub_57A3F0Missing() int {
 	return int(C.sub_57A3F0(name, 0, 0, 0))
 }
 
+func C_game52ServerInfoEarlyReturn() uint32 {
+	in := C.calloc(1, 16)
+	out := C.calloc(1, 128)
+	defer C.free(in)
+	defer C.free(out)
+	saved := C.dword_5d4594_815052
+	C.dword_5d4594_815052 = 0
+	defer func() {
+		C.dword_5d4594_815052 = saved
+	}()
+	return uint32(C.nox_server_makeServerInfoPacket_554040((*C.char)(in), 16, (*C.char)(out)))
+}
+
+func C_sub_57A950Missing() int {
+	name := C.CString("missing-game52-map.map")
+	defer C.free(unsafe.Pointer(name))
+	return int(C.sub_57A950(name))
+}
+
 func C_sub_57A9F0Missing() int {
 	dir := C.CString("missing-game52-map")
 	name := C.CString("missing-rule.rul")
@@ -568,6 +595,16 @@ func C_sub_57AAA0Disabled() int8 {
 	name := C.CString("ignored.rul")
 	defer C.free(unsafe.Pointer(name))
 	return int8(C.sub_57AAA0(name, (*C.char)(rules), nil))
+}
+
+func C_sub_42CC50Empty() bool {
+	rule := C.calloc(4, C.size_t(unsafe.Sizeof(uintptr(0))))
+	payload := C.malloc(8)
+	defer C.free(rule)
+	*(*unsafe.Pointer)(unsafe.Pointer(uintptr(rule) + 2*unsafe.Sizeof(uintptr(0)))) = payload
+	ret := C.sub_42CC50((*unsafe.Pointer)(rule))
+	cleared := *(*unsafe.Pointer)(unsafe.Pointer(uintptr(rule) + 2*unsafe.Sizeof(uintptr(0)))) == nil
+	return ret == 0 && cleared
 }
 
 func C_nox_xxx_playerCheckSpellClass_57AEA0(class, spell int) int {

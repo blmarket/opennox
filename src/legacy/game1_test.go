@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	noxflags "github.com/noxworld-dev/opennox/v1/common/flags"
+	"github.com/noxworld-dev/opennox/v1/common/memmap"
 )
 
 func TestGame1ModifNext(t *testing.T) {
@@ -136,6 +137,65 @@ func TestGame1Sub40A6A0(t *testing.T) {
 	_ = C_sub_40A6A0(1)
 	_ = C_sub_40A6A0(-1)
 	_ = C_sub_40A6A0(999)
+}
+
+func TestGame1RemainingStateAndTimingHelpers(t *testing.T) {
+	h := newGameLogicHarness(t)
+	h.setServer(0, 30)
+	h.snapshotMem(0x5D4594, 3468, 8)
+	h.snapshotMem(0x5D4594, 3508, 4)
+	h.snapshotMem(0x5D4594, 3536, 4)
+
+	oldPlatformTicks := PlatformTicks
+	PlatformTicks = func() uint64 { return 1000 }
+	t.Cleanup(func() { PlatformTicks = oldPlatformTicks })
+
+	require.Equal(t, int64(75), C_sub_40A310(75))
+	require.Equal(t, uint64(1075), *memmap.PtrUint64(0x5D4594, 3468))
+	require.Equal(t, -17, C_sub_40AA30(-17))
+	require.Equal(t, uint32(0xffff_ffef), *memmap.PtrUint32(0x5D4594, 3536))
+	require.Equal(t, 91, C_sub_40AA60(91))
+	require.Equal(t, uint32(91), *memmap.PtrUint32(0x5D4594, 3508))
+
+	before, after, shared, teamCount, mapInfo := C_game1RemainingStateHelpers(0x12345678)
+	require.Equal(t, uint32(0x12345678), before)
+	require.Zero(t, after)
+	require.Equal(t, uintptr(memmap.PtrOff(0x5D4594, 371616)), shared)
+	require.Zero(t, teamCount)
+	require.Equal(t, uint32(0x12345678), mapInfo)
+}
+
+func TestGame1WallSecretLifecycle(t *testing.T) {
+	got := C_game1WallSecretLifecycle()
+	require.NotZero(t, got.firstFound)
+	require.NotZero(t, got.secondFound)
+	require.True(t, got.middleRemoved)
+	require.True(t, got.headRemoved)
+	require.True(t, got.missingReturnedNil)
+	require.True(t, got.emptyAfter)
+}
+
+func TestGame1SafeEmptyPaths(t *testing.T) {
+	h := newGameLogicHarness(t)
+	h.setServer(0, 30)
+	for _, off := range []uintptr{33392, 35496} {
+		h.snapshotMem(0x587000, off, 4)
+		*memmap.PtrUint32(0x587000, off) = 0
+	}
+	for _, off := range []uintptr{371364, 371500} {
+		h.snapshotMem(0x5D4594, off, 12)
+		clear(memmap.BlobByAddr(0x5D4594).Data[off : off+12])
+	}
+	got := C_game1SafeEmptyPaths()
+	require.Zero(t, got.emptyGeneratedName)
+	require.Zero(t, got.weaponName)
+	require.Zero(t, got.armorDefense)
+	require.Zero(t, got.armorName)
+	require.Zero(t, got.unmarkResult)
+	require.Zero(t, got.teamStart)
+	require.Zero(t, got.assignResult)
+	require.Zero(t, got.toggleOff)
+	require.Zero(t, got.toggleOn)
 }
 
 func TestGame1Sub409E40(t *testing.T) {
