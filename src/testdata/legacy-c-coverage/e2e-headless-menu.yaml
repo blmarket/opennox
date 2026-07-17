@@ -1,0 +1,117 @@
+steps:
+  - action: wait
+    dt: 300
+    name: startup and legal screens
+  - action: esc
+    dt: 60
+    name: advance to main menu
+  - action: wait
+    dt: 240
+    name: main menu animation
+  - action: dismiss-dialog
+    dt: 1
+    name: dismiss quit confirmation
+  - action: main-menu-button
+    dt: 5
+    id: 112
+    name: open multiplayer game selection
+  - action: wait
+    dt: 300
+    name: multiplayer game selection
+  - action: click
+    dt: 30
+    x: 176
+    y: 104
+    name: host multiplayer game
+  - action: wait
+    dt: 300
+    name: multiplayer class selection
+  - action: click
+    dt: 30
+    x: 256
+    y: 208
+    name: select warrior class
+  - action: click
+    dt: 30
+    x: 512
+    y: 208
+    name: select conjurer class
+  - action: click
+    dt: 30
+    x: 768
+    y: 208
+    name: select wizard class
+  - action: click
+    dt: 30
+    x: 512
+    y: 656
+    name: accept multiplayer class
+  - action: wait
+    dt: 300
+    name: multiplayer character selection
+  - action: character-select-button
+    dt: 1
+    id: 501
+    name: create new multiplayer character
+  - action: wait
+    dt: 300
+    name: new multiplayer class selection
+  - action: click
+    dt: 30
+    x: 768
+    y: 208
+    name: select new multiplayer wizard
+  - action: click
+    dt: 30
+    x: 512
+    y: 656
+    name: accept new multiplayer class
+  - action: wait
+    dt: 300
+    name: multiplayer color selection
+  - action: click
+    dt: 15
+    x: 872
+    y: 64
+    name: cycle skin color
+  - action: click
+    dt: 15
+    x: 872
+    y: 144
+    name: cycle hair color
+  - action: click
+    dt: 15
+    x: 872
+    y: 443
+    name: cycle pants color
+  - action: click
+    dt: 15
+    x: 872
+    y: 520
+    name: cycle shirt color
+  - action: click
+    dt: 30
+    x: 376
+    y: 605
+    name: accept multiplayer character
+  - action: wait
+    dt: 300
+    name: multiplayer server options
+  - action: dismiss-dialog
+    dt: 30
+    name: dismiss multiplayer chat-area help
+  - action: wait
+    dt: 600
+    name: multiplayer chat area
+  - action: run
+    dt: 180
+    ang: 0.75
+    name: move in multiplayer chat area
+  - action: inventory
+    dt: 30
+    name: open multiplayer inventory
+  - action: inventory
+    dt: 30
+    name: close multiplayer inventory
+  - action: quit
+    dt: 30

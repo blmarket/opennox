@@ -572,7 +572,11 @@ func initGameSession435CC0() error {
 	} else {
 		c.Nox_xxx_netSendIncomingClient_43CB00()
 	}
-	c.SetDrawFunc(c.clientDraw)
+	if noxflags.HasEngine(noxflags.EngineNoRendering) {
+		c.SetDrawFunc(nil)
+	} else {
+		c.SetDrawFunc(c.clientDraw)
+	}
 	gameSetPlayState(3)
 	c.Objs.LoadError = false
 	sz := videoGetWindowSize()

@@ -11,7 +11,7 @@ import (
 	"github.com/noxworld-dev/opennox/v1/common/ntype"
 )
 
-func (c *Client) initSeat(sz image.Point) error {
+func (c *Client) initSeat(sz image.Point, _ bool) error {
 	return nil
 }
 

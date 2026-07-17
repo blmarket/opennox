@@ -295,6 +295,26 @@ func TestGame52RemainingUtilities(t *testing.T) {
 	require.Equal(t, [7]int32{-1, -1, -1, -1, -1, -1, -1}, fields)
 }
 
+func TestGame52RemainingSafeFailures(t *testing.T) {
+	h := newGameLogicHarness(t)
+	h.loadBlobData()
+	h.setGameFlags(0)
+	setGame52Server(t, 0)
+
+	minimum, average := C_game52EmptyPlayerStats()
+	require.Zero(t, minimum)
+	require.Zero(t, average)
+	require.Zero(t, C_sub_57A3F0Missing())
+	require.Zero(t, C_sub_57A9F0Missing())
+	require.Equal(t, int8(-128), C_sub_57AAA0Disabled())
+	require.Equal(t, 9, C_nox_xxx_playerCheckSpellClass_57AEA0(0, 0))
+
+	object, drawable := C_game52EmptyClientChecks()
+	require.Zero(t, object)
+	require.Zero(t, drawable)
+	require.Zero(t, C_game52NullSubs())
+}
+
 func setGame52Server(t *testing.T, frame uint32) *server.Server {
 	t.Helper()
 	oldGetServer := GetServer

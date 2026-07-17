@@ -1,0 +1,345 @@
+steps:
+  - action: wait
+    dt: 120
+    name: startup
+  - action: esc
+    dt: 40
+    name: startup escape
+  - action: wait
+    dt: 180
+    name: server map load
+  - action: esc
+    dt: 120
+    name: modal escape
+  - action: wait
+    dt: 180
+    name: client map load
+  - action: esc
+    dt: 30
+    name: close startup menu
+  - action: server-command
+    dt: 30
+    command: cheat health 10000
+  - action: server-command
+    dt: 1
+    command: cheat mana 10000
+  - action: spawn-monsters
+    dt: 5
+    name: spawn all monster object families
+  - action: spawn-items
+    dt: 30
+    name: spawn all ordinary inventory families
+  - action: exercise-items
+    dt: 120
+    name: pick up, equip, unequip, and use ordinary items
+  - action: toggle-inventory-direct
+    dt: 30
+    name: open populated inventory
+  - action: wait
+    dt: 120
+    name: draw populated inventory
+  - action: raw
+    dt: 15
+    ev:
+      type: wheel
+      wheel: -4
+  - action: raw
+    dt: 15
+    ev:
+      type: wheel
+      wheel: 4
+  - action: toggle-inventory-direct
+    dt: 30
+    name: close populated inventory
+  - action: grant-all-spells
+    dt: 30
+    name: grant every spell for spellbook coverage
+  - action: show-book-direct
+    dt: 30
+    name: open populated spellbook
+  - action: wait
+    dt: 120
+    name: draw populated spellbook
+  - action: raw
+    dt: 15
+    ev:
+      type: wheel
+      wheel: -3
+  - action: raw
+    dt: 15
+    ev:
+      type: wheel
+      wheel: 3
+  - action: hide-book-direct
+    dt: 30
+    name: close populated spellbook
+  - action: toggle-map-direct
+    dt: 30
+    name: open automap
+  - action: wait
+    dt: 90
+    name: draw automap
+  - action: toggle-map-direct
+    dt: 30
+    name: close automap
+  - action: toggle-console-direct
+    dt: 30
+    name: open console
+  - action: raw
+    dt: 15
+    ev:
+      type: text_input
+      text: help
+  - action: raw
+    dt: 15
+    ev:
+      type: key
+      key: 28
+      pressed: true
+  - action: raw
+    dt: 1
+    ev:
+      type: key
+      key: 28
+      pressed: false
+  - action: toggle-console-direct
+    dt: 30
+    name: close console
+  - action: show-server-options-direct
+    dt: 30
+    name: open server options
+  - action: wait
+    dt: 120
+    name: draw server options
+  - action: click
+    dt: 30
+    x: 950
+    y: 230
+    name: open advanced server options
+  - action: wait
+    dt: 120
+    name: draw advanced server options
+  - action: click
+    dt: 30
+    x: 461
+    y: 107
+    name: open spell restrictions
+  - action: wait
+    dt: 120
+    name: draw spell restrictions
+  - action: click
+    dt: 15
+    x: 223
+    y: 320
+    name: enable all spells
+  - action: click
+    dt: 15
+    x: 368
+    y: 320
+    name: disable all spells
+  - action: click
+    dt: 15
+    x: 250
+    y: 72
+    name: toggle first spell
+  - action: click
+    dt: 15
+    x: 250
+    y: 132
+    name: toggle middle spell
+  - action: click
+    dt: 15
+    x: 250
+    y: 200
+    name: toggle last visible spell
+  - action: click
+    dt: 30
+    x: 461
+    y: 137
+    name: open weapon restrictions
+  - action: wait
+    dt: 60
+    name: draw weapon restrictions
+  - action: click
+    dt: 15
+    x: 223
+    y: 320
+    name: enable all weapons
+  - action: click
+    dt: 15
+    x: 368
+    y: 320
+    name: disable all weapons
+  - action: click
+    dt: 15
+    x: 250
+    y: 90
+    name: toggle weapon
+  - action: click
+    dt: 30
+    x: 461
+    y: 167
+    name: open armor restrictions
+  - action: wait
+    dt: 60
+    name: draw armor restrictions
+  - action: click
+    dt: 15
+    x: 223
+    y: 320
+    name: enable all armor
+  - action: click
+    dt: 15
+    x: 368
+    y: 320
+    name: disable all armor
+  - action: click
+    dt: 15
+    x: 250
+    y: 90
+    name: toggle armor
+  - action: click
+    dt: 30
+    x: 461
+    y: 77
+    name: open rule-file options
+  - action: wait
+    dt: 60
+    name: draw rule-file options
+  - action: click
+    dt: 30
+    x: 478
+    y: 290
+    name: close advanced options
+  - action: click
+    dt: 15
+    x: 815
+    y: 300
+    name: toggle auto-assign
+  - action: click
+    dt: 15
+    x: 913
+    y: 300
+    name: toggle team damage
+  - action: click
+    dt: 15
+    x: 900
+    y: 280
+    name: toggle teams
+  - action: click
+    dt: 15
+    x: 900
+    y: 320
+    name: shuffle teams
+  - action: click
+    dt: 15
+    x: 955
+    y: 255
+    name: restore server defaults
+  - action: hide-server-options-direct
+    dt: 30
+    name: close server options
+  - action: rank
+    dt: 30
+    name: show player rankings
+  - action: wait
+    dt: 120
+    name: draw player rankings
+  - action: rank
+    dt: 30
+    name: cycle player rankings
+  - action: wait
+    dt: 120
+    name: draw alternate rankings
+  - action: rank
+    dt: 30
+    name: hide player rankings
+  - action: netstat
+    dt: 30
+    name: show network statistics
+  - action: wait
+    dt: 60
+    name: draw network statistics
+  - action: netstat
+    dt: 30
+    name: hide network statistics
+  - action: hud
+    dt: 30
+    name: hide game interface
+  - action: wait
+    dt: 60
+    name: draw without game interface
+  - action: hud
+    dt: 30
+    name: restore game interface
+  - action: toggle-map-direct
+    dt: 30
+    name: reopen automap for zoom
+  - action: map-zoom-in
+    dt: 15
+    name: zoom automap in
+  - action: map-zoom-out
+    dt: 15
+    name: zoom automap out
+  - action: toggle-map-direct
+    dt: 30
+    name: close zoomed automap
+  - action: quick-health
+    dt: 15
+    name: use quick health potion
+  - action: quick-mana
+    dt: 15
+    name: use quick mana potion
+  - action: quick-cure
+    dt: 15
+    name: use quick poison cure
+  - action: swap-weapons
+    dt: 15
+    name: swap equipped weapons
+  - action: previous-spell-set
+    dt: 15
+    name: previous spell set
+  - action: next-spell-set
+    dt: 15
+    name: next spell set
+  - action: select-spell-set
+    dt: 15
+    name: select spell set
+  - action: place-trap
+    dt: 15
+    name: place trap
+  - action: taunt
+    dt: 15
+    name: send taunt
+  - action: point
+    dt: 15
+    name: send point emote
+  - action: laugh
+    dt: 15
+    name: send laugh emote
+  - action: use-all-abilities
+    dt: 30
+    name: use every warrior ability
+  - action: cast-beneficial-spells
+    dt: 3
+    name: cast beneficial spells on player
+  - action: cancel-spells
+    dt: 120
+    name: cancel active duration spells
+  - action: hurt-monsters
+    dt: 120
+    name: exercise monster damage handlers
+  - action: kill-monsters
+    dt: 120
+    name: exercise monster death handlers
+  - action: run
+    dt: 180
+    ang: 0.25
+    name: exercise movement
+  - action: jump
+    dt: 5
+  - action: melee
+    dt: 10
+    ang: 0.5
+  - action: quit
+    dt: 180

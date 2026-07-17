@@ -1,0 +1,250 @@
+steps:
+  - action: wait
+    dt: 120
+    name: startup
+  - action: esc
+    dt: 40
+    name: startup escape
+  - action: wait
+    dt: 180
+    name: server map load
+  - action: esc
+    dt: 120
+    name: modal escape
+  - action: wait
+    dt: 180
+    name: initial client map load
+  - action: server-command
+    dt: 30
+    command: cheat health 10000
+  - action: server-command
+    dt: 1
+    command: cheat mana 10000
+  - action: server-command
+    dt: 1
+    command: cheat spawn Skeleton
+    name: spawn representative monsters
+  - action: server-command
+    dt: 2
+    command: cheat spawn SkeletonLord
+  - action: server-command
+    dt: 2
+    command: cheat spawn Wizard
+  - action: server-command
+    dt: 2
+    command: cheat spawn Imp
+  - action: server-command
+    dt: 2
+    command: cheat spawn GruntAxe
+  - action: server-command
+    dt: 2
+    command: cheat spawn EmberDemon
+  - action: server-command
+    dt: 2
+    command: cheat spawn MeleeDemon
+  - action: server-command
+    dt: 2
+    command: cheat spawn Urchin
+  - action: server-command
+    dt: 2
+    command: cheat spawn UrchinShaman
+  - action: server-command
+    dt: 2
+    command: cheat spawn Archer
+  - action: server-command
+    dt: 2
+    command: cheat spawn Swordsman
+  - action: server-command
+    dt: 2
+    command: cheat spawn Demon
+  - action: server-command
+    dt: 2
+    command: cheat spawn Bomber
+  - action: server-command
+    dt: 2
+    command: cheat spawn SpittingSpider
+  - action: server-command
+    dt: 2
+    command: cheat spawn Spider
+  - action: server-command
+    dt: 2
+    command: cheat spawn Bat
+  - action: server-command
+    dt: 2
+    command: cheat spawn Zombie
+  - action: server-command
+    dt: 2
+    command: cheat spawn VileZombie
+  - action: server-command
+    dt: 2
+    command: cheat spawn Goon
+  - action: server-command
+    dt: 2
+    command: cheat spawn Bear
+  - action: server-command
+    dt: 2
+    command: cheat spawn WhiteWolf
+  - action: server-command
+    dt: 2
+    command: cheat spawn CarnivorousPlant
+  - action: server-command
+    dt: 2
+    command: cheat spawn Mimic
+  - action: server-command
+    dt: 2
+    command: cheat spawn Scorpion
+  - action: server-command
+    dt: 2
+    command: cheat spawn Beholder
+  - action: server-command
+    dt: 2
+    command: cheat spawn OgreWarlord
+  - action: server-command
+    dt: 2
+    command: cheat spawn BlackWidow
+  - action: server-command
+    dt: 2
+    command: cheat spawn MechanicalGolem
+  - action: server-command
+    dt: 2
+    command: cheat spawn StoneGolem
+  - action: server-command
+    dt: 2
+    command: cheat spawn Ghost
+  - action: spawn-monsters
+    dt: 5
+    name: spawn all monster object families
+  - action: spawn-items
+    dt: 30
+    name: spawn all ordinary inventory families
+  - action: cast-all-spells
+    dt: 3
+    name: cast every loaded spell
+  - action: run
+    dt: 360
+    ang: 0.25
+    name: exercise movement and combat
+  - action: jump
+    dt: 5
+  - action: melee
+    dt: 10
+    ang: 0.5
+  - action: cast
+    dt: 10
+    slot: 1
+  - action: cast
+    dt: 10
+    slot: 2
+  - action: cast
+    dt: 10
+    slot: 3
+  - action: inventory
+    dt: 10
+  - action: esc
+    dt: 30
+  - action: server-command
+    dt: 60
+    command: load CapFlag
+    name: capture the flag
+  - action: server-command
+    dt: 180
+    command: load FlagBall
+    name: flagball
+  - action: server-command
+    dt: 180
+    command: load Kingdoms
+    name: king of the realm
+  - action: server-command
+    dt: 180
+    command: load FreezOut
+    name: elimination
+  - action: server-command
+    dt: 180
+    command: load Bunker
+    name: multiplayer objects
+  - action: server-command
+    dt: 180
+    command: load ManaMine
+    name: elevators
+  - action: server-command
+    dt: 180
+    command: load LostTomb
+    name: traps and doors
+  - action: server-command
+    dt: 180
+    command: load So_Dun
+    name: cooperative objects
+  - action: server-command
+    dt: 180
+    command: load So_Beach
+  - action: server-command
+    dt: 120
+    command: load So_FOV
+  - action: server-command
+    dt: 120
+    command: load So_Grok
+  - action: server-command
+    dt: 120
+    command: load So_Mines
+  - action: server-command
+    dt: 120
+    command: load So_Swamp
+  - action: server-command
+    dt: 120
+    command: load war01a
+    name: warrior campaign
+  - action: server-command
+    dt: 180
+    command: load war03d
+  - action: server-command
+    dt: 120
+    command: load war05c
+  - action: server-command
+    dt: 120
+    command: load war07h
+  - action: server-command
+    dt: 120
+    command: load war10d
+  - action: server-command
+    dt: 120
+    command: load con01a
+    name: conjurer campaign
+  - action: server-command
+    dt: 180
+    command: load con03b
+  - action: server-command
+    dt: 120
+    command: load con05c
+  - action: server-command
+    dt: 120
+    command: load con07h
+  - action: server-command
+    dt: 120
+    command: load con10d
+  - action: server-command
+    dt: 120
+    command: load G_Castle
+    name: quest castle
+  - action: server-command
+    dt: 180
+    command: load G_Crypts
+  - action: server-command
+    dt: 120
+    command: load G_Forest
+  - action: server-command
+    dt: 120
+    command: load G_Lava
+  - action: server-command
+    dt: 120
+    command: load G_Mines
+  - action: server-command
+    dt: 120
+    command: load G_Swamp
+  - action: server-command
+    dt: 120
+    command: load G_Temple
+  - action: server-command
+    dt: 120
+    command: load G_LOTDD
+  - action: quit
+    dt: 180

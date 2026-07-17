@@ -9,11 +9,13 @@ import (
 	"github.com/spf13/viper"
 	"github.com/tawesoft/golib/v2/dialog"
 
+	"github.com/noxworld-dev/opennox-lib/client/seat"
 	"github.com/noxworld-dev/opennox-lib/client/seat/sdl"
 	"github.com/noxworld-dev/opennox-lib/env"
 
 	"github.com/noxworld-dev/opennox/v1/client/input"
 	"github.com/noxworld-dev/opennox/v1/client/render"
+	headlessseat "github.com/noxworld-dev/opennox/v1/client/seat/headless"
 	"github.com/noxworld-dev/opennox/v1/internal/version"
 	"github.com/noxworld-dev/opennox/v1/legacy"
 )
@@ -23,15 +25,22 @@ func init() {
 	viper.SetDefault(configVideoStretch, false)
 }
 
-func (c *Client) initSeat(sz image.Point) error {
-	sst, err := sdl.New("OpenNox "+version.ClientVersion(), sz)
-	if err != nil {
-		return err
+func (c *Client) initSeat(sz image.Point, headless bool) error {
+	var sst seat.Seat
+	if headless {
+		sst = headlessseat.New(sz)
+	} else {
+		var err error
+		sst, err = sdl.New("OpenNox "+version.ClientVersion(), sz)
+		if err != nil {
+			return err
+		}
 	}
 	c.Seat = sst
 	if env.IsE2E() {
 		c.Seat = e2eWrapSeat(c.Seat)
 	}
+	var err error
 	c.Win, err = render.New(c.Seat)
 	if err != nil {
 		_ = c.Seat.Close()

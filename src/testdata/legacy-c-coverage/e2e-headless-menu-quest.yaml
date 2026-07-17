@@ -1,0 +1,123 @@
+steps:
+  - action: wait
+    dt: 300
+    name: startup and legal screens
+  - action: esc
+    dt: 60
+    name: advance to main menu
+  - action: wait
+    dt: 240
+    name: main menu animation
+  - action: dismiss-dialog
+    dt: 1
+    name: dismiss quit confirmation
+  - action: main-menu-button
+    dt: 5
+    id: 131
+    name: open solo quest selection
+  - action: wait
+    dt: 300
+    name: solo quest selection
+  - action: character-select-button
+    dt: 30
+    id: 501
+    name: create new quest character
+  - action: wait
+    dt: 300
+    name: quest class selection
+  - action: click
+    dt: 30
+    x: 256
+    y: 208
+    name: select warrior class
+  - action: click
+    dt: 30
+    x: 512
+    y: 208
+    name: select conjurer class
+  - action: click
+    dt: 30
+    x: 768
+    y: 208
+    name: select wizard class
+  - action: click
+    dt: 30
+    x: 512
+    y: 656
+    name: accept quest class
+  - action: wait
+    dt: 300
+    name: quest color selection
+  - action: click
+    dt: 15
+    x: 872
+    y: 64
+    name: cycle skin color
+  - action: click
+    dt: 15
+    x: 872
+    y: 144
+    name: cycle hair color
+  - action: click
+    dt: 15
+    x: 872
+    y: 443
+    name: cycle pants color
+  - action: click
+    dt: 15
+    x: 872
+    y: 520
+    name: cycle shirt color
+  - action: click
+    dt: 30
+    x: 376
+    y: 605
+    name: accept quest character
+  - action: wait
+    dt: 900
+    name: start multiplayer quest
+  - action: dismiss-dialog
+    dt: 30
+    name: dismiss quest help
+  - action: server-command
+    dt: 30
+    command: cheat health 10000
+  - action: server-command
+    dt: 1
+    command: cheat mana 10000
+  - action: spawn-monsters
+    dt: 30
+    name: spawn quest monster families
+  - action: spawn-items
+    dt: 30
+    name: spawn quest item families
+  - action: grant-all-spells
+    dt: 60
+    name: grant quest spells and abilities
+  - action: show-book-direct
+    dt: 60
+    name: open populated quest spellbook
+  - action: wait
+    dt: 120
+    name: draw quest spellbook
+  - action: hide-book-direct
+    dt: 30
+    name: close quest spellbook
+  - action: cast-all-spells
+    dt: 3
+    name: cast every spell in quest mode
+  - action: cancel-spells
+    dt: 120
+    name: cancel quest duration spells
+  - action: hurt-monsters
+    dt: 120
+    name: exercise quest monster damage
+  - action: kill-monsters
+    dt: 120
+    name: exercise quest monster deaths
+  - action: run
+    dt: 180
+    ang: 0.5
+    name: move in multiplayer quest
+  - action: quit
+    dt: 30

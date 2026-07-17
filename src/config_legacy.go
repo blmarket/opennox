@@ -657,7 +657,7 @@ func nox_common_skipcfgfile_4331E0(sect cfg.Section, skip bool) error {
 }
 
 func writeConfigLegacy(path string) error {
-	if env.IsE2E() {
+	if configReadOnly || env.IsE2E() {
 		return nil
 	}
 	configLog.Printf("writing legacy: %q", path)

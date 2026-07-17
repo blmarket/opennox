@@ -10,6 +10,7 @@ extern uint32_t dword_5d4594_2516348;
 extern uint32_t dword_5d4594_2516344;
 extern uint32_t dword_5d4594_2516328;
 extern uint32_t dword_5d4594_2523804;
+extern uint32_t dword_8531A0_2576;
 
 unsigned int nox_xxx_netGetUnitCodeCli_578B00(int a1);
 int nox_xxx_netClearHighBit_578B30(short a1);
@@ -65,6 +66,23 @@ long long nox_xxx___Getcvt_57B180(void);
 int sub_57B190(unsigned short a1, unsigned short a2);
 int* sub_57ADF0(int* a1);
 char sub_57A1E0(int* a1, const char* a2, int* a3, char a4, short a5);
+unsigned int sub_554290(void);
+int sub_554300(void);
+int sub_57A3F0(char* a1, int a2, int a3, int a4);
+int sub_57A9F0(const char* a1, const char* a2);
+char sub_57AAA0(const char* a1, char* a2, int* a3);
+int nox_xxx_playerCheckSpellClass_57AEA0(int a1, int a2);
+int nox_xxx_client_57B400(int a1);
+typedef struct nox_drawable nox_drawable;
+int sub_57B450(nox_drawable* a1);
+void nullsub_10(uint32_t a1);
+int nullsub_8(int a1, int a2);
+void nullsub_28(uint32_t a1);
+void nullsub_30(uint32_t a1);
+void nullsub_29(void);
+void nullsub_35(uint32_t a1, uint32_t a2);
+void nullsub_24(uint32_t a1);
+void nullsub_9(uint32_t a1);
 */
 import "C"
 import (
@@ -523,4 +541,61 @@ func C_game52RuleDefaults(flags int16) (ret int8, fields [7]int32) {
 	emptyList := [2]C.int{}
 	C.sub_57ADF0(&emptyList[0])
 	return ret, fields
+}
+
+func C_game52EmptyPlayerStats() (minimum, average uint32) {
+	return uint32(C.sub_554290()), uint32(C.sub_554300())
+}
+
+func C_sub_57A3F0Missing() int {
+	name := C.CString("missing-game52-rule-file.rul")
+	defer C.free(unsafe.Pointer(name))
+	return int(C.sub_57A3F0(name, 0, 0, 0))
+}
+
+func C_sub_57A9F0Missing() int {
+	dir := C.CString("missing-game52-map")
+	name := C.CString("missing-rule.rul")
+	defer C.free(unsafe.Pointer(dir))
+	defer C.free(unsafe.Pointer(name))
+	return int(C.sub_57A9F0(dir, name))
+}
+
+func C_sub_57AAA0Disabled() int8 {
+	rules := C.calloc(1, 64)
+	defer C.free(rules)
+	*(*uint8)(unsafe.Pointer(uintptr(rules) + 52)) = 0x80
+	name := C.CString("ignored.rul")
+	defer C.free(unsafe.Pointer(name))
+	return int8(C.sub_57AAA0(name, (*C.char)(rules), nil))
+}
+
+func C_nox_xxx_playerCheckSpellClass_57AEA0(class, spell int) int {
+	return int(C.nox_xxx_playerCheckSpellClass_57AEA0(C.int(class), C.int(spell)))
+}
+
+func C_game52EmptyClientChecks() (object, drawable int) {
+	typeSlot := memmap.PtrUint32(0x5D4594, 2523876)
+	drawTypeSlot := memmap.PtrUint32(0x5D4594, 2523880)
+	savedType, savedDrawType := *typeSlot, *drawTypeSlot
+	savedPlayer := uint32(C.dword_8531A0_2576)
+	*typeSlot, *drawTypeSlot = 1, 1
+	C.dword_8531A0_2576 = 0
+	defer func() {
+		*typeSlot, *drawTypeSlot = savedType, savedDrawType
+		C.dword_8531A0_2576 = C.uint32_t(savedPlayer)
+	}()
+	return int(C.nox_xxx_client_57B400(0)), int(C.sub_57B450(nil))
+}
+
+func C_game52NullSubs() int {
+	C.nullsub_10(1)
+	ret := int(C.nullsub_8(2, 3))
+	C.nullsub_28(4)
+	C.nullsub_30(5)
+	C.nullsub_29()
+	C.nullsub_35(6, 7)
+	C.nullsub_24(8)
+	C.nullsub_9(9)
+	return ret
 }

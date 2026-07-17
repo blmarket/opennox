@@ -24,8 +24,15 @@ import (
 	"github.com/noxworld-dev/opennox-lib/client/keybind"
 	"github.com/noxworld-dev/opennox-lib/client/seat"
 	"github.com/noxworld-dev/opennox-lib/log"
+	"github.com/noxworld-dev/opennox-lib/object"
 	"github.com/noxworld-dev/opennox-lib/platform"
+	"github.com/noxworld-dev/opennox-lib/player"
+	"github.com/noxworld-dev/opennox-lib/spell"
+	"github.com/noxworld-dev/opennox-lib/things"
 	"github.com/noxworld-dev/opennox-lib/types"
+
+	"github.com/noxworld-dev/opennox/v1/legacy"
+	"github.com/noxworld-dev/opennox/v1/server"
 )
 
 var (
@@ -335,15 +342,17 @@ type e2eFileYML struct {
 }
 
 type e2eStepYML struct {
-	Action string        `yaml:"action"`
-	Time   uint64        `yaml:"dt,omitempty"`
-	Dur    time.Duration `yaml:"dur,omitempty"`
-	Name   string        `yaml:"name,omitempty"`
-	X      int           `yaml:"x,omitempty"`
-	Y      int           `yaml:"y,omitempty"`
-	Ang    float64       `yaml:"ang,omitempty"`
-	Slot   int           `yaml:"slot,omitempty"`
-	Event  *e2eStepRaw   `yaml:"ev,omitempty"`
+	Action  string        `yaml:"action"`
+	Time    uint64        `yaml:"dt,omitempty"`
+	Dur     time.Duration `yaml:"dur,omitempty"`
+	Name    string        `yaml:"name,omitempty"`
+	X       int           `yaml:"x,omitempty"`
+	Y       int           `yaml:"y,omitempty"`
+	Ang     float64       `yaml:"ang,omitempty"`
+	Slot    int           `yaml:"slot,omitempty"`
+	ID      int           `yaml:"id,omitempty"`
+	Command string        `yaml:"command,omitempty"`
+	Event   *e2eStepRaw   `yaml:"ev,omitempty"`
 }
 
 func (sc *e2eScenario) Load(path string) {
@@ -379,6 +388,18 @@ func (sc *e2eScenario) Load(path string) {
 				sc.Wait(dt, "")
 			}
 			sc.ClickLeft(l.X, l.Y, l.Name)
+		case "select-final-class":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			x := 768
+			switch strings.ToLower(os.Getenv("NOX_E2E_CLASS")) {
+			case "warrior":
+				x = 256
+			case "conjurer":
+				x = 512
+			}
+			sc.ClickLeft(x, 208, l.Name)
 		case "interact":
 			if dt != 0 {
 				sc.Wait(dt, "")
@@ -415,6 +436,117 @@ func (sc *e2eScenario) Load(path string) {
 				sc.Wait(dt, "")
 			}
 			sc.Key(keybind.KeyI, l.Name)
+		case "book":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyB, l.Name)
+		case "map":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyTab, l.Name)
+		case "console":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyF1, l.Name)
+		case "rank":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyF9, l.Name)
+		case "netstat":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyF10, l.Name)
+		case "hud":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyF11, l.Name)
+		case "map-zoom-in":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.Key2, l.Name)
+		case "map-zoom-out":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.Key1, l.Name)
+		case "quick-health":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyX, l.Name)
+		case "quick-mana":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyC, l.Name)
+		case "quick-cure":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyZ, l.Name)
+		case "swap-weapons":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyV, l.Name)
+		case "previous-spell-set":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyW, l.Name)
+		case "next-spell-set":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyE, l.Name)
+		case "select-spell-set":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyR, l.Name)
+		case "place-trap":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyT, l.Name)
+		case "taunt":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyJ, l.Name)
+		case "point":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyK, l.Name)
+		case "laugh":
+			if dt != 0 {
+				sc.Wait(dt, "")
+			}
+			sc.Key(keybind.KeyL, l.Name)
+		case "toggle-inventory-direct":
+			sc.add(dt, l.Name, func() { legacy.Nox_client_toggleInventory_467C60() })
+		case "toggle-book-direct":
+			sc.add(dt, l.Name, func() { legacy.Nox_client_toggleSpellbook_45AC70() })
+		case "show-book-direct":
+			sc.add(dt, l.Name, func() { legacy.Nox_xxx_bookShowMB_45AD70(0) })
+		case "hide-book-direct":
+			sc.add(dt, l.Name, func() { legacy.Nox_xxx_bookHideMB_45ACA0(0) })
+		case "toggle-map-direct":
+			sc.add(dt, l.Name, func() { nox_client_toggleMap_473610() })
+		case "toggle-console-direct":
+			sc.add(dt, l.Name, func() { guiCon.Toggle() })
+		case "show-server-options-direct":
+			sc.add(dt, l.Name, legacy.Nox_xxx_guiServerOptsLoad_457500)
+		case "hide-server-options-direct":
+			sc.add(dt, l.Name, func() { legacy.Nox_xxx_guiServerOptionsHide_4597E0(0) })
 		case "jump":
 			if dt != 0 {
 				sc.Wait(dt, "")
@@ -443,6 +575,97 @@ func (sc *e2eScenario) Load(path string) {
 			case 5:
 				sc.Key(keybind.KeyG, l.Name)
 			}
+		case "server-command":
+			sc.add(dt, l.Name, func() {
+				execServerCmd(l.Command)
+			})
+		case "dismiss-dialog":
+			sc.add(dt, l.Name, sub_44A400)
+		case "main-menu-button":
+			sc.add(dt, l.Name, func() {
+				if winMainMenu == nil {
+					e2eError(fmt.Errorf("main menu is not available for button %d", l.ID))
+					return
+				}
+				btn := winMainMenu.ChildByID(uint(l.ID))
+				if btn == nil {
+					e2eError(fmt.Errorf("main menu button %d is not available", l.ID))
+					return
+				}
+				winMainMenu.Func94(&WindowEvent0x4007{Win: btn})
+			})
+		case "character-select-button":
+			sc.add(dt, l.Name, func() {
+				if winSelSave == nil {
+					e2eError(fmt.Errorf("character selection is not available for button %d", l.ID))
+					return
+				}
+				btn := winSelSave.ChildByID(uint(l.ID))
+				if btn == nil {
+					e2eError(fmt.Errorf("character selection button %d is not available", l.ID))
+					return
+				}
+				winSelSave.Func94(&WindowEvent0x4007{Win: btn})
+			})
+		case "spawn-monsters":
+			sc.add(dt, l.Name, func() {
+				e2eSpawnObjectClasses(object.ClassMonster, object.ClassPlayer)
+			})
+		case "spawn-items":
+			sc.add(dt, l.Name, func() {
+				e2eSpawnObjectClasses(
+					object.ClassWeapon|object.ClassArmor|object.ClassWand|object.ClassFood|
+						object.ClassKey|object.ClassInfoBook|object.ClassReadable|object.ClassTreasure|
+						object.ClassPickup|object.ClassNotStackable,
+					object.ClassPlayer|object.ClassMonster|object.ClassMissile|object.ClassObstacle|
+						object.ClassDoor|object.ClassTrigger|object.ClassTransporter|object.ClassHole|
+						object.ClassElevator|object.ClassElevatorShaft|object.ClassMonsterGenerator|
+						object.ClassFlag|object.ClassClientPredict,
+				)
+			})
+		case "exercise-items":
+			sc.add(dt, l.Name, e2eExerciseItems)
+		case "grant-all-spells":
+			sc.add(dt, l.Name, e2eGrantAllSpells)
+		case "cast-all-spells":
+			for spl := spell.SPELL_ANCHOR; spl.Valid(); spl++ {
+				spl := spl
+				sc.add(dt, spl.String(), func() {
+					e2eCastSpell(spl)
+				})
+			}
+		case "use-all-abilities":
+			for abil := server.AbilityInvalid + 1; abil < server.AbilityMax; abil++ {
+				abil := abil
+				sc.add(dt, abil.String(), func() {
+					e2eUseAbility(abil)
+				})
+			}
+		case "cast-beneficial-spells":
+			for spl := spell.SPELL_ANCHOR; spl.Valid(); spl++ {
+				spl := spl
+				sc.add(dt, spl.String()+" self", func() {
+					if !noxServer.Spells.HasFlags(spl, things.SpellOffensive) {
+						e2eCastSpellAt(spl, nil)
+					}
+				})
+			}
+		case "cancel-spells":
+			sc.add(dt, l.Name, func() {
+				for cur := noxServer.Spells.Dur.List; cur != nil; {
+					next := cur.Next
+					noxServer.Spells.Dur.CancelSpell(cur)
+					cur = next
+				}
+			})
+		case "hurt-monsters":
+			sc.add(dt, l.Name, func() {
+				e2eDamageMonsters(false)
+			})
+		case "kill-monsters":
+			sc.add(dt, l.Name, func() {
+				e2eDamageMonsters(true)
+			})
 		case "raw":
 			ev := l.Event
 			switch ev.Type {
@@ -480,6 +703,142 @@ func (sc *e2eScenario) Load(path string) {
 		default:
 			panic("unsupported type: " + l.Action)
 		}
+	}
+}
+
+func e2eGrantAllSpells() {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	serverCheatAllSpells(true, 3)
+}
+
+func e2eExerciseItems() {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	unit := asObjectS(host.PlayerUnit)
+	var items []*server.Object
+	for it := noxServer.Objs.First(); it != nil; it = it.Next() {
+		if it.Class().HasAny(object.ClassWeapon | object.ClassArmor | object.ClassWand | object.ClassFood |
+			object.ClassKey | object.ClassInfoBook | object.ClassReadable | object.ClassTreasure |
+			object.ClassPickup | object.ClassNotStackable) {
+			items = append(items, it)
+		}
+	}
+	for _, it := range items {
+		if it.Flags().HasAny(object.FlagDead|object.FlagDestroyed) || !unit.DoPickup(it) {
+			continue
+		}
+		if it.Class().HasAny(object.ClassWeapon | object.ClassArmor | object.ClassWand) {
+			if unit.Equip(it) {
+				unit.Unequip(it)
+			}
+		}
+		it.CallUse(host.PlayerUnit)
+	}
+}
+
+func e2eDamageMonsters(kill bool) {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	ind := 0
+	for it := noxServer.Objs.First(); it != nil; {
+		next := it.Next()
+		if it.Class().Has(object.ClassMonster) && !it.Flags().HasAny(object.FlagDead|object.FlagDestroyed) {
+			dmg := 1
+			typ := object.DamageType(ind % len(object.DamageTypeNames))
+			if kill {
+				_, max := it.Health()
+				dmg = max + 1
+				typ = object.DamageTrue
+			}
+			asObjectS(it).CallDamage(host.PlayerUnit, host.PlayerUnit, dmg, typ)
+			ind++
+		}
+		it = next
+	}
+}
+
+func e2eUseAbility(abil server.Ability) {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	u := host.PlayerUnit
+	ud := u.UpdateDataPlayer()
+	ud.Player.Info().SetPlayerClass(player.Warrior)
+	ud.Player.SpellLvl[abil] = 5
+	noxServer.abilities.CancelAbilities(u)
+	noxServer.abilities.Do(u, abil)
+}
+
+func e2eCastSpell(spl spell.ID) {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	target := host.PlayerUnit
+	for it := noxServer.Objs.First(); it != nil; it = it.Next() {
+		if it.Class().Has(object.ClassMonster) && !it.Flags().HasAny(object.FlagDead|object.FlagDestroyed) {
+			target = it
+			break
+		}
+	}
+	e2eCastSpellAt(spl, target)
+}
+
+func e2eCastSpellAt(spl spell.ID, target *server.Object) {
+	host := noxServer.Players.Host()
+	if host == nil || host.PlayerUnit == nil {
+		return
+	}
+	caster := host.PlayerUnit
+	if target == nil {
+		target = caster
+	}
+	noxServer.castSpellBy(spl, 5, caster, target, target.Pos())
+}
+
+func e2eSpawnObjectClasses(classes, exclude object.Class) {
+	if noxServer == nil {
+		return
+	}
+	host := noxServer.Players.Host()
+	if host == nil {
+		return
+	}
+	base := host.Pos()
+	ind := 0
+	for _, typ := range noxServer.Types.List() {
+		if !typ.Class().HasAny(classes) || typ.Class().HasAny(exclude) {
+			continue
+		}
+		const step = 50
+		pos := base
+		pos.X += float32((ind%17 - 8) * step)
+		pos.Y += float32((ind/17 + 1) * step)
+		noxServer.createObject(typ, pos)
+		ind++
 	}
 }
 

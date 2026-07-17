@@ -124,6 +124,7 @@ func RunArgs(args []string) (gerr error) {
 		fNoThreads  = flags.Bool("nothread", false, "nothread")
 		fNoFloor    = flags.Bool("noFloor", false, "noFloor")
 		fNoDraw     = flags.Bool("noDraw", false, "noDraw")
+		fHeadless   = flags.Bool("headless", false, "render without a native window")
 		fPort       = flags.Int("port", common.GamePort, "server port number to use")
 		fClientPort = flags.Int("clientport", 0, "clientport")
 		fNoSoft     = flags.Bool("nosoft", false, "nosoft")
@@ -247,7 +248,7 @@ func RunArgs(args []string) (gerr error) {
 		return fmt.Errorf("failed to load strings file: %w", err)
 	}
 	if !*fServer && !*fNoDraw {
-		err = noxClient.initSeat(image.Point{X: noxDefaultWidth, Y: noxDefaultHeight})
+		err = noxClient.initSeat(image.Point{X: noxDefaultWidth, Y: noxDefaultHeight}, *fHeadless)
 		if err != nil {
 			return err
 		}

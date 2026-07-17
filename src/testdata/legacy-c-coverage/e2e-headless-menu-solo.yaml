@@ -1,0 +1,195 @@
+steps:
+  - action: wait
+    dt: 300
+    name: startup and legal screens
+  - action: esc
+    dt: 60
+    name: advance to main menu
+  - action: wait
+    dt: 240
+    name: main menu animation
+  - action: dismiss-dialog
+    dt: 1
+    name: dismiss quit confirmation
+  - action: main-menu-button
+    dt: 5
+    id: 111
+    name: open solo character selection
+  - action: wait
+    dt: 300
+    name: solo character selection
+  - action: character-select-button
+    dt: 1
+    id: 501
+    name: create new solo character
+  - action: wait
+    dt: 300
+    name: class selection
+  - action: dismiss-dialog
+    dt: 1
+    name: clear modal before class selection
+  - action: click
+    dt: 30
+    x: 256
+    y: 208
+    name: select warrior class
+  - action: click
+    dt: 30
+    x: 512
+    y: 208
+    name: select conjurer class
+  - action: click
+    dt: 30
+    x: 768
+    y: 208
+    name: select wizard class
+  - action: select-final-class
+    dt: 30
+    name: select scenario class
+  - action: click
+    dt: 30
+    x: 512
+    y: 656
+    name: accept selected class
+  - action: wait
+    dt: 300
+    name: color selection
+  - action: click
+    dt: 15
+    x: 872
+    y: 64
+    name: cycle skin color
+  - action: click
+    dt: 15
+    x: 872
+    y: 144
+    name: cycle hair color
+  - action: click
+    dt: 15
+    x: 602
+    y: 218
+    name: cycle mustache style
+  - action: click
+    dt: 15
+    x: 872
+    y: 218
+    name: cycle mustache color
+  - action: click
+    dt: 15
+    x: 602
+    y: 293
+    name: cycle beard style
+  - action: click
+    dt: 15
+    x: 872
+    y: 293
+    name: cycle beard color
+  - action: click
+    dt: 15
+    x: 602
+    y: 368
+    name: cycle sideburn style
+  - action: click
+    dt: 15
+    x: 872
+    y: 368
+    name: cycle sideburn color
+  - action: click
+    dt: 15
+    x: 872
+    y: 443
+    name: cycle pants color
+  - action: click
+    dt: 15
+    x: 872
+    y: 520
+    name: cycle shirt color
+  - action: click
+    dt: 15
+    x: 872
+    y: 592
+    name: cycle shoe color
+  - action: click
+    dt: 30
+    x: 376
+    y: 605
+    name: accept character appearance
+  - action: wait
+    dt: 1200
+    name: start solo campaign
+  - action: click
+    dt: 60
+    x: 245
+    y: 385
+    name: advance campaign briefing
+  - action: click
+    dt: 120
+    x: 780
+    y: 385
+    name: advance campaign briefing page
+  - action: wait
+    dt: 300
+    name: finish campaign briefing
+  - action: show-book-direct
+    dt: 30
+    name: open wizard spellbook
+  - action: wait
+    dt: 120
+    name: draw wizard spellbook
+  - action: hide-book-direct
+    dt: 30
+    name: close wizard spellbook
+  - action: click
+    dt: 30
+    x: 780
+    y: 723
+    name: repeat opening dialog
+  - action: wait
+    dt: 120
+    name: replay opening dialog
+  - action: click
+    dt: 30
+    x: 780
+    y: 752
+    name: finish opening dialog
+  - action: wait
+    dt: 120
+    name: close opening dialog
+  - action: toggle-inventory-direct
+    dt: 30
+    name: open solo inventory
+  - action: wait
+    dt: 120
+    name: draw solo inventory
+  - action: click
+    dt: 30
+    x: 600
+    y: 730
+    name: select solo inventory item
+  - action: click
+    dt: 30
+    x: 650
+    y: 730
+    name: select another inventory item
+  - action: toggle-inventory-direct
+    dt: 30
+    name: close solo inventory
+  - action: toggle-map-direct
+    dt: 30
+    name: open solo automap
+  - action: wait
+    dt: 120
+    name: draw solo automap
+  - action: toggle-map-direct
+    dt: 30
+    name: close solo automap
+  - action: run
+    dt: 180
+    ang: 0.25
+    name: move in solo campaign
+  - action: melee
+    dt: 15
+    ang: 0.5
+    name: attack in solo campaign
+  - action: quit
+    dt: 30
